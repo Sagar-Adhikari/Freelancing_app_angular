@@ -1,0 +1,82 @@
+/*View Offer Page Design Start*/
+.button_block_btn { width:100%; text-align: center; display: inline-block; position: relative;}
+.contract_details_right span { word-break: break-all; }
+.div_row a {text-align: center;width: 100%;display: inline-block;color: #4A154B;font-weight: bold;}
+.button_block { width:100%; text-align: center; display: inline-block; position: relative;}
+.freelancer_profile .freelancer-wrap .bg-box{padding: 15px 30px;background-color: #fff;height: auto;box-shadow: 0 0 20px #dcdcdc;border-radius: 10px;padding: 36px 40px;margin-bottom: 20px;}
+.freelancer_profile .freelancer-wrap .bg-box .freelancer-detail{margin-bottom: 35px;}
+.freelancer_profile .freelancer-wrap {padding: 35px 0;}
+.category_mainwrap .breadcrumb_wrap h4 { font-size: 24px;font-family: 'HelveticaNeue-Medium';color: #fff;text-transform: capitalize;margin: 0;letter-spacing: 1px;}
+.category_mainwrap .breadcrumb_wrap{background-color: #4A154B;}
+.contract_details_page .mat-button {font-size: 16px;background-color: #4A154B;color: #fff;line-height: 37px;font-family: 'HelveticaNeue';width: auto;box-shadow: 0 0 5px #d5d5d5;margin-left: 0;border-radius: 5px;letter-spacing: 0.5px;margin-right:15px;}
+.contract_details_page .mat-button.cancel_button{background-color: #DFE2E9;color: #000;box-shadow: 0 0 2px #d5d5d5;}
+.right_side_table table {width: 765px;}
+.contract_details_page label{font-weight:600;font-family: 'HelveticaNeue-Medium';color:#4A4A4A;}
+.profile-details .row {margin-bottom: 15px;}
+.header_block h5 {font-size: 16px;margin-top: 10px;}
+.header_block span{color:#4A154B;display: inline-block;}
+.header_block span h4.Accept { color: green; }
+.profile-details {font-size: 14px;font-family: 'HelveticaNeue';color: #7B7B7B;letter-spacing: 0.5px;}
+.right_side_table th.mat-header-cell {color: #4A4A4A;font-weight: 600;text-transform: capitalize;vertical-align:middle;}
+.right_side_table .mat-header-cell { font-size: 14px; }
+.right_side_table tr.mat-row { border-left-width: 1px !important; }
+.right_side_table .mat-header-cell:last-child,.right_side_table .mat-cell:last-child { width: 120px; max-width: 120px; }
+.right_side_table td.mat-cell { font-size: 14px; font-family: 'HelveticaNeue'; color: #7B7B7B; }
+.right_side_table tr.mat-footer-row,.right_side_table tr.mat-row { height: 40px; }
+.right_side_table tr.mat-header-row { height: 40px; }
+.right_side_table .mat-header-cell,.right_side_table .mat-cell{ max-width:27%; }
+.div_row { width: 100%; display: block; }
+.div_row h2 { font-size: 14px; font-family: 'HelveticaNeue-medium'; color: #666666; width:100%; display:block; }
+.freelancer_profile.contract_details_mainwrap .bg-box.bg-boxright.bg-boxright_blk { padding: 0 !important; }
+.contract_details_mainwrap .bg-boxright_blk h1 { width: 100%; display: block; margin: 0; padding: 10px 10px; font-size: 14px; border-bottom: 1px solid #ddd; font-family: 'HelveticaNeue-Medium'; color: #ADADAD; }
+.contract_details_mainwrap .bg-boxright_blk .div_row .left { width: 28%; display: inline-block; vertical-align: top; }
+.contract_details_mainwrap .bg-boxright_blk .div_row .right { width: 72%; display: inline-block; vertical-align: top; letter-spacing: 0.5px; padding-top:5px; }
+.contract_details_mainwrap .bg-boxright_blk .div_row .left img { width: 55px; height: 55px; display: inline-block; border-radius: 50%; }
+.contract_details_mainwrap .bg-boxright_blk .div_row h3 { font-size: 13px; font-family: 'HelveticaNeue-medium'; color: #4A154B; width: 100%; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; display: block; letter-spacing: 0.5px; }
+.contract_details_mainwrap .bg-boxright_blk .div_row .right h4 { font-size: 13px; width: 100%; display: block; font-family: 'HelveticaNeue'; color: #7B7B7B; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; }
+.contract_details_mainwrap .mat-list .mat-list-item{ height: auto; }
+.contract_details_mainwrap .bg-boxright_blk .mat-list { padding: 15px 0 !important; }
+.contract_details_mainwrap .mat-list .mat-list-item { padding-top: 15px; }
+.contract_details_mainwrap .mat-list .mat-list-item:first-child { padding-top: 0; }
+.freelancer_profile .freelancer-wrap .contract_details_page .bg-box.profile_bg-box { margin-bottom: 0; }
+.related_link_block .div_row h3 { line-height: 18px; }
+.button_block { text-align: center; padding: 0 10px; }
+.mat-button { width: 100%; background-color: #4A154B; color: #fff; line-height: 37px; font-family: 'HelveticaNeue'; box-shadow: 0 0 5px #d5d5d5; margin-left: 0; border-radius: 5px; letter-spacing: 0.5px; margin-right: 15px; }
+.button_block .mat-button { border: 1px solid #EAEBEC; width: 100%; color: #AE2838 !important; background-color: #fff;}
+.button_block .mat-button.withdraw_button{background-color: #ae2838 !important;color: #fff !important;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;}
+.button_right{padding: 12px 0;margin:0;}
+.freelancer_profile.contract_details_mainwrap .bg-box.bg-boxright.bg-boxright_blk:last-child {margin-bottom: 0;}
+.button_block .mat-button {margin: 10px 0;}
+.mat-table tr.mat-header-row {border: 1px solid rgba(0,0,0,.12);}
+.right_side_table {padding-top: 7px;}
+
+
+@media(max-width:1200px)
+{
+.contract_details_mainwrap .bg-boxright_blk .div_row .right {padding-left: 3px;}
+.contract_details_mainwrap .bg-boxright_blk .div_row .left img {width: 45px;height: 45px;}
+}
+
+@media(max-width:992px)
+{
+.contract_details_mainwrap .bg-boxright_blk .div_row .left {width: 8%;}
+.contract_details_mainwrap .bg-boxright_blk .div_row .right {width: 92%;}
+}
+
+
+@media(max-width:767px)
+{
+.contract_details_mainwrap .bg-boxright_blk .div_row .left {width: 12%;}
+.contract_details_mainwrap .bg-boxright_blk .div_row .right {width: 88%;}
+.contract_details_page .mat-button {margin-top: 10px;margin-bottom: 10px;}
+}
+
+
+@media(max-width:480px)
+{
+.contract_details_mainwrap .bg-boxright_blk .div_row .left {width: 15%;}
+.contract_details_mainwrap .bg-boxright_blk .div_row .right {width: 85%;}
+.contract_details_mainwrap .bg-boxright_blk .div_row .left img {width: 40px;height: 40px;}
+}
+
+/*View Offer Page Design End*/

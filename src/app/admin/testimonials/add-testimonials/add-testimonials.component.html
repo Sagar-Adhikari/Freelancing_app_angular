@@ -1,0 +1,48 @@
+<div class="admin-dashboard admin-settingspage admin-custompage admin-cmspage">
+	<div class="general-form-layout custompage-form-layout pages-container">
+		<h2>Add Testimonial</h2>
+		<form [formGroup]="testmaddForm" (ngSubmit)="testmaddFormSubmit(testmaddForm.value)">
+			<ng-template [ngIf]="ismessage"><div class="alert alert-danger" role="alert">{{errormessage}}</div></ng-template>
+			<ng-template [ngIf]="is_success"><div class="alert alert-success" role="alert">Testimonial has been added successfully</div></ng-template>
+			<div class="formfield-box">
+				<mat-form-field appearance="outline">
+					<mat-label>Author</mat-label>   
+					<input matInput placeholder="Enter Author" formControlName="testm_author" required>
+				</mat-form-field>
+			</div>
+
+			<div class="formfield-box">
+				<mat-form-field appearance="outline">
+					<mat-label>Position</mat-label>   
+					<input matInput placeholder="Enter Position" formControlName="testm_position" required>
+				</mat-form-field>
+			</div>
+
+			<div class="formfield-box">
+				<mat-form-field appearance="outline">
+					<mat-label>Description</mat-label>   
+					<textarea matInput placeholder="Enter Description" formControlName="testm_message" required></textarea>
+				</mat-form-field>
+			</div>
+
+			<div class="formfield-box">
+				<mat-form-field appearance="outline">
+					<mat-label>Video Url</mat-label>   
+					<input matInput placeholder="Enter Video Url" formControlName="testm_video_url" required>
+				</mat-form-field>
+			</div>
+
+			<div class="formfield-box">
+				<mat-radio-group formControlName="testm_status">
+					Status : 
+					<mat-radio-button value="Active" checked="checked">Active</mat-radio-button>
+					<mat-radio-button value="Inactive">In-active</mat-radio-button>
+				</mat-radio-group>
+			</div>
+			<div class="submit-btn">
+				<button mat-raised-button type="submit" [disabled]="isbuttondisable">Save</button>
+				<button mat-raised-button [routerLink]="['/admin/testimonials']">Cancel</button>
+			</div>
+		</form>
+	</div>
+</div>

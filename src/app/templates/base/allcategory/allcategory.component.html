@@ -1,0 +1,56 @@
+<!--ALL CATEGORY MAIN CONTENT-->
+<div class="category_mainwrap">
+    <div class="breadcrumb_wrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                    <h4>Browser top freelancers by category</h4>
+                </div>
+                <!--end col-->
+
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <form>
+                        <div class="search-category">
+                            <span class="form-icon"><i class="fa fa-search"></i></span>
+                            <input (keyup)="searchbycategory($event)" class="form-control" type="text" value="{{categoryName}}" placeholder="Search a Category">
+                        </div>
+                        <!--end search-category-->
+                    </form>
+                </div>
+                <!--end col-->
+            </div>
+            <!--end row-->
+        </div>
+        <!--end container-->
+    </div>
+    <!--end breadcrumb_wrap-->
+
+    <div class="category_list">
+        <div class="container">
+            <div class="row">
+                <ng-container *ngFor="let category of allCategorys">
+                    <ng-container *ngIf="category.subcategory != '';">
+                        <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+                            <h3>{{ category.name }}</h3>
+                            <ul>
+                                <li *ngFor="let subcategory of category.subcategory">
+                                    <a routerLink="/search/freelancer/{{ category.id }}">
+                                        <span><i class="fa fa-circle"></i></span>{{ subcategory.name }}
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </ng-container>
+                </ng-container>
+                <div *ngIf="allCategorys == undefined || allCategorys.length === 0">
+                    <h3>No result found</h3>
+                </div>
+            </div>
+            <!--end row-->
+        </div>
+        <!--end container-->
+    </div>
+    <!--end category_list-->
+</div>
+<!--end category_mainwrap-->
+<!--END ALL CATEGORY MAIN CONTENT-->

@@ -1,0 +1,125 @@
+<div class="category_mainwrap proposaldetail_wrap"> 
+  <div class="breadcrumb_wrap">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <h4>Proposal Detail</h4>
+        </div><!--end col-->
+        <!--start profile back button-->
+
+        <!--end profile back button-->
+      </div><!--end row-->
+    </div><!--end container-->
+  </div><!--end breadcrumb_wrap-->
+
+  <div class="proposedetail-leftbox">
+  <div class="container" *ngIf="isLoaded">
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" >
+      <div class="bg-box profile_bg-box" >
+        <div class="pull-left">
+          <h3 class="head-style">{{proposalDetails.name}}</h3>
+          <p class="detail-date">Posted {{proposalDetails.job_created | timeAgo}}</p>
+        </div>
+
+        <div class="pull-right">
+          <div class="profile_back_btn row button_row">
+            <button routerLink="/admin/proposals"  class="back_button save-btn" mat-button> <i class="material-icons">keyboard_backspace</i> Back</button>
+          </div>
+        </div>
+
+        <div class="btn-group">
+          <!-- <button mat-button>Copywriting</button> -->
+          <button mat-button [routerLink]="['/jobdetail/' + proposalDetails.job_id]">View Job Posting</button>
+        </div>
+
+        <div class="proposedetail-list">
+          <mat-list role="list">
+            <mat-list-item role="listitem">
+              <h5>Job Type <span class="dollar-symbol">$</span></h5>
+            <p>{{proposalDetails.payment}} Price </p>
+            </mat-list-item>
+            <mat-list-item role="listitem">
+            <h5>Budget</h5>
+            <p>{{proposalDetails.payment_amount}} <span>$</span></p>
+            </mat-list-item>
+            <mat-list-item role="listitem">
+            <h5>{{hiredLevel}} Level</h5>
+            <p>{{hiredLevelTxt[hiredLevel]}}</p>
+            </mat-list-item>
+            <mat-list-item role="listitem">
+            <h5>Bid</h5>
+            <p>{{proposalDetails.bid_amount}} <span>$</span></p>
+            </mat-list-item>
+        </mat-list>
+        </div><!--end proposedetail-list-->
+
+        <div class="details-box">
+          <h4>Details</h4>
+          <p>{{proposalDetails.description | truncatetext : textLength}}<a (click)="onMoreFun(jobDescrption.length, morelessText)" class="more-link">{{morelessText}}</a></p>
+
+          <!-- <p class="highlight-text">Only freelancers located in the U.S may apply</p> -->
+        </div><!--end details-box-->
+
+        <div class="proposedetail-list skills-box" *ngIf="skillsDisplays != []">
+        <h4>Skills Required:</h4>       
+        <div *ngIf="skillsDisplays.length > 0;else noskills">
+          <mat-list role="list">
+            <ng-container *ngFor='let skillsDisplay of skillsDisplays'>
+                <mat-list-item role="listitem"><a href="{{baseurl}}/search/job?skill={{skillsDisplay}}" target="_blank">{{skillsDisplay}}</a></mat-list-item>
+            </ng-container>
+          </mat-list>
+        </div>                
+        <ng-template #noskills>No Skills Selected</ng-template>
+        </div><!--end details-box-->
+      </div><!--end profile_bg-box-->
+
+      <div class="bg-box profile_bg-box second_box" *ngIf="proposalDetails.cover_letter">
+        <h3 class="head-style">Cover Letter</h3>
+        <div class="cover-desc">
+          <p>{{proposalDetails.cover_letter | truncatetext : textCoverLength}}<a (click)="onCoverMoreFun(coverLetter.length, morelessCoverText)" class="more-link">{{morelessCoverText}}</a></p>
+        </div><!--end cover-desc-->
+      </div><!--end profile_bg-box-->
+      <!-- start Attachments -->
+      <div *ngIf="attachmentFile" class="bg-box profile_bg-box second_box fileupload-box" >
+      <h3 class="head-style">Attachments</h3>
+        <mat-list-item *ngFor="let rowattachment of attachment;let i = index">
+          <div class="fileupload-img">
+            <!-- <span class="thumbimg" [ngSwitch]="true">
+              <span *ngSwitchCase="rowattachment.filetype === 'text/csv'"><img src='/assets/images/thumbimg/csvthumb.png'></span>
+              <span *ngSwitchCase="rowattachment.filetype === 'image/jpeg'"><img [src]="rowattachment.filepath"></span>
+              <span *ngSwitchCase="rowattachment.filetype === 'video/mp4' || rowattachment.filetype === 'video/x-matroska'"><img src='/assets/images/thumbimg/videothumb.png'></span>
+              <span *ngSwitchCase="rowattachment.filetype === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'"><img src='/assets/images/thumbimg/docthumb.png'></span>
+              <span *ngSwitchCase="rowattachment.filetype === 'application/vnd.openxmlformats-officedocument.presentationml.presentation'"><img src='/assets/images/thumbimg/pptthumb.png'></span>
+              <span *ngSwitchCase="rowattachment.filetype === 'application/pdf'"><img src='/assets/images/thumbimg/pdfthumb.png'></span>
+              <span *ngSwitchCase="rowattachment.filetype === 'application/zip'"><img src='/assets/images/thumbimg/zipthumb.png'></span>
+              <span *ngSwitchCase="rowattachment.filetype === 'application/x-php'"><img src='/assets/images/thumbimg/phpthumb.png'></span>
+              <span *ngSwitchCase="rowattachment.filetype === 'text/vnd.trolltech.linguist' || rowattachment.filetype === 'application/javascript'"><img src='/assets/images/thumbimg/jsthumb.png'></span>
+              <span *ngSwitchCase="rowattachment.filetype === 'application/sql'"><img src='/assets/images/thumbimg/sqlthumb.png'></span>
+              <span *ngSwitchCase="rowattachment.filetype === 'none'"><img src='/assets/images/thumbimg/nonethumb.png'></span>
+            </span>  -->
+            <ng-container *ngIf="rowattachment.filetype === 'img' || rowattachment.filetype === 'pdf';else downloadfile">
+                  <span class="fileupload-txt" (click)="viewAttachment(rowattachment.filepath ,rowattachment.filetype)"><span>
+                    <mat-icon>attach_file</mat-icon>
+                  </span>{{rowattachment.file_name}}</span>
+                </ng-container>
+                <ng-template #downloadfile>
+                  <a href="{{rowattachment.filepath}}">
+                    <span class="fileupload-txt" ><span>
+                    <mat-icon>attach_file</mat-icon>
+                    </span>{{rowattachment.file_name}}</span>
+                  </a>
+                </ng-template>                      
+            <!-- <span class="fileupload-txt">{{rowattachment.file_name}}</span><span (click)="viewAttachment(rowattachment.filepath ,rowattachment.filetype)" class="uploadelete-btn"><mat-icon>visibility</mat-icon></span> -->
+          </div>
+        </mat-list-item>
+      </div>
+       <!-- end Attachments -->
+
+    </div><!--end col-->
+
+  </div><!--end row-->
+  </div><!--end container-->
+  </div><!--end proposedetail-leftbox-->
+
+</div><!--end proposaldetail_wrap-->

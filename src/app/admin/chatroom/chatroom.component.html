@@ -1,0 +1,57 @@
+	<div class="admin-dashboard admin-cmspage">
+		<div class="memberships-container pages-container mat-elevation-z8">
+			<h2>Chat Room</h2>
+
+			<div class="chatroom-table-container">
+	
+					<div class="table-responsive">
+							<table mat-table [dataSource]="data" class="chatroom-table"
+							matSort matSortActive="name" matSortDisableClear matSortDirection="asc">
+
+							<ng-container matColumnDef="index">
+								<th mat-header-cell *matHeaderCellDef> S.No </th>
+								<td mat-cell *matCellDef="let row; let i = index;"> <span *ngIf="pageEvent">{{pageEvent.pageIndex*perpage+ConvertToInt(i)+1}} </span> <span *ngIf="!pageEvent">{{ ConvertToInt(i)+1 }}</span></td>
+							</ng-container>
+
+							<ng-container matColumnDef="room_name">
+								<th mat-header-cell *matHeaderCellDef>Room Name</th>
+								<td mat-cell *matCellDef="let row">{{ row.room_name }}</td>
+							</ng-container>
+
+							<ng-container matColumnDef="created">
+								<th mat-header-cell *matHeaderCellDef>Created</th>
+								<td mat-cell *matCellDef="let row">{{ row.created | date:'yyyy-MM-dd h:mm a' }}</td>
+							</ng-container>
+
+							<ng-container matColumnDef="action">
+								<th mat-header-cell *matHeaderCellDef>
+									<span><i class="fa fa-plus mat-icon"></i>Action</span>
+								</th>
+								<td mat-cell *matCellDef="let row">
+									<button class="action" mat-icon-button focusable="false" routerLink="/admin/chat/message/{{row.id}}">                  
+										<i class="material-icons">message</i>
+									</button>
+								</td>
+							</ng-container>
+							
+							<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+							<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+						</table>
+
+					</div>
+
+				<div class="no-results" [style.display]="resultsLength == 0 ? '' : 'none'">
+					No Record Found.
+				</div>
+				
+				<mat-paginator [ngStyle]="{display: paginationhidder ? 'block' : 'none'}" [length]="resultsLength" [pageSize]="perpage" (page)="pageEvent = $event"></mat-paginator>
+
+			</div>
+		
+		</div>
+	</div>
+
+	
+	<!-- Copyright 2018 Google Inc. All Rights Reserved.
+		Use of this source code is governed by an MIT-style license that
+		can be found in the LICENSE file at http://angular.io/license -->

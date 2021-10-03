@@ -1,0 +1,65 @@
+.freelancer_profile .freelancer-wrap .bg-box {background-color: #fff;height: auto;box-shadow: 0px 0px 20px #dcdcdc;border-radius: 10px;display: inline-block;width: 100%;margin-bottom: 0px;}
+.change_plan_content .connect_history_table table.mat-table { min-width:1070px;border: 1px solid rgba(0,0,0,.12);}
+.category_mainwrap .breadcrumb_wrap { background-color: #4A154B; padding: 20px 0; }
+.category_mainwrap .breadcrumb_wrap h4 { font-size: 24px;font-family: 'HelveticaNeue-Medium'; color: #fff;text-transform: capitalize;margin: 0;letter-spacing: 1px;}
+.freelancer_profile .freelancer-wrap{padding: 35px 0;}
+.freelancer_profile .freelancer-wrap.changeplan-wrap .bg-box{padding:0px !important;}
+.change_plan_content .row {margin: 0px;width: 100%;}
+.left_side_block h1 {font-size: 20px;margin:0px 0px 10px;font-family: 'HelveticaNeue-Medium';width:100%;display:block;}
+.left_side_block h2 {font-size: 16px;margin:0px 0px 10px;font-family: 'HelveticaNeue-Medium';width:100%;display:block;}
+.right_side_block h3 {font-size: 16px;margin:5px 0px 10px;font-family: 'HelveticaNeue-Medium';width:100%;display:block;}
+.left_side_block{width:50%;float:left;}
+.right_side_block{width:50%;float:left;text-align:right;}
+.changeplan_detail{border-bottom:1px solid #F0F0F0;width: 100%;display: block;padding: 33px 30px;float: left;background-color: #F9F9F9;border-top: 1px solid #F0F0F0;}
+.learn_more p{color:#4A154B;font-size:14px;font-family: 'HelveticaNeue';font-family: 'HelveticaNeue-Medium';}
+.change_plan_list.mat-list { width: 100%;padding: 10px 10px !important;}
+.change_plan_list .material-icons {font-size: 22px;color: #4A154B;margin-right: 10px;}
+.bold {font-weight: 600;margin-right:5px;}
+.learn_more {width: 100%;padding: 5px 30px 10px 30px;display: block;}
+.changeplan-wrap .mat-button {font-size: 14px;background-color: #4A154B; color: #fff;line-height: 37px;font-family: 'HelveticaNeue';width: auto;box-shadow: 0px 0px 10px #d5d5d5;margin-left: 0;border-radius: 5px;letter-spacing: 0.5px;margin-right: 10px; margin-bottom:20px;}
+.changeplan-wrap .mat-list .mat-list-item { display: block; min-height: 30px; height:auto; margin-bottom: 5px;}
+:host /deep/ .change_plan_list .mat-list-item-content { display: block !important; vertical-align: top; }
+.icon_span { display:inline-block; margin-top:1px; vertical-align:middle; float:left; width: 7%; }
+.change_plan_list p { width: 93%; float: left; }
+.learn_more a { cursor: pointer; color: #4A154B; }
+.bg-box.profile_bg-box {color: #141414;}
+table {width: 100%;}
+.connect_history_table{width:100%;display:block;padding:20px;}
+th.mat-header-cell { text-align: left;font-family: 'HelveticaNeue-Medium';color: #333;font-size: 16px;vertical-align: middle;}
+.selectbox {width: 100%;display: inline-block;vertical-align: middle;padding-right:20px;}
+.select_block {width: 100%;display: block;}
+:host /deep/ .mat-select-panel .dropdown_height.mat-option {line-height: 25px !important;height: 25px !important;font-size: 13px;}
+:host /deep/ .mat-select-panel {max-height: 340px !important;}
+td.mat-cell:last-child, td.mat-footer-cell:last-child, th.mat-header-cell:last-child {padding-right: 24px; width: 90px;max-width: 90px;}
+.selectbox .mat-button {height: 46px;min-width:auto;font-size: 14px;}
+
+@media(min-width:1200px)
+{
+.table-responsive {overflow-x: hidden;}
+}
+
+@media(max-width:992px)
+{
+.icon_span{width: 10%;}
+.change_plan_list p {width: 90%;}
+.selectbox{width: 100%;display: inline-block;vertical-align: middle;padding-right: 15px;margin:10px 0;}
+.selectbox.select_box_button { text-align: center;}
+.changeplan-wrap .select_box_button .mat-button { margin-right: 6px; min-width:auto; }
+}
+
+@media(max-width:767px)
+{
+.right_side_block{width: 100%;text-align: left;}
+.left_side_block{width: 100%;}
+.icon_span{width: 7%;}
+.change_plan_list p {width: 93%;}
+.selectbox { width: 100%;display: inline-block;vertical-align: middle;padding-right: 15px;margin:10px 0px;}
+.select_block .selectbox.select_box_button { width: 100%; }
+}
+
+@media(max-width:480px)
+{
+.icon_span{width: 10%;}
+.change_plan_list p {width: 90%;}
+.selectbox{width: 100%;padding-right: 0px;margin:10px 0px;}
+}

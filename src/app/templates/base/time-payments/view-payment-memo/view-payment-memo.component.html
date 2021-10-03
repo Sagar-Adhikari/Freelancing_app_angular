@@ -1,0 +1,22 @@
+<div class="model_main">
+  <div class="modal-header">
+    <h5 class="modal-title">Memo details</h5>
+    <button (click)="onCancelClick()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="model-container">
+      <div class="popup_matrow">
+        <div>From Time : {{data.payview.from_time}} <!--{{data.payview.from_time | date:'yyyy-MM-dd hh:mm:ss a'}}--></div>
+        <div>To Time: {{data.payview.to_time}}<!--{{data.payview.to_time | date:'yyyy-MM-dd hh:mm:ss a'}}--></div>
+        <div>Total Hours : {{data.payview.sum_hours}}</div>
+        <div>Date : {{data.payview.manual_date}}</div>
+        <div>Memo : {{data.payview.memo}}</div>
+      </div>
+      <div class="button-row bottom-btn">
+        <button mat-button type="button" (click)="onCancelClick()" class="save-btn">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>

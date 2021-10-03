@@ -1,0 +1,59 @@
+<div class="table-responsive">
+  <div class="example-container mat-elevation-z8">
+    <table mat-table [dataSource]="data" class="contracts-table" matSort matSortActive="name" matSortDisableClear
+      matSortDirection="asc">
+      <ng-container matColumnDef="index">
+        <mat-header-cell *matHeaderCellDef> S.No </mat-header-cell>
+        <mat-cell *matCellDef="let row; let i = index;"> <span *ngIf="pageEvent">{{pageEvent.pageIndex*perpage+ConvertToInt(i)+1}}
+          </span> <span *ngIf="!pageEvent">{{ ConvertToInt(i)+1 }}</span></mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="brand">
+        <th mat-header-cell *matHeaderCellDef>Card Details</th>
+        <td mat-cell *matCellDef="let row">
+          {{ row.brand }} ending in {{ row.last }}
+          <ng-container *ngIf="row.primary">
+            <i class="material-icons verified_icon">check_circle_outline</i>
+          </ng-container>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <mat-header-cell *matHeaderCellDef>
+          <span><i class="fa fa-plus mat-icon"></i>Action</span>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <!--menu starts -->
+
+          <span *ngIf="!row.primary;else removemethod">
+                <button mat-button [matMenuTriggerFor]="menu" class="mat-circle-button">
+                  <i class="material-icons">more_horiz</i>
+                </button>
+          </span><ng-template #removemethod>
+            <span *ngIf="resultsLength == 1">
+                <button mat-button [matMenuTriggerFor]="menu" class="mat-circle-button">
+                  <i class="material-icons">more_horiz</i>
+                </button>
+            </span>
+          </ng-template>
+          
+          <mat-menu #menu="matMenu" class="menu-dropdown">
+            <button mat-menu-item color="primary" focusable="false" (click)="setPrimarycard(row.id)" *ngIf="row.primary==false"><i
+                class="material-icons">&#xE254;</i>Set primary</button>
+            <button mat-menu-item color="primary" focusable="false" (click)="deleteMethod(row.id)"><i class="material-icons">&#xE16C;</i>Remove</button>
+          </mat-menu>
+          <!-- menu ends -->
+        </mat-cell>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <div class="no-results" [style.display]="resultsLength == 0 ? '' : 'none'">
+      No Record Found.
+    </div>
+    <mat-paginator [ngClass]="{'page_custom_hide': perpage > resultsLength}" [length]="resultsLength" [pageSize]="perpage"
+			(page)="pageEvent = $event"></mat-paginator>
+  </div>
+</div>

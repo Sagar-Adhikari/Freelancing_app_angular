@@ -1,0 +1,7 @@
+.bottom-btn button{font-family: 'HelveticaNeue';font-size: 14px;background: #4A154B;color: #fff;font-weight: normal;margin-right: 5px;}
+.bottom-btn{margin-top: 10px;}
+.model-container{text-align: center;}
+::ng-deep mat-label{font-weight: bold;margin-bottom: 15px;display: inline-block;}
+::ng-deep .mat-form-field { display: inline-block; position: relative; text-align: left; width: 60%;height: 67px; }
+::ng-deep .text-danger{text-align: center!important;}
+:host /deep/ .mat-radio-button {margin-right: 15px;padding: 10px;width:auto;}

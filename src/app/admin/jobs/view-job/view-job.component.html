@@ -1,0 +1,178 @@
+<div class="category_mainwrap job_detailwrap">
+
+
+    <div class="admin-dashboard admin-cmspage">
+        <div class="jobs-container pages-container mat-elevation-z8">
+            <div class="job_listing">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="bg-box">
+
+                                <div class="pull-left">
+                                    <h2>Jobs List</h2>
+                                </div>
+
+                                <div class="pull-right">
+                                    <div class="row button_row">
+                                        <button routerLink="/admin/jobs" mat-button> <i class="material-icons">keyboard_backspace</i> Back</button>
+                                    </div>
+                                </div>
+
+                                <div class="job_title">
+                                    <h3>{{jobTitleName}}</h3>
+                                </div>
+
+                                <div class="trans-wrap">
+                                    <div class="trans-left">
+                                        <div class="trans-img"><img src="{{baseurl}}/assets/images/trans-img1.png"></div>
+                                        <div class="trans-desc">
+                                            <h4>{{jobPayment}}</h4>
+                                            <p *ngIf="jobPayment == 'Fixed'">$ {{amount}}</p>
+                                            <ng-container *ngFor="let commit of commits">
+                                                <p *ngIf="commit.key == jobCommitment">{{commit.name}}</p>
+                                            </ng-container>
+                                            <ng-container *ngFor="let complement of complements">
+                                                <p *ngIf="complement.key == expComp">{{complement.name}}</p>
+                                            </ng-container>
+                                        </div>
+                                    </div>
+
+                                    <div class="trans-left">
+                                        <div class="trans-img"><img src="{{baseurl}}/assets/images/trans-img2.png"></div>
+                                        <div class="trans-desc">
+                                            <h4>{{hiredLevel}} Level</h4>
+                                            <p>{{hiredLevelTxt[hiredLevel]}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="detail-wrap">
+                                    <h4>details</h4>
+                                    <p class="post-date">Posted {{jobCreatedAt | timeAgo}}</p>
+                                    <p>{{jobDescrption}}
+                                        <a (click)="onMoreFun(jobDescrption.length, morelessText)" class="more-text">{{morelessText}}</a>
+                                    </p>
+
+                                </div>
+
+                                <div class="detail-wrap">
+                                    <h4>Client Details</h4>
+                                    <p>Name : {{userName}}</p>
+                                    <p>Location : {{userLocation}}</p>
+                                    <p>Address : {{userAddress}}</p>
+                                </div>
+
+                                <div class="detail-wrap" *ngIf="validOS != ''">
+                                    <h4>Supported Device</h4>
+                                    <p>{{validOS}}</p>
+                                    <h4 *ngIf="otherOS">Others</h4>
+                                    <p *ngIf="otherOS">{{otherOS}}</p>
+                                </div>
+
+                                <div class="detail-wrap">
+                                    <h4>Other Details</h4>
+                                    <p>Project Type : {{projectType}}</p>
+                                    <p *ngIf="resource != ''">Need to hire : {{resource}}</p>
+                                    <p *ngIf="lifeCycle != ''">Life Cycle : {{lifeCycle}}</p>
+                                    <p *ngIf="experience != ''">Experience to hire : {{experience}}</p>
+                                    <p *ngIf="language != ''">Programming Skills : {{language}}</p>
+                                    <p *ngIf="framework != ''">Framework : {{framework}}</p>
+                                </div>
+
+                                <div class="detail-wrap">
+                                    <h4>Preferred Qualifications</h4>
+                                    <p>Freelancer Type : {{preferenceType}}</p>
+                                    <p>Job Success Score : {{freelanceScore}}</p>
+                                    <p>Rising Talent : {{freelanceTalent}}</p>
+                                    <p>Hours Billed on Remote Nepal : {{hoursBilledWork}}</p>
+                                    <p>Location : {{location}}</p>
+                                    <p>English Level : {{englishLevel}}</p>
+                                </div>
+
+                                <div class="detail-wrap skill-wrap">
+                                    <h4>Skills and Expertise</h4>
+                                    <div class="skill-btn">
+                                        <div *ngIf="skillsDisplays.length > 0;else noskills">
+                                            <mat-list role="list">
+                                                <ng-container *ngFor='let skillsDisplay of skillsDisplays'>
+                                                    <mat-list-item role="listitem"><a href="{{baseurl}}/search/job?skill={{skillsDisplay}}" target="_blank">{{skillsDisplay}}</a></mat-list-item>
+                                                </ng-container>
+                                            </mat-list>
+                                        </div>
+                                        <ng-template #noskills>No Skills Selected</ng-template>
+                                    </div>
+                                </div>
+
+                                <div *ngIf="attachmentFile" class="detail-wrap skill-wrap fileupload-box">
+                                    <h4>Attachments</h4>
+                                    <mat-list-item *ngFor="let rowattachment of attachment;let i = index">
+                                        <div class="fileupload-img">
+                                            <span class="thumbimg" [ngSwitch]="true">
+                      <span *ngSwitchCase="rowattachment.filetype === 'csv'"><img src='{{baseurl}}/assets/images/thumbimg/csvthumb.png'></span>
+                                            <span *ngSwitchCase="rowattachment.filetype === 'img'"><img [src]="rowattachment.filepath"></span>
+                                            <span *ngSwitchCase="rowattachment.filetype === 'video'"><img src='{{baseurl}}/assets/images/thumbimg/videothumb.png'></span>
+                                            <span *ngSwitchCase="rowattachment.filetype === 'doc'"><img src='{{baseurl}}/assets/images/thumbimg/docthumb.png'></span>
+                                            <span *ngSwitchCase="rowattachment.filetype === 'pdf'"><img src='{{baseurl}}/assets/images/thumbimg/pdfthumb.png'></span>
+                                            <span *ngSwitchCase="rowattachment.filetype === 'zip'"><img src='{{baseurl}}/assets/images/thumbimg/zipthumb.png'></span>
+                                            <span *ngSwitchCase="rowattachment.filetype === 'php'"><img src='{{baseurl}}/assets/images/thumbimg/phpthumb.png'></span>
+                                            <span *ngSwitchCase="rowattachment.filetype === 'js'"><img src='{{baseurl}}/assets/images/thumbimg/jsthumb.png'></span>
+                                            <span *ngSwitchCase="rowattachment.filetype === 'sql'"><img src='{{baseurl}}/assets/images/thumbimg/sqlthumb.png'></span>
+                                            <span *ngSwitchCase="rowattachment.filetype === 'none'"><img src='{{baseurl}}/assets/images/thumbimg/nonethumb.png'></span>
+                                            </span>
+                                            <span class="fileupload-txt">{{rowattachment.file_name}}</span><span (click)="viewAttachment(rowattachment.filepath ,rowattachment.filetype)" class="uploadelete-btn">
+                    <mat-icon>visibility</mat-icon>
+                  </span>
+                                        </div>
+                                    </mat-list-item>
+                                </div>
+
+                                <div class="detail-wrap skill-wrap">
+                                    <h4>Activity on this Job</h4>
+                                    <h5>
+                                        Proposals: <span *ngIf="proposal_count == 0;else proposalswitch">{{ proposalFormat[0] }}</span>
+                                        <ng-template #proposalswitch>
+                                            <ng-container [ngSwitch]="proposal_count">
+                                                <span *ngSwitchCase="proposal_count &lt; 5">{{ proposalFormat[0] }}</span>
+                                                <span *ngSwitchCase="proposal_count >= 5 && proposal_count &lt; 10">{{ proposalFormat[1] }}</span>
+                                                <span *ngSwitchCase="proposal_count >= 10 && proposal_count &lt; 15">{{ proposalFormat[2] }}</span>
+                                                <span *ngSwitchCase="proposal_count >= 15 && proposal_count &lt; 20">{{ proposalFormat[3] }}</span>
+                                                <span *ngSwitchCase="proposal_count >= 20 && proposal_count &lt; 50">{{ proposalFormat[4] }}</span>
+                                                <span *ngSwitchCase="proposal_count >= 50">{{ proposalFormat[5] }}</span>
+                                                <span *ngSwitchDefault>{{ proposalFormat[0] }}</span>
+                                            </ng-container>
+                                        </ng-template>
+                                    </h5>
+                                    <h5>Interviewing: <span>{{interviewingCount}}</span></h5>
+                                    <h5>Invites Sent: <span>{{invite_sent}}</span></h5>
+                                    <h5>Unanswered Invites: <span>{{unansweredCount}}</span></h5>
+                                </div>
+                                <!--end skill-wrap-->
+                                <div>
+                                   <mat-slide-toggle [(ngModel)]="selection" [disabled]="disabled"> Status </mat-slide-toggle>
+                                </div>
+
+                                <div class="update-btn">
+                                    <button mat-raised-button type="submit" (click)="onUpdate()" >Update</button>
+                                </div>
+
+                            </div>
+                            <!--end bg-box-->
+                        </div>
+                        <!--end col-->  
+
+                    </div>
+                    <!--end row-->
+                </div>
+                <!--end container-->    
+            </div>
+            <!--end job_listing-->
+        </div>
+        <!--end job_detailwrap-->
+    </div>
+
+
+ 
+
+
+</div>

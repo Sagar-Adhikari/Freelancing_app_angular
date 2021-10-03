@@ -1,0 +1,21 @@
+import { constant } from '../data/constant';
+export class Broadcast {
+   broadcast_id : number;
+   broadcast_img : string;
+   broadcast_name : string;
+   broadcast_type: string;
+   broadcast_status : string;
+   author_id: number;
+   author_name: string;
+   author_pic: string;
+   author_country: string;
+   latitude: string;
+   longitude: string;
+   like_count: number;
+   viewer_count: number;
+   created_at: number;
+   is_like :boolean;
+   is_follow :boolean;
+   is_requested :boolean;
+   is_follow_button :boolean;
+};

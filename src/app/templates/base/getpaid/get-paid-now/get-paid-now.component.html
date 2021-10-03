@@ -1,0 +1,54 @@
+<div class="category_mainwrap postjob_wrap">
+  <div class="breadcrumb_wrap">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <h4>Get Paid Now</h4>
+        </div>
+        <!--end col-->
+      </div>
+      <!--end row-->
+    </div>
+    <!--end container-->
+  </div>
+
+  <div class="payment-fulldesc">
+    <div class="setup-payment-details">
+      <div class="container">
+        <div class="row">
+          <div class="setup-payment-container">
+
+
+    <form  #getpaidform="ngForm">
+      <mat-label>Available Balance $ &nbsp;{{availablebalanceinitial}}</mat-label>
+   
+      <div class="form-group payment-method">
+      <label>Payment Method</label>
+    <mat-form-field appearance="outline">
+      <mat-select name="paymentmethod" #paymentmethod ngModel required placeholder="Payment Method">
+        <mat-option *ngFor="let method of paymentmethoddisplay" value="{{method.payment_method}}-{{method.id}}">
+          <span *ngIf="loggedUserId === method.user">
+            <span *ngIf="method.payment_method == 'paypal'">
+            {{method.payment_method}} ( {{method.paypal_email}} )
+            </span>
+            <span *ngIf="method.payment_method == 'bank'">
+            {{method.payment_method}} ( {{method.account_number}} )
+            </span>
+          </span>      
+          </mat-option>
+      </mat-select>
+    </mat-form-field>
+    </div>
+
+
+
+    <a routerLink="/get-paid/getpaidnow/mypayment"></a>
+    <button mat-button (click)="getpaidform.valid && getpaid(getpaidform)">Get Paid Now</button>
+    <a routerLink="/get-paid"><button mat-button class="cancel-btn">Cancel</button></a>
+  </form>
+    </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>

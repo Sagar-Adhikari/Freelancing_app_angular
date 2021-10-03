@@ -1,0 +1,36 @@
+
+<div>
+    <div class="model_main"> 
+      <div class="modal-header">
+        <h4 class="modal-title">Dispute</h4>
+        <button (click)="onclickcancel()"><mat-icon>close</mat-icon></button>
+      </div>
+      <form [formGroup]="disputeForm">
+      <div class="modal-body">      
+        <div class="profile-leftblock">        
+          <div>
+            <div class="form-group" *ngIf="action == 'create'">
+                <label>Amount</label>
+                <input #ratevalue class="form-control" (keyup)="onKeyUpamount($event)"  formControlName="amount">
+                <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrordisputeMsg('amount') || this.errorMsgArr['amount']}}</div>
+            </div>
+            <div class="form-group" *ngIf="action == 'create'">
+                <label>Subject</label>
+                <input class="form-control"  formControlName="subject">
+                <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrordisputeMsg('subject') || this.errorMsgArr['subject']}}</div>
+            </div>
+            <div class="form-group">
+                <label>Message</label>
+                <textarea class="form-control" formControlName="message"></textarea>
+                <div class="text-danger text-left small" *ngIf="errorMsg && action == 'reply'">{{geterrordisputeMsg('message') || this.errorMsgArr['message']}}</div> 
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <button class="save-btn" (click)="saveDispute(disputeForm.value)">Save</button>
+        <button class="cancel-btn" (click)="onclickcancel()">Cancel</button>
+      </div>
+    </form>
+    </div>
+</div>

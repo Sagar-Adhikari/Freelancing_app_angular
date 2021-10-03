@@ -1,0 +1,266 @@
+<div class="category_mainwrap freelancer_profile">
+	<div class="breadcrumb_wrap">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<h4>profile</h4>
+				</div>
+				<!--end col-->
+			</div>
+			<!--end row-->
+		</div>
+		<!--end container-->
+	</div>
+	<!--end breadcrumb_wrap-->
+
+	<div class="freelancer-wrap">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+					<div class="bg-box profile_bg-box">
+						<div class="profile_back_btn">
+							<!--start profile back button-->
+							<button routerLink="/search/freelancer" class="back_button save-btn"
+								mat-button>Back to Search</button>
+						</div>
+						<!--end profile back button-->
+						<div class="freelancer-detail">
+							<div class="profile-img">
+								<img src={{profileImage}}>
+							</div>
+							<div class="profile-name">
+								<h4>{{firstName}} {{lastName}}</h4>
+								<ngb-rating [rate]="rating"></ngb-rating>
+								<p>{{state}}
+									<ng-container *ngFor="let counte of countries">
+										<span *ngIf="counte.code == country">{{counte.name}}</span>
+									</ng-container>
+								</p>
+							</div>
+							<!--end profile-name-->
+						</div>
+						<!--end freelancer-detail-->
+
+						<section class="profile-details">
+							<h5><span>{{jobtitle}} </span></h5>
+							<div class="profile_content_blk">
+								<!-- <p *ngIf="jobdescription != '' && jobdescription != null">
+									{{jobdescription | truncatetext : textLength}}<a
+										(click)="onMoreFun(jobdescription.length, morelessText)">{{morelessText}}</a></p>
+								<p *ngIf="jobdescription == '' || jobdescription == null">{{jobdescription}}</p> -->
+
+								<p *ngIf="jobdescription != '' && jobdescription != null">
+									{{jobdescription | truncatetext : textLength}}
+									<span *ngIf="jobdescription.length > 204" (click)="onMoreFun(jobdescription.length, morelessText)"><a>{{morelessText}}</a></span></p>								
+									<p *ngIf="jobdescription == '' || jobdescription == null" >{{jobdescription}}</p>							
+							</div>
+						</section>
+						<!--end profile-details-->
+
+						<div class="trans-wrap">
+							<div class="trans-left">
+								<a href="javascript:;">
+									<div class="trans-img" (click)="onPlayVideo()"><img src="assets/images/play-icon.png"></div>
+									<div class="trans-desc">
+										<h4>play video</h4>
+									</div>
+									<!--end trans-desc-->
+								</a>
+							</div>
+							<!--end trans-left-->
+
+							<div class="trans-left">
+								<div class="trans-img"><img src="assets/images/trans-img2.png"></div>
+								<div class="trans-desc">
+									<h4>Rs.
+										<span *ngIf="jobhourlyrate == null;else jobhourlyrateelse">
+											0
+										</span>
+										<ng-template #jobhourlyrateelse>
+											{{jobhourlyrate}}
+										</ng-template>
+										<br />Hourly Rate
+									</h4>
+								</div>
+								<!--end trans-desc-->
+							</div>
+							<!--end trans-left-->
+						</div>
+						<!--end trans-wrap-->
+					</div>
+					<!--end bg-box-->
+				</div>
+				<!--end col-->
+
+				<div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+					<div class="bg-box bg-boxright bg-boxright_blk">
+						<mat-list role="list">
+							<mat-list-item role="listitem" class="gray_bg_btn">
+
+								<div *ngIf="user_type=='Client'">
+
+									<button mat-button routerLink="/postjob" *ngIf="jobs_count==0">Post Job To Invite</button>
+									
+									<button mat-button (click)="invitationPopup();" *ngIf="jobs_count>0 && invitation==false">Invite To
+										Job</button>
+
+									<button mat-button *ngIf="jobs_count>0 && invitation==true">Invitation Sent</button>
+
+									<button mat-button *ngIf="jobs_count>0" routerLink="/contract/{{queryUserID}}">{{hireme}}</button>
+									
+									<span *ngIf="is_wishlist==true"> <button mat-button (click)="Removewishlistfreelancerfunc(wish_id)">Saved</button></span>
+									<span *ngIf="is_wishlist==false"> <button mat-button
+											(click)="Addwishlistfreelancerfunc()">Save</button> </span>
+
+								</div>
+
+								<h4>Availability</h4>
+								<div *ngIf="available != 4 && available != '' && available != null;else notavailable;">
+									<p>Available</p>
+									<p>{{selectedAvailable}}</p>
+									<p *ngIf="current_time">User's Current Time</p>
+									<p>{{current_time}}</p>
+								</div>
+								<ng-template #notavailable>
+									<p>Not available until {{expected}}</p>
+									<p *ngIf="current_time">User's Current Time</p>
+									<p>{{current_time}}</p>
+								</ng-template>
+							</mat-list-item>
+							<mat-list-item role="listitem">
+								<h4>Profile Link</h4>
+								<form class="copylink-form">
+									<mat-form-field class="example-full-width coplylink_blk">
+										<input #profilelink matInput [style.background-color]="displayColor"
+											value={{copylink}} readonly>
+									</mat-form-field>
+									<button ngxClipboard (click)="displayCopyColor()" [ngxClipboard]="profilelink" mat-button>Copy
+										Link</button>
+								</form>
+							</mat-list-item>
+							<mat-list-item role="listitem">
+								<h4>Languages</h4>
+								<p *ngIf="english_level != '' && english_level != null">English: <span>{{english_level}}</span></p>
+								<p *ngIf="english_level == '' || english_level == null"><span>English language level not added</span>
+								</p>
+							</mat-list-item>
+							<mat-list-item role="listitem" *ngIf="margeOtherLang.length > 0">
+								<div class="language_scroll">
+									<div class="detail-wrap" *ngFor="let row of margeOtherLang;">
+										<p>{{row.language}} - <span class="lang_name">{{row.level}}</span></p>
+									</div>
+								</div>
+							</mat-list-item>
+						</mat-list>
+					</div>
+					<!--end bg-box-->
+				</div>
+				<!--end col-->
+
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="bg-box bg-boxbottom">
+						<div class="post-head">
+							<h3>portfolio</h3>
+							<div class="post-btn">
+							</div>
+						</div>
+
+						<div class="portfolio-detail">
+							<div *ngIf="!(portResultData?.length > 0)">Work experience not added</div>
+							<div class="detail-wrap" *ngFor="let portRow of portResultData">
+								<div class="portfolio-img"><img src={{portRow.project_image}}></div>
+								<div class="portfolio_rightblk">
+									<h4>{{portRow.project_title}}</h4>
+									<p>{{portRow.project_overview}}</p>
+									<p class="add-txt">{{portRow.category_name}}</p>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+					<div class="bg-box bg-boxbottom">
+						<div class="post-head">
+							<h3>Skills</h3>
+							<div class="post-btn">
+							</div>
+							<!--end post-btn-->
+						</div>
+						<!--end post-head-->
+
+						<div class="portfolio-detail skills_detail">
+							<div *ngIf="skills.length > 0;else noskills">
+								<ng-container *ngFor="let skill of skills">
+									<button mat-button (click)="skillBasedSearch(skill)">{{skill}}</button>
+								</ng-container>
+							</div>
+							<ng-template #noskills>No Skills Selected</ng-template>
+						</div>
+						<!--end portfolio-detail-->
+					</div>
+
+					<div class="bg-box bg-boxbottom">
+						<div class="post-head">
+							<h3>Employment</h3>
+							<div class="post-btn">
+							</div>
+						</div>
+
+						<div class="portfolio-detail certification-detail">
+							<div *ngIf="!(empResultData?.length > 0)">Employment details not added</div>
+							<div class="detail-wrap" *ngFor="let empRow of empResultData">
+								<h4>{{empRow.title}} | {{empRow.role}} | ( {{empRow.organization}} )</h4>
+								<div *ngIf="empRow.currently_working_here;else toYear;">
+									<p>{{empRow.year_from}} - Present
+								</div>
+								<ng-template #toYear>
+									<p>{{empRow.year_from}} - {{empRow.year_to}}</p>
+								</ng-template>
+							</div>
+						</div>
+					</div>
+
+					<div class="bg-box bg-boxbottom">
+						<div class="post-head">
+							<h3>Education</h3>
+							<div class="post-btn">
+							</div>
+						</div>
+
+						<div class="portfolio-detail certification-detail">
+							<div *ngIf="!(eduResultData?.length > 0)">Education details not added</div>
+							<div class="detail-wrap" *ngFor="let eduRow of eduResultData">
+								<h4>{{eduRow.degree}}( {{eduRow.organization}} )</h4>
+								<p>{{eduRow.year_from}} - {{eduRow.year_to}}</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="bg-box bg-boxbottom">
+						<div class="post-head">
+							<h3>Other Experiences</h3>
+							<div class="post-btn">
+							</div>
+							<!--end post-btn-->
+						</div>
+						<!--end post-head-->
+
+						<div class="portfolio-detail certification-detail">
+							<div *ngIf="!(otherExpResultData?.length > 0)">Other experience details not added</div>
+							<div class="detail-wrap" *ngFor="let otherExp of otherExpResultData">
+								<h4>{{otherExp.subject}}</h4>
+								<p>{{otherExp.description}}</p>
+							</div>
+						</div>
+					</div>
+					<!--end bg-boxbottom-->
+				</div>
+
+			</div>
+			<!--end row-->
+		</div>
+		<!--end container-->
+	</div>
+	<!--end freelancer-wrap-->
+</div>
+<!--end freelancer_profile-->

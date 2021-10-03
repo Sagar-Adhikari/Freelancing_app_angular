@@ -1,0 +1,104 @@
+/*popup design*/
+::ng-deep .mat-accent .mat-pseudo-checkbox-checked, ::ng-deep .mat-accent .mat-pseudo-checkbox-indeterminate, ::ng-deep .mat-pseudo-checkbox-checked, ::ng-deep .mat-pseudo-checkbox-indeterminate {background: #4A154B;}
+
+.modal-title { color: #4A154B; font-size: 25px; text-transform: uppercase; font-family: 'Open Sans', sans-serif; font-weight: normal; font-style: normal; letter-spacing: 1px; }
+.profile-leftblock h5 { color: #4A154B; font-size: 20px; text-transform: uppercase; font-family: 'Open Sans', sans-serif; font-weight: normal; font-style: normal; letter-spacing: 1px; margin-bottom: 30px; }
+button.save-btn { background-color: #27AB6B; border-color: #A62B3D; border-radius:6px; font-family: 'Open Sans', sans-serif; padding: 0 16px; color: #fff; }
+button{font-weight: normal; cursor: pointer; margin: 0px 5px; line-height: 36px; font-size: 14px; outline:0px; border:0px; }
+button.save-btn:hover { background-color: #992331; }
+button.cancel-btn:hover { background-color: #C4C7CD; color: #000; }
+button.cancel-btn{ background-color: #DFE2E9; color: #000; border-radius:6px; font-family: 'Open Sans', sans-serif; padding: 0 16px; }
+button:focus { outline:none; }
+.modal-header { padding: 0px 0px 10px 0px; }
+.btn_block { padding: 10px 0px; }
+.modal-body{ padding:15px 0px; }
+.modal-header button { background: transparent; border: none; cursor: pointer; position: relative; top: 0px; outline: none; padding:0px; text-align:right; margin: 0px; right:-8px; }
+.mat-select {
+    padding: .5rem .75rem;
+    font-size: 1rem;
+    line-height: 1.25;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: .25rem;
+}
+.available_popup label{
+    width:100%;
+}
+.mat-radio-button {
+    margin-right: 7px;
+}
+.add_lang_popup label {
+    margin-right: 10px;
+}
+.mat-select {
+    padding: .5rem .75rem;
+    font-size: 1rem;
+    line-height: 1.25;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: .25rem;
+}
+:host /deep/  .ng-value-container {
+    width: 100%;
+    padding: .5rem .75rem;
+    font-size: 1rem;
+    line-height: 1.25;
+    color: #464a4c;
+    background-color: #fff;
+    background-image: none;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: .25rem;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    display: block;
+}
+/* :host /deep/ .ng-dropdown-panel {
+    max-height: 300px;
+    overflow-y: auto;
+    background-color: #fff;
+    width: 300px;
+    position:fixed;
+}
+:host /deep/ .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+    padding: 8px 20px;
+}
+:host /deep/  .ng-select .ng-value.ng-star-inserted {
+    background-color: #E0E0E0;
+    border-radius: 4px;
+    padding: 3px 10px;
+    margin: 2px 3px 2px 3px;
+    line-height: 22px;
+} */
+
+:host /deep/ .ng-dropdown-panel .ng-dropdown-panel-items { max-height: 100px; }
+:host /deep/  .ng-select .ng-value.ng-star-inserted:hover { background-color: #4A154B; color:#fff; }
+:host /deep/ .ng-select .ng-select-container .ng-value-container .ng-input > input { height: 100%; }
+:host /deep/ .ng-select .ng-clear-wrapper .ng-clear { line-height: 42px; }
+:host /deep/ .ng-value-container { min-height: 50px; }
+:host /deep/ .ng-clear-wrapper.ng-star-inserted { display: none; }
+/*popup scrollbar*/
+::ng-deep  .cdk-overlay-dark-backdrop { min-height: 100% !important; position: fixed !important; }
+::ng-deep .cdk-global-overlay-wrapper{ overflow-y:auto; pointer-events: auto; padding:20px 0px 0px 0px; overflow-x:hidden; }
+::ng-deep  .cdk-global-scrollblock { overflow: hidden; width: 102%; }
+::ng-deep   .mat-dialog-container { overflow: hidden; }
+.profile-leftblock label { font-weight: 600; }
+.modal-header .mat-icon.material-icons { color: rgba(0,0,0,.87); }
+:host /deep/ .skills_block .ng-select-container .ng-value.ng-star-inserted { border: 1px solid #ced0da; text-transform: capitalize; cursor: pointer; opacity: 1; transition: opacity .2s cubic-bezier(.35,0,.25,1),background-color .1s cubic-bezier(.35,0,.25,1); font-family: Roboto,"Helvetica Neue",sans-serif; font-size: 14px; font-weight: 500; display: inline-block; margin-bottom: 10px; padding: 2px 16px; background-color: #f4f5f8; color: #292b2c; line-height: 33px; border-radius: 4px; }
+.skills_block { width: 100%; display: block; }
+:host /deep/ .ng-select .ng-select-container::after { border-bottom: 0px solid rgba(0,0,0,0.42) !important; }
+:host /deep/ .ng-value-container { border: 0px solid rgba(0,0,0,.15); }
+:host /deep/ .ng-select.ng-select-focused .ng-select-container .ng-arrow-wrapper .ng-arrow{ color:#4A154B; }
+:host /deep/ .ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value .ng-value-icon { color: inherit; }
+:host /deep/ .skills_block .ng-select-container .ng-value.ng-star-inserted:hover { background: #4A154B; color: #fff; border: 1px solid #4A154B; }
+:host /deep/ .skills_block .ng-select { padding-bottom: 5px; }
+:host /deep/ .skills_block .ng-select.ng-select-multiple .ng-select-container.ng-has-value .ng-arrow-wrapper { border-top: 6px solid transparent; }
+button.save-btn { margin-left: 0px; }
+
+
+@media(min-width:991px)
+{
+.profile-leftblock { max-width: 700px; min-width: 700px; }
+}
+
+@media(max-width:767px)
+{
+.modal-title{ font-size: 15px; }
+}

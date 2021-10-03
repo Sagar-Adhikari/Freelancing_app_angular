@@ -1,0 +1,25 @@
+.admin-container {box-shadow: 0 3px 5px -1px rgba(0,0,0,.1), 0 6px 10px 0 rgba(0,0,0,.1), 0 1px 10px 0 rgba(0,0,0,.1); height: auto; margin:15px; }
+.hpanel { width:100%; }
+.panel-heading { width:100%; padding:15px; margin-bottom:15px; border-bottom:1px solid #ececed; }
+.page-title h4 { font-family: 'Noto Sans', sans-serif; font-size:14px; color:#c23041; font-weight:bold; margin-bottom:0px;}
+.page-crumb h4 { font-family: 'Noto Sans', sans-serif; font-size:14px; color:#41454b; margin-bottom:0px;}
+.panel-body { widows: 100%; margin:10px; padding:10px; border:1px solid #dfe2e5; }
+table.mat-table { width:1024px; max-width:100%; }
+td.mat-cell span.Overdue { color:#f20;}
+th.mat-header-cell { font-size: 14px; font-weight: bold; color: #41454b; font-family: 'Noto Sans', sans-serif; }
+th.mat-header-cell:last-child { width:100px; }
+.leader-content { width:100%;}
+.left-side { float: left; display:inline-block; }
+.right-side { display: inline-block; }
+td.mat-cell p { margin-bottom:0px; font-size: 12px; font-weight: bold; color:#41454b; font-family: 'Noto Sans', sans-serif; }
+td.mat-cell span { color:#94a1b2; font-size: 11px; font-family: 'Noto Sans', sans-serif; }
+td.mat-cell span.budget-status { text-transform: uppercase; }
+td.mat-cell span.budget-status.not-paid { color:#f20; }
+td.mat-cell .pending p { width:auto; font-size:10px; font-weight: normal; border-radius:4px; padding:5px; background-color: #f7981c; color:#fff; display: inline-block; position: relative;}
+td.mat-cell .running p { width:auto; font-size:10px; font-weight: normal; border-radius:4px; padding:5px; background-color: #36af47; color:#fff; display: inline-block; position: relative; }
+.mat-icon.material-icons { position: relative; top: 9px; color: #41454b;}
+.left-side img { width: 35px; height: 35px; border-radius: 35px; margin: 0px 10px; object-fit: contain; }
+.search-category { position: relative; display: inline-block; }
+.search-category span.form-icon{position: absolute;height: 100%;background: transparent;width: 40px;text-align: center;top: 13px;left: 4px;color: #41454b;cursor: pointer;}
+.search-category input.form-control{height: 45px;border-radius: 30px;padding-left: 40px;font-family: 'HelveticaNeue';font-size: 16px;color: #41454b;letter-spacing: 1px;line-height: 45px;border:1px solid rgba(7,0,0,.1);margin:3px;}
+/* Header End CSS Styles */

@@ -1,0 +1,12 @@
+{
+  "name": "workplus-chat-example",
+  "version": "0.0.1",
+  "description": "Workplus chat application",
+  "dependencies": {
+    "express": "^4.15.2",
+    "lodash": "^4.17.20",
+    "node-postgres": "^0.6.2",
+    "redis": "^3.0.2",
+    "socket.io": "^2.1.1"
+  }
+}

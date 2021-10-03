@@ -1,0 +1,334 @@
+<div class="category_mainwrap freelancer_profile">
+    <div class="breadcrumb_wrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <h4>profile</h4>
+                </div>
+                <!--end col-->
+            </div>
+            <!--end row-->
+        </div>
+        <!--end container-->
+    </div>
+    <!--end breadcrumb_wrap-->
+
+    <div class="freelancer-wrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                    <div class="bg-box profile_bg-box">
+                        <div class="freelancer-detail">
+                            <div class="profile-img">
+                                <span *ngIf="profileImage == null;else profileImagenotnull">
+										<img src="assets/images/profile_default.png">
+									</span>
+                                <ng-template #profileImagenotnull>
+                                    <img src={{profileImage}}>
+                                </ng-template>
+                            </div>
+                            <div class="profile-name">
+                                <h4>{{firstName}} {{lastName}}</h4>
+                                <p>{{state}}
+                                    <ng-container *ngFor="let counte of countries">
+                                        <span *ngIf="counte.code == selectedcountry">{{counte.name}}</span>
+                                    </ng-container>
+                                </p>
+                            </div>
+                            <!--end profile-name-->
+                        </div>
+                        <!--end freelancer-detail-->
+
+                        <section class="profile-details">
+                            <h5 (mouseover)="editJobTitleDisplay=true" (mouseleave)="editJobTitleDisplay=false;">
+                                <span class="profile_heading">{{jobtitle}} 
+
+											<span *ngIf="editJobTitleDisplay;" (click)="editFreeJobTitle()">
+										
+													<span class="edit_icon_theme"><i class="fa fa-pencil"></i></span></span>
+                                </span>
+                            </h5>
+
+                            <div class="profile_content_blk" (mouseover)="editJobDescriptionDisplay=true" (mouseleave)="editJobDescriptionDisplay=false;"><span *ngIf="editJobDescriptionDisplay;" (click)="editJobDescrip()"><span class="edit_icon_theme"><i class="fa fa-pencil"></i></span></span>
+                                <p *ngIf="jobdescription != '' && jobdescription != null">{{jobdescription | truncatetext : textLength}}<span *ngIf="jobdescription.length > 150" (click)="onMoreFun(jobdescription.length, morelessText)">{{morelessText}}</span></p>
+                                <p *ngIf="jobdescription == '' || jobdescription == null">{{jobdescription}}</p>
+                                <!-- <p>I have over 5 years experience in iOS development. I developed a wide range of iOS apps. Most of them I developed from scratch, so I know how to design application architecture and write clean and simple code. I maintained debug and refactored legacy code.</p>
+									<mat-list role="list">
+									<mat-list-item role="listitem"><span class="fa fa-circle icon"></span>Programming Experience</mat-list-item>
+									<mat-list-item role="listitem"><span class="fa fa-circle icon"></span>Expert in swift and objective c</mat-list-item>
+									<mat-list-item role="listitem"><span class="fa fa-circle icon"></span>Unit/UI testing, TDD</mat-list-item>
+
+									<mat-list-item role="listitem"><span class="fa fa-circle icon"></span>MVP, VIPER, VIP</mat-list-item>
+									<mat-list-item role="listitem"><span class="fa fa-circle icon"></span>Strong object-oriented design skills</mat-list-item>
+									<mat-list-item role="listitem"><span class="fa fa-circle icon"></span>Deep understanding of design patterns</mat-list-item>
+									<mat-list-item role="listitem"><span class="fa fa-circle icon"></span>Multi-threaded, asynchronous code</mat-list-item>
+									<mat-list-item role="listitem"><span class="fa fa-circle icon"></span>Debugging and performance testing skills</mat-list-item>
+									<mat-list-item role="listitem"><span class="fa fa-circle icon"></span>Ability to write clean, well-factored...</mat-list-item>
+									</mat-list> -->
+                            </div>
+                        </section>
+                        <!--end profile-details-->
+
+                        <div class="trans-wrap">
+                            <div class="trans-left">
+                                <a href="javascript:;">
+                                    <div class="trans-img" (click)="onPlayVideo()"><img src="assets/images/play-icon.png"></div>
+                                    <div class="trans-desc" (mouseover)="editVideoDisplay=true" (mouseleave)="editVideoDisplay=false;">
+                                        <h4 (mouseover)="editVideoDisplay=true" (mouseleave)="editVideoDisplay=false;">play video <span *ngIf="editVideoDisplay;" (click)="editJobVideo()"><span class="edit_icon_theme"><i class="fa fa-pencil"></i></span></span>
+                                        </h4>
+                                    </div>
+                                    <!--end trans-desc-->
+                                </a>
+                            </div>
+                            <!--end trans-left-->
+
+                            <div class="trans-left">
+                                <div class="trans-img" (mouseover)="editRateDisplay=true" (mouseleave)="editRateDisplay=false;"><img src="assets/images/trans-img2.png"></div>
+                                <div class="trans-desc" (mouseover)="editRateDisplay=true" (mouseleave)="editRateDisplay=false;">
+                                    <h4>Rs.{{jobhourlyrate}}<br/>Hourly Rate</h4><span *ngIf="editRateDisplay;" (click)="editHourlyRate()"><span class="edit_icon_theme"><i class="fa fa-pencil"></i></span></span>
+                                </div>
+                                <!--end trans-desc-->
+                            </div>
+                            <!--end trans-left-->
+                        </div>
+                        <!--end trans-wrap-->
+                    </div>
+                    <!--end bg-box-->
+                </div>
+                <!--end col-->
+
+                <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                    <div class="bg-box bg-boxright bg-boxright_blk">
+                        <div class="job-btn">
+                            <button mat-button routerLink="/freelancer/setting/profile">profile settings</button>
+                        </div>
+                        <!--end job-btn-->
+                        <button class="view-btn" mat-button routerLink="/freelancerview/{{userID}}">View my profile as others see it</button>
+                        <mat-list role="list">
+                            <mat-list-item role="listitem">
+                                <h4 (mouseover)="editAvailableDisplay=true" (mouseleave)="editAvailableDisplay=false;">Availability <span *ngIf="editAvailableDisplay;" (click)="editAvailable()"><span class="edit_icon_theme"><i class="fa fa-pencil"></i></span></span>
+                                </h4>
+                                <div *ngIf="available != 4 && selectedAvailable;else notavailable;">
+                                    <p>Available</p>
+                                    <p>{{selectedAvailable}}</p>
+                                    <p *ngIf="current_time">User's Current Time</p>
+                                    <p>{{current_time}}</p>
+                                </div>
+                                <ng-template #notavailable>
+                                    <p>Not available until {{expected}}</p>
+                                    <p *ngIf="current_time">User's Current Time</p>
+                                    <p>{{current_time}}</p>
+                                </ng-template>
+                            </mat-list-item>
+                            <mat-list-item role="listitem">
+                                <h4>Profile Link</h4>
+                                <form class="copylink-form">
+                                    <mat-form-field class="example-full-width coplylink_blk profile_copylink">
+                                        <input #profilelink matInput [style.background-color]="displayColor" value={{copylink}} readonly>
+                                    </mat-form-field>
+                                    <button (click)="displayCopyColor()" ngxClipboard [ngxClipboard]="profilelink" mat-button>Copy Link</button>
+                                </form>
+                            </mat-list-item>
+                            <mat-list-item role="listitem">
+                                <h4 (mouseover)="addLangEngDisplay=true" (mouseleave)="addLangEngDisplay=false;">Languages <span *ngIf="addLangEngDisplay;" (click)="addEngLang()"><span class="add_text"><span class="edit_icon_theme edit_icon_space"><i class="fa fa-plus"></i></span></span>
+                                    </span>
+                                </h4>
+                                <p (mouseover)="editLangEngDisplay=true" (mouseleave)="editLangEngDisplay=false;">English: <span>{{english_level}}</span> <span *ngIf="editLangEngDisplay;" (click)="editEngLang()"><span class="edit_icon_theme edit_icon_space"><i class="fa fa-pencil"></i></span></span>
+                                </p>
+                                <div class="language_scroll">
+                                    <div class="detail-wrap" *ngFor="let row of margeOtherLang;let i = index;">
+                                        <p>{{row.language}} - <span class="lang_name">{{row.level}}</span></p> <span class="edit_delete_blk"><span (click)="editOtherLang(i,margeOtherLang)"><span class="edit_icon_theme"><i class="fa fa-pencil"></i></span></span>
+                                        <span
+                                            (click)="deleteOtherLang(i,margeOtherLang)"><span class="edit_icon_theme"><i class="fa fa-trash"></i></span></span>
+                                            </span><span></span>
+                                    </div>
+                                </div>
+                            </mat-list-item>
+                        </mat-list>
+                    </div>
+                    <!--end bg-box-->
+                </div>
+                <!--end col-->
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="bg-box bg-boxbottom">
+                        <div class="post-head">
+                            <h3>portfolio</h3>
+                            <div class="post-btn">
+                                <button mat-button (click)="addPortfolio('add')"><span class="fa fa-plus"></span>Add</button>
+                            </div>
+                        </div>
+
+                        <div class="portfolio-detail">
+                            <div *ngIf="!(portResultData?.length > 0)" (click)="addPortfolio('add')">Add your project works here</div>
+                            <div class="detail-wrap" *ngFor="let portRow of portResultData">
+                                <div class="portfolio-img"><img src={{portRow.project_image}}></div>
+                                <div class="portfolio_rightblk">
+                                    <h4>{{portRow.project_title}}</h4>
+                                    <span class="portfolio_edit_delete">
+										<span (click)="addPortfolio('edit', portRow.id, portRow.project_title, portRow.project_categories, portRow.project_subcategories, portRow.project_url, portRow.completion_date, portRow.skills, portRow.project_image, portRow.project_file, portRow.project_overview, portRow.category_name)"><span class="edit_icon_theme"><i class="fa fa-pencil"></i></span></span>
+                                    <span
+                                        (click)="portDelete(portRow.id)"><span class="edit_icon_theme"><i class="fa fa-trash"></i></span></span>
+                                        </span>
+                                        <p>{{portRow.project_overview}}</p>
+                                        <p class="add-txt">{{portRow.category_name}}</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="bg-box bg-boxbottom">
+                        <div class="post-head">
+                            <h3>Skills</h3>
+                            <div class="post-btn">
+                                <button mat-button (click)='editSkills()'><span class="fa fa-pencil"></span>Edit</button>
+                            </div>
+                            <!--end post-btn-->
+                        </div>
+                        <!--end post-head-->
+
+                        <div class="portfolio-detail skills_detail">
+                            <div *ngIf="skills.length > 0;else noskills">
+                                <ng-container *ngFor="let skill of skills">
+                                    <button *ngIf="skill !== ''" mat-button (click)="skillBasedSearch(skill)">{{skill}}</button>
+                                </ng-container>
+                            </div>
+                            <ng-template #noskills>No Skills Selected</ng-template>
+                        </div>
+                        <!--end portfolio-detail-->
+                    </div>
+
+                    <!-- <div class="bg-box bg-boxbottom">
+							<div class="post-head">
+								<h3>certifications</h3>
+								<div class="post-btn">
+								<button mat-button><span class="fa fa-pencil"></span>Edit</button>
+								</div>
+							</div>
+
+							<div class="portfolio-detail certification-detail">
+								<div class="portfolio-img"><img src="assets/images/google-img.jpg"></div>
+								<div class="detail-wrap">
+									<h4>AdWords Display Certification</h4>
+									<p>Pending verification by networkplus</p>
+									<p>Google</p>
+									<p>The Display Advertising exam covers advanced concepts and best practices for creating, managing, measuring, and optimizing Display campaigns.</p>
+								</div>
+							</div>
+						</div> -->
+
+                    <div class="bg-box bg-boxbottom">
+                        <div class="post-head">
+                            <h3>Employment</h3>
+                            <div class="post-btn">
+                                <button mat-button (click)="editEmp('add')"><span class="fa fa-plus"></span>Add</button>
+                            </div>
+                        </div>
+
+                        <div class="portfolio-detail certification-detail">
+                            <div *ngIf="!(empResultData?.length > 0)" (click)="editEmp('add')">Add your experience details here</div>
+                            <div class="detail-wrap" *ngFor="let empRow of empResultData">
+                                <h4>{{empRow.title}} | {{empRow.role}} | ( {{empRow.organization}} )</h4>
+                                <span class="portfolio_edit_delete">
+										<span (click)="editEmp('edit', empRow.id, empRow.organization, empRow.currently_working_here, empRow.location, empRow.country, empRow.title, empRow.role, empRow.year_from, empRow.year_to, empRow.description)"><span class="edit_icon_theme"><i class="fa fa-pencil"></i></span></span>
+                                <span
+                                    (click)='deleteEmp(empRow.id)'><span class="edit_icon_theme"><i class="fa fa-trash"></i></span></span>
+                                    </span>
+                                    <div *ngIf="empRow.currently_working_here;else toYear;">
+                                        <p>{{empRow.year_from}} - Present</div>
+                                    <ng-template #toYear>
+                                        <p>{{empRow.year_from}} - {{empRow.year_to}}</p>
+                                    </ng-template>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-box bg-boxbottom">
+                        <div class="post-head">
+                            <h3>Education</h3>
+                            <div class="post-btn">
+                                <button mat-button (click)="editEdu('add')"><span class="fa fa-plus"></span>Add</button>
+                            </div>
+                        </div>
+
+                        <div class="portfolio-detail certification-detail">
+                            <div *ngIf="!(eduResultData?.length > 0)" (click)="editEdu('add')">Add your education details here</div>
+                            <div class="detail-wrap" *ngFor="let eduRow of eduResultData">
+                                <h4>{{eduRow.degree}}( {{eduRow.organization}} )</h4>
+                                <span class="portfolio_edit_delete">
+									<span (click)="editEdu('edit', eduRow.id, eduRow.organization,eduRow.year_from,eduRow.year_to,eduRow.degree,eduRow.area,eduRow.description)"><span class="edit_icon_theme"><i class="fa fa-pencil"></i></span></span>
+                                <span
+                                    (click)='deleteEduc(eduRow.id)'><span class="edit_icon_theme"><i class="fa fa-trash"></i></span></span>
+                                    </span>
+                                    <p>{{eduRow.year_from}} - {{eduRow.year_to}}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-box bg-boxbottom">
+                        <div class="post-head">
+                            <h3>Other Experiences</h3>
+                            <div class="post-btn">
+                                <button mat-button (click)="editOtherExp('add')"><span class="fa fa-plus"></span>Add</button>
+                            </div>
+                            <!--end post-btn-->
+                        </div>
+                        <!--end post-head-->
+
+                        <div class="portfolio-detail certification-detail">
+                            <div *ngIf="!(otherExpResultData?.length > 0)" (click)="editOtherExp('add')">Add your other experience details here</div>
+                            <div class="detail-wrap" *ngFor="let otherExp of otherExpResultData">
+                                <h4>{{otherExp.subject}}</h4>
+                                <span class="portfolio_edit_delete">
+										<span (click)="editOtherExp('edit',otherExp.id,otherExp.subject,otherExp.description)"><span class="edit_icon_theme"><i class="fa fa-pencil"></i></span></span><span (click)='deleteOtherExp(otherExp.id)'><span class="edit_icon_theme"><i class="fa fa-trash"></i></span></span>
+                                </span>
+                                <p>{{otherExp.description}}</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--end bg-boxbottom-->
+
+                    <div class="bg-box bg-boxbottom">
+                        <div class="post-head">
+                            <h3>Upload Documents</h3>
+                            <div class="post-btn">
+                                <button mat-button (click)="editDocument()"><span class="fa fa-plus"></span>Add</button>
+                            </div>
+                            <!--end post-btn-->
+                        </div>
+                        <!--end post-head-->
+
+                        <div class="portfolio-detail certification-detail">
+                            <div *ngIf="!(DocumentResultData?.length > 0)" (click)="editDocument()">Add your documents here</div>
+                            <div class="detail-wrap">
+                                <ul *ngFor='let docurl of docurls'>
+                                    <li>
+                                        <img [src]="docurl.image" height="200" />
+                                    </li>
+
+                                    <li>
+                                        <button mat-button class="cancel-btn" type="button" (click)="documentDeleteSubmit(docurl.id)">Delete</button>
+                                    </li>
+
+                                    <li>
+                                        <a target="_blank" [href]="docurl.file">Download</a>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--end bg-boxbottom-->
+                </div>
+
+            </div>
+            <!--end row-->
+        </div>
+        <!--end container-->
+    </div>
+    <!--end freelancer-wrap-->
+</div>
+<!--end freelancer_profile-->

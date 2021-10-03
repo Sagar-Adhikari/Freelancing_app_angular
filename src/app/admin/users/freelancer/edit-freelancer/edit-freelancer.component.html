@@ -1,0 +1,150 @@
+<div class="admin-dashboard admin-settingspage admin-custompage admin-cmspage">
+  <div class="general-form-layout custompage-form-layout pages-container">
+    <h2>Edit Freelancer</h2>
+    <form [formGroup]="freelancerForm" (ngSubmit)="freelancerFormSubmit(freelancerForm.value)">
+      <ng-template [ngIf]="ismessage">
+        <div class="alert alert-danger" role="alert">{{errormessage}}</div>
+      </ng-template>
+      <ng-template [ngIf]="is_success">
+        <div class="alert alert-success" role="alert">Freelancer has been updated successfully</div>
+      </ng-template>
+
+      <div class="formfield-box">
+        <mat-form-field appearance="outline">
+          <mat-label>First Name</mat-label>
+          <input matInput placeholder="First Name" formControlName="first_name" required>
+        </mat-form-field>
+        <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('first_name') ||
+            this.errorMsgArr['first_name']}}</div>
+      </div>
+
+      <div class="formfield-box">
+        <mat-form-field appearance="outline">
+          <mat-label>Last Name</mat-label>
+          <input matInput placeholder="Last Name" formControlName="last_name" required>
+        </mat-form-field>
+        <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('last_name') ||
+            this.errorMsgArr['last_name']}}</div>
+      </div>
+
+      <div class="formfield-box">
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="email" formControlName="email" required>
+        </mat-form-field>
+        <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('email') ||
+            this.errorMsgArr['email']}}</div>
+      </div>
+
+      <div class="formfield-box">
+        <mat-form-field appearance="outline">
+          <mat-label>Title</mat-label>
+          <input matInput placeholder="Title" formControlName="title" required>
+        </mat-form-field>
+        <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('title') ||
+            this.errorMsgArr['title']}}</div>
+      </div>
+
+      <div class="formfield-box">
+        <mat-form-field appearance="outline">
+          <mat-label>Phone</mat-label>
+          <input matInput placeholder="Phone" formControlName="phone" required>
+        </mat-form-field>
+        <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('phone') ||
+            this.errorMsgArr['phone']}}</div>
+      </div>
+
+      <div class="formfield-box">
+        <mat-form-field appearance="outline">
+          <mat-label>Address</mat-label>
+          <input matInput placeholder="Address" formControlName="address" required>
+        </mat-form-field>
+        <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('address') ||
+            this.errorMsgArr['address']}}</div>
+      </div>
+
+      <div class="formfield-box">
+        <mat-form-field appearance="outline">
+          <mat-label>Zipcode</mat-label>
+          <input matInput type="text" class="form-control" (keypress)="isNumber($event)" formControlName="zipcode" placeholder="Enter the phone state">
+        </mat-form-field>
+        <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('zipcode') ||
+            this.errorMsgArr['zipcode']}}</div>
+      </div>
+
+      <div class="formfield-box">
+        <mat-form-field appearance="outline">
+          <mat-label>City</mat-label>
+          <input matInput type="text" class="form-control" formControlName="city" placeholder="Enter the city">
+        </mat-form-field>
+        <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('city') ||
+            this.errorMsgArr['city']}}</div>
+      </div>
+
+      <div class="formfield-box">
+        <mat-form-field appearance="outline">
+          <mat-label>State</mat-label>
+          <input matInput type="text" class="form-control" formControlName="state" placeholder="Enter the state">
+        </mat-form-field>
+        <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('state') ||
+            this.errorMsgArr['state']}}</div>
+      </div>
+
+      <div class="formfield-box">
+        <mat-form-field appearance="outline">
+          <mat-select placeholder="Select Country" formControlName="country" [(ngModel)]="updatedCountry">
+            <mat-option *ngFor="let location of locations" [value]="location.code">
+              {{ location.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('country') ||
+            this.errorMsgArr['country']}}</div>
+      </div>
+
+      <div class="formfield-box">
+          <mat-form-field appearance="outline">
+          <mat-select placeholder="Select Timezone" formControlName="timezone" [(ngModel)]="updatedTimezone">
+              <mat-option *ngFor="let timezone of timeZoneLists" [value]="timezone">
+                  {{ timezone }}
+              </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('timezone') || this.errorMsgArr['timezone']}}</div>
+        </div>
+
+     <div class="formfield-box">
+        <mat-radio-group formControlName="user_status">
+          Status :
+          <mat-radio-button value="Active">Active</mat-radio-button>
+          <mat-radio-button value="Inactive">In-active</mat-radio-button>
+        </mat-radio-group>
+        <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('user_status') || this.errorMsgArr['user_status']}}</div>
+      </div>
+
+      <div class="formfield-box">
+        <mat-radio-group formControlName="user_verify">
+          Status :
+          <mat-radio-button value="True">Verified</mat-radio-button>
+          <mat-radio-button value="False">Not-Verified</mat-radio-button>
+        </mat-radio-group>
+        <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('user_verify') || this.errorMsgArr['user_verify']}}</div>
+      </div>
+
+
+    <div class="edit_freelancer_block">
+      <ul class="edit_freelancer_list" *ngFor='let docurl of docurls'>
+        <li>
+          <div><img [src]="docurl.image" /></div>
+          <a target="_blank" [href]="docurl.file">Download</a>
+        </li>
+      </ul>
+    </div>
+
+      <div class="submit-btn">
+        <button mat-raised-button type="submit" [disabled]="isbuttondisable">Save</button>
+        <button mat-raised-button [routerLink]="['/admin/user-freelancers']">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>

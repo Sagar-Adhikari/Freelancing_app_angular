@@ -1,0 +1,38 @@
+<div>
+  <div class="model_main"> 
+    <div class="modal-header">
+      <h4 class="modal-title">Update The Category Skill</h4>
+      <button (click)="onclickcancel()"><mat-icon>close</mat-icon></button>
+    </div>
+    <form [formGroup]="setCategoryForm">
+    <div class="modal-body">      
+      <div class="profile-leftblock">        
+        <div class="row">
+          <h5>What are the main services you offer to clients?</h5>
+          <p>Select up to 10 categories.</p>
+          <p class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('category') || this.errorMsgArr['category']}}</p>
+					<ng-container *ngFor="let category of categorylists">
+						<ng-container  *ngIf="category.subcategory != '' ">
+							<div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 box-bottom">
+								<h3>{{ category.name }}</h3>
+								<div>
+									<div *ngFor="let subcategory of category.subcategory">
+                      <div *ngIf="initialCategory && initialCategory.indexOf(category.name +' / '+ subcategory.name) !== -1;else unchecked">
+                          <mat-checkbox [ngModel]="true" formControlName="category" (change)="onChangeCategory(category.name,subcategory.name, $event.checked)">{{subcategory.name}}</mat-checkbox>
+                      </div>
+                      <ng-template #unchecked><mat-checkbox (change)="onChangeCategory(category.name,subcategory.name, $event.checked)">{{subcategory.name}}</mat-checkbox></ng-template>
+                    </div>
+                </div>
+							</div>
+						</ng-container>
+					</ng-container>
+				</div>
+      </div>
+    </div>
+    <div class="bottom-btn">
+      <button mat-button class="save-btn" (click)="submitCategoryForm(setCategoryForm.value)">Save</button>
+      <button mat-button class="cancel-btn" (click)="onclickcancel()">Cancel</button>
+    </div>
+  </form>
+  </div>
+</div>

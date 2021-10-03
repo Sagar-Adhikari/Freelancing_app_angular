@@ -1,0 +1,195 @@
+<div class="category_mainwrap freelancer_profile contract_details_mainwrap">
+  <!--start freelancer_profile-->
+  <div class="breadcrumb_wrap">
+    <!--start breadcrumb_wrap-->
+    <div class="container">
+      <!--start container-->
+      <div class="row">
+        <!--start row-->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <!--start col-->
+          <h4>Time & Payments </h4>
+        </div>
+        <!--end col-->
+      </div>
+      <!--end row-->
+    </div>
+    <!--end container-->
+  </div>
+  <!--end breadcrumb_wrap-->
+  <!-- while content STARTS -->
+  <div class="milestone-wrap postjob-details" *ngIf="display">
+    <!-- top part starts -->
+    <div class="container">
+      <div class="row">
+        <div class="postjob-inner">
+          <h5> {{offerData ? offerData.title : ''}}</h5>
+          <!-- client login starts -->
+          <section class="content-section">
+            <div class="freelancer-data" *ngIf="is_owner">
+              <div class="left profile-img" *ngIf="offerData && offerData.freelancer.id">
+                <img src="{{user_avatar_url}}?id={{offerData.freelancer.id}}" />
+              </div>
+              <div class="right profile-name">
+                <h3>{{offerData.freelancer.first_name}} {{offerData.freelancer.last_name}}</h3>
+              </div>
+              <ng-container *ngIf="offerData && offerData.status != 'Closed'">
+                <!-- feedback menu starts -->
+                <button mat-button [matMenuTriggerFor]="menu" class="menu-btn">...</button>
+                <mat-menu #menu="matMenu" class="menu-dropdown">
+
+                  <button mat-menu-item
+                    routerLink="/freelancer-feedback/{{offerData.freelancer.id}}/{{offerData.id}}/closed">
+                    End Contract
+                  </button>
+
+                </mat-menu>
+                <!-- feedback menu ends -->
+              </ng-container>
+            </div>
+          </section>
+          <!-- client login ends -->
+          <!-- freelancer login starts -->
+          <div class="freelancer-data" *ngIf="!is_owner">
+            <div class="left profile-img">
+              <img src="{{user_avatar_url}}?id={{offerData ? offerData.client.id : ''}}" />
+            </div>
+            <div class="right profile-name">
+              <h3>{{offerData ? offerData.client.first_name : ''}} {{offerData ? offerData.client.last_name : ''}}</h3>
+            </div>
+            <ng-container *ngIf="offerData && offerData.status !== 'Closed'">
+              <!-- feedback menu starts -->
+              <button mat-button [matMenuTriggerFor]="menu" class="menu-btn">...</button>
+              <mat-menu #menu="matMenu" class="menu-dropdown">
+                <button mat-menu-item
+                  routerLink="/client-feedback/{{offerData ? offerData.client.id : ''}}/{{offerData ? offerData.id : ''}}/closed">
+                  End Contract
+                </button>
+              </mat-menu>
+              <!-- feedback menu ends -->
+            </ng-container>
+          </div>
+          <!-- freelancer login ends -->
+          <div class="action-group">
+            <button mat-button *ngIf="!is_owner && manual_time && offerData && offerData.status != 'Closed'"
+              (click)="manualtimePopup(offerData.id,offerData.start_date)">+ Manual
+              Time</button>
+            <!-- <button mat-button *ngIf="is_owner && offerData && offerData.status != 'Closed'">Give Bonus</button> -->
+            <button mat-button *ngIf="is_owner && amountToPaid > 0 && offerData && offerData.status != 'Closed'" (click)="manualTimePayment(offerData.id)" [disabled]="!payment_btn"> Payment</button>
+            <button mat-button *ngIf="offerData && offerData.status == 'Closed'">Contract Closed</button>
+          </div>
+          <!-- top part ends -->
+          <!-- tab starts  -->
+          <div>
+            <mat-tab-group class="mat-tab-block">
+              <!-- time tab starts -->
+              <mat-tab label="TIME & PAYMENTS">
+                <!-- amount block starts  -->
+                <div class="amount">
+                  <p><span class="title-span">Budget</span><span>${{offerData ? offerData.amount : ''}} / hrs</span></p>
+                  <p><span class="title-span">Weekly
+                      Payment</span><span>${{offerData ? offerData.weekly_payment : ''}}</span></p>
+                  <p *ngIf="totalHourPaid"><span class="title-span">Paid</span><span>$ {{totalHourPaid ? totalHourPaid*offerData.amount : ''}}</span></p>
+                  <p *ngIf="amountToPaid"><span
+                      class="title-span">Remaining</span><span>$ {{amountToPaid}}</span>
+                  </p>
+                </div>
+                <!-- amount block ends  -->
+                <style>
+                  .example-container {
+                    overflow: auto;
+                    height: 300px;
+                  }
+                </style>
+                <div class="manual-time-list">
+                  <div class="" *ngIf="dataSource && dataSource.length > 0">
+                    <div class="table-responsive">
+                      <div class="example-container mat-elevation-z8">
+                        <table mat-table [dataSource]="dataSource" class="milestone-table">
+                          <!-- S.No -->
+                          <ng-container matColumnDef="no">
+                            <th mat-header-cell *matHeaderCellDef> # </th>
+                            <td mat-cell *matCellDef="let element;let i = index;">
+                              <span>{{ i+1 }}</span>
+                            </td>
+                          </ng-container>
+                          <!-- Name Column -->
+                          <ng-container matColumnDef="from_time">
+                            <th mat-header-cell *matHeaderCellDef>From Time</th>
+                            <td mat-cell *matCellDef="let element"> {{element.from_time}}
+                              <!--{{element.from_time | date:'yyyy-MM-dd hh:mm:ss a'}}-->
+                            </td>
+                          </ng-container>
+                          <!-- Amount Column -->
+                          <ng-container matColumnDef="to_time">
+                            <th mat-header-cell *matHeaderCellDef>To Time</th>
+                            <td mat-cell *matCellDef="let element">{{element.to_time}}
+                              <!--{{element.to_time | date:'yyyy-MM-dd hh:mm:ss a'}}-->
+                            </td>
+                          </ng-container>
+                          <!-- Payment status Column -->
+                          <ng-container matColumnDef="sum_hours">
+                            <th mat-header-cell *matHeaderCellDef>Total Hours</th>
+                            <td mat-cell *matCellDef="let element"> {{element.sum_hours}} </td>
+                          </ng-container>
+                          <ng-container matColumnDef="action">
+                            <th mat-header-cell *matHeaderCellDef>Action</th>
+                            <td mat-cell *matCellDef="let element;let i = index;">
+                              <button type="button" mat-button (click)="viewPaymentReport(i)">View</button>
+                            </td>
+                          </ng-container>
+                          <tr mat-header-row *matHeaderRowDef="displayedColumns;"></tr>
+                          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!--manual time show-->
+                <div class="manual-time-list">
+                    <div class="" *ngIf="clientHourlyDatas && clientHourlyDatas.length > 0">
+                      <div class="table-responsive">
+                        <div class="example-container mat-elevation-z8">
+                          <table mat-table [dataSource]="clientHourlyDatas" class="milestone-table">
+                            <ng-container matColumnDef="weeks">
+                              <th mat-header-cell *matHeaderCellDef> Hourly Details </th>
+                              <td mat-cell *matCellDef="let element">
+                                <span>{{ 'Weekly Total Hours :' + element.week_hours }}</span>
+                                <div *ngFor="let hrlydetail of element.dates">
+                                  {{ hrlydetail.manual_date }} - {{ hrlydetail.from_time }} - {{ hrlydetail.to_time }} - {{ hrlydetail.sum_hours }} - {{ hrlydetail.paid ? 'Paid' : 'Not Paid' }}
+                                </div>
+                              </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="displayColumnsHrlyDetails;"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayColumnsHrlyDetails;"></tr>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--manual time show-->
+              </mat-tab>
+              <mat-tab label="MESSAGES & FILES">
+                <app-chat-room></app-chat-room>
+              </mat-tab>
+              <!-- <mat-tab label="WORK DIARY"> WORK DIARY content will come here </mat-tab> -->
+              <mat-tab label="TERMS & SETTINGS">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div class="staticpage_content">
+                    <span [innerHTML]="desc"></span>
+                  </div>
+                </div>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
+          <!--Hourly Details display to the client - start -->
+          <div>
+            
+
+          </div>
+          <!--Hourly Details display to the client - end -->
+        </div>
+      </div>
+    </div>
+  </div>

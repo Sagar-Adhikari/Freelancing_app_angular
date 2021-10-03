@@ -1,0 +1,28 @@
+<div class="modal-header d-flex align-items-center">
+	<h2 class="modal-title">Add People</h2>
+	<button mat-dialog-close tabindex="-1"><mat-icon>close</mat-icon></button>
+</div>
+<div class="modal-body tips">
+	<form [formGroup]="peopleForm" (ngSubmit)="peopleSubmit(peopleForm.value)">
+	
+	<!----><div class="row m-md-top hide-settings">
+		<div class="col-md-12">
+			<div class="radio">
+				<mat-form-field appearance="outline">
+		          <mat-label>Add People</mat-label>           
+		            <mat-select formControlName="room_people" multiple>
+		              <mat-option *ngFor="let user of user_emails" [value]="user.email">{{user.email}}</mat-option>
+		            </mat-select>
+		          </mat-form-field>
+
+				<div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('room_people') || this.errorMsgArr['room_people']}}</div>
+			</div>        
+		</div>
+	</div>
+
+	<div class="bottom-btn">
+	<button mat-button class="save-btn" type="submit" [disabled]="isbuttondisable">Save</button>
+	<button mat-button type="button" class="cancel-btn" (click)="onCancel()">Cancel</button>
+</div>
+</form>
+</div>

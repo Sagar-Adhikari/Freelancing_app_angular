@@ -1,0 +1,36 @@
+<div>
+    <div class="model_main">
+        <div class="modal-header">
+            <h4 class="modal-title">Change Hourly Rate</h4>
+            <button (click)="onclickcancel()"><mat-icon>close</mat-icon></button>
+        </div>
+        <form [formGroup]="jobHourlyEditForm">
+            <div class="modal-body">
+                <div class="profile-leftblock">
+                    <h5>Please note that your new hourly rate will only apply to new contracts. The Remote Nepal Service Fee is 20% when you begin a contract with a new client. Once you bill over $500 with your client, the fee will be 10%.</h5>
+                    <p>Your profile rate: ${{initialRate}}/hr</p>
+                    <div>
+                        <div class="form-group">
+                            <label>Hourly Rate Total amount the client will see</label>
+                            <input #ratevalue class="form-control" formControlName="hourly_rate" (mouseleave)="calculaterate()" (keypress)="isNumber($event)" placeholder="Enter your rate"> <span>/hr</span>
+                            <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('hourly_rate') || this.errorMsgArr['hourly_rate']}}</div>
+                        </div>
+                        <div class="form-group">
+                            <label>20% Remmote Nepal Service Fee</label>
+                            <input class="form-control" readonly value=${{percentagevalue}}> <span>/hr</span>
+                        </div>
+                        <div class="form-group">
+                            <label>You'll be paid
+                    The estimated amount you'll receive after service fees</label>
+                            <input class="form-control" readonly value=${{remainingvalue}}> <span>/hr</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button class="save-btn" (click)="saveJobHourly(jobHourlyEditForm.value)">Save</button>
+                <button class="cancel-btn" (click)="onclickcancel()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>

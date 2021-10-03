@@ -1,0 +1,65 @@
+<div class="category_mainwrap htmltest_wrap">	
+		<div class="breadcrumb_wrap">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						<h4>{{testGroupDetails.group_name}}</h4>
+					</div><!--end col-->
+				</div><!--end row-->
+			</div><!--end container-->
+		</div><!--end breadcrumb_wrap-->
+
+		<div class="htmltest-box">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 title_text_page">
+						
+						<div class="pull-left">
+							<h3 class="page-head">{{testGroupDetails.title}}</h3>
+						</div>
+
+						<div class="pull-right">
+							<h5 class="top-backbtn">
+								<a routerLink="/search/test">
+									<span><i class="fa fa-arrow-left"></i></span>
+									Back to home screen
+								</a>
+							</h5>
+						</div>
+
+						<div class="bg-box">
+							<div class="row">
+							<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+							<div class="left-content">
+							<p>This test is about {{testGroupDetails.questions_count}} multiple choice questions and should take less than {{testGroupDetails.questions_count * 1}}:00 minutes to complete.</p>
+								<button *ngIf="errMsgEligible == ''" mat-button (click)="checkEliableTest(testGroupDetails.id)" class="start_test_btn">start test</button>
+								<p *ngIf="errMsgEligible"> {{errMsgEligible}}</p> 
+							</div><!--end left-content-->
+							</div><!--end col-->
+
+							<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+							<div class="right-content">
+								<h5>test contents</h5>
+								<p>{{testGroupDetails.description}}</p>
+								<!-- <mat-list role="list">
+								  <mat-list-item role="listitem"><span class="fa fa-circle icon"></span>elements</mat-list-item>
+								  <mat-list-item role="listitem"><span class="fa fa-circle icon"></span>canvas</mat-list-item>
+								  <mat-list-item role="listitem"><span class="fa fa-circle icon"></span>svg</mat-list-item>
+								  <mat-list-item role="listitem"><span class="fa fa-circle icon"></span>elements</mat-list-item>
+								  <mat-list-item role="listitem"><span class="fa fa-circle icon"></span>canvas</mat-list-item>
+								  <mat-list-item role="listitem"><span class="fa fa-circle icon"></span>svg</mat-list-item>
+								  <mat-list-item role="listitem"><span class="fa fa-circle icon"></span>canvas</mat-list-item>
+								  <mat-list-item role="listitem"><span class="fa fa-circle icon"></span>svg</mat-list-item>
+								</mat-list> -->
+								<!-- <h6><a>Learn more about skills testing</a></h6> -->
+							</div><!--end right-content-->
+							</div><!--end col-->
+							</div><!--end row-->
+						</div><!--end bg-box-->
+					</div><!--end col-->
+				</div><!--end row-->
+			</div><!--end container-->
+		</div><!--end htmltest-box-->
+
+
+</div><!--end htmltest_wrap-->

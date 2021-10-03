@@ -1,0 +1,169 @@
+<div class="admin-dashboard admin-cmspage">
+	<div class="contracts-container pages-container mat-elevation-z8">
+		<h2>Contracts</h2>
+
+		<div class="filter_layout">
+			<div class="filter_layout_input">
+				<div class="row">
+				<div class="col-lg-3 col-md-6 col-sm-12">
+					<mat-form-field> <!-- (keydown.enter)="applyFilter(customFilter,1)" -->
+						<input matInput class="class_filter_input" #filter  [(ngModel)]="customFilter"
+						placeholder="Filter">
+					</mat-form-field>
+				</div>
+
+				<div class="col-lg-3 col-md-6 col-sm-12">
+					<mat-form-field>
+						<mat-select [(ngModel)]="categoryFilter" placeholder="Choose Category" (selectionChange)="changeCategory($event.value)">
+							<mat-option *ngFor="let cat_info of categoryList" [value]="cat_info.id">{{ cat_info.name }}</mat-option>
+						</mat-select>
+					</mat-form-field>
+				</div>
+
+				<div class="col-lg-3 col-md-6 col-sm-12">
+					<mat-form-field>
+						<mat-select [(ngModel)]="subcategoryFilter" placeholder="Choose Sub Category">
+							<mat-option *ngFor="let subcat of subcategoryList" [value]="subcat.id">{{ subcat.name }}</mat-option>
+						</mat-select>
+					</mat-form-field>
+				</div>
+
+				<div class="col-lg-3 col-md-6 col-sm-12">
+					<mat-form-field>
+						<mat-select [(ngModel)]="paymentType" placeholder="Choose Payment">
+							<mat-option *ngFor="let pay_info of paymentLists" [value]="pay_info.value">{{ pay_info.name }}</mat-option>
+						</mat-select>
+					</mat-form-field>
+				</div>
+
+				<div class="col-lg-3 col-md-6 col-sm-12">
+					<mat-form-field>
+						<mat-select [(ngModel)]="statusFilter" placeholder="Choose Status">
+							<mat-option *ngFor="let status_info of statusLists" [value]="status_info.value">{{ status_info.name }}</mat-option>
+						</mat-select>
+					</mat-form-field>
+				</div>
+
+				<div class="col-lg-3 col-md-6 col-sm-12">
+					<mat-form-field>
+						<mat-select [(ngModel)]="dateTypeSelection" placeholder="Choose Range" (selectionChange)="onChangeType($event.value)">
+							<mat-option *ngFor="let type of types" [value]="type.value">
+								{{type.viewValue}}
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+					<!-- <button mat-button [matMenuTriggerFor]="menu" class="user-status_menu"><span><i class="fa fa-circle"></i><i class="fa fa-circle"></i><i
+							 class="fa fa-circle"></i></span></button>
+					<mat-menu #menu="matMenu">
+						<button *ngFor="let type of types" mat-menu-item (click)="onChangeType(type.value)">{{type.viewValue}}</button>
+					</mat-menu> -->
+				</div> 
+
+
+				<div class="col-lg-3 col-md-6 col-sm-12" *ngIf='displayRange'>
+					<input type="text" name="daterangeInput" daterangepicker
+					[options]="options" (selected)="selectedDate($event, daterange)" class="custon_inputdate" />
+				</div>
+
+
+				<div class="col-lg-3 col-md-6 col-sm-12">
+					<div class="filter_button_layout">
+						<button #filterbutton mat-raised-button (click)="applyFilter(customFilter,1)"><i class="material-icons">search</i> Search</button>
+						<button #filterbutton mat-raised-button (click)="applyFilter(customFilter,0)"><i class="material-icons">autorenew</i> Reset</button>
+					</div>
+				</div>
+			</div>
+
+			</div>
+		</div>
+
+		<div class="contracts-container mat-elevation-z8 table-box">
+			<div class="contracts-loading-shade" *ngIf="isLoadingResults || isRateLimitReached">
+				<mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+				<div class="contracts-rate-limit-reached" *ngIf="isRateLimitReached">
+					It will be reset in one minute.
+				</div>
+			</div>
+
+
+			<div class="contracts-table-container">
+				<div class="table-responsive">
+				<table mat-table [dataSource]="data" class="contracts-table" matSort matSortActive="name" matSortDisableClear
+				 matSortDirection="asc">
+				 
+					<ng-container matColumnDef="index">
+						<mat-header-cell *matHeaderCellDef> S.No </mat-header-cell>
+						<mat-cell *matCellDef="let row; let i = index;"> <span *ngIf="pageEvent">{{pageEvent.pageIndex*perpage+ConvertToInt(i)+1}}
+							</span> <span *ngIf="!pageEvent">{{ ConvertToInt(i)+1 }}</span></mat-cell>
+					</ng-container>
+
+					<ng-container matColumnDef="job_category">
+						<th mat-header-cell *matHeaderCellDef>Job Category</th>
+						<td mat-cell *matCellDef="let row">{{ row.job_category.name }}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="freelancer">
+						<th mat-header-cell *matHeaderCellDef>Freelancer</th>
+						<td mat-cell *matCellDef="let row">{{ row.freelancer.email }} - {{ row.freelancer.username }}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="client">
+						<th mat-header-cell *matHeaderCellDef>Client</th>
+						<td mat-cell *matCellDef="let row">{{ row.client.email }} - {{ row.client.username }}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="job_subcategory">
+						<th mat-header-cell *matHeaderCellDef>Job Subcategory</th>
+						<td mat-cell *matCellDef="let row">{{ row.job_subcategory.name }}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="title">
+						<th mat-header-cell *matHeaderCellDef>Contract Title</th>
+						<td mat-cell *matCellDef="let row">{{ row.title }}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="amount">
+						<th mat-header-cell *matHeaderCellDef>Amount</th>
+						<td mat-cell *matCellDef="let row">{{ row.amount }} / {{ row.type }}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="status">
+						<th mat-header-cell *matHeaderCellDef>Status</th>
+						<td mat-cell *matCellDef="let row">{{ row.status }}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="created">
+						<th mat-header-cell *matHeaderCellDef>Created</th>
+						<td mat-cell *matCellDef="let row">{{ row.created | timeAgo }}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="action">
+						<mat-header-cell *matHeaderCellDef>
+							<span><i class="fa fa-plus mat-icon"></i>Action</span>
+						</mat-header-cell>
+						<mat-cell *matCellDef="let row">
+							<button mat-icon-button color="primary" focusable="false" routerLink="/admin/contract/view/{{row.id}}">
+								<a><i class="material-icons">&#xE24D;</i></a>
+							</button>
+							<!-- <button mat-icon-button color="primary" focusable="false" (click)="deletebyid(row.id)"><i class="material-icons">&#xE16C;</i>
+	              	</button> -->
+						</mat-cell>
+					</ng-container>
+
+					<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+					<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+				</table>
+			</div>
+			<div class="no-results" [style.display]="resultsLength == 0 ? '' : 'none'">
+				No Record Found.
+			</div>
+			<mat-paginator [length]="resultsLength" [pageSize]="perpage" (page)="pageEvent = $event"></mat-paginator>
+		</div>
+
+
+	</div>
+</div>
+
+<!-- Copyright 2018 Google Inc. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at http://angular.io/license -->

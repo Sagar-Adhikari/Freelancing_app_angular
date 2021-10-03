@@ -1,0 +1,13 @@
+.container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .container > * {
+    width: 100%;
+  }
+.delete-popup{ margin-top: 19px; padding-bottom: 30px; width:100%; text-align: center; }
+.delete-popup h3{text-align: center;}
+.delete-popup button{    background-color: #292f43;color: #fff;border: none;}
+
+.mat-dialog-actions { width:100%; text-align: center; display: inline-block; }

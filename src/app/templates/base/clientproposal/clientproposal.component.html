@@ -1,0 +1,89 @@
+<div class="category_mainwrap job_listingwrap">	
+  <div class="breadcrumb_wrap">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <h4>Proposal listing</h4>
+        </div><!--end col-->
+      </div><!--end row-->
+    </div><!--end container-->
+  </div><!--end breadcrumb_wrap-->
+
+  <div class="job_listing">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="posting-box">
+            <div class="table-responsive">
+            <div class="example-container mat-elevation-z8">
+<mat-table #table [dataSource]="dataSource" matSort matSortDisableClear>
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="jobtitle">
+    <mat-header-cell *matHeaderCellDef=""> Job Title </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.name}}<br><span>{{element.payment}} Price - Posted {{element.modified | timeAgo}}</span><br>View Suggested Freelancers </mat-cell>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef=""> Proposals </mat-header-cell>
+    <mat-cell *matCellDef="let element"> 7(3 new) </mat-cell>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="weight">
+    <mat-header-cell *matHeaderCellDef=""> Messaged </mat-header-cell>
+    <mat-cell *matCellDef="let element"> 5 </mat-cell>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="symbol">
+    <mat-header-cell *matHeaderCellDef=""> Offers/Hires </mat-header-cell>
+    <mat-cell *matCellDef="let element"> 25 </mat-cell>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="status">
+    <mat-header-cell *matHeaderCellDef=""> Status </mat-header-cell>
+    <mat-cell *matCellDef="let element"> <span class="green">{{element.status}}</span> </mat-cell>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="action">
+    <mat-header-cell *matHeaderCellDef=""> </mat-header-cell>
+    <!-- <mat-cell *matCellDef="let element">
+        <span>
+            <a routerLink="/editpost/{{element.id}}" >
+              <mat-icon>edit</mat-icon>
+            </a>
+          </span>
+        <span>
+          <a href="javascript:;" (click)="deleteDraft(element.id);">
+            <mat-icon>delete</mat-icon>
+          </a>
+        </span>
+    </mat-cell> -->
+    <mat-cell *matCellDef="let element"> <button mat-button [matMenuTriggerFor]="menu">Actions<span class="fa fa-chevron-down"></span></button>
+<mat-menu #menu="matMenu">
+<button mat-menu-item="" routerLink="/editpost/{{element.id}}" ><mat-icon>edit</mat-icon> Edit</button>
+<button mat-menu-item="" (click)="deleteOpen(element.id);"><mat-icon>delete</mat-icon> Delete</button>
+</mat-menu>
+</mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+<div class="no-results" [style.display]="resultsLength == 0 ? '' : 'none'">
+  No Record Found.
+</div>
+<mat-paginator #dataPaginator [length]="resultsLength" [pageSize]="10"></mat-paginator>
+</div>
+</div><!--end table-responsive-->
+          </div><!--end posting-box-->
+        </div><!--end col-->
+      </div><!--end row-->
+    </div><!--end container-->
+  </div><!--end job_listing-->
+
+</div><!--end job_listingwrap-->

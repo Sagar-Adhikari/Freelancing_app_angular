@@ -1,0 +1,118 @@
+<div class="admin-dashboard admin-cmspage">
+  <div class="jobs-container pages-container mat-elevation-z8">
+    <h2>Connects History List</h2>
+
+    <div class="filter_layout">
+      <div class="filter_layout_input">
+        <div class="row">
+          <div class="col-lg-3 col-md-6 col-sm-12">
+            <mat-form-field>
+              <input matInput class="class_filter_input" (keydown.enter)="applyFilter(1)" [(ngModel)]="searchFilter"
+                placeholder="Search by username">
+            </mat-form-field>
+          </div>
+
+          <div class="col-lg-3 col-md-6 col-sm-12">
+            <mat-form-field>
+              <mat-select [(ngModel)]="lastDayFilter" placeholder="Last days">
+                <mat-option *ngFor="let lastdays of lastdays" [value]="lastdays.value">
+                  {{lastdays.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-lg-3 col-md-6 col-sm-12">
+            <mat-form-field>
+              <mat-select [(ngModel)]="connectTypeFilter" placeholder="All Connects">
+                <mat-option class="dropdown_height" *ngFor="let allconnects of allconnects" [value]="allconnects.value">
+                  {{allconnects.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="filter_button_layout">
+              <button type="button" (click)="applyFilter(1)" mat-button><i class="material-icons">search</i> Search</button>
+              <button type="button" (click)="applyFilter(0)" mat-button><i class="material-icons">autorenew</i> Reset</button>
+            </div>
+          </div>
+      </div>
+      </div>
+    </div>
+
+    <div class="jobs-container mat-elevation-z8 table-box">
+      <div class="jobs-loading-shade" *ngIf="isLoadingResults || isRateLimitReached">
+        <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+        <div class="jobs-rate-limit-reached" *ngIf="isRateLimitReached">
+          It will be reset in one minute.
+        </div>
+      </div>
+
+      <div class="jobs-table-container">
+
+        <table mat-table [dataSource]="dataSource" matSort matSortActive="id" matSortDisableClear matSortDirection="desc"
+          class="jobs-table">
+
+          <!-- Date Column -->
+          <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef>DATE</th>
+            <td mat-cell *matCellDef="let element">{{element.created | date: 'dd/MM/yyyy'}}
+            </td>
+          </ng-container>
+
+          <!-- Description Column -->
+          <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef>Description </th>
+            <td mat-cell *matCellDef="let element">
+              <ng-container *ngIf="element.connect_type == 'Applied to job'">
+                {{element.job_name}}
+              </ng-container>
+              <ng-container *ngIf="element.connect_type != 'Applied to job'">
+                {{element.description}}
+              </ng-container>
+            </td>
+          </ng-container>
+          <!-- username Column -->
+          <ng-container matColumnDef="username">
+            <th mat-header-cell *matHeaderCellDef>Username</th>
+            <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+          </ng-container>
+          <!-- Connects Type Column -->
+          <ng-container matColumnDef="conntecttype">
+            <th mat-header-cell *matHeaderCellDef>Connects Type</th>
+            <td mat-cell *matCellDef="let element"> {{element.connect_type}} </td>
+          </ng-container>
+
+          <!-- Amount Column -->
+          <ng-container matColumnDef="amount">
+            <th mat-header-cell *matHeaderCellDef> Used Connects </th>
+            <td mat-cell *matCellDef="let element">
+              <ng-container *ngIf="element.type == 'loss'">
+                {{element.connects}}
+              </ng-container>
+              <ng-container *ngIf="element.type != 'loss'">
+                {{element.connects}}
+              </ng-container>
+            </td>
+          </ng-container>
+
+          <!-- Balance Column -->
+          <ng-container matColumnDef="balance">
+            <th mat-header-cell *matHeaderCellDef> Balance Connects </th>
+            <td mat-cell *matCellDef="let element"> {{element.balance}} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+      <div class="no-results" [style.display]="resultsLength == 0 ? '' : 'none'">
+        No Record Found.
+      </div>
+      <mat-paginator [length]="resultsLength" [pageSize]="perpage" (page)="pageEvent = $event"></mat-paginator>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<div>
+    <div class="model_main"> 
+      <div class="modal-header">
+        <h4 class="modal-title">Preview</h4>
+        <button (click)="onclickcancel()"><mat-icon>close</mat-icon></button>
+      </div>
+      <div class="modal-body">      
+        <div class="profile-leftblock video_popup_blk">        
+              <iframe width="520" height="360" [src]="urlFile" frameborder="0" allowtransparency="true" allowfullscreen class="video_blk"></iframe>
+          <ng-template #novideo>No video uploaded</ng-template>
+        </div>
+      </div>
+    </div>
+  </div>

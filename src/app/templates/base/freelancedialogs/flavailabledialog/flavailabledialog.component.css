@@ -1,0 +1,306 @@
+/*popup design*/
+:host /deep/ .mat-radio-label-content { padding-right:8px; }
+mat-form-field { width:100%; margin:10px 0; }
+.modal-title {
+    color: #4A154B;
+    font-size: 25px;
+    text-transform: uppercase;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    letter-spacing: 1px;
+}
+.profile-leftblock h5 {
+    color: #4A154B;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+}
+button.save-btn {
+    background-color: #A62B3D;
+    border-color: #A62B3D;
+    border-radius:6px;
+    font-family: 'Open Sans', sans-serif;
+    padding: 0 16px;
+    color: #fff;
+}
+button{
+    font-weight: normal;
+    cursor: pointer;
+    margin: 0px 5px;
+    line-height: 36px;
+    font-size: 14px;
+    outline:0px;
+    border:0px;
+}
+button.save-btn:hover {
+    background-color: #992331;
+}
+button.cancel-btn:hover {
+    background-color: #C4C7CD;
+    color: #000;
+}
+button.cancel-btn{
+    background-color: #DFE2E9;
+/*  border-color: #DFE2E9;*/
+    color: #000;
+    border-radius:6px;
+    font-family: 'Open Sans', sans-serif;
+    padding: 0 16px;
+}
+button:focus{
+    outline:none;
+}
+.modal-header {
+    padding: 0px 0px 10px 0px;
+}
+.btn_block{
+padding: 10px 0px;
+}
+.modal-body{
+    padding:15px 0px;
+}
+.modal-header button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    top: 8px;
+    outline: none;
+    padding:0px;
+    text-align:right;
+    margin: 0px;
+    right:-8px;
+}
+.mat-select {
+    padding: .5rem .75rem;
+    font-size: 1rem;
+    line-height: 1.25;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: .25rem;
+}
+.available_popup label{
+    width:100%;
+}
+.mat-radio-button {
+    margin-right: 7px;
+}
+:host /deep/ .tab_heading .mat-radio-label {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    box-shadow: 0px 1px 30px #cccbcb;
+    line-height: 46px;
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+    border-radius: 7px;
+    padding: 3px 17px;
+    color: #4A154B;
+    text-transform: uppercase;
+    font-family: 'HelveticaNeue-Medium';
+    font-size: 13px;
+    text-decoration: none;
+}
+:host /deep/  .tab_heading .mat-radio-checked .mat-radio-label{
+    background-color: #4A154B;
+    color: #fff;
+}
+:host /deep/ .tab_heading .mat-radio-container {
+    opacity: 0;
+    display: none;
+}
+.mat-radio-button{
+    margin-right: 10px;
+    margin-left: 10px;
+}
+.mat-radio-button:first-child {
+    margin-left: 0px;
+}
+.mat-radio-button:last-child {
+    margin-right: 0px;
+}
+.form-group.available_blk {
+    background: #fff;
+    box-shadow: 0px 1px 30px #cccbcb;
+    padding: 20px;
+}
+.mat-radio-button:first-child {
+    margin-left: 0px;
+}
+.mat-radio-button:last-child {
+    margin-right: 0px;
+}
+.form-group.available_blk.non_available_block {
+    text-align: center;
+}
+:host /deep/ .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+    padding-bottom: 0;
+}
+/*calendar design*/
+::ng-deep .mat-calendar-body-cell.mat-calendar-body-disabled{
+    color: #A0A0A0 !important;
+    background: #E0E0E0 !important;
+}
+::ng-deep .mat-calendar-body-today:not(.mat-calendar-body-selected) {
+    background: #ae2838 !important;
+    color: #fff;
+}
+::ng-deep .mat-calendar-body-selected {
+    background: #ae2838 !important;
+    color: #fff;
+}
+::ng-deep .mat-calendar-body-cell-content{
+    border: 0px !important;
+
+}
+::ng-deep mat-datepicker-toggle .mat-icon-button {
+    color: #AE2838 !important;
+}
+::ng-deep .mat-form-field-infix .form-control{
+    background: transparent;
+    color: #464a4c;
+}
+::ng-deep .mat-form-field.mat-form-field-invalid .mat-form-field-label,::ng-deep .mat-form-field-appearance-legacy .mat-form-field-label {
+    color: #464a4c;
+}
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-infix{
+    padding: 3px 0px 0px 0px;
+    border: 0px;
+}
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-label {
+    top: 0px;
+}
+::ng-deep .mat-datepicker-content .mat-calendar-next-button,::ng-deep .mat-datepicker-content .mat-calendar-previous-button,::ng-deep .mat-datepicker-toggle {
+    color: #4A154B;
+}
+::ng-deep .mat-calendar-body-cell:not(.mat-calendar-body-disabled):hover > .mat-calendar-body-cell-content:not(.mat-calendar-body-selected) {
+    background-color: #F2F2F2;
+}
+::ng-deep .profile-leftblock button:focus {
+    outline: none;
+}
+::ng-deep .mat-form-field-label-wrapper {
+    top: 5px;
+}
+::ng-deep .mat-calendar {
+    font-family: inherit;
+}
+::ng-deep .profile-leftblock .mat-form-field-flex {
+    padding: 2px 10px 2px 10px;
+}
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {
+    padding: 0em 0 1em 0;
+}
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-underline {
+    display: none;
+}
+/*popup scrollbar*/
+::ng-deep  .cdk-overlay-dark-backdrop {
+    min-height: 100% !important;
+    position: fixed !important;
+}
+::ng-deep .cdk-global-overlay-wrapper{
+    overflow-y:auto;
+    pointer-events: auto;
+    padding:20px 0px 0px 0px;
+    overflow-x:hidden;
+}
+::ng-deep  .cdk-global-scrollblock {
+    overflow: hidden;
+    width: 102%;
+}
+::ng-deep   .mat-dialog-container {
+    overflow: hidden;
+}
+:host /deep/ .modal-body{
+    min-height: 200px;
+}
+.modal-header .mat-icon.material-icons {
+    color: rgba(0,0,0,.87);
+}
+.form-group {
+    margin-bottom: 5px;
+}
+.formgroup_radio  .mat-radio-group{
+    margin-top: 27px;
+    display: block;
+}
+@media(min-width:991px){
+.profile-leftblock {
+    max-width: 750px;
+    min-width: 750px;
+}
+}
+@media(max-width:992px){
+:host /deep/ .mat-radio-label{
+    font-size:11px;
+    padding: 3px 5px;
+}
+.mat-radio-button{
+    margin-right: 3px;
+    margin-left: 3px;
+}
+.profile-leftblock {
+    max-width: 600px;
+    min-width: 600px;
+}
+}
+@media(max-width:767px){
+.modal-title{
+    font-size: 15px;
+}
+.mat-radio-button:first-child {
+    margin-left: 3px;
+}
+.mat-radio-button:last-child {
+    margin-right: 3px;
+}
+:host /deep/  .mat-radio-label{
+    min-width: 180px; 
+}
+:host /deep/ .tab_heading .mat-radio-label{
+    min-width: auto; 
+}
+:host /deep/ .mat-radio-label{
+    font-size:10px;
+    padding: 3px 10px;
+}
+.form-group.available_blk{
+    padding: 20px 5px;
+}
+:host /deep/ .mat-radio-label-content{
+    padding-left:3px;
+    padding-right:3px;
+}
+:host /deep/ .tab_heading .mat-radio-label {
+    box-shadow: 0px 1px 10px #cccbcb;
+    line-height: 34px;
+    padding: 3px 2px;
+}
+:host /deep/ .modal-body{
+    min-height: 250px;
+}
+.profile-leftblock {
+    max-width: 210px;
+    min-width: 210px;
+}
+:host /deep/ .mat-form-field-infix {
+    width: 152px;
+}
+::ng-deep .cdk-overlay-pane {
+    right: 5px !important;
+}
+.profile-leftblock .control-label {
+    width: 100%;
+}
+.btn.btn-primary.save-btn {
+    margin: 0px;
+}
+}

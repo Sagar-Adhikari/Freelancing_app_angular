@@ -1,0 +1,68 @@
+.modal-header{padding: 0 20px 10px 20px;width: 100%;}
+.credit_card_block {padding: 10px 20px;}
+.modal-title{color: #4A154B;font-size: 25px;text-transform: uppercase;font-family: 'Open Sans', sans-serif;font-weight: normal;font-style: normal;letter-spacing: 1px;}
+.modal-header button{ background: transparent;border: none;cursor: pointer;position: absolute;top: 0px;outline: none;padding: 0;text-align: right;margin: 0;right: 10px;}
+.modal-header .mat-icon.material-icons {color: rgba(0,0,0,.87) !important;cursor: pointer;}
+.postjob-details {max-width: 730px;min-width: 730px;margin: 0px -24px; overflow-x: hidden; margin-bottom: -24px !important;}
+.form-control{display: block; width: 100%;padding: .5rem .75rem; font-size: 1rem;line-height: 1.25; color: #464a4c;background-color: #fff;background-image: none; background-clip: padding-box;border: 1px solid rgba(0,0,0,.15); border-radius: .25rem; transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;}
+.form-control:focus {color: #464a4c; background-color: #fff;border-color: #5cb3fd;outline: 0;}
+.postjob-details label {font-family: 'HelveticaNeue';font-weight: 600;font-size: 14px;margin-bottom: 12px;width: 100%;}
+.form-group{width:100%;}
+.mat-radio-button {width: 100%;display: block;padding: 15px 15px;background-color: #F9F9F9;border: 1px solid #DFDFDF; }
+form {width: 100%; padding: 0;}
+.card_image {float: right; margin-top: -10px; padding-bottom: 0;}
+.mat-button {font-size: 16px; background-color: #4A154B;color: #fff;line-height: 37px;font-family: 'HelveticaNeue';width: auto;box-shadow: 0 0 5px #d5d5d5; margin-left: 0;border-radius: 5px;letter-spacing: 0.5px; margin-right:15px;}
+.mat-button.cancel_button{background-color: #DFE2E9;color: #000;box-shadow: 0 0 2px #d5d5d5;}
+.credit_card_blk {position: relative;width: 100%;display: block;}
+.credit_card_blk span.card_img_span {position: absolute;top: 5px;left: 10px;}
+.credit_card_blk span.card_righttext{position: absolute;top: 5px;right: 10px;font-size: 16px;color: #8F969E; vertical-align: middle;font-weight: 600;}
+.credit_card_blk .form-control {padding-left: 50px;padding-right: 150px;}
+.card_righttext .material-icons {font-size: 20px;color: #BCBCBC;margin-top: 3px;vertical-align: top;}
+.button_blk .form-group{margin-bottom:0px;}
+.paypal_text{font-style: italic; font-weight: 600; font-size: 16px;}
+.paypal_card_block .mat-button {font-weight: 400 !important; min-width: 215px; margin-bottom: 5px;}
+.mat-radio-button.mat-radio-checked {background-color: transparent; border: 1px solid transparent;}
+.paypal_card_block { padding: 10px 20px;}
+.form-group span.safer_text {width: 100%; display: block; padding-left: 38px; font-size: 12px; padding-top: 4px;}
+/*popup scrollbar*/
+::ng-deep .cdk-overlay-dark-backdrop { min-height: 100% !important; position: fixed !important;}
+::ng-deep .cdk-global-overlay-wrapper{ overflow-y:auto;pointer-events: auto; padding:20px 0px 0px 0px; overflow-x:hidden;}
+::ng-deep .cdk-global-scrollblock { overflow: hidden; width: 102%;}
+::ng-deep .mat-dialog-container {overflow: hidden;}
+.form-group.border {padding-top: 10px;}
+button.cancel-btn{background-color: #DFE2E9;color: #000;}
+
+@media(max-width:1200px)
+{
+.postjob-details{max-width: 100%;min-width: 100%;margin: 0 !important;}
+}
+
+@media(max-width:767px)
+{
+.modal-title{font-size: 15px;}
+.card_image{margin-top: 10px;padding-bottom: 10px;width: 100%;}
+.postjob-details .mat-radio-button {padding: 10px 2px 5px;}
+.credit_card_blk span.card_righttext {top: 11px;font-size: 10px;}
+.card_righttext .material-icons {font-size: 13px;margin-top: 0;}
+.credit_card_blk .form-control {padding-left: 40px; padding-right: 85px;}
+.credit_card_block {padding: 10px 0px;}
+.postjob-details {margin-bottom: 0 !important;}
+.paypal_card_block .mat-button {min-width: 115px;}
+.modal-header {padding: 0 7px 10px 0px;}
+}
+
+@media(max-width:480px)
+{
+.form-control {font-size: 12px;line-height: 21px;}
+.postjob-details .mat-button{ margin-right: 5px;}
+.form-control{padding: 8px 5px;}
+.credit_card_blk span.card_img_span {left: 3px;}
+.card_img_span img {width: 25px;}
+.credit_card_blk .form-control {padding-left: 30px;padding-right: 70px;}
+.no-padding-res{padding: 0px 1px;}
+.credit_card_blk span.card_righttext {top: 13px;font-size: 9px;}
+}
+.logo {
+    height: 50px;
+    cursor: pointer;
+  }

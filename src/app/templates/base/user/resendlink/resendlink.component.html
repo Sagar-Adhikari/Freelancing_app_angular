@@ -1,0 +1,74 @@
+<div class="breadcrumb_wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <h4>Resend Email Verification Link</h4>
+            </div>
+            <!--end col-->
+        </div>
+        <!--end row-->
+    </div>
+    <!--end container-->
+</div>
+<!--end breadcrumb_wrap-->
+
+<div class="login_maincontent">
+    <div class="login-maincontent-inner">
+        <!--start login_maincontent innerblock-->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <h5 class="top-backbtn"><a routerLink="/"><span><i class="fa fa-arrow-left"></i></span>Back to home screen</a></h5>
+                </div>
+                <!--end col-->
+
+                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+
+
+                    <ngb-carousel>
+                        <ng-template ngbSlide>
+                            <div class="item">
+                                <div class="item">
+                                    <h4>Remote Nepal</h4>
+                                    <h5>Enter Your Email Address</h5>
+                                    <div class="login-img"><img src="assets/images/login-img.png" class="img-fluid"></div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </ngb-carousel>
+
+                </div>
+                <!--end col-->
+
+                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                    <div class="login-box">
+                        <h3>Resend Link</h3>
+                        <form [formGroup]="rForm" (ngSubmit)="loginSubmit(rForm.value)">
+                            <div class="form-group">
+                                <span class="form-icon"><i class="fa fa-user-circle"></i></span>
+                                <input type="text" class="form-control" placeholder="Email" formControlName="email" required>
+                                <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('email') || this.errorMsgArr['email']}}</div>
+                            </div>
+                            <!--end form-group-->
+
+                            <div class="bottom-btn">
+                                <div class="forgot_txt"><a routerLink="/login"><span><i class="fa fa-arrow-left"></i></span> Back to Login</a></div>
+                                <div class="submit-btn"><button type="submit" [disabled]="isbuttondisable">Submit</button></div>
+                                <h6>New to Remote Nepal?</h6>
+                            </div>
+                            <!--end bottom-btn-->
+
+                            <div class="signup-btn"><a routerLink="/register">sign up</a></div>
+                        </form>
+                    </div>
+                    <!--end login-box-->
+                </div>
+                <!--end col-->
+            </div>
+            <!--end row-->
+        </div>
+        <!--end container-->
+    </div>
+    <!--end login_maincontent innerblock-->
+</div>
+<!--end login_maincontent-->

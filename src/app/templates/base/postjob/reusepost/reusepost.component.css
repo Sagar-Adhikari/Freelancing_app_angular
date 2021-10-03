@@ -1,0 +1,360 @@
+/*Category page css*/
+*{font-family: 'HelveticaNeue';}
+* i{font: normal normal normal 14px/1 FontAwesome;}
+* span.fa{font: normal normal normal 14px/1 FontAwesome;}
+.category_mainwrap input::-webkit-input-placeholder {color: #b5b8b8!important;}
+.category_mainwrap input:-moz-placeholder { color: #b5b8b8!important;  }
+ul{margin:0;padding: 0;}
+li{list-style: none;}
+.category_mainwrap .breadcrumb_wrap{background-color: #4A154B;padding: 35px 0;}
+.category_mainwrap .breadcrumb_wrap h4{font-size: 32px;font-family: 'HelveticaNeue-Medium';color: #fff;text-transform: capitalize;margin:0;}
+.category_mainwrap .search-category{float: right;}
+.category_mainwrap .search-category span.form-icon{position: absolute;height: 100%;background: transparent;width: 40px;text-align: center;padding-top: 10px;padding-left: 4px;color: #4A154B;cursor: pointer;}
+.category_mainwrap .search-category input.form-control{height: 45px;border-radius: 30px;padding-left: 40px;font-family: 'HelveticaNeue';font-size: 16px;color: #3d3d3d;letter-spacing: 1px;line-height: 45px;}
+.category_mainwrap .postjob-details{padding: 35px 0;}
+.category_mainwrap .postjob-details .postjob-inner{background-color: #fff;width: 100%;-webkit-box-shadow: 0 1px 6px rgba(57,73,76,0.35);box-shadow: 0 1px 6px rgba(57,73,76,0.35);padding-bottom: 30px;margin-bottom: 20px;}
+.category_mainwrap .postjob-details .postjob-inner h5{padding: 25px;margin: 0;font-family: 'HelveticaNeue-Medium';font-size: 20px;text-transform: capitalize;border-bottom: 1px solid #ddd;}
+.category_mainwrap .postjob-details .postjob-inner .content-section{padding: 20px 30px 0;}
+.category_mainwrap .postjob-details .postjob-inner .content-section .form-group label{width: 100%;}
+.category_mainwrap .postjob-details .postjob-inner .content-section.steptwo-section{width: 70%;display: inline-block;}
+:host /deep/ .steptwo-section .mat-radio-label {cursor: pointer;display: inline-flex; align-items: center;white-space: nowrap;vertical-align: middle; box-shadow: 0px 1px 8px #cccbcb;line-height: 46px;width: 100%;    display: inline-block;text-align: center;border-radius: 7px;    padding: 3px 32px;    color: rgb(101, 101, 101);text-transform: uppercase;font-family: 'HelveticaNeue-Medium';font-size: 13px;text-decoration: none;}:host /deep/ .steptwo-section .mat-radio-checked .mat-radio-label {background-color: #4A154B;color: #fff;}
+:host /deep/ .steptwo-section .mat-radio-label .mat-radio-container{opacity: 0;display: none;}
+:host /deep/ .steptwo-section .mat-radio-button {display: inline-block;width: 49%;margin-bottom: 15px;padding: 0 15px 0 0;}
+:host /deep/ .steptwo-section .mat-radio-button:last-child {margin-bottom: 15px;padding: 0 0px 0 0;width: 47%;}
+:host /deep/ .radio-style .mat-radio-label {cursor: pointer;display: inline-flex;align-items: center;white-space: nowrap; vertical-align: middle; box-shadow: 0px 1px 8px #cccbcb;line-height: 46px;width: 100%;    display: inline-block;text-align: center;border-radius: 7px;    padding: 3px 32px;    color: rgb(101, 101, 101);text-transform: uppercase;font-family: 'HelveticaNeue-Medium';font-size: 13px;text-decoration: none;}
+:host /deep/ .radio-style .mat-radio-checked .mat-radio-label {background-color: #4A154B;color: #fff;}
+:host /deep/ .radio-style .mat-radio-label .mat-radio-container{opacity: 0;display: none;}
+:host /deep/ .radio-style .mat-radio-button {display: inline-block;width: 24%;margin-bottom: 15px; padding: 0 15px 0 0;}
+:host /deep/ .radio-style .mat-radio-button:last-child {margin-bottom: 15px; padding: 0 0px 0 0;}
+:host /deep/ .radio-style .mat-checkbox-label {cursor: pointer;display: inline-flex; align-items: center; white-space: nowrap; vertical-align: middle; box-shadow: 0px 1px 8px #cccbcb;line-height: 46px;width: 100%;    display: inline-block;text-align: center;border-radius: 7px;    padding: 3px 32px;    color: rgb(101, 101, 101);text-transform: uppercase;font-family: 'HelveticaNeue-Medium';font-size: 13px;text-decoration: none;}
+:host /deep/ .radio-style .mat-checkbox-checked .mat-checkbox-label {background-color: #4A154B;color: #fff;}
+:host /deep/ .radio-style .mat-checkbox-label .mat-checkbox-container{opacity: 0;display: none;}
+:host /deep/ .radio-style .mat-checkbox-button { display: inline-block; width: 24%; margin-bottom: 15px; padding: 0 15px 0 0px;}
+:host /deep/ .radio-style .mat-checkbox-button:last-child {margin-bottom: 15px;padding: 0;}
+:host /deep/ .radio-style .mat-checkbox-inner-container{opacity: 0;display: none;}
+:host /deep/ .mat-radio-button {display: inline-block; width: auto;margin: 0 10px 0px 0px;}
+.postjob-inner.postjob-three .text-danger { text-align:left !important; }
+.m-sm-bottom{font-family: 'HelveticaNeue';font-weight: normal;}
+.m-sm-bottom button b{font-family: 'HelveticaNeue';font-weight: normal;color: #4A154B;cursor: pointer;text-decoration: none;}
+.mat-form-field{width: 100%;}
+.bottom-btn{padding-left: 0;}
+.bottom-btn button{font-family: 'HelveticaNeue';font-size: 14px;background: #4A154B;color: #fff;font-weight: normal;margin-right: 5px;}
+.expansion-body .form-group{display: inline-block;width: 46%;margin-right: 39px;}
+.category_mainwrap .postjob-details .postjob-inner .content-section .form-group label { width: 100%;/* color: #333; *//* font-weight: bold; */font-family: 'HelveticaNeue-medium'; font-size: 16px;}
+.category_mainwrap .postjob-details .postjob-inner .content-section .form-group label button{background: #4A154B;color: #fff; min-width: 20px; border-radius: 50%; height: 20px;width: 20px; padding: inherit;line-height: 19px;position: relative;left: 5px;top: -2px;}
+.postjob-fulldesc{padding: 35px 0;}
+.postjob-fulldesc .postjob-details{padding: 0px 0 30px;}
+.left-selected span.fa.fa-check{color: #fff;background: #008329; font-size: 10px; width: 18px; height: 18px;text-align: center;display: inline-block;line-height: 18px; border-radius: 50%;margin-right: 10px;}
+.left-selected button{background: #4A154B;color: #fff;min-width: 40px;border-radius: 50%;height: 40px;width: 40px;padding: inherit;line-height: 40px;position: relative;left: 15px;top: -2px;}
+.left-selected{padding: 30px 20px 0;position: relative;}
+.vertical-align-middle{position: absolute;right: 20px;top: 34px;}
+.vertical-align-middle a{color: #4A154B;}
+.vertical-align-middle a span{margin-right: 5px;}
+:host /deep/ .mat-form-field-infix {display: block;position: relative;flex: auto;min-width: 0;width: 180px;border:1px solid rgba(0,0,0,.42);padding: 10px;}
+:host /deep/ .mat-form-field-label{left: 9px;top: 23px;}
+:host /deep/ .mat-focused .mat-form-field-label{left: 0;top: 20px;color: #4A154B;}
+:host /deep/ .mat-focused .mat-form-field-underline .mat-form-field-ripple { background-color: #4A154B;}
+:host /deep/ .mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label{left: 0;top: 20px;}
+:host /deep/ .form-group .mat-checkbox{margin-right: 20px;}
+.top-txt{padding-top: 15px;font-size: 20px;}
+.top-txt i{font-size: 30px;}
+.eo-image-drop.drop-box {background: none repeat scroll 0% 0% #F9F9F9;color: #656565;border: 2px dashed #4A154B;min-height: 80px;padding: 22px 0 0 10px;}
+.drop-box {background: none repeat scroll 0 0 #f8f8f8;border: 5px dashed #DDD;height: 65px;text-align: center;padding: 15px 0;}
+.drop-box label {font-size: 13px;}
+.drop-box label.attachment { cursor: pointer;color: #37a000;}
+.drop-box label:not(.btn), .drop-box .control-label {margin-bottom: 10px !important;color: #222;font-weight: 700; font-size: 13px;text-align: center !important;width: auto!important;}
+.eo-image-drop [type="file"] {position: absolute;z-index: 0; opacity: 0;width: 1px;height: 1px;}
+small { font-size: 12px;line-height: 20px;}
+:host /deep/ .ng-dropdown-panel .scroll-host {
+    overflow: hidden;
+    overflow-y: auto;
+    position: relative;
+    display: block;
+    -webkit-overflow-scrolling: touch;
+    background: #fff;
+    border: 1px solid #333;
+    padding: 10px;
+}
+:host /deep/ .ng-select{border: 1px solid rgba(0,0,0,.42);padding: 10px;}
+:host /deep/ .ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value {
+    white-space: nowrap;
+    background: #ddd;
+    margin-right: 5px;
+    padding: 5px;
+    border-radius: 4px;
+}
+.fileupload-box .mat-list-item{display: inline-block;width: 10%;margin-right: 20px;position: relative;}
+.fileupload-box .mat-list-item .fileupload-img span.thumbimg img{width: 100%;height: 81px;object-fit: cover;background: #eee;}
+.fileupload-box .mat-list-item span.fileupload-txt{white-space: nowrap;overflow: hidden;
+    display: inline-block;width: 100%;text-overflow: ellipsis;}
+.fileupload-box{margin-top: 20px;background: #ddd;padding: 5px 5px 0;}
+.fileupload-box .mat-list-item .uploadelete-btn{position: absolute;right: 0;top: 0;text-align: center;cursor:pointer;background: #4A154B;}
+.fileupload-box .mat-list-item .uploadelete-btn mat-icon.mat-icon.material-icons{color: #fff;font-size: 16px;line-height: 23px;}
+.fileupload-box .mat-list-item span.thumbimg{width: 108px;height: 81px;display: inline-block;vertical-align: top;background: #eee;}
+.postjob-inner.postjob-three a.screen-icon{background: #4A154B;height: 30px;display: inline-block;width: 30px;text-align: center;margin-right: 5px;margin-left: 5px;margin-bottom: 5px;margin-top: 5px;}
+.postjob-inner.postjob-three a.screen-icon mat-icon.mat-icon.material-icons{color: #fff;font-size: 16px;line-height: 26px;}
+:host /deep/ .mat-radio-label-content {
+    display: inline-block;
+    order: 0;
+    line-height: inherit;
+    padding-left: 8px;
+    padding-right: 0;
+    white-space: normal;
+}
+:host /deep/ .mat-checkbox-layout {
+    cursor: inherit;
+    align-items: baseline;
+    vertical-align: middle;
+    display: inline-flex;
+    white-space: normal;
+}
+.edit-outerwrap{background: #ddd;
+    margin-top: 5px;
+    padding: 0 10px;}
+.fileupload-box{
+    padding: 0;
+}
+.skills_block {
+    border: 0px solid #ced0da;
+    width: 100%;
+    display: block;
+    padding:0;
+}
+:host /deep/ .ng-select .ng-select-container::after {
+    border-bottom: 0px solid rgba(0,0,0,0.42) !important;
+}
+:host /deep/ .ng-value-container {
+    border: 0px solid rgba(0,0,0,.15);
+}
+:host /deep/ .ng-select.ng-select-focused .ng-select-container .ng-arrow-wrapper .ng-arrow{
+    color:#4A154B;
+}
+:host /deep/ .ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value .ng-value-icon {
+    color: inherit;
+}
+:host /deep/ .skills_block .ng-select-container .ng-value.ng-star-inserted:hover {
+    background: #AE2838 !important;
+    color: #fff;
+    border: 1px solid #4A154B;
+}
+:host /deep/ .skills_block .ng-select {
+    padding:10px 10px 5px !important;
+}
+:host /deep/ .skills_block .ng-select.ng-select-multiple .ng-select-container.ng-has-value .ng-arrow-wrapper {
+    border-top: 6px solid transparent;
+}
+:host /deep/ .skills_block .ng-value-container {
+    border-top: 0px !important;
+    padding: 10px 10px 3px !important;
+}
+:host /deep/ .skills_block .ng-select-container .ng-value.ng-star-inserted {
+    border: 1px solid #ced0da;
+    cursor: pointer;
+    opacity: 1;
+    transition: opacity .2s cubic-bezier(.35,0,.25,1),background-color .1s cubic-bezier(.35,0,.25,1);
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    display: inline-block;
+    margin-bottom: 10px;
+    padding: 2px 16px !important;
+    background-color: #f4f5f8 !important;
+    color: #292b2c;
+    line-height: 33px;
+    border-radius: 4px;
+    margin-right: 10px !important;
+}
+:host /deep/ .skills_block .ng-clear-wrapper.ng-star-inserted {
+    margin-top: -11px !important;
+}
+:host /deep/ .skills_block .ng-select .ng-arrow-wrapper {
+    bottom: 3px;
+}
+:host /deep/ .skills_block .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected {
+    color: #4A154B;
+}
+
+/* Input field outline design start*/
+:host /deep/ .postjob-inner.postjob-three .mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label{
+    display: block;
+}
+:host /deep/ .postjob-inner label.mat-form-field-label.mat-form-field-label.mat-form-field-label {
+    display: block;
+}
+:host /deep/ .postjob-inner .mat-form-field-appearance-outline .mat-form-field-outline {
+    top: 3px;
+}
+:host /deep/ .postjob-inner .mat-form-field {
+    padding-top: 0;
+}
+:host /deep/ .postjob-inner .mat-form-field-infix.mat-form-field-infix {
+    padding: 12px 7px !important;
+}
+:host /deep/ .postjob-inner .mat-form-field-appearance-outline .mat-form-field-label {
+    top: 1.84375em;
+    margin-top: -.25em;
+    left:-6px;
+}
+:host /deep/ .postjob-inner .mat-form-field-label mat-label {
+    padding-left: 7px;
+    padding-right:7px;
+    background-color: #fff;
+}
+:host /deep/ .postjob-inner .mat-form-field-should-float .mat-form-field-label {
+    min-height: 22px;
+}
+:host /deep/ .postjob-inner .mat-select {
+    border: 1px solid #E0E0E0;
+    border-radius: 5px;
+    padding: 10px 20px;
+}
+:host /deep/ .postjob-inner .ng-select .ng-select-container {
+    min-height: 25px;
+}
+:host /deep/ .postjob-inner .skills_block .ng-select {
+    padding: 7px 10px 7px !important;
+    border: 1px solid #E0E0E0;
+    border-radius: 5px;
+}
+:host /deep/ .postjob-inner .mat-form-field-appearance-outline .mat-select-arrow-wrapper {
+    transform: none;
+}
+:host /deep/ .postjob-inner .mat-select-arrow-wrapper {
+    vertical-align: middle;
+}
+:host /deep/ .postjob-inner .mat-form-field-infix.mat-form-field-infix .mat-select {
+    font-size: 16px;
+    font-weight: 400;
+}
+:host /deep/ .postjob-inner .mat-expansion-panel-header-title {
+    font-size: 16px;
+    font-family: 'HelveticaNeue-medium';
+}
+:host /deep/ .postjob-inner .mat-form-field-wrapper {
+    padding-bottom: 0;
+}
+.postjob-inner .mat-expansion-panel .form-group label {
+    font-size: 16px;
+}
+.postjob-inner label{
+    margin-bottom:20px;
+}
+.postjob-inner .input-field-margin{
+    margin-top:20px;
+}
+.postjob-inner .mat-expansion-panel {
+    padding-bottom: 7px;
+}
+.bottom-btn button {
+    margin: 10px 15px 0 0;
+}
+.form-group.radio-style {
+    margin-bottom: 0;
+}
+/* Input field outline design end*/
+/* Reduce spacing issue start */
+.stepthree-section .form-group:last-child {
+    margin-bottom: 0;
+}
+.stepthree-section .form-group.radio-style:last-child .mat-radio-button {
+    margin-bottom: 0;
+}
+.postjob-fulldesc .postjob-details:last-child {
+    padding-bottom: 0 !important;
+}
+.category_mainwrap .postjob-details .postjob-inner.postjob-three:last-child {
+    margin-bottom: 0;
+}
+:host /deep/ .postjob-inner .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+    margin-top:4px;
+}
+/* Reduce spacing issue end*/
+@media(max-width: 480px)
+{
+:host /deep/ .radio-style .mat-radio-button {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 0 15px 0 0;
+}
+.vertical-align-middle {
+    position: relative;
+    right: 0;
+    top: 0;
+}
+.fileupload-box .mat-list-item {
+    display: inline-block;
+    width: 42%;
+    margin-right: 20px;
+    position: relative;
+}
+:host /deep/ .ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value {
+    white-space: normal;
+    background: #ddd;
+    margin-right: 5px;
+    padding: 5px;
+    border-radius: 4px;
+    margin-bottom: 5px;
+}
+}
+@media(min-width: 481px) and (max-width: 767px)
+{
+:host /deep/ .radio-style .mat-radio-button {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 0 15px 0 0;
+}
+.vertical-align-middle {
+    position: relative;
+    right: 0;
+    top: 0;
+}
+.fileupload-box .mat-list-item {
+    display: inline-block;
+    width: 42%;
+    margin-right: 20px;
+    position: relative;
+}
+:host /deep/ .ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value {
+    white-space: normal;
+    background: #ddd;
+    margin-right: 5px;
+    padding: 5px;
+    border-radius: 4px;
+    margin-bottom: 5px;
+}
+}
+@media(min-width: 768px) and (max-width: 991px)
+{
+:host /deep/ .radio-style .mat-radio-button {
+    display: inline-block;
+    width: 49%;
+    margin-bottom: 15px;
+    padding: 0 15px 0 0;
+}
+:host /deep/ .ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value {
+    white-space: normal;
+    background: #ddd;
+    margin-right: 5px;
+    padding: 5px;
+    border-radius: 4px;
+    margin-bottom: 5px;
+}
+.fileupload-box .mat-list-item {
+    display: inline-block;
+    width: 17%;
+    margin-right: 20px;
+    position: relative;
+}
+}
+@media(min-width: 992px) and (max-width: 1199px)
+{
+:host /deep/ .radio-style .mat-radio-button {
+    display: inline-block;
+    width: 30%;
+    margin-bottom: 15px;
+    padding: 0 15px 0 0;
+}
+
+}

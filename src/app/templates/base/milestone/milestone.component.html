@@ -1,0 +1,304 @@
+<div class="category_mainwrap freelancer_profile contract_details_mainwrap">
+  <!--start freelancer_profile-->
+  <div class="breadcrumb_wrap">
+    <!--start breadcrumb_wrap-->
+    <div class="container">
+      <!--start container-->
+      <div class="row">
+        <!--start row-->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <!--start col-->
+          <h4>Milestones Details </h4>
+        </div>
+        <!--end col-->
+      </div>
+      <!--end row-->
+    </div>
+    <!--end container-->
+  </div>
+  <!--end breadcrumb_wrap-->
+  <!-- while content STARTS -->
+  <div class="milestone-wrap postjob-details" *ngIf="display">
+    <!-- top part starts -->
+    <div class="container">
+      <div class="row">
+        <div class="postjob-inner">
+          <h5> {{offerData.title}}</h5>
+          <!-- client login starts -->
+          <section class="content-section">
+            <div class="freelancer-data" *ngIf="is_owner">
+              <div class="left profile-img">
+                <img src="{{user_avatar_url}}?id={{offerData.freelancer.id}}" />
+              </div>
+              <div class="right profile-name">
+                <h3>{{offerData.freelancer.first_name}} {{offerData.freelancer.last_name}}</h3>
+              </div>
+              <ng-container *ngIf="offerData.status != 'Closed'">
+                <!-- feedback menu starts -->
+                <button mat-button [matMenuTriggerFor]="menu" class="menu-btn">...</button>
+                <mat-menu #menu="matMenu" class="menu-dropdown">
+                  <button mat-menu-item routerLink="/freelancer-feedback/{{offerData.freelancer.id}}/{{offerData.id}}/closed">
+                    End Contract
+                  </button>
+                </mat-menu>
+                <!-- feedback menu ends -->
+              </ng-container>
+            </div>
+          </section>
+          <!-- client login ends -->
+          <!-- freelancer login starts -->
+          <div class="freelancer-data" *ngIf="!is_owner">
+            <div class="left profile-img">
+              <img src="{{user_avatar_url}}?id={{offerData.client.id}}" />
+            </div>
+            <div class="right profile-name">
+              <h3>{{offerData.client.first_name}} {{offerData.client.last_name}}</h3>
+            </div>
+            <ng-container *ngIf="offerData.status != 'Closed'">
+              <!-- feedback menu starts -->
+              <button mat-button [matMenuTriggerFor]="menu" class="menu-btn">...</button>
+              <mat-menu #menu="matMenu" class="menu-dropdown">
+                <button mat-menu-item routerLink="/client-feedback/{{offerData.client.id}}/{{offerData.id}}/closed">
+                  End Contract
+                </button>
+              </mat-menu>
+              <!-- feedback menu ends -->
+            </ng-container>
+          </div>
+          <!-- freelancer login ends -->
+          <div class="action-group">
+            <!-- <button mat-button *ngIf="is_owner && offerData.status != 'Closed'" (click)="addMilestone()">+ New
+              Milestone</button> -->
+            <!-- <button mat-button *ngIf="is_owner && offerData.status != 'Closed'">Give Bonus</button> -->
+            <button mat-button *ngIf="offerData.status == 'Closed'">Contract Closed</button>
+          </div>
+
+          <!-- top part ends -->
+
+          <!-- tab starts  -->
+          <div>
+            <mat-tab-group class="mat-tab-block">
+              <!-- milestones tab starts -->
+              <mat-tab label="MILESTONES & PAYMENTS">
+                <!-- amount block starts  -->
+                <div class="amount">
+                  <p><span class="title-span">Budget</span><span>${{offerData.amount}}</span></p>
+                  <p *ngIf="userType === 'Client'"><span class="title-span">In Escrow</span><span>${{offerData.escrow}}</span></p>
+                  <p><span class="title-span">Paid</span><span>${{offerData.paid_amount}}</span></p>
+                  <p><span class="title-span">Remaining</span><span>${{offerData.remaining_amount}}</span></p>
+                </div>
+                <!-- amount block ends  -->
+                <div class="table-data">
+                  <div class="row-blk" *ngIf="offerData.type=='Fixed'">
+                    <div class="">
+                      <label>Milestone(s)</label>
+                    </div>
+                    <div class="">
+                      <!-- table starts -->
+                      <div class="" *ngIf="dataSource['data'].length > 0">
+                        <div class="table-responsive">
+                          <div class="example-container mat-elevation-z8">
+                            <table mat-table [dataSource]="dataSource" class="milestone-table" matSort>
+                              <!-- S.No -->
+                              <ng-container matColumnDef="no">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> # </th>
+                                <td mat-cell *matCellDef="let element; let i = index;">
+                                  <span>{{ i+1 }}</span>
+                                </td>
+                              </ng-container>
+                              <!-- Name Column -->
+                              <ng-container matColumnDef="name">
+                                <th mat-header-cell *matHeaderCellDef>Name</th>
+                                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                              </ng-container>
+                              <!-- Amount Column -->
+                              <ng-container matColumnDef="amount">
+                                <th mat-header-cell *matHeaderCellDef>Amount </th>
+                                <td mat-cell *matCellDef="let element">${{element.deposit_amount}} </td>
+                              </ng-container>
+                              <!-- Due Date Column -->
+                              <ng-container matColumnDef="due_date">
+                                <th mat-header-cell *matHeaderCellDef>Due Date</th>
+                                <td mat-cell *matCellDef="let element"> {{element.due_date}} </td>
+                              </ng-container>
+                              <!-- Payment status Column -->
+                              <ng-container matColumnDef="payment_status">
+                                <th mat-header-cell *matHeaderCellDef>Payment status</th>
+                                <td mat-cell *matCellDef="let element">
+                                  <ng-container *ngIf="!element.payment_status">
+                                    <span *ngIf="userType === 'Client' && element.payment_request && !element.payment_status;else payment_statusforfreelancer;">
+                                      <button mat-button (click)="paytofreelancer(element,freelancer_id)" class="cancel-btn">Pay</button>
+                                    </span>
+                                    <ng-template #payment_statusforfreelancer>
+                                      {{element.payment_status ? 'Paid' : 'Not Paid'}}
+                                    </ng-template>
+                                  </ng-container>
+                                  <ng-container *ngIf="element.payment_status">
+                                    Paid
+                                  </ng-container>
+                                </td>
+                              </ng-container>
+                              <ng-container matColumnDef="active_action">
+                                <th mat-header-cell *matHeaderCellDef>Active action</th>
+                                <td mat-cell *matCellDef="let element">
+                                  <div *ngIf="is_owner; else freelancerview">
+                                    <ng-container *ngIf="element.display_button; else othercontent">
+                                      <button *ngIf="element.display_button && !element.activate_status" mat-button
+                                        (click)="onActivateMilestane(element.id, element)" class="cancel-btn">Activate</button>
+                                    </ng-container>
+                                    <ng-template #othercontent>
+                                      <label *ngIf="element.activate_status" class="activated">Activated</label>
+                                    </ng-template>
+                                  </div>
+                                  <ng-template #freelancerview>
+                                    <div *ngIf="!element.payment_status && element.activate_status">
+                                      <button mat-button (click)="onMilestaneRequest(element)" class="cancel-btn">{{element.payment_request ? 'Re-request' : 'Request'}}</button>
+                                    </div>
+                                  </ng-template>
+                                </td>
+                              </ng-container>
+                              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- table ends -->
+                      <!-- add milestone form starts -->
+                      <div class="addmilestone_block" *ngIf="addmilestone_display_status">
+                        <form [formGroup]="addmilestoneForm">
+                          <ng-template [ngIf]="ismessage">
+                            <div class="alert alert-danger" role="alert">{{errormessage}}</div>
+                          </ng-template>
+                          <div class="form-group">
+                            <label>Description</label>
+                            <mat-form-field appearance="outline">
+                              <input matInput placeholder="Enter Description" formControlName="milestone_description">
+                            </mat-form-field>
+                            <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('milestone_description')
+                              ||
+                              this.errorMsgArr['milestone_description']}}</div>
+                          </div>
+                          <div class="form-group">
+                            <label>Choose a due date</label>
+                            <mat-form-field appearance="outline">
+                              <input (click)="picker.open()" matInput [matDatepicker]="picker" formControlName="milestone_due_date" placeholder="Choose a due date"
+                                [min]="minDate">
+                              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                              <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
+                            <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('milestone_due_date')
+                              ||
+                              this.errorMsgArr['milestone_due_date']}}</div>
+                          </div>
+                          <div class="form-group">
+                            <label>Enter Amount</label>
+                            <mat-form-field appearance="outline">
+                              <input matInput placeholder="Enter Amount" formControlName="milestone_amount" value=""
+                                allownumberonly autocomplete="off">
+                            </mat-form-field>
+                            <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('milestone_amount')
+                              ||
+                              this.errorMsgArr['milestone_amount']}}</div>
+                          </div>
+                          <div class="form-group button-row">
+                            <button mat-button (click)="saveMilestone(addmilestoneForm.value)" [disabled]="isbuttondisable"
+                              class="save">Save</button>
+                            <button mat-button (click)="cancelMilestone()" class="cancel-btn">Cancel</button>
+                          </div>
+                        </form>
+                      </div>
+                      <div class="bottom-btn">
+                        <button mat-button *ngIf="is_owner && offerData.status != 'Closed'" (click)="addMilestone()"
+                          class="white-btn">+ New Milestone</button>
+                      </div>
+                      <!-- add milestone form ends -->
+                    </div>
+                  </div>
+                  <div class="row-blk" *ngIf="offerData.type=='Fixed'">
+                    <div class="">
+                      <label *ngIf="payReqListDatasourse['data'].length > 0">Payment Request(s)</label>
+                    </div>
+                    <div class="">
+                      <!-- table starts -->
+                      <div class="" *ngIf="payReqListDatasourse['data'].length > 0">
+                        <div class="table-responsive">
+                          <div class="example-container mat-elevation-z8">
+                            <table mat-table [dataSource]="payReqListDatasourse" class="milestone-table" matSort>
+                              <!-- S.No -->
+                              <ng-container matColumnDef="no">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> # </th>
+                                <td mat-cell *matCellDef="let element; let i = index;">
+                                  <span>{{ i+1 }}</span>
+                                </td>
+                              </ng-container>
+                              <!-- Name Column -->
+                              <ng-container matColumnDef="name">
+                                <th mat-header-cell *matHeaderCellDef>Name</th>
+                                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                              </ng-container>
+                              <!-- Amount Column -->
+                              <ng-container matColumnDef="amount">
+                                <th mat-header-cell *matHeaderCellDef>Amount </th>
+                                <td mat-cell *matCellDef="let element">${{element.deposit_amount}} </td>
+                              </ng-container>
+                              <!-- Due Date Column -->
+                              <ng-container matColumnDef="description">
+                                <th mat-header-cell *matHeaderCellDef>Description</th>
+                                <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+                              </ng-container>
+                              <!-- Payment status Column -->
+                              <!-- Due Date Column -->
+                              <ng-container matColumnDef="due_date">
+                                <th mat-header-cell *matHeaderCellDef>Requested Date</th>
+                                <td mat-cell *matCellDef="let element"> {{element.created | date:'yyyy-MM-dd hh:mm:ss a'}} </td>
+                              </ng-container>
+                              <!-- Payment status Column -->
+                              <ng-container matColumnDef="payment_status">
+                                <th mat-header-cell *matHeaderCellDef>Payment status</th>
+                                <td mat-cell *matCellDef="let element">
+                                  <ng-container *ngIf="!element.payment_status">
+                                    Not Paid
+                                  </ng-container>
+                                  <ng-container *ngIf="element.payment_status">
+                                    Paid
+                                  </ng-container>
+                                </td>
+                              </ng-container>
+                              <ng-container matColumnDef="action">
+                                <th mat-header-cell *matHeaderCellDef>Action</th>
+                                <td mat-cell *matCellDef="let element">
+                                  <button mat-button (click)="viewPayRequest(element.id)" class="save">View</button>
+                                </td>
+                              </ng-container>
+                              <tr mat-header-row *matHeaderRowDef="payRegDisplayedColumns"></tr>
+                              <tr mat-row *matRowDef="let row; columns: payRegDisplayedColumns;"></tr>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- table ends -->
+                    </div>
+                  </div>
+                </div>
+              </mat-tab>
+              <!-- milestones tab ends -->
+
+              <mat-tab label="MESSAGES & FILES">
+                <app-chat-room></app-chat-room>
+              </mat-tab>
+              <mat-tab label="TERMS & SETTINGS">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div class="staticpage_content">
+                    <span [innerHTML]="desc"></span>
+                  </div>
+                </div>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- tab ends  -->
+  </div>
+  <!-- while content ENDS -->

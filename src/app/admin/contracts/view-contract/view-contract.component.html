@@ -1,0 +1,258 @@
+<div class="category_mainwrap job_detailwrap">
+    <div class="admin-dashboard admin-cmspage">
+        <div class="contracts-container pages-container mat-elevation-z8">
+          <h2>Contract detail</h2>
+          <div class="contract_backbtn">
+            <div class="pull-right">
+              <button mat-button routerLink="/admin/contracts"><i class="material-icons">keyboard_backspace</i> Back</button>
+            </div>
+          </div>
+ 
+
+
+  <div class="job_listing">
+    <div class="container">
+        <section class="profile-details">
+
+        <div class="contract_block">
+          <div class="container">
+              <h5><span>{{offerData.offer_status}}</span> - Expires on {{expires|date:'mediumDate'}}</h5>
+              <div class="table-responsive">
+              <table>
+                <tr>
+                  <td>Contract Title</td>
+                  <td>{{offerData.title}}</td>
+                </tr>
+
+                <tr>
+                  <td>Job Category</td>
+                  <td>{{offerData.job_category.name}} / {{offerData.job_subcategory.name}}</td>
+                </tr>
+
+                <tr *ngIf="offerData.type=='Hourly'">
+                  <td>Hourly Rate</td>
+                  <td>${{offerData.amount}}</td>
+                </tr>
+
+                <tr *ngIf="offerData.type=='Hourly'">
+                  <td>Weekly Limit</td>
+                  <td>{{contracts_type[offerData.limit-1].name}}</td>
+                </tr>
+
+                <tr *ngIf="offerData.type=='Fixed'">
+                  <td>Budget</td>
+                  <td>${{offerData.amount}}</td>
+                </tr>
+
+                <tr>
+                  <td>Offer Date</td>
+                  <td> {{offerData.created|date:'mediumDate'}}</td>
+                </tr>
+    
+                <tr>
+                  <td>Start Date</td>
+                  <td>{{offerData.start_date|date:'mediumDate'}}</td>
+                </tr>
+    
+                <tr>
+                  <td>Client Message</td>
+                  <td>{{offerData.description}}</td>
+                </tr>
+              </table>
+              </div>
+          </div>          
+        
+        <div class="container" *ngIf="offerData.type=='Fixed' && offerData.milestones.length > 0">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 contract_details_left">
+              <label>Milestone(s)</label>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 contract_details_left">
+              <div class="right_side_table">
+                <div class="table-responsive">
+                  <table mat-table [dataSource]="offerData.milestones" class="mat-elevation-z8">
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="name">
+                      <th mat-header-cell *matHeaderCellDef>Name</th>
+                      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                    </ng-container>
+                    <!-- Amount Column -->
+                    <ng-container matColumnDef="amount">
+                      <th mat-header-cell *matHeaderCellDef>Amount </th>
+                      <td mat-cell *matCellDef="let element">${{element.deposit_amount}} </td>
+                    </ng-container>
+                    <!-- Due Date Column -->
+                    <ng-container matColumnDef="due_date">
+                      <th mat-header-cell *matHeaderCellDef>Due Date</th>
+                      <td mat-cell *matCellDef="let element"> {{element.due_date}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="activate_status">
+                      <th mat-header-cell *matHeaderCellDef>Activation Status</th>
+                      <td mat-cell *matCellDef="let element"> {{(element.activate_status) ? 'Activated' : 'Not Yet'}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="payment_request">
+                      <th mat-header-cell *matHeaderCellDef>Request Status</th>
+                      <td mat-cell *matCellDef="let element"> {{(element.payment_request) ? 'Requested' : 'Not yet'}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="payment_status">
+                      <th mat-header-cell *matHeaderCellDef>Payment Status</th>
+                      <td mat-cell *matCellDef="let element"> {{(element.payment_status) ? 'Paid' : 'Not Yet'}} </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="container" *ngIf="offerData.type=='Hourly' && offerData.manuals.length > 0">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 contract_details_left">
+              <label>Manual Time Entry</label>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 contract_details_left">
+              <div class="right_side_table">
+                <div class="table-responsive">
+                  <table mat-table [dataSource]="offerData.manuals" class="mat-elevation-z8">
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="manual_date">
+                      <th mat-header-cell *matHeaderCellDef>Date</th>
+                      <td mat-cell *matCellDef="let element"> {{element.manual_date}} </td>
+                    </ng-container>
+                    <!-- Amount Column -->
+                    <ng-container matColumnDef="from_time">
+                      <th mat-header-cell *matHeaderCellDef>From Time </th>
+                      <td mat-cell *matCellDef="let element"> {{element.from_time}} </td>
+                    </ng-container>
+                    <!-- Due Date Column -->
+                    <ng-container matColumnDef="to_time">
+                      <th mat-header-cell *matHeaderCellDef>To Time</th>
+                      <td mat-cell *matCellDef="let element"> {{element.to_time}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="sum_hours">
+                      <th mat-header-cell *matHeaderCellDef>Total Hours</th>
+                      <td mat-cell *matCellDef="let element"> {{element.sum_hours}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="memo">
+                      <th mat-header-cell *matHeaderCellDef>Memo</th>
+                      <td mat-cell *matCellDef="let element"> {{element.memo}} </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedManualColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedManualColumns;"></tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        </div>
+
+
+
+    <div class="contract_block">
+      <div class="container">
+        <h4>Freelancer Info</h4>
+        <div class="table-responsive">
+        <table>
+          <tr>
+            <td>Email :</td>
+            <td>{{offerData.freelancer.email}}</td>
+          </tr>
+
+          <tr>
+            <td>Name :</td>
+            <td>{{offerData.freelancer.first_name}} {{offerData.freelancer.last_name}}</td>
+          </tr>
+
+          <tr>
+            <td>Category :</td>
+            <td>{{offerData.freelancer.category}}</td>
+          </tr>
+
+          <tr>
+            <td>Phone :</td>
+            <td>{{offerData.freelancer.phone}}</td>
+          </tr>
+
+          <tr>
+            <td>country :</td>
+            <td>
+              <ng-container *ngFor="let counte of countries">
+                <span *ngIf="counte.code == offerData.freelancer.country">{{counte.name}}</span>
+              </ng-container>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Address : </td>
+            <td>
+                {{offerData.freelancer.address}}
+                {{offerData.freelancer.zipcode}}
+            </td>
+          </tr>
+        </table>
+        </div>
+      </div>  
+    </div>
+
+        <div class="contract_block">
+          <div class="container">
+            <h4>Client Info</h4>
+            <div class="table-responsive">
+            <table>
+              <tr>
+                <td>Email : </td>
+                <td> {{offerData.client.email}}</td>
+              </tr>
+
+              <tr>
+                <td>Name :</td>
+                <td>{{offerData.client.first_name}} {{offerData.client.last_name}}</td>
+              </tr>
+
+              <tr>
+                <td>Category : </td>
+                <td>{{offerData.client.category}}</td>
+              </tr>
+
+              <tr>
+                <td>Phone : </td>
+                <td>{{offerData.client.phone}}</td>
+              </tr>
+
+              <tr>
+                <td>country :</td>
+                <td>
+                    <ng-container *ngFor="let counte of countries">
+                      <span *ngIf="counte.code == offerData.client.country">{{counte.name}}</span>
+                    </ng-container>
+                </td>
+              </tr>
+
+              <tr>
+                <td>Address :</td>
+                <td>                  
+                    {{offerData.client.address}}
+                    {{offerData.client.zipcode}}
+                </td>
+              </tr>
+            </table>        
+            </div>
+          </div>
+        </div>
+
+
+
+
+        </section>
+    </div>
+  </div>
+
+    </div>
+  </div>
+</div>

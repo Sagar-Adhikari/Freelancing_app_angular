@@ -1,0 +1,201 @@
+<div class="category_mainwrap proposaldetail_wrap">
+    <div class="breadcrumb_wrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <h4>Proposal Detail</h4>
+                </div>
+                <!--end col-->
+            </div>
+            <!--end row-->
+        </div>
+        <!--end container-->
+    </div>
+    <!--end breadcrumb_wrap-->
+
+    <div class="proposedetail-leftbox">
+        <div class="container" *ngIf="isLoaded">
+            <div class="row">
+                <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+                    <div class="bg-box profile_bg-box">
+                        <h3 class="head-style">{{proposalDetails.name}}</h3>
+                        <p class="detail-date">Posted {{proposalDetails.job_created | timeAgo}}</p>
+
+                        <div class="btn-group">
+                            <!-- <button mat-button>Copywriting</button> -->
+                            <button mat-button [routerLink]="['/jobdetail/' + proposalDetails.job_id]">View Job Posting</button>
+                        </div>
+
+                        <div class="proposedetail-list">
+                            <mat-list role="list">
+                                <mat-list-item role="listitem">
+                                    <h5 *ngIf="proposalDetails.payment == 'Fixed'">Job type</h5>
+                                    <p *ngIf="proposalDetails.payment == 'Fixed'">Fixed Price Rs.</p>
+                                    <h5 *ngIf="proposalDetails.payment == 'Hourly'">Job type</h5>
+                                    <p *ngIf="proposalDetails.payment == 'Hourly'">Hourly Price Rs.</p>
+                                </mat-list-item>
+                                <mat-list-item role="listitem" *ngIf="proposalDetails.payment == 'Fixed'">
+                                    <h5>Budget</h5>
+                                    <p>Rs.{{proposalDetails.payment_amount}}</p>
+                                </mat-list-item>
+
+                                <mat-list-item role="listitem">
+                                    <h5>{{hiredLevel}} Level</h5>
+                                    <p>{{hiredLevelTxt[hiredLevel]}}</p>
+                                </mat-list-item>
+                                <mat-list-item role="listitem">
+                                    <h5>Bid/Budget</h5>
+                                    <p *ngIf="proposalDetails.payment == 'Fixed'">Rs.{{proposalDetails.bid_amount}}</p>
+                                    <p *ngIf="proposalDetails.payment == 'Hourly'">Rs.{{proposalDetails.bid_amount}} / hr</p>
+                                </mat-list-item>
+                            </mat-list>
+                        </div>
+                        <!--end proposedetail-list-->
+
+                        <div class="details-box">
+                            <h4>Details</h4>
+                            <p>{{proposalDetails.description | truncatetext : textLength}}
+                                <a (click)="onMoreFun(jobDescrption.length, morelessText)" class="more-text">  {{morelessText}}</a></p>
+
+                            <!-- <p class="highlight-text">Only freelancers located in the U.S may apply</p> -->
+                        </div>
+                        <!--end details-box-->
+
+                        <div class="proposedetail-list skills-box">
+                            <h4>Skills Required:</h4>
+                            <div *ngIf="skillsDisplays.length > 0;else noskills">
+                                <mat-list role="list">
+                                    <ng-container *ngFor='let skillsDisplay of skillsDisplays'>
+                                        <mat-list-item role="listitem"><a href="{{baseurl}}/search/job?skill={{skillsDisplay}}"> {{skillsDisplay}}</a></mat-list-item>
+                                    </ng-container>
+                                </mat-list>
+                            </div>
+                            <ng-template #noskills>No Skills Selected</ng-template>
+                        </div>
+                        <!--end details-box-->
+                    </div>
+                    <!--end profile_bg-box-->
+
+                    <div class="bg-box profile_bg-box second_box" *ngIf="proposalDetails.cover_letter">
+                        <h3 class="head-style">Cover Letter</h3>
+                        <div class="cover-desc">
+                            <p>{{proposalDetails.cover_letter | truncatetext : textCoverLength}}
+                                <a (click)="onCoverMoreFun(coverLetter.length, morelessCoverText)" class="more-text">  {{morelessCoverText}}</a></p>
+                        </div>
+                        <!--end cover-desc-->
+                    </div>
+                    <!--end profile_bg-box-->
+                    <!-- Question block -->
+                    <div class="bg-box profile_bg-box second_box question_answer_block" *ngIf="showAns">
+                        <h3 class="head-style">Question & Answers</h3>
+                        <div *ngFor="let ans of answersList;let i = index">
+                            <p class="question_text">{{ans.question_text}}</p>
+                            <p class="ans_text">{{ans.answer}}</p>
+                        </div>
+                    </div>
+                    <!-- Question block -->
+                    <!-- start Attachments -->
+                    <div *ngIf="attachmentFile" class="bg-box profile_bg-box second_box fileupload-box">
+                        <h3 class="head-style">Attachments</h3>
+                        <mat-list-item *ngFor="let rowattachment of attachment;let i = index">
+                            <div class="fileupload-img">
+                                <!-- <span class="thumbimg" [ngSwitch]="true">
+                <span *ngSwitchCase="rowattachment.filetype === 'text/csv'"><img src='/assets/images/thumbimg/csvthumb.png'></span>
+                <span *ngSwitchCase="rowattachment.filetype === 'image/jpeg'"><img [src]="rowattachment.filepath"></span>
+                <span *ngSwitchCase="rowattachment.filetype === 'video/mp4' || rowattachment.filetype === 'video/x-matroska'"><img src='/assets/images/thumbimg/videothumb.png'></span>
+                <span *ngSwitchCase="rowattachment.filetype === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'"><img src='/assets/images/thumbimg/docthumb.png'></span>
+                <span *ngSwitchCase="rowattachment.filetype === 'application/vnd.openxmlformats-officedocument.presentationml.presentation'"><img src='/assets/images/thumbimg/pptthumb.png'></span>
+                <span *ngSwitchCase="rowattachment.filetype === 'application/pdf'"><img src='/assets/images/thumbimg/pdfthumb.png'></span>
+                <span *ngSwitchCase="rowattachment.filetype === 'application/zip'"><img src='/assets/images/thumbimg/zipthumb.png'></span>
+                <span *ngSwitchCase="rowattachment.filetype === 'application/x-php'"><img src='/assets/images/thumbimg/phpthumb.png'></span>
+                <span *ngSwitchCase="rowattachment.filetype === 'text/vnd.trolltech.linguist' || rowattachment.filetype === 'application/javascript'"><img src='/assets/images/thumbimg/jsthumb.png'></span>
+                <span *ngSwitchCase="rowattachment.filetype === 'application/sql'"><img src='/assets/images/thumbimg/sqlthumb.png'></span>
+                <span *ngSwitchCase="rowattachment.filetype === 'none'"><img src='/assets/images/thumbimg/nonethumb.png'></span>
+              </span>                        -->
+                                <ng-container *ngIf="rowattachment.filetype === 'img' || rowattachment.filetype === 'pdf';else downloadfile">
+                                    <span class="fileupload-txt" (click)="viewAttachment(rowattachment.filepath ,rowattachment.filetype)"><span>
+                    <mat-icon>attach_file</mat-icon>
+                  </span>{{rowattachment.file_name}}</span>
+                                </ng-container>
+                                <ng-template #downloadfile>
+                                    <a href="{{rowattachment.filepath}}">
+                                        <span class="fileupload-txt"><span>
+                    <mat-icon>attach_file</mat-icon>
+                    </span>{{rowattachment.file_name}}</span>
+                                    </a>
+                                </ng-template>
+                            </div>
+                        </mat-list-item>
+                    </div>
+                    <!-- end Attachments -->
+
+                </div>
+                <!--end col-->
+
+                <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                    <div class="bg-box bg-boxright bg-boxright_blk">
+                        <div class="action-message">
+                            <!-- <h3 class="head-style">Submitted Proposals Your Proposed terms:</h3> -->
+                            <!-- <h5 *ngIf="isAccepted">Proposal Accepted</h5> -->
+                            <!-- <h5 *ngIf="isRejected">Proposal Rejected</h5> -->
+                            <h5 *ngIf="isRequest">Offer Sent</h5>
+                            <h5 *ngIf="isOffered">Offer Sent & Accepted</h5>
+                        </div>
+                        <div class="btn-group">
+                            <!-- <button mat-button>Propose Different Terms</button> -->
+                            <!-- <button mat-button *ngIf="showWithDraw" (click)="withdrawProposal()">Withdraw Proposal</button> -->
+                            <!-- <button mat-button *ngIf="showAccept" (click)="acceptProposal()">Accept Proposal</button> -->
+                            <button mat-button *ngIf="showHire && !isOffered && !isRequest" routerLink="/contract/{{proposedUserId}}/{{job_id}}">Hire Freelancer</button>
+                            <!-- <button mat-button *ngIf="showReject && !isOffered" (click)="rejectProposal()">Reject Proposal</button> -->
+                        </div>
+                        <div class="btn-group">
+                            <button mat-button *ngIf="showHire && !isOffered && !isRequest" (click)="addRoom()">message</button>
+                            <!-- <button mat-button *ngIf="showReject && !isOffered" (click)="rejectProposal()">Reject Proposal</button> -->
+                        </div>
+                        <mat-list role="list">
+                            <mat-list-item role="listitem">
+                                <h4>About the Freelancer</h4>
+                                <ngb-rating [rate]="proposalDetails.freelancer_rating"></ngb-rating>
+                                <p>reviews</p>
+                            </mat-list-item>
+                            <mat-list-item role="listitem">
+                                <h4>Freelancer : <a class="more-text" routerLink="/freelancerview/{{proposedUserId}}">{{proposalDetails.username}}</a></h4>
+                                <p>{{proposalDetails.job_success}}% Success Rate</p><br/>
+                            </mat-list-item>
+                            
+                            <mat-list-item role="listitem">
+                                <ng-container *ngFor="let counte of countries">
+                                    <h4 *ngIf="counte.code == proposalDetails.country">{{counte.name}}</h4>
+                                </ng-container>
+                                <p>{{proposalDetails.freelancer_current_time}}</p>
+                            </mat-list-item>
+
+                            <!-- <mat-list-item role="listitem">
+              <h4>$100+ Total Spent</h4>
+            <p>2 Hires, 12 Active</p>
+              </mat-list-item> -->
+
+                            <mat-list-item role="listitem">
+                                <h4>Rs.{{proposalDetails.hourly_rate}}/hr Avg Hourly Rate</h4>
+                                <!-- <p>Paid</p>
+            <p>20 Hours</p> -->
+                            </mat-list-item>
+
+                            <mat-list-item role="listitem">
+                                <p>Member Since {{proposalDetails.created_freelancer | timeAgo}}</p>
+                            </mat-list-item>
+
+                        </mat-list>
+                    </div>
+                    <!--end bg-boxright-->
+                </div>
+                <!--end col-->
+            </div>
+            <!--end row-->
+        </div>
+        <!--end container-->
+    </div>
+    <!--end proposedetail-leftbox-->
+
+</div>
+<!--end proposaldetail_wrap-->

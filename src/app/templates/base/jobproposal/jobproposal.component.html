@@ -1,0 +1,219 @@
+<div class="category_mainwrap job_detailwrap">
+    <div class="breadcrumb_wrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <h4>job detail</h4>
+                </div>
+                <!--end col-->
+            </div>
+            <!--end row-->
+        </div>
+        <!--end container-->
+    </div>
+    <!--end breadcrumb_wrap-->
+
+    <div class="job_listing">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                    <div class="bg-box">
+                        <h3>{{jobTitleName}}</h3>
+                        <div class="trans-wrap">
+                            <div class="trans-left">
+                                <div class="trans-img"><img src="assets/images/trans-img1.png"></div>
+                                <div class="trans-desc">
+                                    <h4>{{payment}}</h4>
+                                    <ng-container *ngFor="let commit of commits">
+                                        <p *ngIf="commit.key == jobCommitment">{{commit.name}}</p>
+                                    </ng-container>
+                                    <ng-container *ngFor="let complement of complements">
+                                        <p *ngIf="complement.key == expComp">{{complement.name}}</p>
+                                    </ng-container>
+                                </div>
+                            </div>
+
+                            <div class="trans-left">
+                                <div class="trans-img"><img src="assets/images/trans-img2.png"></div>
+                                <div class="trans-desc">
+                                    <h4>{{hiredLevel}} Level</h4>
+                                    <p>{{hiredLevelTxt[hiredLevel]}}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="detail-wrap">
+                            <h4>details</h4>
+                            <p class="post-date">Posted {{jobCreatedAt | timeAgo}}</p>
+                            <p>{{jobDescrption}}</p>
+                            <a routerLink="/jobdetail/{{job_id}}"><span>View Job Posting</span></a>
+                            <!-- <h5>Type of document: <span>Legal</span></h5>
+                <h5>Translate: <span>from English to Urdu</span></h5> -->
+                        </div>
+
+                        <div class="detail-wrap skill-wrap" *ngIf="skillsDisplays.length > 0">
+                            <h4>Skills and Expertise</h4>
+                            <div class="skill-btn">
+
+                                <ng-container *ngFor='let skillsDisplay of skillsDisplays'>
+                                    <button mat-button (click)="skillBasedSearch(skillsDisplay)">{{skillsDisplay}}</button>
+                                </ng-container>
+                            </div>
+                        </div>
+
+                        <!--end skill-wrap-->
+                    </div>
+                    <!--end bg-box-->
+                </div>
+                <!--end col-->
+                <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                    <div class="bg-box bg-boxright">
+                        <mat-list role="list" *ngIf="showClient">
+                            <mat-list-item role="listitem">
+                                <div class="detail-wrap skill-wrap">
+                                    <h4>Activity on this Job</h4>
+                                    <h5>
+                                        Proposals: <span *ngIf="proposal_count == 0;else proposalswitch">{{ proposalFormat[0] }}</span>
+                                        <ng-template #proposalswitch>
+                                            <ng-container [ngSwitch]="proposal_count">
+                                                <span *ngSwitchCase="proposal_count &lt; 5">{{ proposalFormat[0] }}</span>
+                                                <span *ngSwitchCase="proposal_count >= 5 && proposal_count &lt; 10">{{ proposalFormat[1] }}</span>
+                                                <span *ngSwitchCase="proposal_count >= 10 && proposal_count &lt; 15">{{ proposalFormat[2] }}</span>
+                                                <span *ngSwitchCase="proposal_count >= 15 && proposal_count &lt; 20">{{ proposalFormat[3] }}</span>
+                                                <span *ngSwitchCase="proposal_count >= 20 && proposal_count &lt; 50">{{ proposalFormat[4] }}</span>
+                                                <li *ngSwitchCase="proposal_count >= 50"> {{ proposalFormat[5] }}</li>
+                                                <li *ngSwitchDefault> {{ proposalFormat[0] }}</li>
+                                            </ng-container>
+                                        </ng-template>
+                                    </h5>
+                                    <h5>Interviewing: <span>{{interviewingCount}}</span></h5>
+                                    <h5>Invites Sent: <span>{{invite_sent}}</span></h5>
+                                    <h5>Unanswered Invites: <span>{{unansweredCount}}</span></h5>
+                                </div>
+                            </mat-list-item>
+                            <mat-list-item role="listitem">
+                                <h4>About the Client</h4>
+                                <ngb-rating [rate]="clientInfo.profile.rating"></ngb-rating>
+                                <p>reviews</p>
+                            </mat-list-item>
+                            <ng-container *ngFor="let counte of countries">
+                                <mat-list-item role="listitem" *ngIf="counte.code == selectedCountry">
+                                    <h4>Location: {{counte.name}}</h4>
+                                    <p>{{clientInfo.profile.current_time}}</p>
+                                </mat-list-item>
+                            </ng-container>
+                            <mat-list-item role="listitem">
+                                <h4>{{clientInfo.profile.job_count}} Jobs Posted </h4>
+                                <p>{{clientInfo.profile.hire_rate}} Hire Rate, {{clientInfo.profile.job_open}} Open Jobs </p>
+                            </mat-list-item>
+                            <mat-list-item role="listitem">
+                                <h4>Rs.{{clientInfo.profile.client_spent}} Total Spent </h4>
+                                <p>{{clientInfo.profile.hires_count}} Hires, {{clientInfo.profile.active_count}} Active </p>
+                            </mat-list-item>
+                            <mat-list-item role="listitem">
+                                <h4>Rs.{{clientInfo.profile.avg_hourly_rate}}/hr Avg Hourly Rate </h4>
+                            </mat-list-item>
+                        </mat-list>
+                        <p class="member-date" *ngIf="showClient">Member Since {{clientInfo.profile.membersince}} </p>
+                    </div>
+                    <!--end bg-box-->
+                </div>
+                <!--end col-->
+                <form [formGroup]="jobProposalForm">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="bg-box bg-boxbottom">
+                            <h3>Terms</h3>
+                            <div class="profile-leftblock">
+                                <h5>Please note that your new hourly rate will only apply to new contracts.</h5>
+                                <p>Your profile rate: Rs.{{initialRate}}/hr</p>
+                                <div>
+                                    <div class="form-group">
+                                        <label>Hourly Rate
+                        Total amount the client will see</label>
+                                        <input #ratevalue formControlName="bid_amount" class="form-control" (input)="calculaterate()" (keypress)="isNumber($event)" placeholder="Enter your rate"> <span *ngIf="payment == 'Hourly'">/hr</span>
+                                        <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('bid_amount') || this.errorMsgArr['bid_amount']}}
+                                        </div>
+                                    </div>
+                                    <!-- <div class="form-group">
+                                        <label>20% networkplus Service Fee : </label><span>${{percentagevalue}}/hr</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>You'll be paid
+                        The estimated amount you'll receive after service fees: </label><span>${{remainingvalue}}/hr</span>
+                                    </div> -->
+                                    <div class="form-group">
+                                        <label>How long do you think this project will take?</label>
+                                        <mat-select formControlName="project_hour" placeholder="Please select">
+                                            <mat-option *ngFor="let hours of project_hours" [value]="hours.name">{{ hours.name }}</mat-option>
+                                        </mat-select>
+                                        <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('project_hour') || this.errorMsgArr['project_hour']}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="bg-box bg-boxbottom">
+                            <h3>Additional Details</h3>
+                            <div class="profile-leftblock">
+                                <div>
+                                    <div class="form-group">
+                                        <label>Cover Letter</label>
+                                        <textarea class="form-control" formControlName="cover_letter" required></textarea>
+                                        <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('cover_letter') || this.errorMsgArr['cover_letter']}}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Attachments</label>
+                                        <div class="drag_attachment">
+                                            <label>drag or <span>upload</span> project files</label>
+                                            <input ng2FileDrop class="well my-drop-zone" ng2FileSelect type="file" [uploader]="uploader" (onFileSelected)="fileSelected($event)" multiple>
+                                        </div>
+                                        <div class="preview_block">
+                                            <mat-list-item *ngFor="let rowattachment of attachment;let i = index">
+                                                <div class="image_preview_block">
+                                                    <!-- <span class="thumbimg" [ngSwitch]="true">
+                              <span *ngSwitchCase="rowattachment.filetype === 'csv'"><img src='/assets/images/thumbimg/csvthumb.png'></span>
+                              <span *ngSwitchCase="rowattachment.filetype === 'img'"><img [src]="rowattachment.tempimage"></span>
+                              <span *ngSwitchCase="rowattachment.filetype === 'video'"><img src='/assets/images/thumbimg/videothumb.png'></span>
+                              <span *ngSwitchCase="rowattachment.filetype === 'doc'"><img src='/assets/images/thumbimg/docthumb.png'></span>
+                              <span *ngSwitchCase="rowattachment.filetype === 'pdf'"><img src='/assets/images/thumbimg/pdfthumb.png'></span>
+                              <span *ngSwitchCase="rowattachment.filetype === 'zip'"><img src='/assets/images/thumbimg/zipthumb.png'></span>
+                              <span *ngSwitchCase="rowattachment.filetype === 'php'"><img src='/assets/images/thumbimg/phpthumb.png'></span>
+                              <span *ngSwitchCase="rowattachment.filetype === 'js'"><img src='/assets/images/thumbimg/jsthumb.png'></span>
+                              <span *ngSwitchCase="rowattachment.filetype === 'sql'"><img src='/assets/images/thumbimg/sqlthumb.png'></span>
+                              <span *ngSwitchCase="rowattachment.filetype === 'none'"><img src='/assets/images/thumbimg/nonethumb.png'></span>
+                            </span> -->
+                                                    <span class="file_name_text">{{rowattachment._file.name}} <a href="javascript:;" (click)="onDeleteAttachment(i);">
+                                <mat-icon>delete</mat-icon>
+                              </a></span>
+
+                                                </div>
+                                            </mat-list-item>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" *ngIf="isLoaded">
+                                        <h3>Answer the Question(s)</h3>
+                                        <div class="form-group" *ngFor="let question of questions; let in=index">
+                                            <mat-label>{{question.question}}<span class="asterisk" *ngIf="question.type == 'Required'">*</span></mat-label>
+                                            <textarea matInput placeholder="Enter the answer" class="form-control" formControlName="qa_block" [(ngModel)]="questions[in].answer"></textarea>
+                                            <div class="text-danger text-left small" *ngIf="questions[in].error">{{questions[in].errormsg}}</div>
+                                            <div *ngIf="answerError" class="text-danger text-left small">Please answer the question</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bottom-btn">
+                                    <button mat-raised-button type="submit" (click)="onSubmitProposal(jobProposalForm.value)">Submit
+                      Proposal</button>
+                                    <button mat-raised-button type="button" (click)="onClickCancel()">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

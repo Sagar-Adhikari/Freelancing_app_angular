@@ -1,0 +1,22 @@
+.admin-container {box-shadow: 0 3px 5px -1px rgba(0,0,0,.1), 0 6px 10px 0 rgba(0,0,0,.1), 0 1px 10px 0 rgba(0,0,0,.1); height: auto; margin:15px; }
+.hpanel { width:100%; }
+.panel-heading { width:100%; padding:15px; margin-bottom:15px; border-bottom:1px solid #ececed; }
+.page-title h4 { font-family: 'Noto Sans', sans-serif; font-size:14px; color:#c23041; font-weight:bold; margin-bottom:0px;}
+.page-crumb h4 { font-family: 'Noto Sans', sans-serif; font-size:14px; color:#41454b; margin-bottom:0px;}
+.panel-body { widows: 100%; margin:10px;}
+/* Header End CSS Styles */
+
+
+.form-block { width:100%; border:1px solid #dfe2e5; margin-top:10px; margin-bottom:30px; }
+.form-title h4 { font-family: 'Noto Sans', sans-serif; font-size:14px; color:#41454b; padding:10px; margin-bottom:10px; border-bottom:1px solid #dfe2e5;}
+input { margin-right: 10px; font-family: 'Noto Sans', sans-serif; font-size: 16px; height: 43px; display: inline-block; } 
+.form-control { border-color: #eaeaea!important; }
+.form-group label { margin-bottom:0px; font-size: 12px; font-weight: bold; color:#41454b; }
+
+.company-logo { width:100%;  border:1px dashed #dfe2e5; padding:15px 10px; display: inline-block; height: 80%;}
+.drag-drop { width:100%; text-align: center; display: inline-block; }
+.drag-drop p {font-family: 'Noto Sans', sans-serif; font-size:14px; color:#41454b; }
+.drag-drop .material-icons {font-size:60px; }
+
+.form-btn { width:100%; display: inline-block; text-align: center; }
+.form-btn button.mat-button { color:#fff; font-family: 'Noto Sans', sans-serif; font-size: 14px; font-weight: bold; background-color:#c23041;  }

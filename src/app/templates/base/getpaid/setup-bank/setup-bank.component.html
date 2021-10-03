@@ -1,0 +1,186 @@
+<div class="category_mainwrap postjob_wrap">
+  <div class="breadcrumb_wrap">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <h4>Set up Payments: Direct to Local Bank</h4>
+        </div><!--end col-->
+      </div><!--end row-->
+    </div><!--end container-->
+  </div><!--end breadcrumb_wrap-->
+
+  <form [formGroup]="setupBankForm" (ngSubmit)="setupBankFormSubmit(setupBankForm.value)" (keydown.enter)="$event.preventDefault()"
+    enctype="multipart/form-data">
+    <div class="payment-fulldesc">
+      <div class="setup-payment-details">
+        <div class="container">
+          <div class="row">
+            <div class="setup-payment-container ">
+
+              <p *ngIf="withdraw_option == 'USD'">Transfer funds directly to your local bank in INR. ${{withdraw_fee_bank}} {{withdraw_option}} per withdrawal. </p>
+              <p *ngIf="withdraw_option == 'percentage'">Transfer funds directly to your local bank in INR. {{withdraw_fee_bank}} {{withdraw_option}} per withdrawal. </p>
+
+              <h5>Payment Details</h5>
+              <section class="content-section stepthree-section">
+                <div class="row">
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                <h6>Bank Information</h6>
+
+                <div class="form-group">
+                  <label>IFSC code</label>
+                  <mat-form-field appearance="outline">
+                    <input matInput placeholder="Enter IFSC code" formControlName="ifsc_code" [(ngModel)]="ifsc_code"
+                      required>
+                  </mat-form-field>
+                  <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('ifsc_code') ||
+                      this.errorMsgArr['ifsc_code']}}</div>
+                </div>
+
+                <div class="bottom-btn">
+                    <button type="button" mat-button (click)="getBankUsingIfsc()">GO</button>
+                    <button *ngIf="!isGetBank" mat-button (click)="onCancel()" class="cancel-btn">Cancel</button>
+                  </div>
+                </div>
+              </div>
+            </section>
+            </div>
+              
+
+
+            <section *ngIf="isGetBank">
+              <div class="setup-bank-details">
+
+            <div class="container">
+              <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="form-group">
+                  <h6>Bank</h6>
+                  <p>{{bankInfo.BANK}}, {{bankInfo.BRANCH}}</p>
+                  <p>{{bankInfo.ADDRESS}}</p>
+                  <p>{{bankInfo.CITY}}, {{bankInfo.DISTRICT}}, {{bankInfo.STATE}}</p>
+                </div>
+              </div>
+
+              <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="form-group">
+                  <h6>Account Currency</h6>
+                  <p>Indian Rupee (INR)</p>
+                </div>
+
+                <div class="form-group">
+                  <h6>Withdraw Fee</h6>
+                  <p *ngIf="withdraw_option != 'USD'">{{withdraw_fee_bank}} {{withdraw_option}} per withdrawal</p>
+                  <p *ngIf="withdraw_option == 'USD'">${{withdraw_fee_bank}} {{withdraw_option}} per withdrawal</p>
+                </div>
+              </div>
+              </div>
+            </div>
+
+
+          <div class="account-info">
+            <div class="container">
+              <h6>Account Holder Information</h6>
+              <div class="row">
+
+              <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="form-group">
+                  <label>Account Number</label>
+                    <mat-form-field class="example-full-width" appearance="outline">                      
+                      <input matInput placeholder="Account Number" allownumberonly formControlName="account_number"
+                        autocomplete="off">
+                    </mat-form-field>
+                    <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('account_number') ||
+                      this.errorMsgArr['account_number']}}</div>
+                </div>
+              </div>
+
+              <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="form-group">
+                  <label>Name on Account</label>
+                    <mat-form-field class="example-full-width" appearance="outline">
+                      <input matInput placeholder="Name" formControlName="account_name">
+                    </mat-form-field>
+                    <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('account_name') ||
+                      this.errorMsgArr['account_name']}}</div>
+                </div>
+              </div>
+
+              <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="form-group">
+                  <label>Address</label>
+                    <mat-form-field class="example-full-width" appearance="outline">
+                      <input matInput placeholder="Address" formControlName="address">
+                    </mat-form-field>
+                    <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('address') ||
+                      this.errorMsgArr['address']}}</div>
+                </div>
+              </div>
+
+              <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="form-group">
+                  <label>City</label>
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <input matInput placeholder="City" formControlName="city">
+                  </mat-form-field>
+                  <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('city') ||
+                    this.errorMsgArr['city']}}</div>
+                </div>
+              </div>
+
+              <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="form-group">
+                  <label>Country</label>
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-select placeholder="Select Country" formControlName="country">
+                      <mat-option>Select Country</mat-option>
+                      <mat-option *ngFor="let location of locations" [value]="location.code">
+                        {{ location.name }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('country') ||
+                    this.errorMsgArr['country']}}</div>
+                </div>
+              </div>
+
+              <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="form-group">
+                  <label>Phone number</label>
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <input matInput placeholder="Phone number" formControlName="phone_number">
+                  </mat-form-field>
+                  <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('phone_number') ||
+                    this.errorMsgArr['phone_number']}}</div>
+                </div>
+              </div>
+
+              <div class="col-lg-12 col-md-6 col-sm-12">
+                <div class="form-group anchor-tag">
+                  <mat-checkbox formControlName="terms" value="1">I attest that i am the owner and have full
+                    authorization to this bank account. </mat-checkbox>
+                  <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('terms') ||
+                    this.errorMsgArr['terms']}}</div>
+                </div>
+              </div>
+                <!--end form-group-->
+
+                <div class="bottom-btn">
+                  <button mat-button type="submit" [disabled]="isbuttondisable">Save</button>
+                  <button mat-button (click)="onCancel()" class="cancel-btn">Cancel</button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+            </div>
+          </section>
+
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+  </form>
+</div>

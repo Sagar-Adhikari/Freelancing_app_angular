@@ -1,0 +1,159 @@
+<div class="breadcrumb_wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <h4>Post a Job</h4>
+            </div>
+            <!--end col-->
+        </div>
+        <!--end row-->
+    </div>
+    <!--end container-->
+</div>
+<!--end breadcrumb_wrap-->
+
+<div class="login_maincontent">
+    <div class="login-maincontent-inner">
+        <!--start login_maincontent innerblock-->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <h5 class="top-backbtn"><a routerLink="/"><span><i class="fa fa-arrow-left"></i></span>Back to home screen</a></h5>
+                </div>
+                <!--end col-->
+
+                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                    <ngb-carousel>
+                        <ng-template ngbSlide>
+                            <div class="item">
+                                <div class="item">
+                                    <h4>Remote Nepal</h4>
+                                    <h5>Enter Your Email Address and login in your account in Remote Nepal Easy access to multiple data sources</h5>
+                                    <div class="login-img"><img src="assets/images/login-img.png" class="img-fluid"></div>
+                                </div>
+                            </div>
+                        </ng-template>
+                        <ng-template ngbSlide>
+                            <div class="item">
+                                <div class="item">
+                                    <h4>Remote Nepal</h4>
+                                    <h5>Enter Your Email Address and login in your account in Remote Nepal Easy access to multiple data sources</h5>
+                                    <div class="login-img"><img src="assets/images/login-img.png" class="img-fluid"></div>
+                                </div>
+                            </div>
+                        </ng-template>
+                        <ng-template ngbSlide>
+                            <div class="item">
+                                <div class="item">
+                                    <h4>Remote Nepal</h4>
+                                    <h5>Enter Your Email Address and login in your account in Remote Nepal Easy access to multiple data sources</h5>
+                                    <div class="login-img"><img src="assets/images/login-img.png" class="img-fluid"></div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </ngb-carousel>
+                </div>
+                <!--end col-->
+                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12" [@registerAnimation]>
+                    <div class="login-box1">
+                        <h3>complete your account</h3>
+                        <p>{{user_email}}</p>
+                        <ng-template [ngIf]="ismessage && errormessage!=''">
+                            <div class="alert alert-danger" role="alert">{{errormessage}}</div>
+                        </ng-template>
+                        <form [formGroup]="rgForm" (ngSubmit)="step2Submit(rgForm.value)">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <span class="form-icon"><i class="fa fa-globe"></i></span>
+                                        <div>
+                                            <input *ngIf="usernameDisplay" type="text" class="form-control" placeholder="Nepal" disabled>
+                                            <div *ngIf="!usernameDisplay" class="select-style select-style-blk" >
+                                                <ng-select formControlName="user_country" [items]="countries" [(ngModel)]="clientcurrentlocation" bindLabel="name" bindValue="code" placeholder="Choose Country">
+                                                    <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                                        {{item.name}}
+                                                    <span class="ng-value-icon right" (click)="clear(item); $event.stopPropagation()" aria-hidden="true">×</span>
+                                                    </ng-template>
+                                                </ng-select>
+                                            </div>
+                                            <!--end select-style-->
+                                            <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('user_country') || this.errorMsgArr['user_country']}}</div>
+                                        </div>
+                                        <span class="select-icon"><i class="fa fa-chevron-down"></i></span>
+                                    </div>
+                                    <!--end form-group-->
+
+                                </div>
+                                <!--end col-->
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <span class="form-icon"><i class="fa fa-key"></i></span>
+                                        <input type="password" class="form-control" placeholder="Password" formControlName="user_password" required>
+                                        <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('user_password') || this.errorMsgArr['user_password']}}</div>
+                                    </div>
+                                    <!--end form-group-->
+                                </div>
+                                <!--end col-->
+
+                            </div>
+                            <!--end row-->
+
+                            <div class="work-selection">
+                                <h4>I Want to</h4>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <mat-radio-group>
+                                            <mat-radio-button [checked]="true" class="example-margin" (click)="actionbtn(1)" value="hire">Hire for a Project</mat-radio-button>
+                                            <mat-radio-button class="example-margin" (click)="actionbtn(2)" value="work">Work as a Freelancer</mat-radio-button>
+                                        </mat-radio-group>
+                                    </div>
+                                    <!--end col-->
+
+                                    <div class="col-lg-12" *ngIf="usernameDisplay">
+                                        <div class="form-group">
+                                            <span class="form-icon"><i class="fa fa-user-circle"></i></span>
+                                            <input type="text" formControlName="user_name" class="form-control" placeholder="User Name">
+                                            <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('user_name') || this.errorMsgArr['user_name']}}</div>
+                                        </div>
+                                        <!--end form-group-->
+                                    </div>
+                                    <!--end col-->
+
+
+
+                                    <!-- <div class="col-lg-6" #freelancer_code style="display: none;">
+												<div class="form-group">
+													<span class="form-icon"><img src="assets/images/captcha-letter.jpg"></span>
+													<input type="text" class="form-control" placeholder="Type the letters below">
+												</div> -->
+                                    <!--end form-group-->
+                                    <!-- <div class="catcha-img"><img src="assets/images/catcha-img.png"></div>
+											</div> -->
+                                    <!--end col-->
+                                </div>
+                                <!--end row-->
+                                <div class="bottom-bg">
+                                    <mat-checkbox class="example-margin" formControlName="send_mail" [checked]="true">Yes! Send me genuinely useful emails every now and then to help me get the most out of Remote Nepal</mat-checkbox>
+                                    <mat-checkbox class="example-margin" formControlName="agree">Yes! I understand and agree to the <a href="{{siteUrl}}/pages/terms" target="_blank">Remote Nepal Terms</a> of Service and <a href="{{siteUrl}}/pages/polices" target="_blank">Privacy Policy.</a></mat-checkbox>
+                                    <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('agree') || this.errorMsgArr['agree']}}</div>
+                                </div>
+                                <!--end bottom-bg-->
+
+                                <div class="submit-btn"><button type="submit">get started</button></div>
+                            </div>
+                            <!--end work-selection-->
+                        </form>
+                    </div>
+                    <!--end login-box1-->
+                </div>
+                <!--end col-->
+
+            </div>
+            <!--end row-->
+        </div>
+        <!--end container-->
+    </div>
+    <!--end login_maincontent innerblock-->
+</div>
+<!--end login_maincontent-->

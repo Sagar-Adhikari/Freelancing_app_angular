@@ -1,0 +1,23 @@
+<div>
+    <h5>Deposit Amount: Rs {{amount}}</h5>
+</div>
+<div style="display:flex;
+    max-width: 500px;
+    margin: auto;
+    justify-content: space-between;">
+    <div>
+        <strong>Esewa</strong>
+        <img class="logo" [src]="'assets/images/esewa_logo.png'" alt="logo" (click)="esewaPay()">
+        <button mat-raised-button (click)="esewaPay()">Pay With eSewa</button>
+    </div>
+
+    <div>
+        <strong>Khalti</strong>
+        <img class="logo" [src]="'assets/images/khalti_logo.png'" alt="logo" (click)="khaltiPay()">
+        <button mat-raised-button (click)="khaltiPay()">Pay With Khalti</button>
+    </div>
+
+</div>
+<div>
+    <button mat-button class="cancel-btn" type="button" (click)="onCancel();">Cancel</button>
+</div>

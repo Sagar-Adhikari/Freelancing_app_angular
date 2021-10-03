@@ -1,0 +1,139 @@
+<div class="category_mainwrap freelancer_profile">
+    <div class="breadcrumb_wrap">
+      <!--start breadcrumb_wrap-->
+      <div class="container">
+        <!--start container-->
+        <div class="row">
+          <!--start row-->
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <!--start col-->
+            <h4>Membership plans </h4>
+          </div>
+          <!--end col-->
+        </div>
+        <!--end row-->
+      </div>
+      <!--end container-->
+    </div>
+    <!--end breadcrumb_wrap-->
+  
+    <div class="freelancer-wrap changeplan-wrap">
+      <div class="container">
+          
+      <div class="back_btn">
+        <button type="button" mat-button routerLink="/setting/membership"> <i class="material-icons">keyboard_backspace </i> Back</button>
+      </div>
+
+        <div class="row" *ngIf="isLoadMembership">
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" *ngIf="membershipData.count > 0">
+            <div class="bg-box profile_bg-box">
+              <div class="freelancer-detail changeplan_detail">
+                <div class="left_side_block">
+                  <h1>{{membershipData.results[0].membership_name}}</h1>
+                  <h2 *ngIf="membershipData.results[0].default_type == 1">Free</h2>
+                  <h2 *ngIf="membershipData.results[0].default_type == 2">${{membershipData.results[0].membership_amount}}/{{membershipData.results[0].membership_type}}</h2>
+                </div>
+                <div class="right_side_block">
+                  <h3 *ngIf="membership_id == membershipData.results[0].id;else switchBasic" >This is your current plan
+                  </h3>
+                  <ng-template #switchBasic>
+                    <button type="button" mat-button (click)="switchMembership(membershipData.results[0].id)">Switch to
+                      {{membershipData.results[0].membership_name}}</button>
+                  </ng-template>
+                </div>
+              </div>
+              <!--end freelancer-detail-->
+              <div class="change_plan_content">
+                <div class="row">
+                  <mat-list role="list" class="change_plan_list">
+                    <mat-list-item role="listitem"><span class="icon_span"><i class="material-icons">check</i></span>
+                      <p><span class="bold">{{membershipData.results[0].membership_connect}}</span>
+                        Connects/{{membershipData.results[0].membership_type}}</p>
+                    </mat-list-item>
+                    <mat-list-item role="listitem"><span class="icon_span"><i class="material-icons">check</i></span>
+                      <p>Hourly protection to ensure you're paid for each hour worked</p>
+                    </mat-list-item>
+                    <mat-list-item role="listitem"><span class="icon_span"><i class="material-icons">check</i></span>
+                      <p>Fixed-price payments are secured through milestones </p>
+                    </mat-list-item>
+                  </mat-list>
+                </div>
+                <div class="row">
+                  <div class="learn_more">
+                    <!-- <p><a>Learn more</a></p> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--end bg-box-->
+          </div>
+          <!--end col-->
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" *ngIf="membershipData.count > 1">
+            <div class="bg-box profile_bg-box">
+              <div class="freelancer-detail changeplan_detail">
+                <div class="left_side_block">
+                  <h1>{{membershipData.results[1].membership_name}}</h1>
+                  <h2 *ngIf="membershipData.results[1].default_type == 1">Free</h2>
+                  <h2 *ngIf="membershipData.results[1].default_type == 2">${{membershipData.results[1].membership_amount}}/{{membershipData.results[1].membership_type}}</h2>
+                </div>
+                <div class="right_side_block">
+                  <h3 *ngIf="membership_id == membershipData.results[1].id;else switchUpgrade">This Is your current plan
+                  </h3>
+                  <ng-template #switchUpgrade>
+                    <button type="button" *ngIf="membershipData.results[1].default_type == 2" mat-button routerLink="/membership/reviewupgrade/{{membershipData.results[1].id}}">Upgrade</button>
+                  </ng-template>
+                </div>
+              </div>
+              <!--end freelancer-detail-->
+              <div class="change_plan_content">
+                <div class="row">
+                  <mat-list role="list" class="change_plan_list">
+                    <mat-list-item role="listitem"><span class="icon_span"><i class="material-icons">check</i></span>
+                      <p><span class="bold">{{membershipData.results[1].membership_connect}}</span>
+                        Connects/{{membershipData.results[1].membership_type}}</p>
+                    </mat-list-item>
+                    <mat-list-item role="listitem"><span class="icon_span"><i class="material-icons">check</i></span>
+                      <p>Hourly protection to ensure you're paid for each hour worked</p>
+                    </mat-list-item>
+                    <mat-list-item role="listitem"><span class="icon_span"><i class="material-icons">check</i></span>
+                      <p>Fixed-price payments are secured through milestones</p>
+                    </mat-list-item>
+                    <mat-list-item role="listitem"><span class="icon_span"><i class="material-icons">check</i></span>
+                      <p>Your profile will never be set to hidden due to inactivity</p>
+                    </mat-list-item>
+                    <mat-list-item role="listitem"><span class="icon_span"><i class="material-icons">check</i></span>
+                      <p>Unused Connects rollover (up to 140)</p>
+                    </mat-list-item>
+                    <mat-list-item role="listitem"><span class="icon_span"><i class="material-icons">check</i></span>
+                      <p>Setting to keep your earnings confidential</p>
+                    </mat-list-item>
+                    <mat-list-item role="listitem"><span class="icon_span"><i class="material-icons">check</i></span>
+                      <p>View competitor bids for any job</p>
+                    </mat-list-item>
+                    <mat-list-item role="listitem"><span class="icon_span"><i class="material-icons">check</i></span>
+                      <p>Customize your profile URL</p>
+                    </mat-list-item>
+                  </mat-list>
+                </div>
+                <div class="row">
+                  <div class="learn_more">
+                    <!-- <p><a>Learn more</a></p> -->
+                  </div>
+                </div>
+              </div>
+  
+            </div>
+            <!--end bg-box-->
+          </div>
+          <!--end col-->
+  
+        </div>
+        <!--end row-->
+      
+      </div>
+      <!--end container-->
+    </div>
+    <!--end freelancer-wrap-->
+  </div>
+  <!--end freelancer_profile-->
+  

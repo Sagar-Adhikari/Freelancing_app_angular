@@ -1,0 +1,38 @@
+<div>
+    <div class="model_main"> 
+      <div class="modal-header">
+        <h4 class="modal-title">Withdraw Settlement</h4>        
+        <button (click)="onclickcancel()"><mat-icon>close</mat-icon></button>
+      </div>
+      <form [formGroup]="withdrawForm">
+      <div class="modal-body">      
+        <div class="profile-leftblock">        
+            <h5>Settlement Amount {{settlement_amount}} </h5>
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="form-group" *ngIf="gettype == 'bank'">
+                <mat-form-field appearance="outline">
+                  <mat-label>Choose a date</mat-label>
+                  <input (click)="picker.open()" matInput [matDatepicker]="picker" formControlName="date" placeholder="Choose a date"
+                    [min]="minDate">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorwithdrawMsg('date') || this.errorMsgArr['date']}}</div>
+            </div>
+
+            <div class="form-group">
+                <label>Notes</label>
+                <textarea class="form-control" formControlName="notes"></textarea> 
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <button class="save-btn" mat-button (click)="saveWithdraw(withdrawForm.value)">Save</button>
+        <button class="cancel-btn" mat-button (click)="onclickcancel()">Cancel</button>
+      </div>
+    </form>
+    </div>
+</div>

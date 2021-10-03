@@ -1,0 +1,105 @@
+<div class="admin-dashboard admin-cmspage">
+	<div class="category-container pages-container mat-elevation-z8">
+		<h2>Withdraw List</h2>
+
+		<div class="withdraw-container pages-container">
+
+    <div class="contact-sub-container mat-elevation-z8 table-box">
+
+      <div class="withdraw-loading-shade"
+      *ngIf="isLoadingResults || isRateLimitReached">
+      <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+      <div class="withdraw-rate-limit-reached" *ngIf="isRateLimitReached">
+        It will be reset in one minute.
+      </div>
+    </div>
+
+    <div class="withdraw-table-container">
+      <div class="table-responsive">
+
+      <table mat-table [dataSource]="data" class="withdraw-table"
+      matSort matSortActive="name" matSortDisableClear matSortDirection="asc">
+      
+      <ng-container matColumnDef="index">
+        <th mat-header-cell *matHeaderCellDef> S.No </th>
+        <td mat-cell *matCellDef="let row; let i = index;"> <span *ngIf="pageEvent">{{pageEvent.pageIndex*perpage+ConvertToInt(i)+1}} </span> <span *ngIf="!pageEvent">{{ ConvertToInt(i)+1 }}</span></td>
+      </ng-container>
+
+      <ng-container matColumnDef="created">
+        <th mat-header-cell *matHeaderCellDef>Date</th>
+        <td mat-cell *matCellDef="let row">{{row.created | date: 'MMM d, y'}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef>Type</th>
+        <td mat-cell *matCellDef="let row">{{ row.type }}</td>
+      </ng-container>
+        
+      <ng-container matColumnDef="amount">
+        <th mat-header-cell *matHeaderCellDef>Amount</th>
+        <td mat-cell *matCellDef="let row">{{ row.amount }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="service_fee">
+        <th mat-header-cell *matHeaderCellDef>Service Fee</th>
+        <td mat-cell *matCellDef="let row">{{ row.service_fee }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="settlement_amount">
+        <th mat-header-cell *matHeaderCellDef>Settlement Amount</th>
+        <td mat-cell *matCellDef="let row">{{ (row.amount - row.service_fee).toFixed(2) }}</td>
+      </ng-container>
+      
+      <ng-container matColumnDef="settlement_date">
+        <th mat-header-cell *matHeaderCellDef>Settlement Date</th>
+        <td mat-cell *matCellDef="let row">{{ row.settlement_date }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="settlement_notes">
+        <th mat-header-cell *matHeaderCellDef>Settlement Notes</th>
+        <td mat-cell *matCellDef="let row">{{ row.settlement_notes }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let row">{{ (row.status) ? 'Completed' : 'Pending' }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+		<mat-header-cell *matHeaderCellDef>
+			<span><i class="fa fa-plus mat-icon"></i>Action</span>
+		</mat-header-cell>
+		<mat-cell *matCellDef="let row">
+      <button type="button" *ngIf="!row.status && row.type=='bank'" mat-button (click)="withdrawBank(row.id, (row.amount - row.service_fee), row.user, 'bank')">Process Bank</button>
+			<button type="button" *ngIf="!row.status && row.type=='paypal'" mat-button (click)="withdrawBank(row.id, (row.amount - row.service_fee), row.user, 'paypal')">Process Paypal</button> 
+      <span *ngIf="row.status">Paid</span>
+		</mat-cell>
+	</ng-container>
+      
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [hidden]="!mywithdrawpaginatorhide" [length]="resultsLength" [pageSize]="perpage" (page)="pageEvent = $event"></mat-paginator> 
+  </div>
+   <div class="no-results" [style.display]="resultsLength == 0 ? '' : 'none'">
+        No Record Found.
+      </div>
+  
+</div>
+
+
+</div>
+</div>
+
+
+</div>
+</div>
+
+<!-- Copyright 2018 Google Inc. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at http://angular.io/license -->

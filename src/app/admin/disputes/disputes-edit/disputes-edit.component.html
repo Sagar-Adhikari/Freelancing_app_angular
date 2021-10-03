@@ -1,0 +1,61 @@
+<section class="dashboard-wrap">
+  <div class="admin-dashboard admin-cmspage">
+    <div class="cms-container pages-container mat-elevation-z8">
+      <h2>Edit disputes Details</h2>
+          
+      <div class="pull-right">
+          <button mat-button (click)="goback()"><i class="material-icons">keyboard_backspace</i> Back</button>
+      </div>
+        <div class="filter_layout">          
+          <div class="container">
+            <div class="row">       
+              <div class="edit_details">
+                  <table>
+                      <tr>
+                        <td><p>Client :</p></td>                    
+                        <td><p>{{disputeDetailArr.client_name}}</p></td>
+                      </tr>
+    
+                      <tr>
+                        <td><p>Freelancer :</p></td>                                      
+                        <td><p>{{disputeDetailArr.freelancer_name}}</p></td>
+                      </tr>
+    
+                      <tr>
+                        <td><p>Subject :</p></td>                    
+                        <td><p>{{disputeDetailArr.reason_subject}}</p></td>
+                      </tr>
+    
+                      <tr>
+                        <td><p>Detail :</p></td>                    
+                        <td><p>{{disputeDetailArr.detail_reason}}</p></td>
+                      </tr>
+    
+                      <tr>
+                        <td><p>Amount :</p></td>                    
+                        <td><p>{{disputeDetailArr.amount}}</p></td>
+                      </tr>
+    
+                      <tr>
+                        <td><p>Change amount :</p></td>
+                        <td><input type="text" #amount value="{{disputeDetailArr.amount}}"></td>
+                      </tr>
+                    </table>
+
+                <!-- <p><span>Client :</span> {{disputeDetailArr.client_name}}</p>
+                <p><span>Freelancer :</span> {{disputeDetailArr.freelancer_name}}</p>
+                <p><span>Subject :</span> {{disputeDetailArr.reason_subject}}</p>
+                <p><span>Detail :</span> {{disputeDetailArr.detail_reason}}</p>
+                <p><span>Amount :</span> {{disputeDetailArr.amount}}</p>
+                <p><span>Change amount :</span> <input type="text" #amount value="{{disputeDetailArr.amount}}"> -->
+                <button *ngIf="disputeDetailArr.state !== 3" mat-button (click)="ChangeDisputeAmount(amount.value,disputeDetailArr)">Save</button>
+              </div>     
+            </div>
+          </div>
+        </div>        
+    </div>
+  </div>
+</section>
+   
+
+

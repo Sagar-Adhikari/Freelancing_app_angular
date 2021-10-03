@@ -1,0 +1,95 @@
+<div class="admin-dashboard admin-settingspage admin-custompage admin-cmspage">
+	<div class="general-form-layout custompage-form-layout pages-container">
+		<h2>Edit Page</h2>
+		<form [formGroup]="cmseditForm" (ngSubmit)="cmseditFormSubmit(cmseditForm.value)">
+			<ng-template [ngIf]="ismessage"><div class="alert alert-danger" role="alert">{{errormessage}}</div></ng-template>
+			<ng-template [ngIf]="is_success"><div class="alert alert-success" role="alert">Page has been updated successfully</div></ng-template>
+			<div class="formfield-box">
+				<mat-form-field appearance="outline">
+					<mat-label>Title</mat-label>   
+					<input matInput placeholder="Enter Title" formControlName="cms_title" required>
+				</mat-form-field>
+			</div>
+
+		<div class="row">
+			<div class="col-lg-6 col-md-6 col-sm-12">
+				<div class="formfield-box">
+					<mat-form-field appearance="outline">
+						<mat-label>Title</mat-label>   
+						<input matInput placeholder="Enter Title" formControlName="cms_title" required>
+					</mat-form-field>
+				</div>
+			</div>
+			
+			<div class="col-lg-6 col-md-6 col-sm-12">
+				<div class="formfield-box">
+					<mat-form-field appearance="outline">
+						<mat-label>Alias name</mat-label>   
+						<input matInput placeholder="Enter Alias name" formControlName="cms_alias" required>
+					</mat-form-field>
+				</div>
+			</div>
+
+			<div class="col-lg-6 col-md-6 col-sm-12">
+				<div class="formfield-box">
+					<mat-form-field appearance="outline">
+						<mat-label>Slug</mat-label>   
+						<input matInput placeholder="Enter Slug" formControlName="cms_slug" required>
+					</mat-form-field>
+				</div>
+			</div>
+
+			<div class="col-lg-6 col-md-6 col-sm-12">
+				<div class="formfield-box">
+					<mat-form-field appearance="outline">
+						<mat-label>Meta Keyword</mat-label>   
+						<input matInput placeholder="Enter Meta Keyword" formControlName="cms_meta_key" required>
+					</mat-form-field>
+				</div>
+			</div>
+
+			<div class="col-lg-12 col-md-12 col-sm-12">
+				<div class="formfield-box">
+					<mat-form-field appearance="outline">
+						<mat-label>Meta Description</mat-label>   
+						<input matInput placeholder="Enter Meta Description" formControlName="cms_meta_desc" required>
+					</mat-form-field>
+				</div>
+			</div>			
+
+			<div class="col-lg-12 col-md-12 col-sm-12">
+				<div class="formfield-box">
+					<mat-label>Description</mat-label>
+					<quill-editor formControlName="cms_desc"></quill-editor>
+					<span *ngIf="isDescription" style="color: red">Please enter description</span>
+				</div>
+			</div>
+
+			<div class="col-lg-6 col-md-6 col-sm-12">
+				<div class="formfield-box select-option">
+					<mat-radio-group formControlName="cms_guest">
+						Allow Guest : 
+						<mat-radio-button value="Yes" checked="checked">Yes</mat-radio-button>
+						<mat-radio-button value="No">No</mat-radio-button>
+					</mat-radio-group>
+				</div>
+			</div>
+
+			<div class="col-lg-6 col-md-6 col-sm-12">
+				<div class="formfield-box select-option">
+					<mat-radio-group formControlName="cms_status">
+						Status : 
+						<mat-radio-button value="Active" checked="checked">Active</mat-radio-button>
+						<mat-radio-button value="Inactive">In-active</mat-radio-button>
+					</mat-radio-group>
+				</div>
+			</div>
+		</div>
+
+			<div class="submit-btn">
+				<button mat-raised-button type="submit" [disabled]="isbuttondisable">Save</button>
+				<button mat-raised-button [routerLink]="['/admin/pages']">Cancel</button>
+			</div>
+		</form>
+	</div>
+</div>

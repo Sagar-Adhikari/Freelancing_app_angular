@@ -1,0 +1,53 @@
+<div class="admin-dashboard admin-settingspage admin-custompage admin-cmspage">
+	<div class="general-form-layout custompage-form-layout pages-container">
+		<h2>Edit Category</h2>
+		<form [formGroup]="categoryForm" (ngSubmit)="categoryFormSubmit(categoryForm.value)">
+			<ng-template [ngIf]="ismessage"><div class="alert alert-danger" role="alert">{{errormessage}}</div></ng-template>
+			<ng-template [ngIf]="is_success"><div class="alert alert-success" role="alert">Category name has been updated successfully</div></ng-template>
+			<div class="formfield-box">
+				<mat-form-field appearance="outline">
+					<mat-label>Category Name</mat-label>            
+					<input matInput placeholder="Category Name" formControlName="category_name" required>
+				</mat-form-field>
+			</div>       
+			<div class="formfield-box">
+				<mat-radio-group formControlName="category_status">
+					Status : 
+					<mat-radio-button value="Active">Active</mat-radio-button>
+					<mat-radio-button value="Inactive">In-active</mat-radio-button>
+				</mat-radio-group>
+			</div>
+
+			<div class="formfield-box">
+				<div *ngIf="pre_img" class="pre_img"><img src="{{preview_img}}" /></div>
+
+
+				
+			<label class="browse-file" mat-button>
+					Browse File
+					<input type='file' (change)="readUrl($event)" #msgfs style="display: none;">
+				</label>
+
+				<div *ngIf="url.length > 0">
+					<ng-container *ngFor="let preview of url; let j = index">
+					 
+
+						 <ul class="add-category-upload">
+							<li><p><img [src]="preview.img" class="chat_msg_img"></p></li>
+							<li><p>{{ preview.file_name }}</p></li>
+							<li><a href="javascript:void(0);" class="remove_icon" (click)="removefiles(j);"><i class="material-icons">clear</i></a></li>
+						</ul>
+
+
+					</ng-container>
+				</div>
+			</div>
+
+
+			<div class="submit-btn">
+				<button mat-raised-button type="submit" [disabled]="isbuttondisable">Save</button>
+				<button mat-raised-button [routerLink]="['/admin/jobs/categorys']">Cancel</button>
+			</div>
+		</form>
+	</div>
+</div>

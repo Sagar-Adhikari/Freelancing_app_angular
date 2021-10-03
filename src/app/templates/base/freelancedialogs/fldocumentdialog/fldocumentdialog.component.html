@@ -1,0 +1,45 @@
+<div>
+    <div class="model_main"> 
+      <div class="modal-header">
+        <h4 class="modal-title">Upload Document</h4>
+        <button (click)="onclickcancel()"><mat-icon>close</mat-icon></button>
+      </div>
+      <form [formGroup]="documentEditForm" enctype="multipart/form-data">
+
+        <div class="form-group">
+          
+          <div class="upload-document">
+
+
+            <span *ngFor='let url of urls;let i= index'>
+              <ul class="upload_image_list">
+                <li>
+                  <img [src]="url" width="200" style="float: left;">
+                  <div>
+                    <button class="cancel-btn" mat-button (click)="deleteDisplayedimg(i)">Delete</button>
+                  </div>
+                </li>             
+              </ul>
+            </span>
+
+            <div class="upload_btn_block">
+              <label for="upload" class="upload_btn" >
+                Upload Document
+                <input type='file' id="upload" (change)="onSelectFile($event)" formControlName="document" multiple style="display: none;">
+              </label>
+            </div>
+
+
+            <div class="text-danger text-left small" *ngIf="errorDocumentMsg">{{geterrordocumentMsg('document') ||
+              this.errorDocumentMsgArr['document']}}</div>
+          </div>
+        </div>
+
+        <!--end form-group-->
+        <div class="account-button">
+          <button class="save-btn" mat-button type="button" (click)="documentEditSubmit(documentEditForm.value)">save</button>
+          <button class="cancel-btn" mat-button (click)="onclickcancel()">Cancel</button>
+        </div>
+        </form>
+    </div>
+  </div>

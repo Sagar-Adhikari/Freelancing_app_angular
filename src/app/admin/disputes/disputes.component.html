@@ -1,0 +1,108 @@
+<section class="dashboard-wrap">
+  <div class="admin-dashboard admin-cmspage">
+    <div class="cms-container pages-container mat-elevation-z8">
+      <h2>Disputes</h2>
+  
+      <div class="filter_layout">
+        <div class="row">
+          <div class="col-lg-8 col-md-12 col-sm-12">
+            <div class="filter_layout_input">
+              <mat-form-field>
+                <input matInput class="class_filter_input" #filter (keydown.enter)="applyFilter(customFilter,1)" [(ngModel)]="customFilter" placeholder="Search">       
+              </mat-form-field>
+            </div>
+          </div>
+  
+          <div class="col-lg-4 col-md-12 col-sm-12">
+            <div class="filter_button_layout">
+              <button #filterbutton mat-raised-button (click)="applyFilter(customFilter,1)"><i class="material-icons">search</i> Search</button>
+              <button #filterbutton mat-raised-button (click)="applyFilter(customFilter,0)"><i class="material-icons">autorenew</i> Reset</button>   
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="cms-container mat-elevation-z8 table-box">
+        <div class="cms-loading-shade"
+        *ngIf="isLoadingResults || isRateLimitReached">
+        <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+        <div class="cms-rate-limit-reached" *ngIf="isRateLimitReached">
+          It will be reset in one minute.
+        </div>
+      </div>
+  
+      <div class="cms-table-container">
+  
+        <table mat-table [dataSource]="data" class="cms-table"
+        matSort matSortActive="id" matSortDisableClear matSortDirection="desc">
+        
+        <ng-container matColumnDef="index">
+          <mat-header-cell *matHeaderCellDef> S.No </mat-header-cell>
+          <mat-cell *matCellDef="let row; let i = index;"> <span *ngIf="pageEvent">{{pageEvent.pageIndex*perpage+ConvertToInt(i)+1}} </span> <span *ngIf="!pageEvent">{{ ConvertToInt(i)+1 }}</span></mat-cell>
+        </ng-container>
+  
+        <ng-container matColumnDef="client">
+          <th mat-header-cell *matHeaderCellDef>Client</th>
+          <td mat-cell *matCellDef="let row">{{ row.client_name }}</td>
+        </ng-container>
+  
+        <ng-container matColumnDef="freelancer">
+          <th mat-header-cell *matHeaderCellDef>Freelancer</th>
+          <td mat-cell *matCellDef="let row">{{ row.freelancer_name }}</td>
+        </ng-container>
+        
+        <ng-container matColumnDef="subject">
+          <th mat-header-cell *matHeaderCellDef>Name</th>
+          <td mat-cell *matCellDef="let row">{{ row.reason_subject }}</td>
+        </ng-container>
+  
+        <ng-container matColumnDef="reason">
+          <th mat-header-cell *matHeaderCellDef>Reason</th>
+          <td mat-cell *matCellDef="let row">{{ row.detail_reason }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="amount">
+          <th mat-header-cell *matHeaderCellDef>Amount</th>
+          <td mat-cell *matCellDef="let row">${{ row.amount }}</td>
+        </ng-container>
+  
+        <ng-container matColumnDef="action">
+          <mat-header-cell *matHeaderCellDef>
+            <span><i class="fa fa-plus mat-icon"></i>Action</span>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <button routerLink="/disputes/view/{{ row.contract }}" mat-icon-button color="primary" focusable="false">                  
+              <!-- <a><i class="material-icons">&#xE254;</i></a>   -->
+              <i  class="material-icons">
+                visibility
+              </i>
+            </button>
+            
+            <button routerLink="/disputes/edit/{{ row.contract }}" mat-icon-button color="primary" focusable="false">                  
+                <i  class="material-icons">&#xE254;</i> 
+            </button>
+          </mat-cell>
+        </ng-container>
+        
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+  
+     <div class="no-results" [style.display]="resultsLength == 0 ? '' : 'none'">
+          No Record Found.
+        </div>
+  
+    <mat-paginator [length]="resultsLength" [pageSize]="perpage" (page)="pageEvent = $event"></mat-paginator>
+  </div>
+  
+  
+  </div>
+  </div>
+  </section>
+ 
+
+
+  <!-- Copyright 2018 Google Inc. All Rights Reserved.
+      Use of this source code is governed by an MIT-style license that
+      can be found in the LICENSE file at http://angular.io/license -->

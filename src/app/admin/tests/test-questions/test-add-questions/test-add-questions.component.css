@@ -1,0 +1,28 @@
+.admin-dashboard.admin-cmspage{padding: 15px 15px;background: #eeeeee;height:auto;min-height:100%;}
+.admin-dashboard.admin-cmspage .pages-container{padding: 15px;background-color: #ffffff; box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);}
+.admin-dashboard.admin-cmspage .pages-container h2{    border-bottom: 1px solid #ececed;
+    color: #4A154B;
+    font-size: 18px;
+    padding-bottom: 15px;
+    margin: 0 -15px 20px;
+    padding: 0 15px 15px;}
+.admin-dashboard.admin-cmspage .pages-container .submit-btn button{margin-left: 0px;background: #4A154B;color: #fff;margin-right: 10px;}
+:host /deep/ .mat-radio-button{margin-right: 15px;}
+.admin-dashboard.admin-cmspage .pages-container .submit-btn{margin-top: 20px; text-align: center; }
+.formfield-box{display: inline-block;width: 50%;padding: 0 15px;position: relative;}
+:host /deep/ .formfield-box .mat-form-field{width: 100%;}
+a.add-evidence{margin-left: 0px;background: #4A154B;color: #fff;margin-right: 10px;}
+a.evidence-delete{position: relative; padding:0px 10px;background-color: #4A154B;}
+a.evidence-delete .material-icons { vertical-align: unset; right: 2px; position: relative; }
+.answer_delete { padding:0px 10px;}
+.form-group.border { text-align: center; }
+ul.answer-field { padding-left: 0px; margin-bottom:0px; }
+ul.answer-field li { display: inline-block; }
+ul.answer-field li:first-child { width:8%; }
+ul.answer-field li:nth-child(2) { width:80%; }
+ul.answer-field li:last-child { width:10%; }
+
+@media(max-width: 767px)
+{
+.formfield-box{display: inline-block;width: 100%;padding: 0 15px;position: relative;}
+}

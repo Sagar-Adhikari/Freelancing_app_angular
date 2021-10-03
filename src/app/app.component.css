@@ -1,0 +1,4 @@
+:host /deep/ .bar { background: #ae2838 !important;}
+:host /deep/ .meteor { box-shadow: #ae2838 0px 0px 10px, #ae2838 0px 0px 5px !important; }
+
+:host /deep/ .spinner-icon { border-top-color: #ae2838 !important; border-left-color: #ae2838 !important; }

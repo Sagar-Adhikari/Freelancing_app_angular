@@ -1,0 +1,37 @@
+<div class="notification-dialogue">
+<div class="notification-dialogue-inner">
+<div class="notification-dialogue-content">
+<mat-dialog-content *ngIf="nLoad">
+  <ng-container *ngIf="nCount > 0;else noNotification">
+    <ul class="notification-list">
+      <li *ngFor="let notifyItem of notList">
+        <div [ngSwitch]="true">
+          <a (click)="updateSeen(notifyItem)" *ngSwitchCase="notifyItem.type === 'submitted'" routerLink="/proposal-details/{{notifyItem.object_id}}">{{notifyItem.text}}</a>
+          <a (click)="updateSeen(notifyItem)" *ngSwitchCase="notifyItem.type === 'Invite'" routerLink="/interview-detail/{{notifyItem.object_id}}">{{notifyItem.text}}</a>
+          <a (click)="updateSeen(notifyItem)" *ngSwitchCase="notifyItem.type === 'Offer'" routerLink="/view-offer/{{notifyItem.object_id}}">{{notifyItem.text}}</a>
+          <a (click)="updateSeen(notifyItem)" *ngSwitchCase="notifyItem.type === 'Created'" routerLink="/jobdetail/{{notifyItem.object_id}}">{{notifyItem.text}}</a>
+          <a (click)="updateSeen(notifyItem)" *ngSwitchCase="notifyItem.type === 'Contract-Created'" routerLink="/view-offer/{{notifyItem.object_id}}">{{notifyItem.text}}</a>
+          <a (click)="updateSeen(notifyItem)" *ngSwitchCase="notifyItem.type === 'Updated'" routerLink="/view-offer/{{notifyItem.object_id}}">{{notifyItem.text}}</a>
+          <a (click)="updateSeen(notifyItem)" *ngSwitchCase="notifyItem.type === 'Message'" routerLink="/chat-room/{{notifyItem.object_id}}">{{notifyItem.text}}</a>
+          <a (click)="updateSeen(notifyItem)" *ngSwitchCase="notifyItem.type === 'Dispute'" routerLink="/view-offer/{{notifyItem.object_id}}">{{notifyItem.text}}</a>
+          <a (click)="updateSeen(notifyItem)" *ngSwitchCase="notifyItem.type === 'Membership-subscription'" routerLink="/setting/membership">{{notifyItem.text}}</a>
+        <a (click)="updateSeen(notifyItem)" *ngSwitchCase="notifyItem.type === 'Payment-Created'" routerLink="/get-paid">{{notifyItem.text}}</a>
+        <a (click)="updateSeen(notifyItem)" *ngSwitchCase="notifyItem.type === 'Transaction' && user_type === 'Client'" routerLink="/client-transaction-history">{{notifyItem.text}}</a>
+        <a (click)="updateSeen(notifyItem)" *ngSwitchCase="notifyItem.type === 'Transaction' && user_type !== 'Client'" routerLink="/transaction-history">{{notifyItem.text}}</a>
+          <a (click)="updateSeen(notifyItem)" *ngSwitchDefault>{{notifyItem.text}}</a>
+          <span class="date-time">&nbsp;&nbsp;Date : {{notifyItem.created | date:"dd/MM/yyyy" }} &nbsp;&nbsp; Time:{{notifyItem.created | date:"HH:mm:ss"}}</span>
+        </div>
+      </li>
+    </ul>
+  </ng-container>
+  <ng-template #noNotification>
+    No more Notification.
+  </ng-template>
+</mat-dialog-content>
+<mat-dialog-actions >
+    <button mat-button  [mat-dialog-close]="true" routerLink="/notification">See All Notifications</button>
+    <button *ngIf="nCount > 0" mat-button (click)="seeAllNotification()">Mark as Read</button>
+</mat-dialog-actions>
+</div>
+</div>
+</div>

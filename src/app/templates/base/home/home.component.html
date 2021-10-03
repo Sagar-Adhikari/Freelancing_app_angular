@@ -1,0 +1,195 @@
+<!-- <ng-template [ngIf]="isDataAvailable"> -->
+
+  <div class="hero-wrap">
+    <div class="hero-content">
+      <div class="hero-text">
+        Hire from anywhere
+        <br/>
+        and get the job done.
+      </div>
+      <a class="nav-link find-freelancer-link" routerLink="/login">Find a Freelancer</a>
+    </div>
+  </div>
+
+  <div class="focus-wrap" id="wefocus">
+    <div class="container">
+      <div class="row">
+        <!-- <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+          <h3>Browse<br>
+            <span>From Categories</span></h3>
+            <span class="head-border"></span>
+            <p class="sub-text">{{static_data.workplus_home_category_head}}</p>
+          </div> -->
+          
+          <!-- <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12" *ngFor="let category of categories; let i = index ">
+              <div class="focus-box">
+                <div  class="focus-inner">
+                  <div  class="icon-img"><img src="assets/images/focus-icon{{ i + 1}}.png"></div>
+                  <h4> <a routerLink="/allcategory/{{ category.name }}">{{ category.name }}</a> </h4>
+                </div> 
+              </div>
+          </div> -->
+        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12"  >
+          <div style="margin-top: 40px;" class="focus-box-browse">
+            <div  class="focus-inner">
+              <h3><div class="browse"  >Browse</div>
+                <div class="categories" >From Categories</div>
+              </h3>
+              <span class="head-border"></span>
+            </div><!--end focus-inner-->
+          </div><!--end focus-box-->
+        </div>
+      
+        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12"  >
+          <div class="focus-box">
+            <div  class="focus-inner">
+              <div  class="icon-img"><img src="assets/images/focus-icon1.png"></div>
+              <div class="text"><a routerLink="/allcategory">  Web Dev</a> </div> 
+            </div><!--end focus-inner-->
+          </div><!--end focus-box-->
+       </div>
+       <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" >
+          <div class="focus-box">
+            <div  class="focus-inner">
+              <div  class="icon-img"><img src="assets/images/focus-icon2.png"></div>
+              <div class="text"><a routerLink="/allcategory">  Mobile Dev</a></div>
+            </div><!--end focus-inner-->
+          </div><!--end focus-box-->
+        </div>
+
+        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12"  >
+          <div class="focus-box">
+            <div  class="focus-inner">
+              <div  class="icon-img"><img src="assets/images/focus-icon3.png"></div>
+              <div class="text"><a routerLink="/allcategory">Medical Consultant</a></div>
+              <!-- <h4> <a routerLink="/allcategory/{{ category.name }}">{{ category.name }}</a> </h4> -->
+            </div><!--end focus-inner-->
+          </div><!--end focus-box-->
+        </div>
+
+        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12"  >
+          <div class="focus-box">
+            <div  class="focus-inner">
+              <div  class="icon-img"><img src="assets/images/focus-icon4.png"></div>
+              <div class="text"><a routerLink="/allcategory">Content Writer</a></div>
+              <!-- <h4> <a routerLink="/allcategory/{{ category.name }}">{{ category.name }}</a> </h4> -->
+            </div><!--end focus-inner-->
+          </div><!--end focus-box-->
+        </div>
+
+        <div  class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+          <div class="focus-box">
+            <div style="height:240px" class="focus-inner" >  
+              <div style="margin-top:40px;" class="more-btn"><a routerLink="/allcategory">show all </a></div>
+             </div> 
+          </div>  
+        </div><!--end col-->
+
+        </div><!--end row-->
+      </div><!--end container-->
+    </div><!--end focus-wrap-->
+
+    <div class="works-wrap" id="howitworks">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <h3>How it works<br>
+              <!-- <span>{{static_data.workplus_home_how_it_works}}</span> -->
+            </h3>
+              <!-- <span class="head-border"></span> -->
+
+              <div class="works-feature">
+                <ul>
+                  <li>
+                    <div class="work-icon"><i class="{{static_data.workplus_home_how_it_works_find_icon}}"></i></div>
+                    <h4>{{static_data.workplus_home_how_it_works_find_head}}</h4>
+                    <p>{{static_data.workplus_home_how_it_works_find_msg}}</p>
+                  </li>
+                  <li>
+                    <div class="work-icon"><i class="{{static_data.workplus_home_how_it_works_hire_icon}}"></i></div>
+                    <h4>{{static_data.workplus_home_how_it_works_hire_head}}</h4>
+                    <p>{{static_data.workplus_home_how_it_works_hire_msg}}</p>
+                  </li>
+                  <li>
+                    <div class="work-icon"><i class="{{static_data.workplus_home_how_it_works_work_icon}}"></i></div>
+                    <h4>{{static_data.workplus_home_how_it_works_work_head}}</h4>
+                    <p>{{static_data.workplus_home_how_it_works_work_msg}}</p>
+                  </li>
+                  <li>
+                    <div class="work-icon"><i class="{{static_data.workplus_home_how_it_works_pay_icon}}"></i></div>
+                    <h4>{{static_data.workplus_home_how_it_works_pay_head}}</h4>
+                    <p>{{static_data.workplus_home_how_it_works_pay_msg}}</p>
+                  </li>
+                </ul>
+              </div><!--end works-feature-->
+            </div><!--end col-->
+          </div><!--end row-->
+        </div><!--end container-->
+      </div><!--end works-wrap-->
+
+      <div class="pricing-wrap" id="prices">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <h3>pricing & plan<br>
+                <span>Find the level of service that works for you</span></h3>
+                <span class="head-border"></span>
+              </div><!--end col-->
+
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="price-plan">
+                  <ul>
+                    <li>
+                      <h4>startup</h4>
+                      <p class="price">$0 <span>/mo.</span></p>
+                      <p class="desc"> Trello is the best visual collaboration tool to help you organize your work and your life. </p>
+                      <div class="buy-btn"><a href="">get free</a></div>
+                    </li>
+                    <li class="active">
+                      <div class="active-div">
+                        <h4>premium</h4>
+                        <p class="price">$10 <span>/mo.</span></p>
+                        <p class="desc">For small teams 
+                          controls, priority support, and unlimited integrations. </p>
+                          <div class="buy-btn"><a href="">buy now</a></div>
+                        </div><!--end active-div-->
+                      </li>
+                      <li>
+                        <h4>business class</h4>
+                        <p class="price">$15 <span>/mo.</span></p>
+                        <p class="desc"> The perfect fit for companies and teams that want advanced administrative controls </p>
+                        <div class="buy-btn"><a href="">buy now</a></div>
+                      </li>
+                      <li>
+                        <h4>Economic Class</h4> 
+                        <p class="price">$30 <span>/mo.</span></p>
+                        <p class="desc"> For large companies collaborating with our highest levels of security </p>
+                        <div class="buy-btn"><a href="">buy now</a></div>
+                      </li> 
+                    </ul>
+                  </div><!--end price-plan-->
+                </div><!--end col-->
+              </div><!--end row-->
+            </div><!--end container-->
+          </div><!--end pricing-wrap-->
+
+          <ng-template [ngIf]="testimonials.length > 0">
+            <div class="testimonial-wrap">
+              <div class="container">
+                <div class="row">
+                  <ngb-carousel>
+                    <ng-template ngbSlide *ngFor="let test_data of testimonials">
+                       <div class="item">
+                        <div class="quotes-img"><img src="assets/images/quotes-img.png"></div>
+                        <h4>{{test_data.message}}</h4>
+                        <h5>{{test_data.author}}</h5>
+                        <p>{{test_data.position}}</p>
+                        <div class="play-icon"><a href="javascript:void(0);" (click)="openmodal(test_data.video_url);"><i class="fa fa-play"></i></a></div>
+                      </div>
+                    </ng-template>
+                  </ngb-carousel>
+                </div><!--end row-->
+              </div><!--end container-->
+            </div><!--end testimonial-wrap-->
+          </ng-template>
+          <!-- </ng-template> -->

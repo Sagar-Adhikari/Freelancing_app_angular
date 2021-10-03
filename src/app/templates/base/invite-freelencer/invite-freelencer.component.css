@@ -1,0 +1,181 @@
+/*popup design*/
+.modal-title {
+    color: #4A154B;
+    font-size: 25px;
+    text-transform: uppercase;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    letter-spacing: 1px;
+}
+.profile-leftblock h5 {
+    color: #4A154B;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+}
+button.save-btn {
+    background-color: #A62B3D;
+    border-color: #A62B3D;
+    border-radius:6px;
+    font-family: 'Open Sans', sans-serif;
+    padding: 0 16px;
+    color: #fff;
+}
+button{
+    font-weight: normal;
+    cursor: pointer;
+    margin: 0px 5px;
+    line-height: 36px;
+    font-size: 14px;
+    outline:0px;
+    border:0px;
+}
+button.save-btn:hover {
+    background-color: #992331;
+}
+button.cancel-btn:hover {
+    background-color: #C4C7CD;
+    color: #000;
+}
+button.cancel-btn{
+    background-color: #DFE2E9;
+/*  border-color: #DFE2E9;*/
+    color: #000;
+    border-radius:6px;
+    font-family: 'Open Sans', sans-serif;
+    padding: 0 16px;
+}
+button:focus{
+    outline:none;
+}
+.modal-header {
+    padding: 0px 0px 10px 0px;
+}
+.btn_block{
+padding: 10px 0px;
+}
+.modal-body{
+    padding:15px 0px;
+}
+.modal-header button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    top: 8px;
+    outline: none;
+    padding:0px;
+    text-align:right;
+    margin: 0px;
+    right:-8px;
+}
+.form-group .mat-select {
+    outline: 0;
+    display: block;
+    width: 100%;
+    padding: .5rem .75rem;
+    font-size: 1rem;
+    line-height: 1.25;
+    color: #464a4c;
+    background-color: #fff;
+    background-image: none;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: .25rem;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+mat-label,label {
+    font-weight: 600;
+    margin-bottom: 10px;
+    display: block;
+}
+.mat-radio-button p {
+    margin-bottom: 0px;
+}
+:host /deep/ .custompage-form-layout .mat-radio-label {
+    white-space: normal;
+}
+/*popup scrollbar*/
+::ng-deep  .cdk-overlay-dark-backdrop {
+    min-height: 100% !important;
+    position: fixed !important;
+}
+::ng-deep .cdk-global-overlay-wrapper{
+    overflow-y:auto;
+    pointer-events: auto;
+    padding:20px 0px 0px 0px;
+    overflow-x:hidden;
+}
+::ng-deep  .cdk-global-scrollblock {
+    overflow: hidden;
+    width: 102%;
+}
+::ng-deep   .mat-dialog-container {
+    overflow: hidden;
+}
+.postjob-details a {
+    color: #4A154B;
+    font-family: 'HelveticaNeue';
+    padding-left: 5px;
+}
+.postjob-details .mat-button {
+    font-size: 16px;
+    background-color: #4A154B;
+    color: #fff;
+    line-height: 37px;
+    font-family: 'HelveticaNeue';
+    width: auto;
+    box-shadow: 0px 0px 5px #d5d5d5;
+    margin-left: 0;
+    border-radius: 5px;
+    letter-spacing: 0.5px;
+    margin-right:15px;
+}
+.postjob-details .mat-button.cancel_button{
+    background-color: #DFE2E9;
+    color: #000;
+    box-shadow: 0px 0px 2px #d5d5d5;
+}
+textarea.form-control{
+    min-height: 120px;
+    max-height: 120px;
+    resize: none;
+    display: block;
+    width: 100%;
+    padding: .5rem .75rem;
+    font-size: 1rem;
+    line-height: 1.25;
+    color: #464a4c;
+    background-color: #fff;
+    background-image: none;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: .25rem;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    margin-bottom: 10px;
+}
+.form-group.border {
+    margin: 5px 0px 0px;
+}
+@media(min-width:992px){
+    .model_main {
+        min-width: 700px;
+        max-width: 700px;
+    }
+}
+@media(min-width:991px){
+.profile-leftblock {
+    max-width: 750px;
+    min-width: 750px;
+}
+}
+@media(max-width:767px){
+.modal-title{
+    font-size: 15px;
+}
+}

@@ -1,0 +1,7 @@
+<ng-container *ngIf="status == 'success';else errorbar">
+    <div class="snack-message"><p><i class="material-icons" style="vertical-align: middle;margin-right: 5px;">check</i>{{message}}</p></div>
+</ng-container>
+
+<ng-template #errorbar>
+    <div class="snack-message"><p><i class="material-icons" style="vertical-align: middle;margin-right: 5px;">error</i>{{message}}</p></div>
+</ng-template>

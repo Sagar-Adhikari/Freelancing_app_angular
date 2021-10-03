@@ -1,0 +1,87 @@
+<div class="model_main">
+	<div class="message-setting-title">
+		<h5>Message Settings</h5>
+	</div>
+<div class="modal-body tips">
+	<form [formGroup]="settingsForm" (ngSubmit)="settingsSubmit(settingsForm.value)">
+	<div class="row hide-settings">
+		<div class="col-md-12">
+			<div class="message-sub-title">
+				<h3>Notifications for:</h3>
+			</div>
+			<div class="checkbox m-sm-top">
+				<label>
+					<mat-checkbox formControlName="play_sound" value="yes">Also play a sound</mat-checkbox>&nbsp;<a href="javascript:void(0);" (click)="testsound();">Test it out!</a>
+				</label>
+			</div>
+		</div>
+	</div>
+
+	<div class="row m-md-top">
+		<div class="col-md-12">
+				<div class="message-sub-title">
+				<h3>Send an email with unread messages for:</h3>			
+			</div>
+		</div>
+	</div>
+	<div class="row m-sm-top">
+		
+		<div class="col-md-6">
+			<mat-form-field appearance="outline">
+			  <mat-select formControlName="cron_status" placeholder="message type">
+			    <mat-option *ngFor="let type of message_type" [value]="type.value">
+			      {{type.viewValue}}
+			    </mat-option>
+			  </mat-select>
+			</mat-form-field>
+		</div>
+
+		<div class="col-md-6">
+			<mat-form-field appearance="outline">
+				<mat-select formControlName="cron_type"  placeholder="message timing">
+					<mat-option *ngFor="let cron of message_cron" [value]="cron.value">
+						{{cron.viewValue}}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+		</div>
+
+	</div>
+	<div class="row">
+		<div class="col-md-8">
+			<div class="checkbox m-sm-top">
+				<label>
+					<mat-checkbox formControlName="cron_send_status">Only send when offline or idle</mat-checkbox>
+				</label>
+			</div>
+		</div>
+	</div>
+	<!----><div class="row m-md-top hide-settings">
+		<div class="col-md-12">
+			
+				<div class="message-sub-title">
+				<h3>In message composer pressing enter key will:</h3>
+			</div>
+
+			<div class="radio">
+				<mat-radio-group formControlName="message_type">
+					<mat-radio-button value="1">Send Message</mat-radio-button>
+					<mat-radio-button value="2">Add a line break</mat-radio-button>
+				</mat-radio-group>
+			</div>        
+		</div>
+	</div>
+
+<div class="bottom-btn">
+	<button mat-button type="submit" [disabled]="isbuttondisable">Save</button>
+	<a (click)="onCancel();">Cancel</a>
+</div>
+</form>
+
+</div>
+
+<div class="dialogClose">
+	<a (click)="onCancel();"> <mat-icon>close</mat-icon></a>
+</div>
+
+</div>

@@ -1,0 +1,59 @@
+<div class="admin-dashboard admin-settingspage admin-custompage admin-cmspage">
+		<div class="general-form-layout custompage-form-layout pages-container">
+			<h2>Edit Test Group</h2>
+			<form [formGroup]="groupForm" (ngSubmit)="groupFormSubmit(groupForm.value)">
+				<ng-template [ngIf]="ismessage"><div class="alert alert-danger" role="alert">{{errormessage}}</div></ng-template>
+				<ng-template [ngIf]="is_success"><div class="alert alert-success" role="alert">Group has been updated successfully</div></ng-template>
+	
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-md-12 col-sm-12">
+					<div class="formfield-box">
+						<mat-form-field appearance="outline">
+							<mat-label>Category Name</mat-label> 
+						 <mat-select formControlName="category_id" placeholder="Choose Category Name">
+						   <mat-option *ngFor="let cat_info of result" [value]="cat_info.id">{{ cat_info.name }}</mat-option>
+						 </mat-select>
+					   </mat-form-field>
+				   </div>
+				</div>
+	
+				<div class="col-lg-6 col-md-12 col-sm-12">
+					<div class="formfield-box">
+						<mat-form-field appearance="outline">
+							<mat-label>Group Name</mat-label>            
+							<input matInput placeholder="Enter Group Name" formControlName="group_name" required>
+						</mat-form-field>
+					</div>
+				</div>
+	
+				<div class="col-lg-6 col-md-12 col-sm-12">
+					<div class="formfield-box">
+						<mat-form-field appearance="outline">
+							<mat-label>Group Description</mat-label>            
+								<textarea matInput placeholder="Enter Group Description" formControlName="group_desc" required></textarea>
+						</mat-form-field>
+					</div>
+				</div>
+	
+				<div class="col-lg-6 col-md-12 col-sm-12">
+					<div class="formfield-box">
+						<mat-radio-group formControlName="group_status">
+							Status : 
+							<mat-radio-button value="Active" checked="checked">Active</mat-radio-button>
+							<mat-radio-button value="Inactive">In-active</mat-radio-button>
+						</mat-radio-group>
+					</div>
+				</div>
+			
+				<div class="col-lg-12 col-md-12 col-sm-12">
+					<div class="submit-btn">
+						<button mat-raised-button type="submit" [disabled]="isbuttondisable">Save</button>
+						<button mat-raised-button [routerLink]="['/admin/test-groups']">Cancel</button>
+					</div>
+				</div>
+			</div>
+		</div>
+			</form>
+		</div>
+	</div>

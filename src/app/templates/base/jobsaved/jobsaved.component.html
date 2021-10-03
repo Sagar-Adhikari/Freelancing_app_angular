@@ -1,0 +1,157 @@
+<div class="category_mainwrap job_detailwrap">
+    <div class="breadcrumb_wrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <h4>job saved</h4>
+                </div>
+                <!--end col-->
+            </div>
+            <!--end row-->
+        </div>
+        <!--end container-->
+    </div>
+    <!--end breadcrumb_wrap-->
+
+
+    <div class="jobsaved">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                    <div class="tab-buttons">
+                        <a routerLink="/search/job" class="tab-btn">SEARCH</a>
+                        <a *ngIf="userLogged" routerLink="/job/saved" class="tab-btn active">SAVED JOBS ({{resultsLength}})</a>
+                    </div>
+
+                    <div class="jobsaved-block">
+                        <div class="label-block">
+                            <h5>Intresting Job <i class="fa fa-star" aria-hidden="true"></i></h5>
+                        </div>
+                        <div class="search-block">
+                            <input class="form-control" matInput #filter [(ngModel)]="customFilter" (keydown.enter)="applyFilter(customFilter)" placeholder="Search Job">
+                            <span class="search_icons" #filterbutton mat-raised-button (click)="applyFilter(customFilter)"><i class="fa fa-search"></i></span>
+                        </div>
+
+                        <div class="">
+                            <ul class="jobsaved_list">
+
+                                <mat-table #table [dataSource]="dataSource" matSort matSortDisableClear>
+
+                                    <ng-container matColumnDef="jobtitle">
+                                        <mat-header-cell *matHeaderCellDef=""> You saved {{resultsLength}} job </mat-header-cell>
+                                        <mat-cell *matCellDef="let element">
+                                            <li>
+                                                <div class="">
+                                                    <div class="row">
+                                                        <div class="col-md-12 col-sm-12">
+                                                            <div class="row">
+                                                                <div class="col-md-10 col-sm-10 col-xs-12">
+                                                                    <h4 (click)="redirectJob(element.job_id)">{{element.name}}</h4>
+                                                                </div>
+                                                                <div class="col-md-2 col-sm-12 col-xs-12 fav_block" *ngIf="userLogged">
+                                                                    <!-- <button mat-mini-fab class="jobsaved_btn"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></button> -->
+                                                                    <button mat-mini-fab class="jobsaved_btn" (click)="onDeleteJobPost(element.id)"><i class="fa fa-heart" aria-hidden="true"></i></button>
+                                                                </div>
+                                                            </div>
+                                                            <h5>
+                                                                <b *ngIf="element.payment == 'Fixed'">Fixed-price</b>
+                                                                <b *ngIf="element.payment == 'Hourly'">Hourly</b> - {{element.experience_level}} ( {{hiredLevelTxt[element.level]}} )
+                                                                <ng-container *ngIf="element.payment == 'Fixed'"> - Est.Budget: Rs.{{element.payment_amount}}</ng-container>
+                                                                <ng-container *ngFor="let complement of complements">
+                                                                    <span *ngIf="complement.key == element.expect_to_complete"> - Est. Time: {{complement.name}}</span>
+                                                                </ng-container>
+                                                                <ng-container *ngFor="let commit of commitsDef">
+                                                                    <span *ngIf="commit.key == element.commitment"> - Commitment : {{commit.name}}.</span>
+                                                                </ng-container>
+                                                                - Posted {{element.job_posted | timeAgo}}</h5>
+                                                        </div>
+
+                                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                                            <div *ngIf="element.description.length > textLength;else fullJobDescription;">
+                                                                <p [attr.id]="'undoBtn'+element.id" *ngIf="showBtn !== element.id" class="jobTruncate">{{element.description | truncatetext : textLength}}
+                                                                    <a (click)="showUndoBtn(element.id,'less')">More</a>
+                                                                </p>
+                                                                <p class="jobFull" *ngIf="showBtn === element.id">{{element.description}}
+                                                                    <a (click)="showUndoBtn(element.id,'more')">Less</a>
+                                                                </p>
+                                                            </div>
+                                                            <ng-template #fullJobDescription>
+                                                                <p>{{element.description}}</p>
+                                                            </ng-template>
+                                                        </div>
+                                                        <div class="col-md-12 col-sm-12 course_button_block" *ngIf="element.required_skills != '' && element.required_skills != null">
+                                                            <ng-container *ngIf="element.required_skills.split(',').length > 5;else nomoreskill">
+                                                                <ng-container *ngFor="let skillData of element.required_skills.split(','); let i=index">
+                                                                    <button *ngIf="i&lt;5" mat-button class="course_btn" (click)="skillBasedSearch(skillData)">{{skillData}}</button>
+                                                                </ng-container>
+                                                                <span> {{element.required_skills.split(',').length - 5}} more</span>
+                                                            </ng-container>
+                                                            <ng-template #nomoreskill>
+                                                                <ng-container *ngFor="let skillData of element.required_skills.split(',')">
+                                                                    <button mat-button class="course_btn" (click)="skillBasedSearch(skillData)">{{skillData}}</button>
+                                                                </ng-container>
+                                                            </ng-template>
+                                                        </div>
+
+                                                        <div class="col-md-12 col-sm-12">
+                                                            <ul class="job-detail-list">
+                                                                <div class="row no_margin">
+                                                                    <li *ngIf="element.proposal_count == 0;else proposalswitch"><span class="normal_font">Proposals:</span> {{ proposalFormat[0] }}</li>
+                                                                    <ng-template #proposalswitch>
+                                                                        <ng-container [ngSwitch]="element.proposal_count">
+                                                                            <li *ngSwitchCase="element.proposal_count &lt; 5"><span class="normal_font">Proposals:</span> {{ proposalFormat[0] }}
+                                                                            </li>
+                                                                            <li *ngSwitchCase="element.proposal_count >= 5 && element.proposal_count &lt; 10"><span class="normal_font">Proposals:</span> {{ proposalFormat[1] }}</li>
+                                                                            <li *ngSwitchCase="element.proposal_count >= 10 && element.proposal_count &lt; 15"><span class="normal_font">Proposals:</span> {{ proposalFormat[2] }}</li>
+                                                                            <li *ngSwitchCase="element.proposal_count >= 15 && element.proposal_count &lt; 20"><span class="normal_font">Proposals:</span> {{ proposalFormat[3] }}</li>
+                                                                            <li *ngSwitchCase="element.proposal_count >= 20 && element.proposal_count &lt;50"><span class="normal_font">Proposals:</span> {{ proposalFormat[4] }}</li>
+                                                                            <li *ngSwitchCase="element.proposal_count >= 50"><span class="normal_font">Proposals:</span> {{ proposalFormat[5] }}</li>
+                                                                            <li *ngSwitchDefault><span class="normal_font">Proposals:</span> {{ proposalFormat[0] }}</li>
+                                                                        </ng-container>
+                                                                    </ng-template>
+                                                                    <li><span class="normal_font">Number of freelancers needed:</span> {{element.resource}}</li>
+                                                                </div>
+                                                                <div class="row no_margin">
+                                                                    <li *ngIf="element.payment_verify" class="payment_list verified_list">
+                                                                        <span class="verified_icon">
+                                <i class="material-icons">check_circle</i></span>Payment verified
+                                                                        <ngb-rating [rate]="element.ratings"></ngb-rating>
+                                                                    </li>
+                                                                    <li *ngIf="!element.payment_verify" class="payment_list unverified_list">
+                                                                        <span class="unverified_icon">
+                                <i class="material-icons">check_circle</i></span>Payment unverified
+                                                                        <ngb-rating [rate]="element.ratings"></ngb-rating>
+                                                                    </li>
+                                                                    <li>Rs.{{element.client_spent}} <span class="normal_font">Spent</span></li>
+                                                                    <li *ngIf="element.client_location"><i class="fa fa-map-marker" aria-hidden="true"></i>
+                                                                        <span class="normal_font"> {{element.client_location}}</span></li>
+                                                                    <!-- <li>100% Job Success</li> -->
+                                                                    <!-- <ng-container *ngFor="let counte of countries">
+                                <li *ngIf="counte.code == element.client_place">                
+                                    <i class="fa fa-map-marker" aria-hidden="true"></i> {{counte.name}}
+                                </li>
+                            </ng-container> -->
+                                                                </div>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                                </mat-table>
+                                <div class="no-results" [style.display]="resultsLength == 0 ? '' : 'none'">
+                                    You not saved any job.
+                                </div>
+                                <mat-paginator [ngStyle]="{display: dataPaginatorhidder ? 'block' : 'none'}" #dataPaginator [length]="resultsLength" [pageSize]="10"></mat-paginator>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

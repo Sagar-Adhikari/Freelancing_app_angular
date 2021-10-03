@@ -1,0 +1,37 @@
+/*popup design*/
+.modal-title {color: #4A154B;font-size: 25px;text-transform: uppercase;font-family: 'Open Sans', sans-serif;font-weight: normal;font-style: normal;letter-spacing: 1px;margin-bottom:0px;display: inline-block;width: 100%;}
+.profile-leftblock h5 { color: #4A154B; font-size: 20px; text-transform: uppercase; font-family: 'Open Sans', sans-serif; font-weight: normal; font-style: normal; letter-spacing: 1px; margin-bottom: 30px; }
+button.save-btn { background-color: #A62B3D; border-color: #A62B3D; border-radius:6px; font-family: 'Open Sans', sans-serif; padding: 0 16px; color: #fff; }
+button{ font-weight: normal; cursor: pointer; margin: 0px 5px; line-height: 36px; font-size: 14px; outline:0px;  border:0px; display: inline-block; }
+button.save-btn:hover { background-color: #992331; }
+button.cancel-btn:hover { background-color: #C4C7CD; color: #000; }
+button.cancel-btn{background-color: #DFE2E9;color: #000;border-radius:6px;font-family: 'Open Sans', sans-serif;padding: 0 16px;}
+button:focus{outline:none;}
+.modal-header {padding: 0px 0px 10px 0px;text-align: center;}
+.btn_block{padding: 10px 0px;}
+.modal-body{padding:15px 0px;}
+.modal-header button {background: transparent;border: none;cursor: pointer; position: relative;top: 0px; outline: none;padding:0px;text-align:right; margin: 0px;right:-8px;}
+.mat-select {padding: .5rem .75rem; font-size: 1rem;line-height: 1.25;border: 1px solid rgba(0,0,0,.15); border-radius: .25rem;}
+.available_popup label{width:100%;}
+.mat-radio-button {margin-right: 7px;}
+.add_lang_popup label {margin-right: 10px;}
+.mat-select {padding: .5rem .75rem;font-size: 1rem;line-height: 1.25;border: 1px solid rgba(0,0,0,.15);border-radius: .25rem;}
+.container.delete-popup { padding: 0px 0px 5px 0px;}
+.portfolio-detail .detail-wrap { width: 100%;float: left;}
+.mat-dialog-actions {text-align: center;width: 100%;display: block;}
+/*popup scrollbar*/
+::ng-deep  .cdk-overlay-dark-backdrop {min-height: 100% !important;position: fixed !important;}
+::ng-deep .cdk-global-overlay-wrapper{overflow-y:auto;pointer-events: auto;padding:20px 0px 0px 0px;overflow-x:hidden;}
+::ng-deep  .cdk-global-scrollblock {overflow: hidden;width: 102%;}
+::ng-deep   .mat-dialog-container {overflow: hidden;}
+
+@media(min-width:991px)
+{
+.profile-leftblock {max-width: 650px;min-width: 650px;}
+}
+
+@media(max-width:767px)
+{
+.modal-title{font-size: 15px;}
+button{margin: 0px 2px;}
+}

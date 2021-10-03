@@ -1,0 +1,238 @@
+<div class="category_mainwrap job_detailwrap">
+    <div class="breadcrumb_wrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <h4>job detail</h4>
+                </div>
+                <!--end col-->
+            </div>
+            <!--end row-->
+        </div>
+        <!--end container-->
+    </div>
+    <!--end breadcrumb_wrap-->
+    <div class="invitaion-message" *ngIf="isInvited">
+        <p>You have been invited to this job <a routerLink="/interview-detail/{{interview_id}}">View Invitation</a></p>
+    </div>
+    <div class="job_listing">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                    <div class="bg-box">
+                        <h3>{{jobTitleName}}</h3>
+                        <div class="trans-wrap">
+                            <div class="trans-left">
+                                <div class="trans-img"><img src="assets/images/trans-img1.png"></div>
+                                <div class="trans-desc">
+                                    <h4>{{payment}}</h4>
+                                    <ng-container *ngFor="let commit of commits">
+                                        <p *ngIf="commit.key == jobCommitment">{{commit.name}}</p>
+                                    </ng-container>
+                                    <ng-container *ngFor="let complement of complements">
+                                        <p *ngIf="complement.key == expComp">{{complement.name}}</p>
+                                    </ng-container>
+                                </div>
+                            </div>
+
+                            <div class="trans-left">
+                                <div class="trans-img"><img src="assets/images/trans-img2.png"></div>
+                                <div class="trans-desc">
+                                    <h4>{{hiredLevel}} Level</h4>
+                                    <p>{{hiredLevelTxt[hiredLevel]}}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="detail-wrap">
+                            <h4>details</h4>
+                            <p class="post-date">Posted {{jobCreatedAt | timeAgo}}</p>
+                            <p>{{jobDescrption | truncatetext : textLength}} <a (click)="onMoreFun(jobDescrption.length, morelessText)" class="details_more"> {{morelessText}}</a></p>
+
+                        </div>
+
+                        <div class="detail-wrap skill-wrap">
+                            <h4>Skills and Expertise</h4>
+                            <div class="skill-btn">
+                                <div *ngIf="skillsDisplays.length > 0;else noskills">
+                                    <ng-container *ngFor='let skillsDisplay of skillsDisplays'>
+                                        <button mat-button (click)="skillBasedSearch(skillsDisplay)">{{skillsDisplay}}</button>
+                                    </ng-container>
+                                </div>
+                                <ng-template #noskills>No Skills Selected</ng-template>
+                            </div>
+                        </div>
+                        <!-- Question block -->
+                        <div class="detail-wrap skill-wrap" *ngIf="showQuestion">
+                            <h4>Questions</h4>
+                            <div *ngFor="let ques of questions;let i = index">
+                                <p class="question_text">{{ques.question}}</p>
+                            </div>
+                        </div>
+                        <!-- Question block -->
+                        <div *ngIf="attachmentFile && attachment.length > 0" class="detail-wrap skill-wrap fileupload-box">
+                            <h4>Attachments</h4>
+                            <mat-list-item *ngFor="let rowattachment of attachment;let i = index">
+                                <div class="fileupload-img">
+                                    <!-- <span class="thumbimg" [ngSwitch]="true">
+                    <span *ngSwitchCase="rowattachment.filetype === 'csv'"><img src='/assets/images/thumbimg/csvthumb.png'></span>
+                    <span *ngSwitchCase="rowattachment.filetype === 'img'"><img [src]="rowattachment.filepath"></span>
+                    <span *ngSwitchCase="rowattachment.filetype === 'video'"><img src='/assets/images/thumbimg/videothumb.png'></span>
+                    <span *ngSwitchCase="rowattachment.filetype === 'doc'"><img src='/assets/images/thumbimg/docthumb.png'></span>
+                    <span *ngSwitchCase="rowattachment.filetype === 'pdf'"><img src='/assets/images/thumbimg/pdfthumb.png'></span>
+                    <span *ngSwitchCase="rowattachment.filetype === 'zip'"><img src='/assets/images/thumbimg/zipthumb.png'></span>
+                    <span *ngSwitchCase="rowattachment.filetype === 'php'"><img src='/assets/images/thumbimg/phpthumb.png'></span>
+                    <span *ngSwitchCase="rowattachment.filetype === 'js'"><img src='/assets/images/thumbimg/jsthumb.png'></span>
+                    <span *ngSwitchCase="rowattachment.filetype === 'sql'"><img src='/assets/images/thumbimg/sqlthumb.png'></span>
+                    <span *ngSwitchCase="rowattachment.filetype === 'none'"><img src='/assets/images/thumbimg/nonethumb.png'></span>
+                  </span> -->
+                                    <ng-container *ngIf="rowattachment.filetype === 'img' || rowattachment.filetype === 'pdf';else downloadfile">
+                                        <span class="fileupload-txt" (click)="viewAttachment(rowattachment.filepath ,rowattachment.filetype)"><span>
+                      <mat-icon>attach_file</mat-icon>
+                    </span>{{rowattachment.file_name}}</span>
+                                    </ng-container>
+                                    <ng-template #downloadfile>
+                                        <a href="{{rowattachment.filepath}}">
+                                            <span class="fileupload-txt"><span>
+                      <mat-icon>attach_file</mat-icon>
+                      </span>{{rowattachment.file_name}}</span>
+                                        </a>
+                                    </ng-template>
+                                </div>
+                            </mat-list-item>
+                        </div>
+
+                        <div class="detail-wrap skill-wrap">
+                            <h4>Activity on this Job</h4>
+
+                            <h5>
+                                Proposals:
+                                <ng-container>
+                                    <span *ngIf="proposal_count &lt; 5">{{ proposalFormat[0] }}</span>
+                                    <span *ngIf="proposal_count >= 5 && proposal_count &lt; 10">{{ proposalFormat[1] }}</span>
+                                    <span *ngIf="proposal_count >= 10 && proposal_count &lt; 15">{{ proposalFormat[2] }}</span>
+                                    <span *ngIf="proposal_count >= 15 && proposal_count &lt; 20">{{ proposalFormat[3] }}</span>
+                                    <span *ngIf="proposal_count >= 20 && proposal_count &lt; 50">{{ proposalFormat[4] }}</span>
+                                    <span *ngIf="proposal_count >= 50">{{ proposalFormat[5] }}</span>
+                                </ng-container>
+                            </h5>
+                            <h5>Interviewing: <span>{{interviewingCount}}</span></h5>
+                            <h5>Invites Sent: <span>{{invite_sent}}</span></h5>
+                            <h5>Unanswered Invites: <span>{{unansweredCount}}</span></h5>
+                        </div>
+                        <!--end skill-wrap-->
+                    </div>
+                    <!--end bg-box-->
+                </div>
+                <!--end col-->
+
+                <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                    <div class="bg-box bg-boxright">
+                        <div class="job-btn">
+                            <button mat-button (click)="postJobLikeThis()" *ngIf="!isFreelancer && !isAdmin &&isClient   && !isNullUser">Post a job</button>
+                            <!-- saved job starts -->
+                            <ng-container *ngIf="isFreelancer && !isAdmin">
+                                <button class="saved-btn" mat-button *ngIf="isSaved;else notsaved" (click)="updateWishlist(job_id)"><i class="fa fa-heart"
+                      aria-hidden="true"></i> Saved Job</button>
+                                <ng-template #notsaved>
+                                    <button class="save-btn" mat-button (click)="updateWishlist(job_id)"> <i class="fa fa-heart-o" aria-hidden="true"></i>
+                      Save Job</button>
+                                </ng-template>
+                            </ng-container>
+                            <!-- saved job ends -->
+                            <ng-container *ngIf="isFreelancer && !isAdmin && !isClient || isNullUser">
+                                <ng-container *ngIf="findPropose;else alreadyProposed">
+                                    <button mat-button routerLink="/job/proposal/{{job_id}}" [disabled]="isInvited || checkConnects">Submit
+                        a proposal</button>
+                                    <h3 *ngIf="checkConnects">Don't have enough connect</h3>
+                                </ng-container>
+                                <ng-template #alreadyProposed>
+                                    <h3>Already Proposed</h3>
+                                </ng-template>
+                            </ng-container>
+                        </div>
+                        <!--end job-btn-->
+
+
+                        <mat-list role="list" *ngIf="showClient">
+                            <mat-list-item role="listitem">
+                                <h4>About the Client</h4>
+                                <ngb-rating [rate]="clientInfo.profile.rating"></ngb-rating>
+                                <p>reviews</p>
+                            </mat-list-item>
+                            <ng-container *ngFor="let counte of countries">
+                                <mat-list-item role="listitem" *ngIf="counte.code == clientInfo.profile.country">
+                                    <h4>Location: {{counte.name}}</h4>
+                                    <p>{{clientInfo.profile.current_time}}</p>
+                                </mat-list-item>
+                            </ng-container>
+                            <mat-list-item role="listitem">
+                                <h4>{{clientInfo.profile.job_count}} Jobs Posted </h4>
+                                <p>{{clientInfo.profile.hire_rate}} Hire Rate, {{clientInfo.profile.job_open}} Open Jobs </p>
+                            </mat-list-item>
+                            <mat-list-item role="listitem">
+                                <h4>Rs.{{clientInfo.profile.client_spent}} Total Spent </h4>
+                                <p>{{clientInfo.profile.hires_count}} Hires, {{clientInfo.profile.active_count}} Active </p>
+                            </mat-list-item>
+                            <mat-list-item role="listitem">
+                                <h4>Rs.{{payment_amount}}
+                                    <span *ngIf="displayHourly">per hour</span>
+                                    <span *ngIf="!displayHourly">Est. Budget</span>
+                                </h4>
+                            </mat-list-item>
+                        </mat-list>
+                        <p class="member-date" *ngIf="showClient">Member Since {{clientInfo.profile.membersince}} </p>
+                        <mat-list>
+                            <mat-list-item role="listitem">
+                                <h4>Job Link</h4>
+                                <form class="copylink-form">
+                                    <mat-form-field class="example-full-width coplylink_blk">
+                                        <input #joblink matInput [style.background-color]="displayColor" value={{copylink}} readonly>
+                                    </mat-form-field>
+                                    <button (click)="displayCopyColor()" ngxClipboard [ngxClipboard]="joblink" mat-button>Copy Link</button>
+                                </form>
+                            </mat-list-item>
+                        </mat-list>
+                    </div>
+                    <!--end bg-box-->
+                </div>
+                <!--end col-->
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" *ngIf="showOtherJobs && isFreelancer">
+                    <div class="bg-box bg-boxbottom jobdetail_table">
+                        <h3>Other open jobs by this client</h3>
+                        <mat-table #table [dataSource]="dataSource" matSort matSortDisableClear>
+
+                            <!-- Position Column -->
+                            <ng-container matColumnDef="jobtitle">
+                                <p *matHeaderCellDef=""></p>
+                                <mat-list role="list">
+                                    <mat-list-item role="listitem">
+                                        <p *matCellDef="let element"><a routerLink="/jobdetail/{{element.id}}" :term>{{element.name}}</a><span>
+                        - {{element.payment}}</span></p>
+                                    </mat-list-item>
+                                </mat-list>
+                            </ng-container>
+                            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                        </mat-table>
+                        <div class="no-results" [style.display]="resultsLength == 0 ? '' : 'none'">
+                            No Record Found.
+                        </div>
+                        <span *ngIf="showOtherJobs">
+              <mat-paginator #dataPaginator [length]="resultsLength" [pageSize]="10"></mat-paginator>
+            </span>
+                        <!-- <ng-template #jobsbyclientelse>
+              <mat-paginator style="display:none;" #dataPaginator [length]="resultsLength" [pageSize]="10"></mat-paginator>
+            </ng-template> -->
+                    </div>
+
+                </div>
+            </div>
+            <!--end row-->
+        </div>
+        <!--end container-->
+    </div>
+    <!--end job_listing-->
+</div>
+<!--end job_detailwrap-->

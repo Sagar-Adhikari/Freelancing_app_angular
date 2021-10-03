@@ -1,0 +1,47 @@
+<div>
+  <div class="model_main"> 
+    <div class="modal-header">
+      <h4 class="modal-title">Availablity</h4>
+      <button (click)="onclickcancel()"><mat-icon>close</mat-icon></button>
+    </div>
+    <form [formGroup]="availableEditForm">
+    <div class="modal-body">      
+      <div class="profile-leftblock available_popup">        
+        <div>
+          <div class="form-group tab_heading">
+            <label>I am currently</label>
+              <mat-radio-group formControlName="available_type" (change)="onselectAvailble($event)" [(ngModel)]="defaultAvaiable" required>
+                <mat-radio-button *ngFor="let typeavailale of typeavaiables" [value]="typeavailale.key" [checked]="typeavailale.key == defaultAvaiable">
+                  {{typeavailale.name}}
+                </mat-radio-button>
+              </mat-radio-group>
+          </div>
+          <div *ngIf="fieldDisplay;else dateField" class="form-group formgroup_radio">
+              <mat-radio-group formControlName="daily_availability" [(ngModel)]="defaultType" required>
+                <mat-radio-button *ngFor="let dailytype of dailytypes" [value]="dailytype.key" [checked]="dailytype.key == defaultType">
+                  {{dailytype.name}}
+                </mat-radio-button>
+              </mat-radio-group>
+              <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('daily_availability') || this.errorMsgArr['daily_availability']}}</div>
+          </div>
+          <ng-template #dateField>
+            <div class="form-group">
+              <label>When do you expect to be ready for new work?</label>
+              <mat-form-field appearance="outline">
+                <input (click)="picker.open()" matInput formControlName="expected_availability" [matDatepicker]="picker" min={{minendDate}} placeholder="Choose a date (mm/dd/yyyy)" (dateChange)="changeExceptedDateEvent($event)" readonly>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+              <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('expected_availability') || this.errorMsgArr['expected_availability']}}</div>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+    <div>
+      <button class="save-btn" (click)="saveAvailable(availableEditForm.value)">Save</button>
+      <button class="cancel-btn" (click)="onclickcancel()">Cancel</button>
+    </div>
+  </form>
+  </div>
+</div>

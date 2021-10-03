@@ -1,0 +1,58 @@
+<div class="admin-dashboard admin-settingspage admin-custompage admin-cmspage">
+  <div class="general-form-layout custompage-form-layout pages-container">
+    <h2>Add Membership</h2>
+    <form [formGroup]="addMembership" (ngSubmit)="addMembershipSubmit(addMembership.value)">
+      <ng-template [ngIf]="ismessage"><div class="alert alert-danger" role="alert" innerHTML="{{errormessage}}"></div></ng-template>
+      <ng-template [ngIf]="is_success"><div class="alert alert-success" role="alert">Memebership has been added successfully.</div></ng-template>
+      <div class="formfield-box">
+        <mat-form-field appearance="outline">
+          <mat-label>Membership Name</mat-label>            
+          <input matInput placeholder="Membership Name" formControlName="membership_name" required>
+        </mat-form-field>
+      </div>
+      <div class="formfield-box">
+      <mat-form-field appearance="outline">
+        <mat-label>Membership Description</mat-label>
+        <input matInput placeholder="Membership Description" formControlName="membership_desc" required>
+      </mat-form-field>
+      </div>
+      <div class="formfield-box">
+        <mat-form-field appearance="outline">
+          <mat-label>Membership Interval</mat-label>
+          <mat-select formControlName="membership_interval_type" placeholder="Membership Interval" required (ngModelChange)="displaytype($event);">
+            <mat-option *ngFor="let inttype of interval_type_select" [value]="inttype.type">{{ inttype.name }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div id="customblock" style="display: none;">
+        <mat-form-field appearance="outline">
+          <input matInput placeholder="Membership Interval" formControlName="membership_interval" (keypress)="_keyPress($event)" pattern="[0-9]*">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-select formControlName="cm_interval_type" placeholder="Membership Interval" required>
+            <mat-option *ngFor="let inttype of custom_interval_type_select" [value]="inttype.type">{{ inttype.name }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div> 
+
+      <div class="formfield-box">
+        <mat-form-field appearance="outline">
+          <mat-label>Membership Price</mat-label>
+          <input matInput placeholder="Membership Price" formControlName="membership_price" (keypress)="_keyPress($event)" pattern="[0-9]*" required>
+        </mat-form-field>
+      </div>
+      <div class="formfield-box">
+        <mat-form-field appearance="outline">
+          <mat-label>Membership Allowed Connects</mat-label>
+          <input matInput placeholder="Allowed Connects" formControlName="allowed_connects" (keypress)="_keyPress($event)" pattern="[0-9]*" required>
+        </mat-form-field>
+      </div>
+
+      <div class="submit-btn">
+        <button mat-raised-button type="submit" [disabled]="isbuttondisable">Save</button>
+        <button mat-raised-button [routerLink]="['/admin/membership']">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>

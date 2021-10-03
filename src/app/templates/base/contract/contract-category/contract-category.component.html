@@ -1,0 +1,47 @@
+<div class="admin-dashboard admin-settingspage admin-custompage">
+	<div class="general-form-layout custompage-form-layout">
+		<div class="model_main"> 
+			<div class="modal-header">
+				<h4 class="modal-title">Hire {{freelancer_name}}</h4>
+				<button (click)="goCanel()"><mat-icon>close</mat-icon></button>
+			</div>
+			<div class="modal-body"> 
+				<form [formGroup]="contractJobForm" (ngSubmit)="saveHire(contractJobForm.value)">
+				<div class="form-group">
+				 	<mat-label>Job Category</mat-label> 
+			      <mat-select formControlName="job_category" (selectionChange)="getSubcategorynames($event.value);" placeholder="Choose Category Name">
+			        <mat-option *ngFor="let cat_info of result" [value]="cat_info.id">{{ cat_info.name }}</mat-option>
+			      </mat-select>
+					<div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('job_category')}}</div>
+				</div>   
+				<div class="form-group">
+					<mat-label>Job Subcategory Name</mat-label>            
+					<mat-select formControlName="job_sub_category" placeholder="Choose Subcategory Name">
+			        <mat-option *ngFor="let sub_cat_info of sub_result" [value]="sub_cat_info.id">{{ sub_cat_info.name }}</mat-option>
+			      </mat-select>
+					<div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('job_sub_category')}}</div>
+				</div>
+				<div class="form-group">   
+					<mat-radio-group formControlName="job_type">
+						<mat-label>Job Type :</mat-label>
+						<mat-radio-button value="2" checked="checked">Hourly <p>Pay by the hour and verify work done with the Work Diary</p></mat-radio-button>
+						<mat-radio-button value="1">Fixed-price <p>Pay by the milestone with escrow protection</p></mat-radio-button>
+					</mat-radio-group>
+					<div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('job_type')}}</div>
+				</div>
+				<div class="form-group" *ngIf="job_id == '' || job_id === null">
+					<mat-label>Job</mat-label>            
+					<mat-select formControlName="job" placeholder="Choose Job">
+			        <mat-option *ngFor="let job_info of job_result" [value]="job_info.id">{{ job_info.name }}</mat-option>
+			      </mat-select>
+					<div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('job')}}</div>
+				</div>
+				<div class="submit-btn">
+					<button mat-button type="submit" class="save-btn">Continue</button>
+					<a href="javascript://" (click)="goCanel();" class="cancel-btn">Cancel</a>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

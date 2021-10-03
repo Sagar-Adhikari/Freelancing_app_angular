@@ -1,0 +1,84 @@
+<div class="postjob-details">
+	<div class="container">
+		<div class="row">
+			<div class="modal-header">
+				<h4 class="modal-title">Add Manual Time</h4>
+				<button><mat-icon class="mat-icon material-icons" role="img" aria-hidden="true" (click)="onCancel();">close</mat-icon></button>
+			</div>
+		</div>
+		<form [formGroup]="manualtimeForm" (ngSubmit)="saveTiming(manualtimeForm.value)">
+
+			<div class="row">
+
+				<div class="col-lg-6 col-md-12 col-sm-6">
+					<div class="form-group">
+						<label>Due Date UTC</label>
+						<mat-form-field class="example-full-width" appearance="outline">
+							<mat-label>Choose a date</mat-label>
+							<input (focus)="picker.open()" [min]="jobstartdate" matInput [matDatepicker]="picker" formControlName="manual_date" placeholder="Choose a date" readonly>
+							<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+							<mat-datepicker #picker></mat-datepicker>
+						</mat-form-field>
+						<div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('manual_date')}}</div>
+					</div>
+				</div>
+				
+				<div class="col-lg-6 col-md-12 col-sm-6">
+					<div class="form-group">
+						<label>Memo</label>
+						<mat-form-field class="example-full-width" appearance="outline">
+							<mat-label>Enter Memo</mat-label>
+							<textarea matInput placeholder="Enter Memo" formControlName="manual_memo" matTextareaAutosize matAutosizeMinRows="5" matAutosizeMaxRows="10" ></textarea>
+						</mat-form-field>
+						<div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('manual_memo')}}</div>
+					</div>
+				</div>
+					
+
+				<span *ngIf="errorMsgStr !== '' " style="color:red;">
+					{{errorMsgStr}}
+				</span>
+
+				<div class="col-lg-12 col-md-12 col-sm-6">
+				<div class="form-group">
+					<label>Time Zone UTC</label>
+				</div>
+					<div class="container">
+						<div class="row">
+							<div class="col-lg-3 col-md-4 col-sm-12 timer-block" formArrayName="Time_List" *ngFor="let list of manualtimeForm.get('Time_List')['controls'];let i = index;">
+								<span [formGroupName]="i">
+									<label>From </label>
+									<span *ngIf="i > 0">
+										<button mat-mini-fab class="remove-btn" type="button" (click)="removedate(i);"><i class="material-icons">delete</i></button>
+									</span>
+										<timepicker formControlName="manual_from_time" required></timepicker>
+										<label>To</label>
+										<timepicker formControlName="manual_to_time" required></timepicker>
+										<div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('manual_from_time')}}</div>
+										<div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('manual_to_time')}}</div>
+									<!-- <div class="text-danger text-left small" *ngIf="!list.valid && listvalidate">Not Valid</div> -->
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				
+
+				<div class="col-lg-12 col-md-12 col-sm-12">
+					<div class="button-container">
+					<div class="form-group">
+						<button mat-button class="cancel-btn" type="button" (click)="onCancel();">Cancel</button>
+							<span *ngIf="checkError == false">
+							<button mat-button class="save-btn" type="submit" [disabled]="!manualtimeForm.valid">Save</button>
+							</span>						
+						<button mat-button class="save-btn" type="button" [disabled]="checkError" (click)="formsubgroupappend();">Add</button>
+					</div>
+					</div>
+				</div>
+			
+		</div>
+		</form>
+	</div>
+</div>

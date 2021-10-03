@@ -1,0 +1,426 @@
+<div class="category_mainwrap profileedit-wrap profileedit_list_middle">
+
+  <div class="profileedit_list">
+    <!-- <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+						<div class="sidemenu"> 
+							<ul>
+								<li><a href=""><span class="fa fa-user"></span>my info {{activemenu}}</a></li>
+								<li><a href=""><span class="fa fa-money"></span>billing methods</a></li>
+								<li><a routerLink="/password"><span class="fa fa-lock"></span>password & security</a></li>
+								<li><a href=""><span class="fa fa-users"></span>teams</a></li>
+								<li><a href=""><span class="fa fa-bell"></span>notification settings</a></li>
+								<li><a href=""><span class="fa fa-sitemap"></span>members & permissions</a></li>
+								<li><a href=""><span class="fa fa-link"></span>linked accounts</a></li>
+							</ul>
+						</div>
+					</div> -->
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="account-box">
+        <h3>account</h3>
+        <div class="account-details account-details_profile" *ngIf='!displayAccountForm'>
+          <div class="account-user" (click)="editProfileImage()">
+            <span *ngIf="imagePath;else defaultIMage;" class="span_relative">
+              <img src="{{image_url}}{{imagePath}}">
+              <div class="profile-edit-icon"><a><span class="fa fa-pencil"></span></a></div>
+            </span>
+            <ng-template #defaultIMage><img src="assets/images/profile_default.png"></ng-template>
+          </div>
+          <div class="edit-icon" (click)="accountClick()"><a><span class="fa fa-pencil"></span></a></div>
+
+          <div class="account-name">
+            <h4>{{first_name}} {{last_name}}</h4>
+            <p>{{register_type}}</p>
+          </div>
+          <!--end account-name-->
+        </div>
+        <!--end account-details-->
+        <div class="name-edit" *ngIf='displayAccountForm'>
+          <div class="account-user" (click)="editProfileImage()">
+            <span *ngIf="imagePath;else defaultIMage;">
+              <img src="{{image_url}}{{imagePath}}">
+            </span>
+            <ng-template #defaultIMage><img src="assets/images/profile_default.png"></ng-template>
+          </div>
+          <form [formGroup]="accountProfileForm" (ngSubmit)="accountProfileSubmit(accountProfileForm.value)">
+            <p>Please read <a routerLink="/pages/polices">our policy on name changes</a></p>
+            <div class="form-group">
+              <label>First Name</label>
+              <input type="text" class="form-control" formControlName="first_name" placeholder="First Name">
+              <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorAccountMsg('first_name') ||
+                this.errorAccountMsg['first_name']}}</div>
+            </div>
+            <!--end form-group-->
+
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" class="form-control" formControlName="last_name" placeholder="Last Name">
+              <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorAccountMsg('last_name') ||
+                this.errorAccountMsg['last_name']}}</div>
+            </div>
+            <!--end form-group-->
+
+            <div class="account-button">
+              <button mat-button type="submit">save</button>
+              <button mat-button (click)="cancelAccountForm()" class="agent_cancelbtn">cancel</button>
+            </div>
+          </form>
+        </div>
+        <!--end name-edit-->
+        <h3>email</h3>
+        <div class="email-wrap" *ngIf='!displayEditForm'>
+          <p>{{mail_address}}</p>
+          <!-- <div class="edit-icon" (click)="emailEditClick()"><a><span class="fa fa-pencil"></span></a></div> -->
+        </div>
+        <div class="email-wrap" *ngIf='displayEditForm'>
+          <form [formGroup]="emailEditForm">
+            <div class="form-group">
+              <label>Email</label>
+              <input type="text" class="form-control" formControlName="email" placeholder="Enter the email address">
+              <div class="text-danger text-left small" *ngIf="errorEmailMsg">{{geterroreMailMsg('email') ||
+                this.errorEmailMsgArr['email']}}</div>
+            </div>
+            <!--end form-group-->
+            <div class="account-button">
+              <button mat-button type="button" (click)="emailEditSubmit(emailEditForm.value)">save</button>
+              <button mat-button (click)="cancelEmailEditForm()" class="agent_cancelbtn">cancel</button>
+            </div>
+          </form>
+        </div>
+        <!--end email-wrap-->
+
+
+        <!--start document-edit-->
+        <h3>Document</h3>
+        <div class="email-wrap" *ngIf='!displayDocumentEditForm'>
+          
+            <ul>
+              <li *ngFor='let docurl of docurls'>
+                <button mat-button type="button" (click)="documentDeleteSubmit(docurl.id)">Delete</button>
+                <a target="_blank" [href]="docurl.file">Download </a>
+                <img [src]="docurl.image" height="200" />
+              </li>
+            </ul>
+
+          <div class="edit-icon" (click)="documentEditClick()"><a><span class="fa fa-pencil"></span></a></div>
+        </div>
+
+        <div class="email-wrap" *ngIf='displayDocumentEditForm'>
+          <form [formGroup]="documentEditForm" enctype="multipart/form-data">
+            <div class="form-group">
+              <label>Upload Document</label>
+              <div class="upload_doc">
+                <img *ngFor='let url of urls'  [src]="url" height="200">
+              
+              <div class="upload_btn">
+                <label>
+                  Upload Document
+                  <input type='file' (change)="onSelectFile($event)" formControlName="document" multiple style="display: none;">
+                </label>
+              </div>
+
+                <div class="text-danger text-left small" *ngIf="errorDocumentMsg">{{geterrordocumentMsg('document') ||
+                  this.errorDocumentMsgArr['document']}}</div>
+              </div>
+            </div>
+            <!--end form-group-->
+            <div class="account-button">
+              <button mat-button type="button" (click)="documentEditSubmit(documentEditForm.value)">save</button>
+              <button mat-button (click)="cancelDocumentEditForm()" class="agent_cancelbtn">cancel</button>
+            </div>
+          </form>
+        </div>
+
+        <!--end document-wrap-->
+
+      </div>
+      <!--end account-box-->
+
+
+      <div class="account-box">
+        <h3>Company details</h3>
+        <div class="account-details" *ngIf='!displayEditCompany'>
+          <span *ngIf="company_name == null">Enter your Company Details</span>
+          <div style="display:none;" class="account-user"><span class="fa fa-calculator"></span></div>
+          <div class="account-name">
+            <h4><a href="{{company_website}}">{{company_name}}</a></h4>
+            <!-- <p></p> -->
+            <p>{{company_tagline}}</p>
+            <p>{{company_description}}</p>
+          </div>
+          <!--end account-name-->
+
+          <div class="account-button">
+            <div class="edit-icon" (click)="companyEditClick()"><a><span class="fa fa-pencil"></span></a></div>
+          </div>
+        </div>
+        <!--end account-details-->
+        <div class="company-wrap" *ngIf='displayEditCompany'>
+          <form [formGroup]="companyEditForm">
+            <div class="form-group">
+              <label>Company Name</label>
+              <input type="text" class="form-control" formControlName="company_name" placeholder="Company Name">
+              <div class="text-danger text-left small" *ngIf="errorCompanyMsg">{{geterrorCompanyMsg('company_name') ||
+                this.errorCompanyMsg['company_name']}}</div>
+            </div>
+            <!--end form-group-->
+            <div class="form-group">
+              <label>Website</label>
+              <input type="text" class="form-control" formControlName="company_website" placeholder="Website">
+              <div class="text-danger text-left small" *ngIf="errorCompanyMsg">{{geterrorCompanyMsg('company_website') ||
+                this.errorCompanyMsg['company_website']}}</div>
+            </div>
+            <!--end form-group-->
+            <div class="form-group">
+              <label>Tagline</label>
+              <input type="text" class="form-control" formControlName="company_tagline" placeholder="Tagline">
+              <div class="text-danger text-left small" *ngIf="errorCompanyMsg">{{geterrorCompanyMsg('company_tagline') ||
+                this.errorCompanyMsg['company_tagline']}}</div>
+            </div>
+            <!--end form-group-->
+            <div class="form-group">
+              <label>Description</label>
+              <input type="text" class="form-control" formControlName="company_description" placeholder="description">
+              <div class="text-danger text-left small" *ngIf="errorCompanyMsg">{{geterrorCompanyMsg('company_description') ||
+                this.errorCompanyMsg['company_description']}}</div>
+            </div>
+            <!--end form-group-->
+            <div class="account-button">
+              <button mat-button type="button" *ngIf="this.company_id" (click)="companyEditSubmit(companyEditForm.value)">save</button>
+              <button mat-button type="button" *ngIf="!this.company_id" (click)="companyAddSave(companyEditForm.value)">save</button>
+              <button mat-button (click)="cancelCompanyEditForm()" class="agent_cancelbtn">cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!--end account-box-->
+
+      <div class="account-box contact-box">
+        <h3>Company contacts</h3>
+        <!--START OWner-->
+        <!-- <h3>Owner</h3>
+        <div class="email-wrap" *ngIf='!displayOwnerForm'>
+          <p>Devi P</p>
+          <div class="edit-icon" (click)="ownerEditClick()"><a><span class="fa fa-pencil"></span></a></div>
+        </div>
+        <div class="email-wrap" *ngIf='displayOwnerForm'>
+          <form [formGroup]="ownerEditForm">
+            <div class="form-group">
+              <label>Owner</label>
+              <input type="text" class="form-control" formControlName="owner" placeholder="Enter the Owner">
+              <div class="text-danger text-left small" *ngIf="errorOwnerMsg">{{geterrorOwnerMsg('owner') ||
+                this.errorOwnerArr['owner']}}</div>
+            </div>
+            <div class="account-button">
+              <button mat-button type="button" (click)="ownerEditSubmit(ownerEditForm.value)">save</button>
+              <button mat-button (click)="cancelOwnerEditForm()" class="agent_cancelbtn">cancel</button>
+            </div>
+          </form>
+        </div> -->
+        <!--END OWner-->
+        <!--START phone-->
+        <h3>phone</h3>
+        <div class="email-wrap" *ngIf='!displayPhoneForm'>
+          <p *ngIf='updatedPhone'>{{updatedPhone}}</p>
+          <p *ngIf='!updatedPhone'>Enter your phone</p>
+          <div class="edit-icon" (click)="phoneEditClick()"><a><span class="fa fa-pencil"></span></a></div>
+        </div>
+        <div class="email-wrap" *ngIf='displayPhoneForm'>
+          <form [formGroup]="phoneEditForm">
+            <div class="form-group">
+              <label>Phone</label>
+              <input type="text" minlength="10" maxlength="15" class="form-control" (keypress)="isNumber($event)" formControlName="phone" placeholder="Enter the phone number">
+              <div class="text-danger text-left small" *ngIf="errorPhoneMsg">{{geterrorPhoneMsg('phone') ||
+                this.errorPhoneMsgArr['phone']}}</div>
+            </div>
+            <!--end form-group-->
+            <div class="account-button">
+              <button mat-button type="button" (click)="phoneEditSubmit(phoneEditForm.value)">save</button>
+              <button mat-button (click)="cancelPhoneEditForm()" class="agent_cancelbtn">cancel</button>
+            </div>
+          </form>
+        </div>
+        <!--end phone-->
+        <!--start VAT Id-->
+        <h3>VAT ID</h3>
+        <div class="email-wrap" *ngIf='!displayVATForm'>
+          <p *ngIf="updatedVat">{{updatedVat}}</p>
+          <p *ngIf="!updatedVat">Enter your VAT ID to enable VAT invoicing</p>
+          <div class="edit-icon" (click)="vatEditClick()"><a><span class="fa fa-pencil"></span></a></div>
+        </div>
+        <div class="email-wrap" *ngIf='displayVATForm'>
+          <form [formGroup]="vatEditForm">
+            <div class="form-group">
+              <label>VAT ID</label>
+              <input type="text" class="form-control" formControlName="vat" placeholder="Enter the VAT ID">
+              <div class="text-danger text-left small" *ngIf="errorVatMsg">{{geterrorVatMsg('vat') ||
+                this.errorVatMsgArr['vat']}}</div>
+            </div>
+            <!--end form-group-->
+            <div class="account-button">
+              <button mat-button type="button" (click)="vatEditSubmit(vatEditForm.value)">save</button>
+              <button mat-button (click)="cancelVatEditForm()" class="agent_cancelbtn">cancel</button>
+            </div>
+          </form>
+        </div>
+        <!--end VAT Id-->
+        <h3>Time Zone</h3>
+        <div class="email-wrap" *ngIf='!displaytimezoneForm'>
+          <p *ngIf='updatedTimezone'>{{updatedTimezone}}</p>
+          <p *ngIf='!updatedTimezone'>Pick your timezone</p>
+          <div class="edit-icon" (click)="timezoneEditClick()"><a><span class="fa fa-pencil"></span></a></div>
+        </div>
+        <div class="email-wrap" *ngIf='displaytimezoneForm'>
+          <form [formGroup]="timezoneEditForm">
+            <div class="form-group">
+              <mat-select placeholder="Select Timezone" formControlName="timezone" [(ngModel)]="updatedTimezone">
+                  <mat-option *ngFor="let timezone of timeZoneLists" [value]="timezone">
+                      {{ timezone }}
+                  </mat-option>
+              </mat-select>
+              <!-- <input type="text" class="form-control" formControlName="phone" placeholder="Enter the phone number"> -->
+              <div class="text-danger text-left small" *ngIf="errortimezoneMsg">{{geterrorTimezoneMsg('timezone') ||
+                this.errortimezoneMsgArr['timezone']}}</div>
+            </div>
+            <!--end form-group-->
+            <div class="account-button">
+              <button mat-button type="button" (click)="timezoneEditSubmit(timezoneEditForm.value)">save</button>
+              <button mat-button (click)="cancelTimezoneEditForm()" class="agent_cancelbtn">cancel</button>
+            </div>
+          </form>
+        </div>
+
+        <h3>Location</h3>
+        <div class="email-wrap" *ngIf='!displayaddressForm'>
+            <p>
+              <span class="location-set">
+              <span *ngIf="updatedAddress !== null">{{updatedAddress}}, </span>
+              <span *ngIf="updatedCity !== null">{{updatedCity}}, </span>
+              <span *ngIf="updatedState !== null">{{updatedState}}, </span> 
+                    <span *ngFor="let location of locations">
+                        <span *ngIf="location.code == updatedCountry">
+                            {{location.name}}
+                        </span>
+                    </span>
+              <span *ngIf="updatedZipcode !== null">- {{updatedZipcode}}</span>
+            </span>
+            </p>
+          <div class="edit-icon" (click)="addressEditClick()"><a><span class="fa fa-pencil"></span></a></div>
+        </div>
+        <div class="email-wrap" *ngIf='displayaddressForm'>
+          <form [formGroup]="addressEditForm">
+            <div class="form-group">
+              <label>Address</label>
+              <input type="text" class="form-control" formControlName="address" placeholder="Enter the address">
+              <div class="text-danger text-left small" *ngIf="erroraddressMsg">{{geterroraddressMsg('address') ||
+                this.erroraddressMsgArr['address']}}</div>
+            </div>
+            <div class="form-group">
+              <label>Zipcode</label>
+              <input type="text" class="form-control" (keypress)="isNumber($event)" formControlName="zipcode"
+                placeholder="Enter the zipcode">
+              <div class="text-danger text-left small" *ngIf="erroraddressMsg">{{geterroraddressMsg('zipcode') ||
+                this.erroraddressMsgArr['zipcode']}}</div>
+            </div>
+            <div class="form-group">
+              <label>City</label>
+              <input type="text" class="form-control" formControlName="city" placeholder="Enter the city">
+              <div class="text-danger text-left small" *ngIf="erroraddressMsg">{{geterroraddressMsg('city') ||
+                this.erroraddressMsgArr['city']}}</div>
+            </div>
+            <div class="form-group">
+              <label>State</label>
+              <input type="text" class="form-control" formControlName="state" placeholder="Enter the state">
+              <div class="text-danger text-left small" *ngIf="erroraddressMsg">{{geterroraddressMsg('state') ||
+                this.erroraddressMsgArr['state']}}</div>
+            </div>
+
+            <div class="form-group">
+              <label>Country</label>
+              <mat-select placeholder="Select Country" formControlName="country" [(ngModel)]="updatedCountry">
+                <mat-option>Select Country</mat-option>
+                <mat-option *ngFor="let location of locations" [value]="location.code">
+                  {{ location.name }}
+                </mat-option>
+              </mat-select>
+              <div class="text-danger text-left small" *ngIf="erroraddressMsg">{{geterroraddressMsg('country') ||
+                this.erroraddressMsgArr['country']}}</div>
+            </div>
+            <!--end form-group-->
+            <div class="account-button">
+              <button mat-button type="button" (click)="addressEditSubmit(addressEditForm.value)">save</button>
+              <button mat-button (click)="canceladdressEditForm()" class="agent_cancelbtn">cancel</button>
+            </div>
+          </form>
+		</div>
+		<!-- Invoice address start -->
+        <h3>Invoice address (Optional)</h3>
+        <div class="email-wrap" *ngIf='!idisplayaddressForm'>
+          <p *ngIf="showInvoiceAddr">{{iupdatedAddress}},  {{iupdatedCity}},  {{iupdatedState}},
+              <span *ngFor="let location of locations">
+                  <span *ngIf="location.code == iupdatedCountry">
+                      {{location.name}}
+                  </span>
+              </span> - {{iupdatedZipcode}}
+          </p>
+          <p *ngIf="!showInvoiceAddr">Enter your invoice address</p>
+          <div class="edit-icon" (click)="invoiceaddressEditClick()"><a><span class="fa fa-pencil"></span></a></div>
+        </div>
+        <div class="email-wrap" *ngIf='idisplayaddressForm'>
+          <form [formGroup]="iaddressEditForm">
+            <p>This address will be displayed on the invoice sent to clients.</p>
+            <mat-checkbox [checked]="(icheck == '2') ? false : true" (change)="onChangeInvoiceAddress($event.checked)">Use my location address</mat-checkbox>
+            <div class="form-group">
+              <label>Address</label>
+              <input type="text" class="form-control" formControlName="iaddress" placeholder="Enter the address">
+              <div class="text-danger text-left small" *ngIf="ierroraddressMsg">{{geterrorinvoiceaddressMsg('iaddress')
+                || this.ierroraddressMsgArr['iaddress']}}</div>
+            </div>
+            <div class="form-group">
+              <label>Zipcode</label>
+              <input type="text" class="form-control" (keypress)="isNumber($event)" formControlName="izipcode"
+                placeholder="Enter the zipcode">
+              <div class="text-danger text-left small" *ngIf="ierroraddressMsg">{{geterrorinvoiceaddressMsg('izipcode')
+                || this.ierroraddressMsgArr['izipcode']}}</div>
+            </div>
+            <div class="form-group">
+              <label>City</label>
+              <input type="text" class="form-control" formControlName="icity" placeholder="Enter the city">
+              <div class="text-danger text-left small" *ngIf="erroraddressMsg">{{geterrorinvoiceaddressMsg('icity') ||
+                this.ierroraddressMsgArr['icity']}}</div>
+            </div>
+            <div class="form-group">
+              <label>State</label>
+              <input type="text" class="form-control" formControlName="istate" placeholder="Enter the state">
+              <div class="text-danger text-left small" *ngIf="erroraddressMsg">{{geterrorinvoiceaddressMsg('istate') ||
+                this.ierroraddressMsgArr['istate']}}</div>
+            </div>
+
+            <div class="form-group">
+              <label>Country</label>
+              <mat-select placeholder="Select Country" formControlName="icountry" [(ngModel)]="iupdatedCountry">
+                <mat-option>Select Country</mat-option>
+                <mat-option *ngFor="let ilocation of ilocations" [value]="ilocation.code">
+                  {{ ilocation.name }}
+                </mat-option>
+              </mat-select>
+              <div class="text-danger text-left small" *ngIf="erroraddressMsg">{{geterrorinvoiceaddressMsg('icountry')
+                || this.ierroraddressMsgArr['icountry']}}</div>
+            </div>
+            <!--end form-group-->
+            <div class="account-button">
+              <button mat-button type="button" (click)="invoiceaddressEditSubmit(iaddressEditForm.value)">save</button>
+              <button mat-button (click)="cancelinvoiceaddressEditForm()" class="agent_cancelbtn">cancel</button>
+            </div>
+          </form>
+        </div>
+        <!-- Invoice address end -->
+      </div>
+      <!--end account-box-->
+
+    </div>
+    <!--end col-->
+  </div>
+  <!--end profileedit_list-->
+</div>
+<!--end profileedit-wrap-->

@@ -1,0 +1,101 @@
+<!-- SITE SETTINGS PAGE START -->
+<div class="admin-dashboard admin-cmspage">
+  <div class="jobs-skills-container pages-container mat-elevation-z8">
+    <div class="col-lg-12 col-md-12 col-sm-12 nopadding">
+      <div class="account-setting-block">
+        <h3>Site Settings</h3>
+        <form [formGroup]="generalForm" (ngSubmit)="generalFormSubmit(generalForm.value)" class="settings_form">
+          <ng-template [ngIf]="ismessage">
+            <div class="alert alert-danger" role="alert" [innerHTML]="errormessage"></div>
+          </ng-template>
+          <ng-template [ngIf]="is_success">
+            <div class="alert alert-success" role="alert">General setting saved</div>
+          </ng-template>
+          <div class="row">
+            <div class="col-lg-6 col-md-12 col-sm-12">
+              <div class="form-group">
+                <mat-form-field appearance="outline">
+                  <mat-label>Application Name</mat-label>
+                  <input matInput formControlName="application_name" placeholder="Enter Application Name">
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="col-lg-6 col-md-12 col-sm-12">
+              <div class="form-group">
+                <mat-form-field appearance="outline">
+                  <mat-label>Email</mat-label>
+                  <input matInput formControlName="email" placeholder="Enter Email">
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="col-lg-6 col-md-12 col-sm-12">
+              <div class="form-group">
+                <label>Frontend Logo</label>
+                <div class="avatar-image">
+                  <img [src]="sanitizer.bypassSecurityTrustUrl(logo_url)" class="logo_url" />
+                </div>
+                <p class="note_text"><b>Note :</b> Better Logo dimension will be in 190*60 jpg, jpeg, png format</p>
+                <label class="btn btn-primary"> Select File
+                  <input type="file" #favi accept=".jpg, .jpeg, .png" style="display: none" ng2FileSelect [uploader]="uploader"
+                    (onFileSelected)="fileSelected($event)" />
+                </label>
+              </div>
+            </div>
+
+            <div class="col-lg-6 col-md-12 col-sm-12">
+              <div class="form-group fav_icons_blk">
+                <label>Fav Icons</label>
+                <div class="avatar-image">
+                  <img [src]="sanitizer.bypassSecurityTrustUrl(favi_url)" class="logo_url" />
+                </div>
+                <p class="note_text"><b>Note :</b> Better Fav icon will be in 16*16 jpg, jpeg, png, ico format</p>
+                <label class="btn btn-primary"> Select File
+                  <input type="file" #logo accept=".jpg, .jpeg, .png, .ico" style="display: none" ng2FileSelect
+                    [uploader]="faviuploader" (onFileSelected)="fileSelected($event)" />
+                </label>
+              </div>
+            </div>
+
+            <div class="col-lg-6 col-md-12 col-sm-12">
+              <div class="form-group">
+                <label>Connects</label>
+                <mat-form-field appearance="outline">
+                  <mat-label>Connects</mat-label>
+                  <input matInput formControlName="connects" (keypress)="numberOnly($event)" placeholder="Enter connects">
+                  <span matPrefix class="notif_icon"><i class="material-icons">notification_important</i></span>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12">
+              <div class="form-group">
+                <label>Withdraw Settings</label>
+                <mat-label>Withdraw Option</mat-label>
+                <mat-radio-group formControlName="withdraw_option" [(ngModel)]="defaultWithdraw" [(value)]="defaultWithdraw">
+                  <mat-radio-button *ngFor="let wOpt of withdrawOptions" [value]="wOpt.key">
+                    {{wOpt.name}}
+                  </mat-radio-button>
+                </mat-radio-group>
+                <mat-form-field appearance="outline">
+                  <mat-label>Withdraw Bank Fee ( {{withdrawSymbol[defaultWithdraw]}} )</mat-label>
+                  <input matInput formControlName="withdraw_fee_bank" placeholder="Enter Bank Fee">
+                  <div class="text-danger text-left small" *ngIf="iswmessage">{{errorBankMsg}}</div>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label>Withdraw Paypal Fee ( {{withdrawSymbol[defaultWithdraw]}} )</mat-label>
+                  <input matInput formControlName="withdraw_fee_paypal" placeholder="Enter Paypal Fee">
+                  <div class="text-danger text-left small" *ngIf="iswmessage">{{errorPaypalMsg}}</div>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="submit_btn">
+              <button mat-button class="">SUBMIT</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- SITE SETTINGS PAGE END -->

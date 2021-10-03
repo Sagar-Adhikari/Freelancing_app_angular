@@ -1,0 +1,77 @@
+<div class="admin-dashboard admin-settingspage admin-custompage admin-cmspage">
+	<div class="general-form-layout custompage-form-layout pages-container">
+		<h2>Add Test Question</h2>
+		<form [formGroup]="qtnaddForm" (ngSubmit)="qtnaddFormSubmit(qtnaddForm.value)">
+			<ng-template [ngIf]="ismessage"><div class="alert alert-danger" role="alert">{{errormessage}}</div></ng-template>
+			<ng-template [ngIf]="is_success"><div class="alert alert-success" role="alert">Question has been added successfully</div></ng-template>
+			<div class="formfield-box">
+				<mat-form-field appearance="outline">
+					<mat-label>Category Name</mat-label> 
+					<mat-select formControlName="category_id" placeholder="Choose Category Name" (ngModelChange)="displaygroups($event);">
+						<mat-option *ngFor="let cat_info of result" [value]="cat_info.id">{{ cat_info.name }}</mat-option>
+					</mat-select>
+				</mat-form-field>
+			</div>
+			<div class="formfield-box">
+				<mat-form-field appearance="outline">
+					<mat-label>Group Name</mat-label> 
+					<mat-select formControlName="group_id" [(ngModel)]="selected_group_value" placeholder="Choose Group Name">
+						<mat-option *ngFor="let gp_info of gp_result" [value]="gp_info.id">{{ gp_info.title }}</mat-option>
+					</mat-select>
+				</mat-form-field>
+
+			</div> 
+			<div class="formfield-box">
+				<mat-form-field appearance="outline">
+					<mat-label>Question</mat-label>   
+					<input matInput placeholder="Enter Question" formControlName="qtn_name" required>         
+				</mat-form-field>
+			</div>
+
+			<div formArrayName="qtn_answer_block">
+				<div *ngFor="let child of qtnaddForm.controls.qtn_answer_block['controls']; let i = index">
+					<div formGroupName="{{i}}" class="formfield-box">
+						<ul class="answer-field">
+							<li>
+								<mat-radio-button [value]="i" (click)="saveanswer(i);"></mat-radio-button>
+							</li>
+
+							<li>
+								<mat-form-field appearance="outline">
+									<mat-label>Answer</mat-label>   
+									<input matInput placeholder="Enter Answer" formControlName="qtn_answer_txt" required>
+								</mat-form-field>
+							</li>
+
+							<li>
+								<div class="answer_delete" *ngIf="i>0">
+									<a mat-mini-fab color="warn" class="evidence-delete product-evident-btn" (click)="removeQtn(i)">
+										<i class="material-icons">delete</i>
+									</a>
+								</div>
+							</li>
+						</ul>
+						
+					</div>
+				</div> 
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group border">
+					<a mat-button class="btn btn-form-save add-evidence" (click)="addQtn()">+ Add More</a>
+				</div>
+			</div>     
+
+			<div>
+				<mat-radio-group formControlName="qtn_status">
+					Status : 
+					<mat-radio-button value="Active" checked="checked">Active</mat-radio-button>
+					<mat-radio-button value="Inactive">In-active</mat-radio-button>
+				</mat-radio-group>
+			</div>
+			<div class="submit-btn">
+				<button mat-raised-button type="submit" [disabled]="isbuttondisable">Save</button>
+				<button mat-raised-button [routerLink]="['/admin/test-questions']">Cancel</button>
+			</div>
+		</form>
+	</div>
+</div>

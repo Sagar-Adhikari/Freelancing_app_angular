@@ -1,0 +1,34 @@
+<div class="admin-dashboard admin-settingspage admin-custompage admin-cmspage">
+	<div class="general-form-layout custompage-form-layout pages-container">
+		<h2>Add Subcategory</h2>
+		<form [formGroup]="subcategoryForm" (ngSubmit)="subcategoryFormSubmit(subcategoryForm.value)">
+			<ng-template [ngIf]="ismessage"><div class="alert alert-danger" role="alert">{{errormessage}}</div></ng-template>
+			<ng-template [ngIf]="is_success"><div class="alert alert-success" role="alert">Subcategory name has been added successfully</div></ng-template>
+			<div class="formfield-box">
+				 <mat-form-field appearance="outline">
+				 	<mat-label>Category Name</mat-label> 
+			      <mat-select formControlName="category_id" placeholder="Choose Category Name">
+			        <mat-option *ngFor="let cat_info of result" [value]="cat_info.id">{{ cat_info.name }}</mat-option>
+			      </mat-select>
+			    </mat-form-field>
+			</div>    
+			<div class="formfield-box">
+				<mat-form-field appearance="outline">
+					<mat-label>Subcategory Name</mat-label>            
+					<input matInput placeholder="Subcategory Name" formControlName="category_name" required>
+				</mat-form-field>
+			</div>   
+			<div class="formfield-box">
+				<mat-radio-group formControlName="category_status">
+					Status : 
+					<mat-radio-button value="Active" checked="checked">Active</mat-radio-button>
+					<mat-radio-button value="Inactive">In-active</mat-radio-button>
+				</mat-radio-group>
+			</div>
+			<div class="submit-btn">
+				<button mat-raised-button type="submit" [disabled]="isbuttondisable">Save</button>
+				<button mat-raised-button [routerLink]="['/admin/jobs/sub-categorys']">Cancel</button>
+			</div>
+		</form>
+	</div>
+</div>

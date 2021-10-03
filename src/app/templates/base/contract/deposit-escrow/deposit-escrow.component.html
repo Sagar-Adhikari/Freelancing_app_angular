@@ -1,0 +1,18 @@
+<div class="postjob-details">
+    <div class="container">
+        <div class="row">
+            <div class="modal-header">
+                <h4 class="modal-title">Deposit funds into escrow today</h4>
+                <button class="mat-icon material-icons" role="img" aria-hidden="true" (click)="onCancel();">close</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="deposite-details">
+                <p>You will be depositing ${{amount}} into escrow today. On your Transaction History report, you'll see an immediate escrow invoice and corresponding payment from your primary billing method. </p>
+                <p>When the milestone work is ready and you release the funds. Remote Nepal will send the funds from escrow to your freelancer.</p>
+                <button mat-button class="save-btn" type="button" (click)="depositEscrow();" [disabled]="isbuttondisable">Yes, Deposit ${{amount}}</button>
+                <button mat-button class="cancel-btn" type="button" (click)="onCancel();">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

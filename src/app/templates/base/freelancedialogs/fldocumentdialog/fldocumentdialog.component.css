@@ -1,0 +1,66 @@
+/*popup design*/
+.modal-title { color: #4A154B; font-size: 25px; text-transform: uppercase; font-family: 'Open Sans', sans-serif; font-weight: normal; font-style: normal; letter-spacing: 1px;}
+.profile-leftblock h5 { color: #4A154B; font-size: 20px; text-transform: uppercase; font-family: 'Open Sans', sans-serif;font-weight: normal; font-style: normal; letter-spacing: 1px; margin-bottom: 30px;}
+button.save-btn { background-color: #A62B3D; border-color: #A62B3D; border-radius:6px;font-family: 'Open Sans', sans-serif; padding: 0 16px; color: #fff;}
+.upload_btn {font-size:14px; background-color: #A62B3D; border-color: #A62B3D; border-radius:6px;font-family: 'Open Sans', sans-serif; padding: 10px 16px; color: #fff; cursor: pointer;}
+button{ font-weight: normal; cursor: pointer; margin: 0px 5px; line-height: 36px; font-size: 14px; outline:0px; border:0px;}
+button.save-btn:hover { background-color: #992331;}
+button.cancel-btn:hover { background-color: #C4C7CD; color: #000;}
+button.cancel-btn {  background-color: #DFE2E9; /*  border-color: #DFE2E9;*/ color: #000; border-radius:6px; font-family: 'Open Sans', sans-serif; padding: 0 16px;}
+button:focus{ outline:none;}
+.modal-header { padding: 0px 0px 10px 0px;}
+.btn_block{padding: 10px 0px;}
+.modal-body{padding:15px 0px;}
+.modal-header button {background: transparent;border: none;cursor: pointer;position: relative;top: 8px; outline: none; padding:0px; text-align:right; margin: 0px; right:-8px;}
+.mat-select { padding: .5rem .75rem; font-size: 1rem;line-height: 1.25; border: 1px solid rgba(0,0,0,.15); border-radius: .25rem;}
+.available_popup label{ width:100%;}
+.mat-radio-button { margin-right: 7px;}
+.add_lang_popup label { margin-right: 10px;}
+.mat-select {padding: .5rem .75rem;font-size: 1rem;line-height: 1.25;border: 1px solid rgba(0,0,0,.15);border-radius: .25rem;}
+:host /deep/ .mat-radio-label { cursor: pointer; display: inline-flex; align-items: center; white-space: nowrap;vertical-align: middle;box-shadow: 0px 1px 30px #cccbcb;line-height: 46px;width: 100%;display: inline-block;text-align: center;border-radius: 7px;padding: 3px 20px;color: #4A154B;text-transform: uppercase;font-family: 'HelveticaNeue-Medium';font-size: 13px;text-decoration: none;}
+:host /deep/  .mat-radio-checked .mat-radio-label{background-color: #4A154B;color: #fff;}
+:host /deep/ .mat-radio-container {opacity: 0;display: none;}
+.mat-radio-button{margin-right: 10px; margin-left: 10px;}
+.upload_btn_block { width:100%;display: inline-block; margin-top:20px;}
+.upload-document { width:100%; text-align:center;}
+.upload-document img { margin:10px 0; width:200px;}
+
+ul.upload_image_list { padding-left:0; margin-bottom:0;}
+ul.upload_image_list li { display: inline-block; vertical-align: middle; }
+
+/*popup scrollbar*/
+::ng-deep  .cdk-overlay-dark-backdrop { min-height: 100% !important; position: fixed !important;}
+::ng-deep .cdk-global-overlay-wrapper{overflow-y:auto;pointer-events: auto;padding:20px 0px 0px 0px;overflow-x:hidden;}
+::ng-deep  .cdk-global-scrollblock {overflow: hidden;width: 102%;}
+::ng-deep   .mat-dialog-container { overflow: hidden;}
+.modal-header .mat-icon.material-icons { color: rgba(0,0,0,.87);}
+
+@media(min-width:991px)
+{
+.profile-leftblock {max-width: 700px; min-width: 700px;}
+}
+
+@media(min-width:768px) and (max-width:990px)
+{
+.profile-leftblock { max-width: 550px; min-width: 550px;}
+}
+
+@media(max-width:992px)
+{
+:host /deep/ .mat-radio-label { font-size:11px; padding: 3px 5px; }
+.mat-radio-button{margin-right: 3px; margin-left: 3px;}
+}
+
+@media(max-width:767px)
+{ 
+.modal-title{ font-size: 15px; }
+.mat-radio-button:first-child { margin-left: 3px; }
+.mat-radio-button:last-child { margin-right: 3px; }
+:host /deep/  .mat-radio-label{ min-width: 120px;  }
+:host /deep/ .mat-radio-label{ font-size:10px; padding: 3px 10px; }
+.form-group.available_blk{ padding: 20px 5px; }
+:host /deep/ .mat-radio-label-content{ padding-left:0px; }
+.form-group.btn_responsive { text-align: center; }
+.form-group.btn_responsive label{ text-align:left; width:100%; }
+.form-group label { width: 100%; }
+}

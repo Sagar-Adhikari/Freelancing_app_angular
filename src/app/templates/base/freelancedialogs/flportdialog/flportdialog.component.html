@@ -1,0 +1,117 @@
+<div>
+  <div class="model_main"> 
+    <div class="modal-header">
+      <h4 class="modal-title">{{popupTitle}} Project Details</h4>
+      <button (click)="onclickcancel()"><mat-icon>close</mat-icon></button>
+    </div>
+    <form [formGroup]="portForm">
+    <div class="modal-body">      
+      <div class="profile-leftblock">        
+        <div>
+          <div class="form-group">
+              <label>Project Title</label>
+              <input class="form-control" formControlName="project_title">
+              <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('project_title') || this.errorMsgArr['project_title']}}</div>
+          </div>
+          <div class="form-group">
+            <label>Select category</label>
+              <div>
+                <mat-select formControlName="project_categories" placeholder="Select Category" (selectionChange)="onchangeallcategory($event.value)">
+                  <mat-option *ngFor="let category of allCategory" [value]="category.id">
+                  {{ category.name }}
+                  </mat-option>
+                </mat-select>
+              </div>
+              <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('project_categories') || this.errorMsgArr['project_categories']}}</div>
+          </div>
+          <div class="form-group">
+            <label>Select sub category</label>
+              <div>
+                <mat-select formControlName="project_subcategories" placeholder="Select SubCategory">
+                  <mat-option *ngFor="let assubcategory of assubcategorylist" [value]="assubcategory.id">
+                  {{ assubcategory.sub_cat_name }}
+                  </mat-option>
+                </mat-select>
+              </div>
+          </div>
+          <div class="form-group">
+            <label>Project URL (optional)</label>
+            <input class="form-control" formControlName="project_url">
+            <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('project_url') || this.errorMsgArr['project_url']}}</div>
+          </div>
+          <div class="form-group">
+            <label class="date_label">Completion Date</label>
+            <mat-form-field>
+              <input class="form-control" (click)="picker.open()" matInput formControlName="completion_date" [matDatepicker]="picker" placeholder="Choose a date (mm/dd/yyyy)" (dateChange)="changeDateEvent($event)" readonly>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('completion_date') || this.errorMsgArr['completion_date']}}</div>
+          </div>
+          <div class="form-group">
+              <label>Skills (optional)</label>
+              <input class="form-control" formControlName="skills">
+            </div>
+          <div class="form-group">
+              <label>Explain about project</label>
+              <textarea class="form-control" formControlName="project_overview"></textarea>
+              <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('project_overview') || this.errorMsgArr['project_overview']}}</div>
+          </div>
+          <!-- <div class="form-group">
+            <label>Thumbnail Image</label>
+              <div class="drag_attachment">
+                <label>drag or <span>upload</span> project files</label>
+                <input class="well my-drop-zone" type="file" ng2FileDrop ng2FileSelect [uploader]>
+              </div>              
+          </div> -->
+          <div class="form-group">
+            <label class="control-label" for="logo">Thumbnail Image <span class="mandatory">*(support only jpeg, jpg, & png)</span></label>
+            <label class="btn btn-primary save-btn">Upload image file
+              <input type="file" style="display: none" formControlName="project_image" accept=".jpg, .jpeg, .png" (change)="changeLogo($event)">
+            </label>
+            <div *ngIf="!fileUploaded && uploadedThumbnail!=''" class="popup_upload_img">                                    
+                <img src="{{uploadedThumbnail}}">
+            </div>
+            <div class="text-danger text-left small" *ngIf="fileUploaded">Please upload valid file format & less then 2MB</div>
+          </div>
+          <!--<div class="form-group">
+              <label>Project Files (*you can upload only five files) </label>
+              <div class="drag_attachment">                                  
+                <div class="upload_files_blk">
+                  <span>drag or <label for="drag_attachment">upload</label> project files</span>
+                  <input ng2FileDrop class="well my-drop-zone hidden" ng2FileSelect type="file" id="drag_attachment" [uploader]="uploader" (onFileSelected)="fileSelected($event)" multiple >
+                </div>
+              </div>
+              <div class="view_uploadimg">
+                <mat-list-item *ngFor="let rowattachment of attachment;let i = index">
+                  <div class="upload_img_blk">
+                    <span class="thumbimg" [ngSwitch]="true">
+                      <span *ngSwitchCase="rowattachment.filetype === 'csv'"><img src='{{baseurl}}/assets/images/thumbimg/csvthumb.png'></span>
+                      <span *ngSwitchCase="rowattachment.filetype === 'img'"><img [src]="rowattachment.filepath"></span>
+                      <span *ngSwitchCase="rowattachment.filetype === 'video'"><img src='{{baseurl}}/assets/images/thumbimg/videothumb.png'></span>
+                      <span *ngSwitchCase="rowattachment.filetype === 'doc'"><img src='{{baseurl}}/assets/images/thumbimg/docthumb.png'></span>
+                      <span *ngSwitchCase="rowattachment.filetype === 'pdf'"><img src='{{baseurl}}/assets/images/thumbimg/pdfthumb.png'></span>
+                      <span *ngSwitchCase="rowattachment.filetype === 'zip'"><img src='{{baseurl}}/assets/images/thumbimg/zipthumb.png'></span>
+                      <span *ngSwitchCase="rowattachment.filetype === 'php'"><img src='{{baseurl}}/assets/images/thumbimg/phpthumb.png'></span>
+                      <span *ngSwitchCase="rowattachment.filetype === 'js'"><img src='{{baseurl}}/assets/images/thumbimg/jsthumb.png'></span>
+                      <span *ngSwitchCase="rowattachment.filetype === 'sql'"><img src='{{baseurl}}/assets/images/thumbimg/sqlthumb.png'></span>
+                      <span *ngSwitchCase="rowattachment.filetype === 'none'"><img src='{{baseurl}}/assets/images/thumbimg/nonethumb.png'></span>
+                    </span>												
+                    <span class="file_name_blk"><span class="upload_img_name">{{rowattachment.file_name}}</span></span>
+                    <a href="javascript:;" class="file_delete_link">
+                      <mat-icon (click)="deleteImg(rowattachment,i)">delete</mat-icon>
+                    </a>
+                  </div>
+                </mat-list-item>
+              </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+    <div>
+      <button class="save-btn" (click)="savePortForm(portForm.value)">Save</button>
+      <button class="cancel-btn" (click)="onclickcancel()">Cancel</button>
+    </div>
+  </form>
+  </div>
+</div>

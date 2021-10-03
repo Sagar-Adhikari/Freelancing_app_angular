@@ -1,0 +1,88 @@
+.modal-title{
+    color: #4A154B;
+    font-size: 25px;
+    text-transform: uppercase;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    letter-spacing: 1px;
+}
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 0px 10px 0px;
+    border-bottom: 1px solid #eceeef;
+}
+.modal-header button{
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    top: 0px;
+    outline: none;
+    padding: 0px;
+    text-align: right;
+    margin: 0px;
+    right: -8px;
+}
+button:focus {
+    outline: none;
+}
+button.save-btn{
+    background-color: #A62B3D;
+    border-color: #A62B3D;
+    border-radius: 6px;
+    font-family: 'Open Sans', sans-serif;
+    padding: 0 16px;
+    color: #fff;
+}
+button.cancel-btn{
+    background-color: #DFE2E9;
+    color: #000;
+    border-radius: 6px;
+    font-family: 'Open Sans', sans-serif;
+    padding: 0 16px;
+}
+.modal-body {
+    padding: 15px 0px;
+}
+.model-container .mat-form-field {
+    margin: 0px 2%;
+    width: 48%;
+}
+.model-container .popup_matrow .mat-form-field:first-child{
+    margin-left:0px;
+}
+.model-container .popup_matrow .mat-form-field:last-child{
+    margin-right:0px;
+}
+button.cancel-btn[_ngcontent-c12]:hover {
+    background-color: #C4C7CD;
+    color: #000;
+}
+button.save-btn[_ngcontent-c12]:hover {
+    background-color: #992331;
+}
+.button-row button {
+    font-weight: normal;
+    cursor: pointer;
+    margin: 0px 5px;
+    line-height: 36px;
+    font-size: 14px;
+    outline: 0px;
+    border: 0px;
+}
+.popup_matrow {
+    width: 100%;
+    display: block;
+}
+@media(max-width:767px){
+.modal-title{
+    font-size: 15px;
+}
+.model-container .mat-form-field{
+    margin: 0px 0%;
+    width: 100%;
+}
+}

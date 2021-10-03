@@ -1,0 +1,118 @@
+<section class="dashboard-wrap">
+  <div class="admin-dashboard admin-cmspage">
+    <div class="cms-container pages-container mat-elevation-z8">
+      <h2>View Details</h2>
+  
+<div class="cms-container mat-elevation-z8 table-box">
+    <div class="pull-right">
+        <ul class="view_btn_list">
+         <span *ngIf="disputeDetailArr.state !== 3">
+          <li><button mat-button (click)="closePopup(suggesstion)">Close Suggesstion</button></li>
+          <li><button mat-button (click)="messegePopup(msgPopup)">Message</button></li>
+        </span>
+          <li><button mat-button (click)="goback()"><i class="material-icons">keyboard_backspace</i> Back</button></li>
+        </ul>
+    </div>    
+
+
+  <div class="cms-table-container">
+  
+  <table mat-table [dataSource]="data" class="cms-table" 
+  matSort matSortActive="id" matSortDisableClear matSortDirection="desc">
+
+  <ng-container matColumnDef="index">
+    <mat-header-cell *matHeaderCellDef> S.No </mat-header-cell>
+    <mat-cell *matCellDef="let row; let i = index;"> <span *ngIf="pageEvent">{{pageEvent.pageIndex*10+ConvertToInt(i)+1}} </span> <span *ngIf="!pageEvent">{{ ConvertToInt(i)+1 }}</span></mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="date">
+    <th mat-header-cell *matHeaderCellDef>Date</th>
+    <td mat-cell *matCellDef="let row">{{ row.time | date: 'MMM d, y' }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="user_name">
+    <th mat-header-cell *matHeaderCellDef>User</th>
+    <td mat-cell *matCellDef="let row">{{ row.user_name }}</td>
+  </ng-container>
+  
+  <ng-container matColumnDef="chat_message">
+    <th mat-header-cell *matHeaderCellDef>Messages</th>
+    <td mat-cell *matCellDef="let row">{{ row.chat_message }}</td>
+  </ng-container>
+  
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+</div>
+
+<div class="no-results" [style.display]="resultsLength == 0 ? '' : 'none'">
+    No Record Found.
+  </div>
+<!--chats-->
+ <mat-paginator [length]="resultsLength" [pageSize]="10" (page)="pageEvent = $event"></mat-paginator>
+  </div>
+  </div>
+  </div>
+  </section>
+ 
+
+
+
+
+  
+
+<!--messege Popup-->
+<ng-template #msgPopup>
+  <div class="transaction-detail-popup">
+    <div class="model_main">
+      <div class="modal-header">
+        <h4 class="modal-title">Message</h4>
+      </div>
+    <button mat-mini-fab [mat-dialog-close]="true" class="close_btn">
+      <mat-icon class="mat-icon material-icons" role="img" aria-hidden="true">close</mat-icon>
+    </button>
+    <mat-form-field appearance="outline">
+        <mat-label>Message</mat-label>
+    <textarea rows="4" cols="50" matInput  placeholder="Message..." #msg></textarea>
+    </mat-form-field>
+
+    <button mat-button [mat-dialog-close]="true" (click)="sendMessege(msg.value)">Send</button>
+  </div>
+  </div>
+</ng-template>
+<!--messege Popup-->
+
+<!--closepopup suggesstion support freelancer or client-->
+<ng-template #suggesstion>
+  <div class="transaction-detail-popup">
+      <div class="model_main">
+        <div class="modal-header">
+          <h4 class="modal-title">Support freelancer Or Client</h4>
+        </div>
+
+        <button mat-mini-fab [mat-dialog-close]="true" class="close_btn">
+          <mat-icon class="mat-icon material-icons" role="img" aria-hidden="true" class="close_btn">close</mat-icon>
+        </button>
+
+        <div class="form-group">
+        <mat-form-field appearance="outline">
+          <mat-select placeholder="Select" #suggestionval>
+            <mat-option value="client">Client -  {{disputeDetailArr.client_name}}</mat-option>
+            <mat-option value="freelancer">Freelancer  - {{disputeDetailArr.freelancer_name}} </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>            
+            
+      <div class="form-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Message</mat-label>              
+            <textarea matInput #suggestionmsg rows="4" cols="50" placeholder="Message Optional..."></textarea>
+        </mat-form-field>
+      </div>
+
+        <button mat-button [mat-dialog-close]="true" (click)="suggesstionfunc(suggestionval.value,suggestionmsg.value)">Send</button>
+    </div>
+  </div>
+</ng-template>
+<!--closepopup suggesstion support freelancer or client-->
+

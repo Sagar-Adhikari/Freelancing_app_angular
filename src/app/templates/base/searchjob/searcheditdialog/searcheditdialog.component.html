@@ -1,0 +1,28 @@
+<div>
+  <div class="model_main"> 
+    <div class="modal-header">
+      <h4 class="modal-title">Rename Saved Search</h4>
+      <button (click)="onclickcancel()"><mat-icon>close</mat-icon></button>
+    </div>
+    <form [formGroup]="searchEditForm">
+    <div class="modal-body">      
+      <div class="profile-leftblock available_popup">        
+        <div>          
+            <div class="form-group">
+              <label>Enter saved search name</label>
+              <mat-form-field appearance="outline">
+                <mat-label>Enter saved search name</mat-label>
+                <input matInput formControlName="job_search" placeholder="Enter here">
+                </mat-form-field>
+              <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('job_search') || this.errorMsgArr['job_search']}}</div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <button class="save-btn" (click)="onUpdateSearch(searchEditForm.value)">Save</button>
+      <button class="cancel-btn" (click)="onclickcancel()">Cancel</button>
+    </div>
+  </form>
+  </div>
+</div>

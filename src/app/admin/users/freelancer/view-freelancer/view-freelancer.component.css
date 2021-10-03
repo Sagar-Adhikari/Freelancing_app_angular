@@ -1,0 +1,285 @@
+ul.detail_list {padding-left:0; margin-bottom:0}
+ul.detail_list li { display: inline-block; vertical-align: middle; }
+
+ul.view_doc_list { padding:10px; }
+ul.view_doc_list li { display: inline-block; vertical-align: top; text-align: center; width:150px; }
+ul.view_doc_list li img { width:120px;height:120px; padding:10px; }
+ul.view_doc_list li a {background-color: #4A154B; color:#fff; border-radius:6px; padding:5px 10px; margin:0 10px;}
+
+.down-btn { width:100%; display: inline-block; text-align: center;}
+.more-btn { font-weight: bold; color: #4A154B; cursor: pointer;}
+
+.category_mainwrap input::-webkit-input-placeholder {color: #b5b8b8!important; }
+.category_mainwrap input:-moz-placeholder { color: #b5b8b8!important;  }
+ul{margin:0;padding: 0;}
+li{list-style: none;}
+.category_mainwrap .breadcrumb_wrap{background-color: #4A154B;padding: 35px 0;}
+.category_mainwrap .breadcrumb_wrap h4{font-size: 32px;font-family: 'HelveticaNeue-Medium';color: #fff;text-transform: capitalize;margin:0;letter-spacing: 1px;}
+.category_mainwrap .search-category{float: right;}
+.category_mainwrap .search-category span.form-icon{position: absolute;height: 100%;background: transparent;width: 40px;text-align: center;padding-top: 10px;padding-left: 4px;color: #4A154B;cursor: pointer;}
+.category_mainwrap .search-category input.form-control{height: 45px;border-radius: 30px;padding-left: 40px;font-family: 'HelveticaNeue';font-size: 16px;color: #3d3d3d;letter-spacing: 1px;line-height: 45px;}
+.freelancer_profile .freelancer-wrap{padding: 35px 0;}
+.freelancer_profile .freelancer-wrap .bg-box{background-color: #fff;height: auto;box-shadow: 0px 0px 20px #dcdcdc;border-radius: 10px;padding: 36px 40px;display: inline-block;width: 100%;}
+.freelancer_profile .freelancer-wrap .bg-box .freelancer-detail{margin-bottom: 35px;}
+.freelancer_profile .freelancer-wrap .bg-box .freelancer-detail .profile-img{width: 98px;height: 98px;border-radius: 50%;float: left;margin-right: 20px;}
+.freelancer_profile .freelancer-wrap .bg-box .freelancer-detail  .profile-img img{width: 98px;height: 98px;border-radius: 50%;object-fit: cover;border:1px solid #484848;}
+.freelancer_profile .freelancer-wrap .bg-box .freelancer-detail .profile-name{display: inline-block;margin-top: 25px;}
+.freelancer_profile .freelancer-wrap .bg-box .freelancer-detail .profile-name h4{text-transform: capitalize;font-family: 'HelveticaNeue-Medium';font-size: 16px;color: #343434;margin-bottom: 3px;}
+.freelancer_profile .freelancer-wrap .bg-box .freelancer-detail .profile-name p{font-family: 'HelveticaNeue';font-size: 14px;color: #343434;}
+.profile-details h5{word-break:break-all;text-transform: capitalize;font-size: 16px;color: #343434;font-family: 'HelveticaNeue-Medium';}
+.profile-details p{word-break:break-all;font-size: 14px;color: #777777;font-family: 'HelveticaNeue';margin-bottom: 1px;}
+:host /deep/ .profile-details .mat-list .mat-list-item .mat-list-item-content{display: inline-block;width: 100%;padding: 0;font-size: 14px;color: #777777;font-family: 'HelveticaNeue';}
+:host /deep/ .profile-details .mat-list .mat-list-item{height: auto;margin-bottom: 0px;padding: 5px 0px;}
+:host /deep/ .profile-details .mat-list .mat-list-item .mat-list-item-content span{margin-right: 10px;font-size: 10px;color: #000000;}
+.freelancer_profile .freelancer-wrap .bg-box .trans-wrap{border: 1px solid #e5e5e5;height: auto;margin-bottom:0px;display:inline-block;width:100%;border-radius: 10px;margin-top: 30px;}
+.freelancer_profile .freelancer-wrap .bg-box .trans-wrap .trans-left{width: 50%;display: inline-block;float: left;border-right: 1px solid #ddd;padding: 30px 46px;height: 127px;}
+.freelancer_profile .freelancer-wrap .bg-box .trans-wrap .trans-left:last-child{border-right:none;}
+.freelancer_profile .freelancer-wrap .bg-box .trans-wrap .trans-left .trans-img{display: inline-block;float: left; margin-right: 18px;}
+.freelancer_profile .freelancer-wrap .bg-box .trans-wrap .trans-left .trans-desc{display: inline-block;width: 65%;margin-top: 20px;}
+.freelancer_profile .freelancer-wrap .bg-box .trans-wrap .trans-left .trans-desc h4{font-family: 'HelveticaNeue-Medium';font-size: 19px;color: #4A154B;text-transform: capitalize;margin-bottom: 5px;cursor: default;}
+.freelancer_profile .freelancer-wrap .bg-box .trans-wrap .trans-left .trans-desc p{font-family: 'HelveticaNeue';font-size: 14px;color: #777;margin-bottom: 0px;}
+.freelancer_profile .freelancer-wrap .bg-box .trans-wrap .trans-left:last-child .trans-desc{margin-top: 12px;}
+.freelancer_profile .freelancer-wrap .bg-boxright{padding: 27px 17px;height: 100%;}
+.freelancer_profile .freelancer-wrap .bg-boxright .job-btn{height: 60px;}
+.freelancer_profile .freelancer-wrap .bg-boxright .job-btn button{line-height: 52px;background-color: #4A154B;width: 100%;text-align: center;margin-bottom: 25px;font-family: 'HelveticaNeue';font-size: 15px;color: #fff;box-shadow:0px 0px 20px #dedede;border-radius: 4px;text-transform: capitalize;}
+:host /deep/ .bg-boxright .mat-list .mat-list-item .mat-list-item-content{display: inline-block;width: 100%;padding: 0;}
+:host /deep/ .bg-boxright .mat-list .mat-list-item{height: auto;border-bottom: 1px solid #ddd;margin-bottom: 0px;margin-left: -17px;margin-right: -17px;padding: 20px 25px;}
+:host /deep/ .bg-boxright .mat-list h4{font-family: 'HelveticaNeue-Medium';font-size: 16px;color: #343434;}
+:host /deep/ .bg-boxright .mat-list p{font-family: 'HelveticaNeue';font-size: 14px;color: #777;margin-bottom: 0;}
+:host /deep/ .bg-boxright .mat-list .mat-list-item:last-child {border-bottom: none;}    
+:host /deep/ .proedit-block .follower-block .grp-name-section .mat-form-field-infix.mat-form-field-infix .mat-form-field-underline {background-color: transparent;    /* replace this color with your accent color hex code */}
+:host /deep/ .freelancer_profile .freelancer-wrap .bg-boxright .mat-form-field-infix.mat-form-field-infix {
+        display: block;
+        position: relative;
+        flex: auto;
+        min-width: 0;
+        width: 180px;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+        height: 55px;
+        /* line-height: 29px; */
+        padding: 20px 10px;
+        font-family: 'HelveticaNeue';
+        font-size: 21px;
+    }
+:host /deep/ .freelancer_profile .freelancer-wrap .bg-boxright .mat-form-field-infix.mat-form-field-infix {display: block;position: relative;flex: auto;min-width: 0;width: 100%;border: 1px solid #c9c9c9;height: 55px;padding: 20px 10px;font-family: 'HelveticaNeue';font-size: 15px;margin-top: 20px;}
+    :host /deep/ .freelancer_profile .freelancer-wrap .bg-boxright .mat-form-field-label {
+        color: #5b5b5b;
+        top: 33px;
+        left: 10px;
+        font-family: 'HelveticaNeue';
+        font-size: 15px;
+    }
+    :host /deep/ .freelancer_profile .freelancer-wrap .bg-boxright .mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+        display: block;
+        top: 19px;
+        left: 0;
+        font-family: 'HelveticaNeue';
+        font-size: 14px;
+        color: #5b5b5b;
+    }
+    :host /deep/ .freelancer_profile .freelancer-wrap .bg-boxright .mat-form-field-ripple {
+        background-color: transparent;
+    }
+    :host /deep/ .freelancer_profile .freelancer-wrap .bg-boxright  .mat-form-field-underline {
+        background-color: transparent;
+    }
+    .freelancer_profile .freelancer-wrap .bg-boxright .copylink-form button{font-size: 16px;color: #4A154B;font-family: 'HelveticaNeue-Medium';}
+    .freelancer_profile .freelancer-wrap .bg-boxbottom{margin-top: 30px;border: 1px solid #dfe2e5;}
+    
+    .freelancer_profile .freelancer-wrap .bg-boxbottom .post-head{    padding: 15px 32px 30px;
+        position: relative;
+        border-bottom: 1px solid #dfe2e5;
+        margin-bottom: 40px;
+        margin-left: -40px;
+        margin-right: -40px;}
+    .freelancer_profile .freelancer-wrap .bg-boxbottom .post-head h3{text-transform: capitalize;color: #343434;font-size: 24px;font-family: 'HelveticaNeue';}
+    .freelancer_profile .freelancer-wrap .bg-boxbottom .post-head .post-btn{position: absolute;right: 28px;top: 0px;}
+    .freelancer_profile .freelancer-wrap .bg-boxbottom .post-head .post-btn button{background-color: #4A154B;color: #fff;line-height: 54px;font-family: 'HelveticaNeue';font-size: 15px;width: auto;    box-shadow: 0px 0px 20px #d5d5d5;
+        margin-left: 15px;border-radius: 5px;letter-spacing: 0.5px;}
+    .freelancer_profile .freelancer-wrap .bg-boxbottom .post-head .post-btn button span.fa{margin-right: 10px;position: relative;top: -1px;}
+    .freelancer_profile .freelancer-wrap .bg-boxbottom .portfolio-detail .portfolio-img{margin-right: 20px;float: left;width: 207px;height: 127px;}
+    .freelancer_profile .freelancer-wrap .bg-boxbottom .portfolio-detail .portfolio-img img{max-width: 100%;}
+    .freelancer_profile .freelancer-wrap .bg-boxbottom .portfolio-detail .detail-wrap{/*display: inline-block;float: left;*/}
+    .freelancer_profile .freelancer-wrap .bg-boxbottom .portfolio-detail .detail-wrap h4{margin-bottom: 10px;font-size: 21px;color: #343434;font-family: 'HelveticaNeue';}
+    .freelancer_profile .freelancer-wrap .bg-boxbottom .portfolio-detail .detail-wrap p{font-size: 14px;color: #777;font-family: 'HelveticaNeue';margin-bottom: 5px; word-break: break-all;}
+    .freelancer_profile .freelancer-wrap .bg-boxbottom .portfolio-detail .detail-wrap p.add-txt{font-size: 16px;color: #4A154B;font-family: 'HelveticaNeue-Medium';text-transform: capitalize;}
+    .freelancer_profile .freelancer-wrap .bg-boxbottom .portfolio-detail.certification-detail .detail-wrap h4{font-size: 16px;color: #4A154B;font-family: 'HelveticaNeue-Medium';text-transform: capitalize;word-break:break-all;}
+    button.view-btn{font-size: 16px;color: #4A154B;margin-bottom: -10px;font-family: 'HelveticaNeue-Medium';background: transparent;padding: 0;outline: none;display: table;margin: 0 auto;}
+    button.view-btn:hover{background-color: transparent;}
+    :host /deep/ button.view-btn .mat-button-focus-overlay{background-color: transparent;}
+    
+    .profile_content_blk p{
+        max-height: 180px;
+        overflow-y: auto;
+        padding-right:10px;
+    }
+    .example-full-width.coplylink_blk {
+        width: 100%;
+    }
+    :host /deep/ .freelancer_profile .freelancer-wrap .bg-boxright .coplylink_blk .mat-form-field-infix {
+        padding: 10px;
+        height: 42px;
+        margin-top: 35px;
+    }
+    :host /deep/ .freelancer_profile .freelancer-wrap .bg-boxright .coplylink_blk .mat-form-field-label-wrapper {
+        top: -25px;
+    }
+    .portfolio-detail .detail-wrap{
+        width: 100%;
+        float: left;
+        margin: 10px 0px;
+    }
+    .bg-boxright.bg-boxright_blk .mat-list p {
+        min-height: 30px;
+        margin-bottom: 2px;
+    }
+    .freelancer_profile .freelancer-wrap .bg-boxbottom .portfolio-detail .portfolio-img{
+        width: 120px;
+        height: 120px;
+    }
+    .portfolio_rightblk{
+        float: left;
+        width: 86%;
+    }
+    .freelancer_profile .freelancer-wrap .bg-boxbottom .portfolio-detail .portfolio-img img{
+        width: 100%;
+        height:100%;
+        object-fit: cover;
+    }
+    .bg-boxright.bg-boxright_blk .mat-list h4{
+        min-height: 30px;
+        vertical-align: top;
+        margin-bottom: 0px;
+    }
+    .freelancer_profile .freelancer-wrap .bg-boxright .copylink-form button{
+        font-size: 16px;
+        background-color: #4A154B;
+        color: #fff;
+        line-height: 37px;
+        font-family: 'HelveticaNeue';
+        width: auto;
+        box-shadow: 0px 0px 20px #d5d5d5;
+        margin-left: 0;
+        border-radius: 5px;
+        letter-spacing: 0.5px;
+    }
+    .profile-details h5 {
+        margin-top: 10px;
+        line-height: 30px;
+        position: relative;
+        display: inline-block;
+        vertical-align: top;
+        min-height:31px;
+    }
+    .profile-details .profile_content_blk p a {
+        margin: 0px 10px;
+        cursor: pointer;
+    }
+    .profile-details .profile_content_blk p a,.profile-details .profile_content_blk p a:hover{
+        color: #4A154B;
+    }
+    .freelancer_profile .freelancer-wrap .bg-box .freelancer-detail{
+        margin-bottom: 5px;
+    }
+    .profile_back_btn {
+        width: 130px;
+        display: inline-block;
+        text-align: right;
+        float: right;
+    }
+    .skills_detail span {
+        background-color: #f4f5f8;
+        border: 1px solid #ced0da;
+        margin: 0px 5px;
+        line-height: 36px;
+        padding: 2px 16px;
+        text-transform: capitalize;
+        border-radius: 5px;
+        cursor: pointer;
+        opacity: 1;
+        transition: opacity .2s cubic-bezier(.35,0,.25,1),background-color .1s cubic-bezier(.35,0,.25,1);
+        font-family: Roboto,"Helvetica Neue",sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        display: inline-block;
+        margin-bottom: 10px;
+    }
+    .skills_detail span:hover{
+        background-color:#4A154B;
+        color:#fff;
+        border: 1px solid #4A154B;
+    }
+    button.save-btn:hover {
+        background-color: #992331;
+    }
+    button.save-btn{
+        background-color: #A62B3D;
+        border-color: #A62B3D;
+        border-radius: 6px;
+        font-family: 'Open Sans', sans-serif;
+        padding: 0 16px;
+        color: #fff;
+        font-weight: 600;
+    }
+    .freelancer_profile .freelancer-wrap .bg-box .freelancer-detail .profile-name{
+        width: 84%;
+        margin-top: 0px;
+    }
+
+
+@media(min-width:1200px)
+{
+.freelancer_profile .freelancer-wrap .bg-box.profile_bg-box{min-height: 530px;}
+}
+    
+@media(max-width: 767px)
+{
+.freelancer_profile .freelancer-wrap .bg-box .freelancer-detail .profile-img {width: 98px;height: 98px;border-radius: 50%;float: none;margin-right: 20px;margin: 0 auto;text-align: center;}
+.freelancer_profile .freelancer-wrap .bg-box .freelancer-detail .profile-name {display: inline-block;margin-top: 10px;width: 100%;text-align: center;}
+.freelancer_profile .freelancer-wrap .bg-box .trans-wrap .trans-left {width: 100%;display: inline-block;float: none;border-right: none;padding: 45px 46px;height: auto;text-align: center;border-bottom: 1px solid #ddd;}
+.freelancer_profile .freelancer-wrap .bg-box .trans-wrap .trans-left .trans-img {display: inline-block;float: none;margin-right: 0;}
+.freelancer_profile .freelancer-wrap .bg-boxbottom .post-head .post-btn {position: relative;right: 0;top: 0px;text-align: center;}
+.freelancer_profile .freelancer-wrap .bg-boxbottom .post-head h3{text-align: center;}
+.freelancer_profile .freelancer-wrap .bg-boxbottom .post-head{margin-bottom: 20px;}
+.freelancer_profile .freelancer-wrap .bg-boxbottom .portfolio-detail .portfolio-img {margin-right: 20px;float: none;width: 207px;height: 127px;margin: 0 auto;}
+.freelancer_profile .freelancer-wrap .bg-boxright {padding: 27px 17px;height: 100%;margin-top: 20px;}
+.freelancer_profile .freelancer-wrap .bg-boxbottom .portfolio-detail .portfolio-img{width: 135px;height:135px;}
+.profile-details h5{margin-top: 0px;}
+}
+    
+@media(max-width:1200px)
+{
+.portfolio_rightblk{width: 83%;}
+.freelancer_profile .freelancer-wrap .bg-box .freelancer-detail .profile-name{width: 81%;}
+}
+
+@media(max-width:992px)
+{
+.portfolio_rightblk{width: 76%;}
+}
+    
+@media(max-width:767px)
+{
+.freelancer_profile .freelancer-wrap .bg-box .trans-wrap .trans-left { padding: 30px 20px; width:100%; }
+.portfolio_rightblk{width: 100%;}
+.freelancer_profile .freelancer-wrap .bg-box .trans-wrap .trans-left .trans-desc h4{padding-left: 10px;font-size: 14px;text-align: left;}
+.freelancer_profile .freelancer-wrap .bg-box .trans-wrap .trans-left{padding: 15px 15px;}
+.freelancer_profile .freelancer-wrap .bg-box .trans-wrap .trans-left .trans-desc{width: 58%;}
+.profile_back_btn{ display: block;float: unset;margin-bottom: 20px;width:100%;}
+.freelancer_profile .freelancer-wrap .bg-box .freelancer-detail .profile-name{width: 100%;}
+}
+
+@media(min-width: 768px) and (max-width: 991px)
+{
+.freelancer_profile .freelancer-wrap .bg-box .trans-wrap .trans-left { padding: 30px 20px; }
+.freelancer_profile .freelancer-wrap .bg-box .trans-wrap .trans-left .trans-desc {display: inline-block;width: 50%;margin-top: 20px;}
+.freelancer_profile .freelancer-wrap .bg-boxright {padding: 27px 17px;height: 100%;margin-top: 20px;}
+}
+
+@media(min-width: 992px) and (max-width: 1199px)
+{
+.freelancer_profile .freelancer-wrap .bg-box .trans-wrap .trans-left .trans-desc {display: inline-block;width: 50%;margin-top: 20px;}
+button.view-btn { font-size: 13px;}
+}
+    

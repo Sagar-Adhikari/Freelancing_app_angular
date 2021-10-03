@@ -1,0 +1,225 @@
+/* Add payment popup design start */
+.modal-title {
+    color: #4A154B;
+    font-size: 25px;
+    text-transform: uppercase;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    letter-spacing: 1px;
+}
+
+ul.prefer-payment { padding-left:0px; margin-bottom:0px;}
+ul.prefer-payment li { width:50%; vertical-align: middle; display: inline-block; }
+.postjob-details p { font-size: 14px; margin-bottom:0px;}
+.payment-schedule { margin-top:10px; position: relative;}
+:host /deep/ .mat-form-field-appearance-outline .mat-form-field-infix { padding:10px 0;}
+:host /deep/ .mat-form-field-wrapper { padding-bottom:5px;}
+:host /deep/ mat-form-field { width:100%; }
+.postjob-details .form-group { margin-bottom:10px; }
+
+
+button.mat-button { background: #4A154B; color: #fff;border-radius: 6px;}
+
+.profile-leftblock h5 {
+    color: #4A154B;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+}
+button.save-btn {
+    background-color: #A62B3D;
+    border-color: #A62B3D;
+    border-radius:2px;
+    font-family: 'Open Sans', sans-serif;
+    padding: 0 16px;
+    color: #fff;
+}
+button{
+    font-weight: normal;
+    cursor: pointer;
+    margin: 0 5px 0 0;
+    line-height: 36px;
+    font-size: 14px;
+    outline:0px;
+    border:0px;
+}
+button.save-btn:hover {
+    background-color: #992331;
+}
+button.cancel-btn:hover {
+    background-color: #C4C7CD;
+    color: #000;
+}
+button.cancel-btn{
+    background-color: #DFE2E9;
+/*  border-color: #DFE2E9;*/
+    color: #000;
+    border-radius:6px;
+    font-family: 'Open Sans', sans-serif;
+    padding: 0 16px;
+    text-transform: capitalize;
+}
+button:focus{
+    outline:none;
+}
+.modal-header {
+    padding: 0 0 10px 0;
+    width:100%;
+}
+.btn_block{
+padding: 10px 0;
+}
+.modal-body{
+    padding:15px 0;
+}
+.modal-header button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    top: 8px;
+    outline: none;
+    padding:0;
+    text-align:right;
+    margin: 0;
+    right:-8px;
+}
+.form-group .mat-select {
+    /* outline: 0;
+    display: block;
+    width: 100%;
+    padding: .5rem .75rem;
+    font-size: 1rem;
+    line-height: 1.25;
+    color: #464a4c;
+    background-color: #fff;
+    background-image: none;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: .25rem;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s; */
+}
+.payment-sublist { margin:10px 0; position: relative;}
+mat-label,label {
+    font-weight: 600;
+    margin-bottom: 0px;
+    display: block;
+}
+.mat-radio-button p {
+    margin-bottom: 0;
+}
+:host /deep/ .custompage-form-layout .mat-radio-label {
+    white-space: normal;
+}
+/*popup scrollbar*/
+::ng-deep  .cdk-overlay-dark-backdrop {
+    min-height: 100% !important;
+    position: fixed !important;
+}
+::ng-deep .cdk-global-overlay-wrapper{
+    overflow-y:auto;
+    pointer-events: auto;
+    padding:20px 0 0;
+    overflow-x:hidden;
+}
+::ng-deep  .cdk-global-scrollblock {
+    overflow: hidden;
+    width: 102%;
+}
+::ng-deep   .mat-dialog-container {
+    overflow: hidden;
+}
+.modal-body h3{
+    font-family: 'HelveticaNeue-Medium';
+    font-size: 18px;
+    margin: 0 0 6px 0;
+}
+.payment-popup-second{
+    padding-top:20px;
+}
+.title-row {
+    width: 100%;
+    display: block;
+}
+.left-img {
+    width: 20%;
+    float: left;
+}
+.payment-popup-details {
+    width: 63%;
+    float: left;
+    font-size: 14px;
+}
+
+.setup-btn {
+    width: 17%;
+    float: left;
+    text-align: right;
+}
+.row-blk {
+    display: block;
+    width: 100%;
+    float: left;
+    border-top: 1px solid #e7e7e7;
+    padding: 10px 0;
+}
+.modal-body .title-row h3 {
+    font-size: 20px;
+    margin: 0 0 17px 0;
+}
+.modal-body .title-row {
+    width: 100%;
+    display: block;
+    float: left;
+}
+.modal-body .payment-popup-row:last-child{
+    padding-bottom:0;
+}
+.setup-btn .save-btn.mat-button {
+    margin-right: 0;
+}
+.payment-popup-details p {
+    margin-bottom: 4px;
+}
+@media(min-width:992px){
+    .model_main {
+        min-width: 700px;
+        max-width: 700px;
+    }
+}
+@media(min-width:991px){
+.profile-leftblock {
+    max-width: 750px;
+    min-width: 750px;
+}
+}
+@media(max-width:767px){
+.modal-title{
+    font-size: 15px;
+}
+.left-img {
+    width: 100%;
+    text-align: center;
+}
+.payment-popup-details {
+    width: 100%;
+    padding-top: 10px;
+}
+.setup-btn {
+    width: 100%;
+    text-align: left;
+    padding-top: 10px;
+}
+.modal-body .title-row h3 {
+    font-size: 16px;
+}
+.modal-body h3 {
+    font-size: 15px;
+}
+}
+/* Add payment popup design end */

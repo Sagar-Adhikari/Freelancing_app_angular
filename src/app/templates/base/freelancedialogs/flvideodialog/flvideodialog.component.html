@@ -1,0 +1,33 @@
+<div>
+    <div class="model_main"> 
+      <div class="modal-header">
+        <h4 class="modal-title">Add Video</h4>
+        <button (click)="onclickcancel()"><mat-icon>close</mat-icon></button>
+      </div>
+      <form [formGroup]="jobVideoEditForm">
+      <div class="modal-body">      
+        <div class="profile-leftblock">        
+          <div>
+            <div class="form-group">
+                <label>Paste the link to your YouTube video here</label>
+                <input class="form-control" formControlName="video_url" placeholder="Enter your video url">
+                <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('video_url') || this.errorMsgArr['video_url']}}</div>
+            </div>
+            <div class="form-group">
+                <mat-select placeholder="What type of video is this?" formControlName="video_type" [(ngModel)]="selectedType">
+                    <mat-option value='1'>Me talking about my skill & experience</mat-option>
+                    <mat-option value='2'>Visual sample of my work</mat-option>
+                    <mat-option value='3'>Something else</mat-option>
+                </mat-select>
+                <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('video_type') || this.errorMsgArr['video_type']}}</div>              
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <button class="save-btn" (click)="saveJobVideo(jobVideoEditForm.value)">Save</button>
+        <button class="cancel-btn" (click)="onclickcancel()">Cancel</button>
+      </div>
+    </form>
+    </div>
+</div>

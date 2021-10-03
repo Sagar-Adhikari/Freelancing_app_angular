@@ -1,0 +1,63 @@
+<div class="category_mainwrap postjob_wrap">
+    <div class="breadcrumb_wrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <h4>Improve Your Remote Nepal Experience</h4>
+                </div>
+                <!--end col-->
+            </div>
+            <!--end row-->
+        </div>
+        <!--end container-->
+    </div>
+    <!--end breadcrumb_wrap-->
+    <form [formGroup]="proregbasicForm" (ngSubmit)="basicRegForm(proregbasicForm.value)">
+        <div class="postjob-fulldesc">
+            <div class="postjob-details">
+                <div class="container">
+                    <div class="row">
+                        <div class="postjob-inner postjob-three">
+                            <h5>Basic Details about you</h5>
+                            <section class="content-section stepthree-section">
+                                <label>This information helps up provide better matches for your needs but isn't shared with freelancers.</label>
+                                <div class="form-group">
+                                    <label>How many employees does your company have?</label>
+                                    <mat-radio-group formControlName="company_employees" required>
+                                        <mat-radio-button *ngFor="let comp_emp of comp_emps" [value]="comp_emp.key">
+                                            {{comp_emp.name}}
+                                        </mat-radio-button>
+                                    </mat-radio-group>
+                                    <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('company_employees') || this.errorMsgArr['company_employees']}}</div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Which department do you work in?</label>
+                                    <mat-radio-group formControlName="company_department" [(ngModel)]="departmentValue" required>
+                                        <mat-radio-button *ngFor="let comp_dept of comp_depts" [value]="comp_dept.key">
+                                            {{comp_dept.name}}
+                                        </mat-radio-button>
+                                    </mat-radio-group>
+                                    <div *ngIf="departmentValue == 'other'"><input matInput formControlName="other_department" placeholder="Enter Other Department" /></div>
+                                    <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('company_department') || this.errorMsgArr['company_department']}}</div>
+                                </div>
+                                <div class="form-group">
+                                    <label>What best describes your role at your company?</label>
+                                    <mat-radio-group formControlName="company_role" required>
+                                        <mat-radio-button *ngFor="let comp_role of comp_roles" [value]="comp_role.key">
+                                            {{comp_role.name}}
+                                        </mat-radio-button>
+                                    </mat-radio-group>
+                                    <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('company_role') || this.errorMsgArr['company_role']}}</div>
+                                </div>
+
+                                <div class="bottom-btn">
+                                    <button mat-raised-button type="submit">Start Hiring</button>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

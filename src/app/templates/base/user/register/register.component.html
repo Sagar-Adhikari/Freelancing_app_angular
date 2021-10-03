@@ -1,0 +1,105 @@
+<div class="breadcrumb_wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <h4>Sign up</h4>
+            </div>
+            <!--end col-->
+        </div>
+        <!--end row-->
+    </div>
+    <!--end container-->
+</div>
+<!--end breadcrumb_wrap-->
+
+<div class="login_maincontent">
+    <div class="login-maincontent-inner">
+        <!--start login_maincontent innerblock-->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <h5 class="top-backbtn"><a routerLink="/"><span><i class="fa fa-arrow-left"></i></span>Back to home screen</a></h5>
+                </div>
+                <!--end col-->
+
+                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                    <ngb-carousel>
+                        <ng-template ngbSlide>
+                            <div class="item">
+                                <div class="item">
+                                    <h4>Remote Nepal</h4>
+                                    <h5>Enter Your Email Address and login in your account in Remote Nepal Easy access to multiple data sources</h5>
+                                    <div class="login-img"><img src="assets/images/login-img.png" class="img-fluid"></div>
+                                </div>
+                            </div>
+                        </ng-template>
+                        <ng-template ngbSlide>
+                            <div class="item">
+                                <div class="item">
+                                    <h4>Remote Nepal</h4>
+                                    <h5>Enter Your Email Address and login in your account in Remote Nepal Easy access to multiple data sources</h5>
+                                    <div class="login-img"><img src="assets/images/login-img.png" class="img-fluid"></div>
+                                </div>
+                            </div>
+                        </ng-template>
+                        <ng-template ngbSlide>
+                            <div class="item">
+                                <div class="item">
+                                    <h4>Remote Nepal</h4>
+                                    <h5>Enter Your Email Address and login in your account in Remote Nepal Easy access to multiple data sources</h5>
+                                    <div class="login-img"><img src="assets/images/login-img.png" class="img-fluid"></div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </ngb-carousel>
+                </div>
+                <!--end col-->
+                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                    <div class="login-box">
+                        <h3>sign up now</h3>
+                        <ng-template [ngIf]="ismessage">
+                            <div class="alert alert-danger" role="alert">{{errormessage}}</div>
+                        </ng-template>
+                        <form [formGroup]="rForm" (ngSubmit)="step1Submit(rForm.value)">
+                            <div class="form-group">
+                                <span class="form-icon"><i class="fa fa-user-circle"></i></span>
+                                <input type="text" formControlName="firstname" required class="form-control" placeholder="First Name">
+                                <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('firstname') || this.errorMsgArr['firstname']}}</div>
+                            </div>
+                            <!--end form-group-->
+
+                            <div class="form-group">
+                                <span class="form-icon"><i class="fa fa-user-circle"></i></span>
+                                <input type="text" formControlName="lastname" required class="form-control" placeholder="Last Name">
+                                <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('lastname') || this.errorMsgArr['lastname']}}</div>
+                            </div>
+                            <!--end form-group-->
+
+                            <div class="form-group">
+                                <span class="form-icon"><i class="fa fa-envelope"></i></span>
+                                <input type="email" formControlName="email" class="form-control" placeholder="Email Address">
+                                <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('email') || this.errorMsgArr['email']}}</div>
+                            </div>
+                            <!--end form-group-->
+
+                            <div class="bottom-btn">
+                                <div class="submit-btn"><button type="submit" [disabled]="isbuttondisable">get started</button></div>
+                                <h6>Already have an account?</h6>
+                            </div>
+                            <!--end bottom-btn-->
+
+                            <div class="signup-btn"><a routerLink="/login">log in</a></div>
+                        </form>
+                    </div>
+                    <!--end login-box-->
+                </div>
+                <!--end col-->
+
+            </div>
+            <!--end row-->
+        </div>
+        <!--end container-->
+    </div>
+    <!--end login_maincontent innerblock-->
+</div>
+<!--end login_maincontent-->

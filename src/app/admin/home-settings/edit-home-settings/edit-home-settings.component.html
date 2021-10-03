@@ -1,0 +1,28 @@
+<div class="admin-dashboard admin-settingspage admin-custompage admin-cmspage">
+	<div class="general-form-layout custompage-form-layout pages-container">
+		<h2>Edit Home Page Text</h2>
+		<form [formGroup]="homeForm" (ngSubmit)="homeFormSubmit(homeForm.value)">
+			<ng-template [ngIf]="ismessage"><div class="alert alert-danger" role="alert">{{errormessage}}</div></ng-template>
+			<ng-template [ngIf]="is_success"><div class="alert alert-success" role="alert">Home text has been updated successfully</div></ng-template>
+			
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-6 col-md-12 col-md-12">
+						<mat-form-field appearance="outline">
+							<mat-label>Text</mat-label>            
+							<input matInput placeholder="Enter text to update" formControlName="option_value" required>
+						</mat-form-field>
+					</div>       
+
+					<div class="col-lg-6 col-md-12 col-md-12">
+						<div class="submit-btn">
+							<button mat-raised-button type="submit" [disabled]="isbuttondisable">Save</button>
+							<button mat-raised-button [routerLink]="['/admin/home-settings']">Cancel</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</form>
+	</div>
+</div>

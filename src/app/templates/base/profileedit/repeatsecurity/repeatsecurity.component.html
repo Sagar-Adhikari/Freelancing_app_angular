@@ -1,0 +1,32 @@
+<div class="category_mainwrap profileedit-wrap profileedit_list_middle">  
+    <div class="profileedit_list">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="account-box contact-box">
+                <h3>Security question</h3>
+                <form [formGroup]="setSecQuestForm" >
+                    <div class="name-edit">
+                    <div>
+                        <label>Question</label>
+                        <p>{{this.current_ques_txt}}</p>
+                        <input type="hidden" class="form-control" formControlName="old_qust_id" value="current_ques_id">
+                        <div class="form-group">
+                            <label>Answer</label>
+                            <input type="password" class="form-control" formControlName="old_qust_answer">
+                            <div class="text-danger text-left small" *ngIf="errorQuesMsg">{{geterrorQuesMsg('old_qust_answer') || this.errorQuesMsgArr['old_qust_answer']}}</div>
+                        </div>
+                        <h3></h3>
+                    </div>                  
+
+                    <div class="account-button">
+                        <mat-checkbox class="example-margin account_checkbox" [checked]="true">I understand my account will be locked if I am unable to answer this question</mat-checkbox>
+                        <div>
+                            <button type="button" mat-button (click)="submitQuesForm(setSecQuestForm.value)">Submit</button>
+                            <!-- <button class="cancel-btn" mat-button (click)="onNoClick()" tabindex="-1">Cancel</button> -->
+                        </div>                        
+                    </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

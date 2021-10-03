@@ -1,0 +1,380 @@
+<section class="dashboard-wrap">
+    <div class="admin-container">
+      <div class="container-fluid">
+        <div class="row">
+  
+              <div class="hpanel">
+                <div class="panel-heading clearfix">
+                    <div class="pull-left page-title"><h4>Dashboard</h4></div>
+                </div>
+  
+              <div class="panel-body">
+                <div class="">
+
+                    <div class="container-fluid dash-count-wrap">
+                        <div class="row">
+                            
+                            <div class="col-md-3 col-sm-12">
+                                <div class="dashboard_count_block">
+                                    <div class="dashboard_count_details">
+                                        <h5>Total Users</h5>
+                                        <span class="icon icon-total-users"></span>
+                                        <h4 *ngIf="isCountLoaded">{{countData.users}}</h4>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3 col-sm-12">
+                                <div class="dashboard_count_block">
+                                    <div class="dashboard_count_details">
+                                        <h5>Freelancers</h5>
+                                        <span class="icon icon-freelancer"></span>
+                                        <h4 *ngIf="isCountLoaded">{{countData.total_freelancer}}</h4>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3 col-sm-12">
+                                <div class="dashboard_count_block">
+                                    <div class="dashboard_count_details">
+                                        <h5>Hirers</h5>
+                                        <span class="icon icon-hiring"></span>
+                                        <h4 *ngIf="isCountLoaded">{{countData.total_hire}}</h4>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3 col-sm-12">
+                                <div class="dashboard_count_block">
+                                    <div class="dashboard_count_details">
+                                        <h5>Agency</h5>
+                                        <span class="icon icon-handshake"></span>
+                                        <h4>5372</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                      <div class="col-lg-8 col-md-12 col-sm-12 no-padding-left">
+                        <div class="map_container">
+                          <div class="map_title">
+                            <h4>User Activity</h4>
+                          </div>
+                          <div class="map-img"><img src="assets/images/map.png" class="img-fluid"></div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-4 col-md-12 col-sm-12 no-padding-right">
+                        <div class="chart_container">
+                        <div class="payment_title">
+                          <h4>Payments</h4>
+                        </div>
+
+                        <div style="display: block">
+                            <canvas baseChart height="35vw" width="45vw" [data]="doughnutChartMobileData" [labels]="doughnutChartMobileLabels" [options]="options"
+                            [chartType]="doughnutChartMobileType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)" [colors]="[{ backgroundColor: ['#f799a4', '#df6a78'] }]">
+                          </canvas>          
+                        </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                      <div class="admin-table-container">
+                        
+                            <div class="pull-left">
+                                <h4>Recent Jobs</h4>
+                            </div>
+
+                            <!-- <div class="pull-right">
+                                <button class="category-dropdown" mat-button [matMenuTriggerFor]="menu">Categoty <i class="material-icons">keyboard_arrow_down </i></button>
+                                <mat-menu #menu="matMenu">
+                                  <button mat-menu-item>Item 1</button>
+                                  <button mat-menu-item>Item 2</button>
+                                </mat-menu>
+                            </div> -->
+                          <div class="table-responsive">
+                          <table mat-table [dataSource]="jobsdataSource" class="jobs-table">
+                            <ng-container matColumnDef="user_name">
+                              <th mat-header-cell *matHeaderCellDef>Username</th>
+                              <td mat-cell *matCellDef="let row"><p>{{ row.user_name }}</p></td>
+                            </ng-container>
+                      
+                            <ng-container matColumnDef="category_name">
+                              <th mat-header-cell *matHeaderCellDef>Category</th>
+                              <td mat-cell *matCellDef="let row"><p>{{ row.category_name }}</p></td>
+                            </ng-container>
+                      
+                            <ng-container matColumnDef="sub_categorie_name">
+                              <th mat-header-cell *matHeaderCellDef>Subcategory</th>
+                              <td mat-cell *matCellDef="let row"><p>{{ row.sub_categorie_name }}</p></td>
+                            </ng-container>
+                      
+                            <ng-container matColumnDef="name">
+                              <th mat-header-cell *matHeaderCellDef>Title</th>
+                              <td mat-cell *matCellDef="let row"><p>{{ row.name }}</p></td>
+                            </ng-container>
+                      
+                            <ng-container matColumnDef="status">
+                              <th mat-header-cell *matHeaderCellDef>Status</th>
+                              <td mat-cell *matCellDef="let row"><p>{{ row.status }}</p></td>
+                            </ng-container>
+                      
+                            <ng-container matColumnDef="created">
+                              <th mat-header-cell *matHeaderCellDef>Created</th>
+                              <td mat-cell *matCellDef="let row"><p>{{ row.created | timeAgo }}</p></td>
+                            </ng-container>
+                            <ng-container matColumnDef="action">
+                              <mat-header-cell *matHeaderCellDef>
+                                <span><i class="fa fa-plus mat-icon"></i>Action</span>
+                              </mat-header-cell>
+                              <mat-cell *matCellDef="let row">
+                                <button mat-icon-button color="primary" focusable="false" routerLink="/admin/jobs/view/{{row.id}}">
+                                  <a><i class="material-icons">&#xE24D;</i></a>                  
+                                </button>
+                              </mat-cell>
+                            </ng-container>
+    
+                            <tr mat-header-row *matHeaderRowDef="jobsdisplayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: jobsdisplayedColumns;"></tr>
+                          </table>
+                           <div class="pull-right">
+                                <button class="category-dropdown" routerLink="/admin/jobs" mat-button >View All Jobs</button>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="admin-table-container">
+                          <div class="pull-left">
+                              <h4>Recent Proposals</h4>
+                          </div>
+
+                          <!-- <div class="pull-right">
+                          <form>
+                            <div class="search-category">
+                              <span class="form-icon"><i class="fa fa-search"></i></span>
+                              <input type="text" matInput class="form-control" placeholder="Search Job">
+                            </div>                     
+                          </form>
+                          </div> -->
+                        <div class="table-responsive">
+                        <table mat-table [dataSource]="bidsdataSource" class="bids-table">
+                          <!-- Project Column -->
+                          <ng-container matColumnDef="job_id">
+                            <th mat-header-cell *matHeaderCellDef> Job </th>
+                            <td mat-cell *matCellDef="let element"> <p>{{element.name}}</p>
+                              <span>{{element.experience_level}} {{hiredLevelTxt[element.experience_level]}}</span> </td>
+                          </ng-container>
+                      
+                          <!-- freelancer Column -->
+                          <ng-container matColumnDef="username">
+                            <th mat-header-cell *matHeaderCellDef> Freelancer </th>
+                            <td mat-cell *matCellDef="let element"> 
+                              <div class="leader-content">
+                                <!-- <div class="left-side"><img src="{{element.leader_image}}"></div> -->
+                                <div class="right-side"><p>{{element.freelancer_name}}</p> 
+                                  <span>{{element.title}}</span>
+                                </div>
+                              </div>
+                              </td>
+                          </ng-container>
+                          <!-- client Column -->
+                          <ng-container matColumnDef="client_name">
+                            <th mat-header-cell *matHeaderCellDef> Client </th>
+                            <td mat-cell *matCellDef="let element"> 
+                              <div class="leader-content">
+                                <!-- <div class="left-side"><img src="{{element.leader_image}}"></div> -->
+                                <div class="right-side"><p>{{element.client_name}}</p> 
+                                  <!-- <span>UK Design Team</span>  -->
+                                </div>
+                              </div>
+                              </td>
+                          </ng-container>
+                          <!-- Experience Level Column -->
+                          <ng-container matColumnDef="experience_level">
+                            <th mat-header-cell *matHeaderCellDef> Experience level </th>
+                            <td mat-cell *matCellDef="let element"> <p> </p> 
+                             </td>
+                          </ng-container>
+                          <!-- Payment type Column -->
+                          <ng-container matColumnDef="payment">
+                            <th mat-header-cell *matHeaderCellDef> Payment </th>
+                            <td mat-cell *matCellDef="let element"> <p>{{element.payment}}</p> 
+                              <!-- <span class="budget-status {{element.budget_status}}">{{element.budget_status}}</span> -->
+                             </td>
+                          </ng-container>
+                           <!-- Est. Budget Column -->
+                           <ng-container matColumnDef="budget">
+                            <th mat-header-cell *matHeaderCellDef> Budget </th>
+                            <td mat-cell *matCellDef="let element">
+                                <p> Est.  :{{element.payment_amount}}<span class="dollar-symbol">$</span></p> 
+                                <span> Bid.  :{{element.bid_amount}}<span class="dollar-symbol">$</span></span> 
+                              <!-- <span class="budget-status {{element.budget_status}}">{{element.budget_status}}</span> -->
+                             </td>
+                          </ng-container>
+                      
+ 
+                          <!-- Status Column -->
+                          <ng-container matColumnDef="status">
+                              <th mat-header-cell *matHeaderCellDef> Status </th>
+                              <td mat-cell *matCellDef="let element"> <div class="{{element.status}}"><p>{{element.status}}</p></div> </td>
+                          </ng-container>
+                           <!-- created Column -->
+                           <ng-container matColumnDef="created">
+                            <th mat-header-cell *matHeaderCellDef> Created </th>
+                            <td mat-cell *matCellDef="let element"> <p>{{element.created | timeAgo}}</p> <span class="{{element.deadline_status}}">{{element.deadline_status}}</span> </td>
+                          </ng-container>
+                          <ng-container matColumnDef="action">
+                              <mat-header-cell *matHeaderCellDef>
+                                <span><i class="fa fa-plus mat-icon"></i>Action</span>
+                              </mat-header-cell>
+                              <mat-cell *matCellDef="let row">
+                                <button mat-icon-button color="primary" focusable="false" routerLink="/admin/proposal-detail/{{row.id}}">
+                                  <a><i class="material-icons">&#xE24D;</i></a>                  
+                                </button>
+                              </mat-cell>
+                            </ng-container>
+                          <tr mat-header-row *matHeaderRowDef="bidsdisplayedColumns"></tr>
+                          <tr mat-row *matRowDef="let row; columns: bidsdisplayedColumns;"></tr>
+                        </table>
+                        <div class="pull-right">
+                          <button class="category-dropdown" routerLink="/admin/proposals" mat-button >View All Bids</button>
+                      </div>
+                      </div>
+                    </div>
+                    </div>
+
+                    <!-- <div class="col-lg-3 col-md-12 col-sm-12">
+                      <mat-tab-group>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <i class="material-icons">supervisor_account</i>
+    </ng-template>
+    <div class="scroll-window">
+    <div class="account-box">
+      <div class="account-img"><img src="assets/images/account-img.jpg"></div>
+      <div class="account-detail">
+        <h5>Jennifer Lawrence</h5>
+        <p>Chief Authority</p>
+      </div>
+      <div class="account-icon"><i class="material-icons">forum</i></div>
+    </div>
+
+    <div class="account-box">
+      <div class="account-img"><img src="assets/images/account-img.jpg"></div>
+      <div class="account-detail">
+        <h5>Jennifer Lawrence</h5>
+        <p>Chief Authority</p>
+      </div>
+      <div class="account-icon"><i class="material-icons">forum</i></div>
+    </div>
+
+    <div class="account-box">
+      <div class="account-img"><img src="assets/images/account-img.jpg"></div>
+      <div class="account-detail">
+        <h5>Jennifer Lawrence</h5>
+        <p>Chief Authority</p>
+      </div>
+      <div class="account-icon"><i class="material-icons">forum</i></div>
+    </div>
+
+    <div class="account-box">
+      <div class="account-img"><img src="assets/images/account-img.jpg"></div>
+      <div class="account-detail">
+        <h5>Jennifer Lawrence</h5>
+        <p>Chief Authority</p>
+      </div>
+      <div class="account-icon"><i class="material-icons">forum</i></div>
+    </div>
+
+    <div class="account-box">
+      <div class="account-img"><img src="assets/images/account-img.jpg"></div>
+      <div class="account-detail">
+        <h5>Jennifer Lawrence</h5>
+        <p>Chief Authority</p>
+      </div>
+      <div class="account-icon"><i class="material-icons">forum</i></div>
+    </div>
+
+    <div class="account-box">
+      <div class="account-img"><img src="assets/images/account-img.jpg"></div>
+      <div class="account-detail">
+        <h5>Jennifer Lawrence</h5>
+        <p>Chief Authority</p>
+      </div>
+      <div class="account-icon"><i class="material-icons">forum</i></div>
+    </div>
+
+    <div class="account-box">
+      <div class="account-img"><img src="assets/images/account-img.jpg"></div>
+      <div class="account-detail">
+        <h5>Jennifer Lawrence</h5>
+        <p>Chief Authority</p>
+      </div>
+      <div class="account-icon"><i class="material-icons">forum</i></div>
+    </div>
+
+    <div class="account-box">
+      <div class="account-img"><img src="assets/images/account-img.jpg"></div>
+      <div class="account-detail">
+        <h5>Jennifer Lawrence</h5>
+        <p>Chief Authority</p>
+      </div>
+      <div class="account-icon"><i class="material-icons">forum</i></div>
+    </div>
+
+    <div class="account-box">
+      <div class="account-img"><img src="assets/images/account-img.jpg"></div>
+      <div class="account-detail">
+        <h5>Jennifer Lawrence</h5>
+        <p>Chief Authority</p>
+      </div>
+      <div class="account-icon"><i class="material-icons">forum</i></div>
+    </div>
+
+    <div class="account-box">
+      <div class="account-img"><img src="assets/images/account-img.jpg"></div>
+      <div class="account-detail">
+        <h5>Jennifer Lawrence</h5>
+        <p>Chief Authority</p>
+      </div>
+      <div class="account-icon"><i class="material-icons">forum</i></div>
+    </div>
+</div>
+    <form class="accountsearch-form">
+  <mat-form-field class="">
+    <input matInput placeholder="Search Peoples,Chats and Reviews" value="">
+    <div class="search-icon"><i class="material-icons">search</i></div>
+  </mat-form-field>
+  <div class="edit-icon"><i class="material-icons">create</i></div>
+</form>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <i class="material-icons">chat</i>
+    </ng-template>
+    Content 2
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <i class="material-icons">account_circle</i>
+    </ng-template>
+
+    Content 3
+  </mat-tab>
+</mat-tab-group>
+                    </div> -->
+                    </div>
+
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </section>

@@ -1,0 +1,285 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<div id="home_wrapper_main" class="work_homewrap {{is_pg_class}} {{commonProfile}}">
+    <ng-template [ngIf]="is_home">
+
+        <header class="navbar navbar-expand navbar-dark px-4 flex-column flex-md-row">
+            <h1>
+                <a routerLink="/" aria-label="Remote Nepal" class="navbar-brand mr-md-2 mr-0">
+                    <img src="assets/images/logo-black.png"> Remote Nepal
+                </a>
+            </h1>
+            <div class="navbar-nav-scroll">
+                <ul class="navbar-nav flex-row">
+                    <li class="nav-item active"><a class="nav-link pointer-link" (click)="goToLink('https://blog.remotenepal.com')">Blog</a></li>
+                    <li class="nav-item active"><a class="nav-link pointer-link" (click)="onHowItWorks()">How it works</a></li>
+                    <li class="nav-item"><a class="nav-link" routerLink="/login">Login</a></li>
+                    <li class="nav-item"><a class="nav-link get-started-link" routerLink="/register">Get Started</a></li>
+                </ul>
+            </div>
+        </header>
+
+    </ng-template>
+    <ng-template [ngIf]="is_home==false">
+        <header>
+            <div class="container">
+                <div class="row">
+                    <h1>
+                        <a routerLink="/" aria-label="Remote Nepal" class="navbar-brand mr-md-2 mr-0">
+                            <img src="assets/images/logo-black.png"> Remote Nepal
+                        </a>
+                    </h1>
+                    <!--end col-->
+
+                    <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                        <div *ngIf="!isGuest" class="main-menu search-category_inner">
+                            <ul>
+                                <li>
+                                    <div  class="search-category">
+                                        <span *ngIf="searchPlaceholder == 'Freelancer';else onjobsearch">
+											<span (click)="onSearchBy()" class="form-icon"><i class="fa fa-search"></i></span>
+                                        <input #searchby (keydown.enter)="onSearchBy()" type="text" class="form-control" placeholder="Search {{searchPlaceholder}}" value="{{searchByuser}}">
+                                        </span>
+                                        <ng-template #onjobsearch>
+                                            <span (click)="onSearchBy()" class="form-icon"><i class="fa fa-search"></i></span>
+                                            <input #searchby (keydown.enter)="onSearchBy()" type="text" class="form-control" placeholder="Search {{searchPlaceholder}}" value="{{searchJobByuser}}">
+                                        </ng-template>
+
+                                        <button class="mat-topform" mat-button [matMenuTriggerFor]="appMenu">
+											<!-- <i class="material-icons">{{searchByIcon}}</i> -->
+											<i class="fa fa-chevron-down"></i>
+										</button>
+                                        <div class="mat-optionicon">
+                                            <mat-menu #appMenu="matMenu">
+                                                <button (click)="changeroute('Freelancer');" mat-menu-item>
+												
+													<span >Find freelancer</span>
+											  </button>
+                                                <button (click)="changeroute('Job');" mat-menu-item>
+												
+													<span>Find job</span>
+											  </button>
+                                            </mat-menu>
+                                        </div>
+                                    </div>
+                                </li>
+                                <div *ngIf="userType == 'Client';then clientprofileheader else freemyprofileheader">here is ignored</div>
+                                <ng-template #clientprofileheader>
+                                    <li>
+                                        <div class="dropdown"><a href="javascript:;" class="dropbtn">Jobs<span><i class="fa fa-chevron-down"></i></span></a>
+                                            <div class="dropdown-content">
+                                                <span class="arrow-up"></span>
+                                                <a routerLink="/joblisting">My Jobs</a>
+                                                <a routerLink="/search/job">All Job Postings</a>
+
+                                                <a routerLink="/all-my-contract">All Contracts</a>
+                                                <a routerLink="/postjob">Post a Job</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="dropdown"><a href="javascript:;" class="dropbtn">Freelancers<span><i class="fa fa-chevron-down"></i></span></a>
+                                            <div class="dropdown-content">
+                                                <span class="arrow-up"></span>
+                                                <a routerLink="/search/freelancer" (click)="freelancerlist(false)">My Freelancers</a>
+                                                <a routerLink="/search/freelancer" (click)="freelancerlist(true)">Find Freelancers</a>
+                                                <!--displayed none its freelancer pages currently start-->
+                                                <a style="display: none;" routerLink="/myproposal">Work Diary</a>
+                                                <a style="display: none;" routerLink="/mystatus">Bring Your Own Freelancer</a>
+                                                <!--displayed none its freelancer pages currently end-->
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ng-template>
+                                <ng-template #freemyprofileheader>
+                                    <li *ngIf="userType != 'Admin'">
+                                        <div class="dropdown"><a href="javascript:;" class="dropbtn">Find Work<span><i class="fa fa-chevron-down"></i></span></a>
+                                            <div class="dropdown-content">
+                                                <span class="arrow-up"></span>
+                                                <a routerLink="/search/job">Find Work</a>
+                                                <a routerLink="/job/saved">Saved Jobs</a>
+                                                <a routerLink="/myproposal">Proposals</a>
+                                                <!-- <a routerLink="/mystatus">My Stats</a> -->
+                                                <!-- <a routerLink="/search/test">Test</a> -->
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li *ngIf="userType != 'Admin'">
+                                        <div class="dropdown">
+                                            <a href="javascript:;">My Jobs<span><i class="fa fa-chevron-down"></i></span></a>
+                                            <div class="dropdown-content">
+                                                <span class="arrow-up"></span>
+                                                <a routerLink="/job/saved">My Jobs</a>
+                                                <a routerLink="/my-contract">All Contracts</a>
+                                                <!-- <a routerLink="#">Work Diary</a> -->
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ng-template>
+                                <li *ngIf="userType != 'Admin'"><a routerLink="/messages">Messages</a></li>
+                                <li *ngIf="userType != 'Admin'">
+                                    <a [ngClass]="(unseen_count > 0)?'active':''" (click)="getNotifications()" (clickOutside)="onClickOutside($event)"><i class="fa fa-bell"></i> <span class="notifyCount" *ngIf="unseen_count > 0">{{ unseen_count }}</span></a>
+                                </li>
+                                <span *ngIf="!isGuest;then logged"></span>
+                                <ng-template #logged>
+
+                                    <!-- PROFILE MENU START -->
+                                    <li class="profile-wrap" *ngIf="userType != 'Admin'">
+                                        <div class="profile-menu">
+                                            <span class="profile-img">
+								<span *ngIf="profileHeaderImage;else defaultIMage;">
+										<img src={{image_url}}{{profileHeaderImage}}>										
+								</span>
+                                            <ng-template #defaultIMage><img src="assets/images/profile_default.png"></ng-template>
+                                            </span>
+                                            <span class="profile-name">{{loginusername}}</span>
+                                            <p class="profile-position">{{userType}}</p>
+                                            <div class="profile-icon" (click)="toggle()"><i class="fa fa-chevron-down"></i></div>
+                                        </div>
+                                        <div class="profil-dropdown  {{buttonName}}">
+                                            <span class="arrow-up"></span>
+                                            <li class="menu-radio">
+                                                <mat-radio-group>
+                                                    <mat-radio-button class="radio-one" value="start" (click)="userOnlineStatus('online')" checked="{{onlineStatus == 'online' && onlineStatus != 'null' ? true : false}}">Online</mat-radio-button>
+                                                    <mat-radio-button class="radio-two" value="end" (click)="userOnlineStatus('offline')" checked="{{onlineStatus == 'offline' || onlineStatus == null ? true : false}}">Invisible</mat-radio-button>
+                                                </mat-radio-group>
+                                            </li>
+                                            <div *ngIf="userType == 'Client';then clientprofile else freemyprofile">here is ignored</div>
+
+                                            <ng-template #clientprofile>
+                                                <li class="dropdown-list">
+                                                    <a routerLink="/joblisting"><i class="material-icons">dns</i>
+													<span>My Post</span></a>
+                                                </li>
+                                                <li class="dropdown-list">
+                                                    <a routerLink="/profileedit"><i class="fa fa-cog"></i>
+														<span>Settings</span></a>
+                                                </li>
+                                            </ng-template>                                 
+                                            <ng-template #freemyprofile>
+                                                <li>
+                                                    <a routerLink="/setting/membership">
+                                                        <span>Available Connects</span> {{availableConnects}}</a>
+                                                </li>
+
+                                                <li class="dropdown-list">
+                                                    <a routerLink="/work-diary"><i class="material-icons">work</i>
+                                                     <span> Work Diary</span> </a>
+                                                </li>
+
+                                                <li class="dropdown-list">
+                                                    <a routerLink="/freelancerprofile"><i class="material-icons">dns</i>
+														<span>My Profile</span></a>
+                                                </li>
+                                                <li class="dropdown-list">
+                                                    <a routerLink="/freelancer/setting/profile"><i class="fa fa-cog"></i>
+														<span>Settings</span></a>
+                                                </li>
+                                            </ng-template>
+                                            <!-- <li class="dropdown-list">
+								<a routerLink="/profileedit"><i class="fa fa-cog"></i>
+								<span>Settings</span></a>
+							</li> -->
+                                            <li class="dropdown-list">
+                                                <a href="javascript:;" (click)="logout()"><i class="fa fa-sign-out"></i>
+    <span>Log Out</span></a>
+                                            </li>
+                                        </div>
+                                    </li>
+                                    <!-- PROFILE MENU END -->
+                                </ng-template>
+                            </ul>
+                        </div>
+                        <!--end main-menu-->
+                    </div>
+                    <!--end col-->
+                </div>
+                <!--end row-->
+            </div>
+            <!--end container-fluid-->
+        </header>
+    </ng-template>
+    <ng-template [ngIf]="isLayout2 && userType == 'Client'">
+        <div class="category_mainwrap profileedit-wrap profile_search_blk">
+            <div class="breadcrumb_wrap">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                            <h4>Profile Edit</h4>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                            <!-- <form>
+									<div class="search-category">
+										<span class="form-icon"><i class="fa fa-search"></i></span>
+										<input type="text" class="form-control" placeholder="Search Freelancers">
+									</div>
+								</form> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="profileedit_list profileedit_list_menu">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="sidemenu">
+                    <ul>
+                        <li><a class="activeLink" [class.activeLink]="activeUrl == '/profileedit'" routerLink="/profileedit"><span class="fa fa-user"></span>my info</a></li>
+                        <!-- <li><a class="activeLink" [class.activeLink]="activeUrl == '/setting/billing-methods'" routerLink="/setting/billing-methods"><span class="fa fa-money"></span>billing methods</a></li> -->
+                        <li><a class="activeLink" [class.activeLink]="activeUrl == '/setting/password'" routerLink="/setting/password"><span class="fa fa-lock"></span>password & security</a></li>
+                        <!--hided for future use-->
+                        <li style="display: none;"><a href=""><span class="fa fa-users"></span>teams</a></li>
+                        <li style="display: none;"><a href=""><span class="fa fa-bell"></span>notification settings</a></li>
+                        <!-- <li><a href=""><span class="fa fa-sitemap"></span>members & permissions</a></li> -->
+                        <li style="display: none;"><a href=""><span class="fa fa-link"></span>linked accounts</a></li>
+                        <!--hided for future use-->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template [ngIf]="isLayout2 && userType == 'Freelancer'">
+        <div class="category_mainwrap profileedit-wrap profile_search_blk">
+            <div class="breadcrumb_wrap">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                            <h4>Profile Edit</h4>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                            <!-- <form>
+									<div class="search-category">
+										<span class="form-icon"><i class="fa fa-search"></i></span>
+										<input type="text" class="form-control" placeholder="Search Freelancers">
+									</div>
+								</form> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="profileedit_list profileedit_list_menu">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="sidemenu">
+                    <ul>
+                        <!-- <li><a class="activeLink" [class.activeLink]="activeUrl == '/setting/billing-methods'" routerLink="/setting/billing-methods"><span class="fa fa-money" ></span>Billing Methods</a></li> -->
+                        <!-- <li><a class="activeLink" [class.activeLink]="activeUrl == '/setting/membership'" routerLink="/setting/membership"><span class="fa fa-sitemap"></span>Membership & Connects</a></li> -->
+                        <li><a class="activeLink" [class.activeLink]="activeUrl == '/freelancer/setting/contact'" routerLink="/freelancer/setting/contact"><span class="fa fa-info-circle"></span>Contact Info</a></li>
+                        <!-- <li><a href=""><span class="fa fa-percent"></span>Tax Information</a></li> -->
+                        <li><a class="activeLink" [class.activeLink]="activeUrl == '/freelancerprofile'" routerLink="/freelancerprofile"><span class="fa fa-user"></span>My Profile</a></li>
+                        <li><a class="activeLink" [class.activeLink]="activeUrl == '/freelancer/setting/profile'" routerLink="/freelancer/setting/profile"><span class="fa fa-cog"></span>Profile Settings</a></li>
+                        <!-- <li><a class="activeLink" [class.activeLink]="activeUrl == '/get-paid'" routerLink="/get-paid"><span class="fa fa-usd"></span>Get Paid</a></li> -->
+                        <!-- <li><a href=""><span class="fa fa-users"></span>My Teams</a></li>
+										<li><a href=""><span class="fa fa-mobile"></span>App Authorizations</a></li> -->
+                        <li><a class="activeLink" [class.activeLink]="activeUrl == '/setting/password'" routerLink="/setting/password"><span class="fa fa-lock"></span>Password & Security</a></li>
+                        <!-- <li><a href=""><span class="fa fa-bell"></span>Notification Settings</a></li> -->
+                        <!-- <li><a class="activeLink" [class.activeLink]="activeUrl == '/setting/withdraw-request'" routerLink="/setting/withdraw-request"><span class="fa fa-money" ></span>Withdraw Request</a></li> -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+    <router-outlet></router-outlet>
+    <app-footer *ngIf="displayFooter()"></app-footer>
+</div>
+<!--end work_homewrap-->

@@ -1,0 +1,275 @@
+<div class="category_mainwrap job_listingwrap">
+    <div class="breadcrumb_wrap">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <h4>My Proposal</h4>
+          </div>
+          <!--end col-->
+        </div>
+        <!--end row-->
+      </div>
+      <!--end container-->
+    </div>
+    <!--end breadcrumb_wrap-->
+  
+    <div class="my_proposal">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="bg-box profile_bg-box">
+  
+              <mat-tab-group>
+                <mat-tab label="ACTIVE">
+                  
+                  <div class="my_proposal_table">
+                    <div class="table-responsive">
+                      <div class="table_title">
+                        <h2>Invitations to interview</h2>
+                      </div>
+                      <div class="mat-elevation-z8">
+                        <table mat-table [dataSource]="inviteDataSource['data']">
+                          <!-- Serial Column -->
+                          <ng-container matColumnDef="no">
+                            <th mat-header-cell *matHeaderCellDef> No. </th>
+                            <td mat-cell *matCellDef="let element; let i = index;"> 
+                              <span *ngIf="invitePageEvent">
+                                {{invitePageEvent.pageIndex*10+ConvertToInt(i)+1}}
+                              </span>
+                               <span *ngIf="!invitePageEvent">
+                                 {{ ConvertToInt(i)+1 }}
+                                </span> </td>
+                          </ng-container>
+                           <!-- Date Column -->
+                           <ng-container matColumnDef="date">
+                            <th mat-header-cell *matHeaderCellDef> Date </th>
+                            <td mat-cell *matCellDef="let element"> 
+                                <p>{{element.created | date: 'MMM d, y'}}</p>
+                                <p>{{element.created | timeAgo}}</p>
+                            </td>
+                          </ng-container>
+  
+                          <!-- Name Column -->
+                          <ng-container matColumnDef="name">
+                            <th mat-header-cell *matHeaderCellDef> Name </th>
+                            <td mat-cell *matCellDef="let element"> {{element.job_detail.name}} </td>
+                          </ng-container>
+  
+                          <!-- Action Column -->
+                          <ng-container matColumnDef="action">
+                            <th mat-header-cell *matHeaderCellDef> Action </th>
+                            <td mat-cell *matCellDef="let element"> <a routerLink='/interview-detail/{{element.id}}' class="view-btn">View</a>
+                            </td>
+                          </ng-container>
+  
+                          <tr mat-header-row *matHeaderRowDef="displayedInviteColumns"></tr>
+                          <tr mat-row *matRowDef="let row; columns: displayedInviteColumns;"></tr>
+                        </table>
+                        <div class="no-results" [style.display]="resultsInviteLength == 0 ? '' : 'none'">
+                          No Record Found.
+                        </div>
+                        <span *ngIf="resultsInviteLength > 10;else resultsInviteLengthelse">
+                        <mat-paginator #invitepaginator [length]="resultsInviteLength" (page)="onInvitePaginateChange($event)"
+                        [pageSize]=10 showFirstLastButtons></mat-paginator>
+                      </span>
+                      <ng-template #resultsInviteLengthelse>
+                          <mat-paginator style="display:none;" #invitepaginator [length]="resultsInviteLength" (page)="onInvitePaginateChange($event)"
+                          [pageSize]=10 showFirstLastButtons></mat-paginator>
+                      </ng-template>
+                       
+                      </div>
+                    </div>
+                  </div>
+  
+  
+                  
+  
+  
+                  <div class="my_proposal_table">
+                    <div class="table-responsive">
+                      <div class="table_title">
+                        <h2>Submitted proposals</h2>
+                      </div>
+                      <div class="mat-elevation-z8">
+                        <table mat-table [dataSource]="submittedDataSource">
+  
+                          <!-- No Column -->
+                          <ng-container matColumnDef="no">
+                            <th mat-header-cell *matHeaderCellDef> No. </th>
+                            <td mat-cell *matCellDef="let element; let i = index;"> <span *ngIf="submittedPageEvent">{{submittedPageEvent.pageIndex*10+ConvertToInt(i)+1}}
+                              </span> <span *ngIf="!submittedPageEvent">{{ ConvertToInt(i)+1 }}</span> </td>
+                          </ng-container>
+  
+                          <!-- Date Column -->
+                          <ng-container matColumnDef="date">
+                              <th mat-header-cell *matHeaderCellDef> Date </th>
+                              <td mat-cell *matCellDef="let element"> 
+                                  <p>{{element.modified | date: 'MMM d, y'}}</p>
+                                  <p>{{element.modified | timeAgo}}</p>
+                              </td>
+                            </ng-container>
+  
+                          <!-- Name Column -->
+                          <ng-container matColumnDef="name">
+                            <th mat-header-cell *matHeaderCellDef> Name </th>
+                            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                          </ng-container>
+                          <!-- Action Column -->
+                          <ng-container matColumnDef="action">
+                            <th mat-header-cell *matHeaderCellDef> Action </th>
+                            <td mat-cell *matCellDef="let element"> <a routerLink='/proposal-details/{{element.id}}' class="view-btn">View</a></td>
+                          </ng-container>
+  
+                          <tr mat-header-row *matHeaderRowDef="displayedSubmittedColumns"></tr>
+                          <tr mat-row *matRowDef="let row; columns: displayedSubmittedColumns;"></tr>
+                        </table>
+                        <div class="no-results" [style.display]="resultsSubmittedLength == 0 ? '' : 'none'">
+                          No Record Found.
+                        </div>
+                        <span *ngIf="resultsSubmittedLength > 10;else Submittedproposalsnotshow">
+                          <mat-paginator #submitpaginator [length]="resultsSubmittedLength" (page)="onSubmitPaginateChange($event)"
+                          [pageSize]=10 showFirstLastButtons></mat-paginator>
+                        </span>
+                        <ng-template #Submittedproposalsnotshow>
+                          <mat-paginator style="display:none;" #submitpaginator [length]="resultsSubmittedLength" (page)="onSubmitPaginateChange($event)"
+                          [pageSize]=10 showFirstLastButtons></mat-paginator>
+                        </ng-template>
+                        
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Offer Listing starts  -->
+                  <div class="my_proposal_table">
+                    <div class="table-responsive">
+                      <div class="table_title">
+                        <h2>Offers</h2>
+                      </div>
+                      <div class="mat-elevation-z8">
+                        <table mat-table [dataSource]="offerDataSource">
+                          <!-- S.No -->
+                          <ng-container matColumnDef="no">
+                            <th mat-header-cell *matHeaderCellDef> No. </th>
+                            <td mat-cell *matCellDef="let element; let i = index;"> <span *ngIf="offerPageEvent">{{offerPageEvent.pageIndex*10+ConvertToInt(i)+1}}
+                              </span> <span *ngIf="!offerPageEvent">{{ ConvertToInt(i)+1 }}</span> </td>
+                          </ng-container>
+                           <!-- Date Column -->
+                           <ng-container matColumnDef="date">
+                              <th mat-header-cell *matHeaderCellDef> Date </th>
+                              <td mat-cell *matCellDef="let element"> 
+                                  <p>{{element.modified | date: 'MMM d, y'}}</p>
+                                  <p>{{element.modified | timeAgo}}</p>
+                              </td>
+                            </ng-container>
+                          <!-- Contract Title -->
+                          <ng-container matColumnDef="title">
+                            <th mat-header-cell *matHeaderCellDef>Contract Title</th>
+                            <td mat-cell *matCellDef="let row">{{ row.title }}</td>
+                          </ng-container>
+                          <!-- Amount -->
+                          <ng-container matColumnDef="amount">
+                            <th mat-header-cell *matHeaderCellDef>Amount</th>
+                            <td mat-cell *matCellDef="let row">{{ row.amount }} / {{ row.type }}</td>
+                          </ng-container>
+                          <!-- Action -->
+                          <ng-container matColumnDef="action">
+                            <th mat-header-cell *matHeaderCellDef> Action </th>
+                            <td mat-cell *matCellDef="let element"><a routerLink='/view-offer/{{element.id}}' class="view-btn">View</a></td>
+                          </ng-container>
+                          <tr mat-header-row *matHeaderRowDef="displayedOfferColumns"></tr>
+                          <tr mat-row *matRowDef="let row; columns: displayedOfferColumns;"></tr>
+                        </table>
+                        <!-- pagination -->
+                        <div class="no-results" [style.display]="resultsOfferLength == 0 ? '' : 'none'">
+                          No Record Found.
+                        </div>
+                        <span *ngIf="resultsOfferLength > 10;else offerDataSourceelsepagnator">
+                            <mat-paginator #offerpaginator [length]="resultsOfferLength" (page)="onOfferPaginateChange($event)"
+                            [pageSize]=10 showFirstLastButtons></mat-paginator>
+                        </span>
+                        <ng-template #offerDataSourceelsepagnator>
+                            <mat-paginator style="display: none;" #offerpaginator [length]="resultsOfferLength" (page)="onOfferPaginateChange($event)"
+                            [pageSize]=10 showFirstLastButtons></mat-paginator>
+                        </ng-template>
+                       
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Offer Listing ends  -->
+
+                  <div class="my_proposal_table">
+                    <div class="table-responsive">
+                      <div class="table_title">
+                        <h2>Active proposals</h2>
+                      </div>
+                      <div class="mat-elevation-z8">
+                        <table mat-table [dataSource]="activeDataSource">
+  
+                          <!-- no Column -->
+                          <ng-container matColumnDef="no">
+                            <th mat-header-cell *matHeaderCellDef> No. </th>
+                            <td mat-cell *matCellDef="let element; let i = index;"> <span *ngIf="activePageEvent">{{activePageEvent.pageIndex*10+ConvertToInt(i)+1}}
+                              </span> <span *ngIf="!activePageEvent">{{ ConvertToInt(i)+1 }}</span> </td>
+                          </ng-container>
+  
+                           <!-- Date Column -->
+                           <ng-container matColumnDef="date">
+                              <th mat-header-cell *matHeaderCellDef> Date </th>
+                              <td mat-cell *matCellDef="let element"> 
+                                  <p>{{element.modified | date: 'MMM d, y'}}</p>
+                                  <p>{{element.modified | timeAgo}}</p>
+                              </td>
+                            </ng-container>
+  
+                          <!-- Name Column -->
+                          <ng-container matColumnDef="name">
+                            <th mat-header-cell *matHeaderCellDef> Name </th>
+                            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                          </ng-container>
+  
+  
+                          <!-- Action Column -->
+                          <ng-container matColumnDef="action">
+                            <th mat-header-cell *matHeaderCellDef> Action </th>
+                            <td mat-cell *matCellDef="let element"> <a routerLink='/proposal-details/{{element.id}}' class="view-btn">View</a></td>
+                          </ng-container>
+  
+                          <tr mat-header-row *matHeaderRowDef="displayedActiveColumns"></tr>
+                          <tr mat-row *matRowDef="let row; columns: displayedActiveColumns;"></tr>
+                        </table>
+                        <div class="no-results" [style.display]="resultsActiveLength == 0 ? '' : 'none'">
+                          No Record Found.
+                        </div>
+                       <span *ngIf="resultsActiveLength > 10;else resultsActiveLengthelse">
+                            <mat-paginator #activepaginator [length]="resultsActiveLength" (page)="onActivePaginateChange($event)"
+                            [pageSize]=10 showFirstLastButtons></mat-paginator>
+                        </span>
+                        <ng-template #resultsActiveLengthelse>
+                            <mat-paginator style="display: none;" #activepaginator [length]="resultsActiveLength" (page)="onActivePaginateChange($event)"
+                            [pageSize]=10 showFirstLastButtons></mat-paginator>
+                        </ng-template>
+                        
+                      </div>
+                    </div>
+                  </div>
+                </mat-tab>
+  
+                <mat-tab label="ARCHIVED">
+                  <app-archiveproposal></app-archiveproposal>
+                </mat-tab>
+  
+              </mat-tab-group>
+  
+            </div>
+          </div>
+          <!--end col-->
+        </div>
+        <!--end row-->
+      </div>
+      <!--end container-->
+    </div>
+    <!--end job_listing-->
+  
+  </div>
+  <!--end job_listingwrap-->
+  

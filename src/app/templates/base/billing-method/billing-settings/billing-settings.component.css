@@ -1,0 +1,39 @@
+.category_mainwrap input::-webkit-input-placeholder { color: #b5b8b8 !important; }
+.category_mainwrap input:-moz-placeholder { color: #b5b8b8 !important;}
+ul { margin: 0;padding: 0;}
+li { list-style: none; }
+.add-billing-button { width:100%;display: inline-block; text-align: right; }
+.account-box.contact-box .row {border-bottom: 1px solid #e5e5e5; }
+.category_mainwrap .breadcrumb_wrap { background-color: #4A154B; padding: 35px 0; }
+.category_mainwrap .breadcrumb_wrap h4 { font-size: 32px; font-family: 'HelveticaNeue-Medium'; color: #fff; text-transform: capitalize; margin: 0; }
+.category_mainwrap .search-category { float: right; }
+.category_mainwrap .search-category span.form-icon { position: absolute;height: 100%;background: transparent;width: 40px;text-align: center;padding-top: 10px;padding-left: 4px;color: #4A154B;cursor: pointer;}
+.category_mainwrap .search-category input.form-control {height: 45px;border-radius: 30px;padding-left: 40px;font-family: 'HelveticaNeue';font-size: 16px;color: #3d3d3d;letter-spacing: 1px;line-height: 45px;}
+.profileedit_list { padding: 35px 0;}
+.profileedit_list .sidemenu { border: 1px solid #e5e5e5; }
+.profileedit_list .sidemenu ul li a span { margin-right: 10px; font-size: 30px; }
+.profileedit_list .sidemenu ul li a { display: inline-block; letter-spacing: 1px;font-family: 'HelveticaNeue'; font-size: 18px; color: #4A154B; text-decoration: none;width: 100%; line-height: 90px;text-align: left;padding-left: 15px;text-transform: capitalize;}
+.profileedit_list .sidemenu ul li a:hover { background-color: #4A154B;color: #fff;}
+.profileedit_list .account-box { border: 1px solid #e5e5e5; margin-bottom: 42px; }
+.account-box h3 { text-transform: capitalize; color: #4A154B; font-family: 'HelveticaNeue'; font-size: 16px; letter-spacing: 1.5px; }
+.category_mainwrap.profileedit-wrap.profileedit_list_middle {width: 815px;display: inline-block;vertical-align: top;text-align: left;}
+.billing_settings .account-box h3{ font-size: 16px;color: #4A154B;font-family: 'HelveticaNeue';letter-spacing: 1.5px;}
+.profileedit-wrap .account-box h3{ margin: 0 0px 0px !important;padding: 20px 15px !important;}
+.billing_settings .account-box h5 { font-size: 16px;font-weight: 600;}
+.billing_settings .account-box div {font-size: 14px;}
+.billing_settings .account-box .account-box {padding: 15px 15px;border: 0px;border-bottom: 1px solid #e5e5e5;}
+.billing_settings .account-box .account-box:last-child {border-bottom: 0px solid #e5e5e5; }
+.account-box button{font-family: 'HelveticaNeue'; font-size: 14px;background: #4A154B;color: #fff;font-weight: normal;margin-right: 5px;box-shadow: 0 3px 1px -2px rgba(0,0,0,.2),0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12);border: 0; padding: 0 16px; border-radius: 2px;min-width: 88px;line-height: 36px;margin:10px 10px; }
+.billing_settings .account-box a { color: #4A154B; font-weight: 600; cursor:pointer;}
+.billing_settings .profileedit_list .account-box {margin-bottom: 0px !important;}
+
+
+@media (max-width:767px)
+{
+.account-box.contact-box .pull-left, .account-box.contact-box .pull-right .add-billing-button { width:100%; text-align: center; }
+}
+
+@media (max-width:1114px )
+{
+.category_mainwrap.profileedit-wrap.profileedit_list_middle { width:100%; }
+}

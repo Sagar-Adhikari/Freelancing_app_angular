@@ -1,0 +1,5 @@
+.popup-title {  color: #4A154B; font-size: 25px; text-transform: uppercase; font-family: 'Open Sans', sans-serif; font-weight: normal; font-style: normal; letter-spacing: 1px;  }
+.modal-header { border-bottom: 1px solid #eceeef; padding:0 0 0 0; margin-bottom:10px;} 
+.cancel-btn.mat-button{ color:#000; background-color: #C4C7CD; }
+.save-btn.mat-button { background: #4A154B; color: #fff;  margin-right: 10px; }
+.popup-btn { width:100%; position: relative; display: inline-block; text-align: center; }

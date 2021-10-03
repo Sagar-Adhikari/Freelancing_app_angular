@@ -1,0 +1,48 @@
+<div class="admin-dashboard admin-settingspage admin-custompage">
+	<div class="general-form-layout custompage-form-layout">
+		<div class="model_main"> 
+			<div class="modal-header">
+        <h4 class="modal-title">Add a payment method</h4>
+        <button (click)="onCancel();"><mat-icon>close</mat-icon></button>
+        <!-- <mat-icon class="mat-icon material-icons" role="img" aria-hidden="true" (click)="onCancel();">close</mat-icon> -->
+			</div>
+			<div class="modal-body"> 
+        <div class="payment-popup-row">
+          <div class="title-row">
+            <h3>Recommended for India</h3>
+          </div>
+          <div class="row-blk">
+          <div class="left-img"><span class="payment-image"><img src="assets/images/bank-image1.png" /></span></div>
+          <div class="payment-popup-details">
+            <h3>Direct to Local Bank (INR)</h3>
+            <p *ngIf="withdraw_option != 'USD'">{{withdraw_fee_bank}} {{withdraw_option}} per withdrawal</p>
+            <p *ngIf="withdraw_option == 'USD'">${{withdraw_fee_bank}} {{withdraw_option}} per withdrawal</p>
+            <p>Deposit to your local bank account in INR </p>
+          </div>
+          <div class="setup-btn">
+            <button type="button" mat-button (click)="setupBank()" routerLink="/setup-bank" class="save-btn">Set Up</button>
+          </div>
+          </div>
+        </div>
+        <div class="payment-popup-row">
+          <div class="title-row">
+            <h3>Also Available</h3>
+          </div>
+          <div class="row-blk">
+          <div class="left-img"><span class="payment-image"><img src="assets/images/paypal-image1.png" /></span>
+          </div>
+          <div class="payment-popup-details">
+              <h3>Paypal</h3>
+            <p *ngIf="withdraw_option != 'USD'">{{withdraw_fee_paypal}} {{withdraw_option}} per withdrawal</p>
+            <p *ngIf="withdraw_option == 'USD'">${{withdraw_fee_paypal}} {{withdraw_option}} per withdrawal</p>
+            <p>Paypal may charge additional fees for sending and withdrawing funds. <a>Don't have a Paypal account?</a></p>
+          </div>
+          <div class="setup-btn">
+            <button type="button" mat-button (click)="setupPaypal()" routerLink="/setup-paypal" class="save-btn">Set Up</button>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

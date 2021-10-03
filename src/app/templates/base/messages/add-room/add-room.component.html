@@ -1,0 +1,55 @@
+<div class="testimonial-popup">
+	<div class="model_main"> 
+    <div class="create-room-title">
+      <h5>Create Room</h5>
+    </div>
+		<div class="modal-body">
+		<form [formGroup]="addRoom" (ngSubmit)="addRoomSubmit(addRoom.value)">
+      <ng-template [ngIf]="ismessage"><div class="alert alert-danger" role="alert" innerHTML="{{errormessage}}"></div></ng-template>
+      <ng-template [ngIf]="is_success"><div class="alert alert-success" role="alert">Room has been added successfully.</div></ng-template>
+      
+      <div class="row">
+
+      <div class="col-md-6">
+        <div class="from-group">
+          <mat-form-field appearance="outline">
+            <mat-label>Room Name</mat-label>            
+            <input matInput placeholder="Enter Room Name" formControlName="room_name" required>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+          <div class="from-group">
+          <mat-form-field appearance="outline">
+            <mat-label>Add People</mat-label>           
+            <mat-select formControlName="room_people" multiple required>
+              <mat-option *ngFor="let user of user_emails" [value]="user.email">{{user.email}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="from-group">
+          <mat-form-field appearance="outline">
+            <mat-label>Message</mat-label>
+            <input matInput placeholder="Enter Message" formControlName="room_message" required>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="submit-btn">
+          <button mat-raised-button type="submit" [disabled]="isbuttondisable">Send</button>
+        </div>
+      </div>
+      
+    </div>
+    </form>
+    </div><!--end modal-body-->
+    
+    <div class="dialogClose">
+      <a (click)="onCancel();"> <mat-icon>close</mat-icon></a></div>
+	</div>
+</div><!--end testimonial-popup-->

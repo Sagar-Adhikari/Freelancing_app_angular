@@ -1,0 +1,49 @@
+<div class="model_main">
+    <ng-container *ngIf="data.popup !== 'view'; else othercontent">
+        <div class="modal-header">
+            <h5 class="modal-title">Add description</h5>
+            <button (click)="onCancelClick()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="setDescForm">
+                <div class="model-container">
+                    <div class="popup_matrow">
+                        <mat-form-field appearance="outline">
+                            <textarea matInput formControlName="description" placeholder="Enter the description(Optional field only)"
+                                class="form-control"></textarea>
+                        </mat-form-field>
+                    </div>
+                    <div class="button-row bottom-btn">
+                        <button mat-button type="submit" (click)="OnSubmitDescript(setDescForm.value)" class="save-btn">Save</button>
+                        <button mat-button type="button" (click)="onCancelClick()" class="cancel-btn">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </ng-container>
+
+    <ng-template #othercontent>
+        <div class="modal-header">
+            <h5 class="modal-title">Request details</h5>
+            <button (click)="onCancelClick()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="model-container">
+                <div class="popup_matrow">
+                    <div>Name : {{data.payview.name}}</div>
+                    <div>Notes : {{data.payview.description}}</div>
+                    <div>Amount : {{data.payview.deposit_amount}}</div>
+                    <div>Request Date : {{data.payview.created | date:'yyyy-MM-dd hh:mm:ss a'}}</div>
+                    <div>Payment status : {{data.payview.payment_status ? 'Paid' : 'Not Paid'}}</div>
+                </div>
+                <div class="button-row bottom-btn">
+                    <button mat-button (click)="onCancelClick()" class="save-btn">Ok</button>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</div>

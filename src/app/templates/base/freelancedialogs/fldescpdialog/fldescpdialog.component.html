@@ -1,0 +1,38 @@
+<div>
+    <div class="model_main"> 
+      <div class="modal-header">
+          <h5 *ngIf="Description == '';else nodesc">Job Description</h5>
+          <ng-template #nodesc><h4> Edit Job Description</h4></ng-template>
+        <button (click)="onclickcancel()"><mat-icon>close</mat-icon></button>
+      </div>
+      <form [formGroup]="jobDescpEditForm">
+      <div class="modal-body">      
+        <div class="profile-leftblock">        
+          <div>
+            
+            <p>Use this space to show clients you have the skills and experience they're looking for.</p>
+                <mat-list role="list">
+                    <mat-list-item role="listitem" *ngFor="let define of DescriptionDef;let i = index">
+                      <span><span class="fa fa-circle icon"></span>{{define}}</span>
+                    </mat-list-item>
+                   </mat-list> 
+                   <span *ngIf="learnmorevar;else learnmorevarfalse">
+                      <span (click)="learnmore()" class="learn_btn">Learn less</span>
+                   </span><ng-template #learnmorevarfalse>
+                      <span (click)="learnmore()" class="learn_btn">Learn more</span>
+                   </ng-template>
+                   
+            <div class="form-group">
+                <textarea class="form-control" formControlName="description" placeholder="Enter job description"></textarea>
+                <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('description') || this.errorMsgArr['description']}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <button class="save-btn" (click)="saveJobDescp(jobDescpEditForm.value)">Save</button>
+        <button class="cancel-btn" (click)="onclickcancel()">Cancel</button>
+      </div>
+    </form>
+    </div>
+</div>

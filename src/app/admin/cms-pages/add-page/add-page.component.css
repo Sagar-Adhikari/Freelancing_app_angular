@@ -1,0 +1,31 @@
+.admin-dashboard.admin-cmspage{padding: 15px 15px;background: #eeeeee;height:auto;min-height:100%;}
+.admin-dashboard.admin-cmspage .pages-container{padding: 15px;background-color: #ffffff;box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);}
+.admin-dashboard.admin-cmspage .pages-container h2{border-bottom: 1px solid #ececed;color: #4A154B;font-size: 18px; padding-bottom: 15px; margin: 0 -15px 20px;padding: 0 15px 15px;}
+.admin-dashboard.admin-cmspage .pages-container .submit-btn button{margin-left: 0px;background: #4A154B;color: #fff;margin-right: 10px;}
+:host /deep/ .mat-radio-button{margin-right: 15px;position: relative;top:3px;}
+.admin-dashboard.admin-cmspage .pages-container .submit-btn{margin-top: 20px;width:100%;text-align: center;}
+.formfield-box{display: inline-block;width: 100%;padding: 0 15px;}
+:host /deep/ .formfield-box .mat-form-field{width: 100%;}
+.formfield-box.text-area { margin:0 0 25px 0;}
+.ql-editor { height:150px;}
+
+
+:host /deep/ .mat-form-field-appearance-legacy .mat-form-field-underline { background-color: transparent; }
+:host /deep/ .mat-form-field.mat-focused .mat-form-field-ripple { background-color: transparent; }
+:host /deep/ .mat-form-field-appearance-legacy .mat-form-field-infix { padding: .4375em 0; border: 1px solid #ced4da; padding: 14px; border-radius: 4px;}
+:host /deep/ .mat-form-field-type-mat-select .mat-form-field-label { padding:14px 10px;}
+:host /deep/ .mat-form-field { width:100%; }
+:host /deep/ .mat-form-field-appearance-outline .mat-form-field-infix { padding: 0.5em 0 0.5em 0; }
+:host /deep/ .mat-form-field-label-wrapper { top: -1.4em; padding-top: .5em; }
+:host /deep/ .mat-form-field-wrapper { padding-bottom:0px; }
+:host /deep/ .mat-form-field { width:100%; margin-top:10px;}
+:host /deep/ .mat-focused .mat-form-field-label { font-size:16px; }
+:host /deep/ input.mat-input-element { color:#34474f; margin-bottom: 5px; }
+:host /deep/ .mat-form-field-appearance-legacy.mat-form-field-can-float .mat-input-server:focus+.mat-form-field-label-wrapper .mat-form-field-label,
+:host /deep/ .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label { display: none; }
+
+
+@media(max-width: 767px)
+{
+.formfield-box{display: inline-block;width: 100%;padding: 0 15px;position: relative;}
+}

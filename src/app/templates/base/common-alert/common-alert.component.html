@@ -1,0 +1,11 @@
+
+<div class="container delete-popup">
+  <div class="modal-header">
+    <h3 class="popup-title" mat-dialog-title>{{data['msg']}}</h3>
+  </div>
+  <p>Sorry!! Time Up. You can continue with Next Question or Exit from the Test</p>
+  <div class="popup-btn" mat-dialog-actions>
+    <button class="save-btn" [disabled]='continueDisable' mat-button (click)="onclickenter()">{{data['btn']}}</button>
+    <button class="cancel-btn" mat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+  </div>
+</div>

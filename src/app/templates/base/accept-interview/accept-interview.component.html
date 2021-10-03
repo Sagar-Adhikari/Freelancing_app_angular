@@ -1,0 +1,144 @@
+<div class="category_mainwrap job_listingwrap">
+    <div class="breadcrumb_wrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <h4>Accept Interview</h4>
+                </div>
+                <!--end col-->
+            </div>
+            <!--end row-->
+        </div>
+        <!--end container-->
+    </div>
+    <!--end breadcrumb_wrap-->
+
+    <div class="job_listing">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <form [formGroup]="acceptForm">
+
+                        <div class="posting-box">
+                            <div class="post-head">
+                                <h3>Job Details</h3>
+                                <div *ngIf="display_data">
+                                    <div class="job-details">
+                                        <h6>{{result["0"].job_detail.name}}</h6>
+                                        <p *ngIf="result['0'].job_detail.category_name"> Category : {{result["0"].job_detail.category_name}} </p>
+                                        <p *ngIf="result['0'].job_detail.sub_category_name"> Sub Category : {{result["0"].job_detail.sub_category_name}} </p>
+                                        <p *ngIf="result['0'].job_detail.job_levels"> Level : {{result["0"].job_detail.job_levels}} </p>
+                                        <p *ngIf="result['0'].job_detail.price_type"> Type : {{result["0"].job_detail.price_type}} </p>
+                                        <p *ngIf="result['0'].reason"> Reason : {{result["0"].reason}} </p>
+                                    </div>
+
+                                    <div class="job-details">
+                                        <a routerLink="/jobdetail/{{result['0'].job_detail.id}}">View job posting</a>
+                                    </div>
+
+                                    <div *ngIf="result['0'].job_detail.required_skills!=''" class="job-details">
+                                        <h6>Skills and expertise</h6>
+                                        <p>{{result["0"].job_detail.required_skills}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end post-head-->
+                        </div>
+                        <!--end posting-box-->
+
+                        <div class="posting-box">
+                            <div class="post-head">
+                                <h3>Terms
+                                    <ng-template *ngIf="display_data && result['0'].job_detail.price_type!='Hourly'">Client's Budget: ${{result["0"].job_detail.price}} </ng-template>
+                                </h3>
+                                <div>
+                                    <label>Bid<br />Total amount the client will see on your proposal</label>
+                                    <mat-form-field appearance="outline" class="example-full-width">
+                                        <mat-label>Amount</mat-label>
+                                        <input matInput placeholder="Amount" allownumberonly formControlName="bid_amount" value="" autocomplete="off" (keyup)="onKeyUpamount($event)">
+                                    </mat-form-field>
+                                    <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('bid_amount')}}</div>
+                                </div>
+                                <div>
+                                    <label>Remote Nepal Service Fee <!-- <a routerLink="/#">Explain this</a> --></label>
+                                    <mat-form-field appearance="outline" class="example-full-width">
+                                        <mat-label>Amount</mat-label>
+                                        <input matInput placeholder="Amount" allownumberonly formControlName="service_amount" value="" autocomplete="off" [readonly]="true">
+                                    </mat-form-field>
+                                    <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('service_amount')}}</div>
+                                </div>
+                                <div>
+                                    <label>You'll Receive<br />The estimated amount you'll receive after service fees</label>
+                                    <mat-form-field appearance="outline" class="example-full-width">
+                                        <mat-label>Amount</mat-label>
+                                        <input matInput placeholder="Amount" allownumberonly formControlName="receive_amount" value="" autocomplete="off" [readonly]="true">
+                                    </mat-form-field>
+                                    <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('receive_amount')}}</div>
+                                </div>
+                            </div>
+                            <!--end post-head-->
+                        </div>
+                        <!--end posting-box-->
+
+                        <div class="posting-box">
+                            <div class="post-head">
+                                <h3>Time Limit</h3>
+                                <div>
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>How long do you think this project will take?</mat-label>
+                                        <mat-select formControlName="project_hour" placeholder="Please select">
+                                            <mat-option *ngFor="let hours of project_hours" [value]="hours.name">{{ hours.name }}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <!--end post-head-->
+                        </div>
+                        <!--end posting-box-->
+
+                        <div class="posting-box">
+                            <div class="post-head">
+                                <h3>Description</h3>
+                                <div>
+                                    <mat-form-field appearance="outline" class="example-full-width">
+                                        <mat-label>Get started on the right foot by setting clear expectations</mat-label>
+                                        <textarea matInput placeholder="Get started on the right foot by setting clear expectations" formControlName="description" matTextareaAutosize matAutosizeMinRows="10" matAutosizeMaxRows="10"></textarea>
+                                    </mat-form-field>
+                                    <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('description')}}</div>
+
+                                    <label for="file-upload" class="custom-file-upload">
+                      Upload Image 
+                  </label> &nbsp;&nbsp;
+                                    <span style="color:grey;">(Upload only JPG, JPEG, PNG and GIF)</span>
+                                    <input id="file-upload" type='file' (change)="readUrl($event)" multiple="" #msgfs mat-button style="display:none;">
+
+                                    <div *ngIf="url.length > 0">
+                                        <ng-container *ngFor="let preview of url; let j = index">
+                                            <ul class="images_list">
+                                                <li>
+                                                    <p>{{ preview.file_name }}<br />Size: {{ preview.size|bytes }}</p>
+                                                </li>
+                                                <li><a href="javascript:void(0);" (click)="removefiles(j);"><i class="material-icons">clear</i></a></li>
+                                            </ul>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end post-head-->
+                        </div>
+                        <!--end posting-box-->
+                        <div class="bottom-btn">
+                            <button mat-button type="submit" [disabled]="isbuttondisable" (click)=saveInterview(acceptForm.value)>Submit</button>
+                            <button mat-button class="cancel_button" (click)="onCancel()">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+                <!--end table-responsive-->
+            </div>
+            <!--end posting-box-->
+        </div>
+        <!--end col-->
+    </div>
+    <!--end row-->
+</div>
+<!--end container-->

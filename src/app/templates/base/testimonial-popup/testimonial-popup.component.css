@@ -1,0 +1,13 @@
+.modal-header{padding:0;border-bottom: none;margin-bottom: 10px;}
+.modal-header h4{color: #4A154B;font-size: 22px;text-transform: capitalize;}
+.modal-header button{background: transparent;border: none;color: #4A154B;cursor: pointer;}
+.modal-header button .mat-icon{color: #ae2838!important;}
+.modal-body{text-align: center;}
+.mat-form-field{width: 50%;}
+.submit-btn button{background: #4A154B;color: #fff;}
+
+@media(max-width: 767px)
+{
+.mat-form-field{width: 100%;}
+}
+

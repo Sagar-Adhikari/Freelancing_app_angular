@@ -1,0 +1,88 @@
+<div class="postjob-details">
+    <div class="container">
+        <div class="row">
+            <div class="modal-header">
+                <h4 class="modal-title">Edit Payment Schedule</h4>
+                <button class="mat-icon material-icons" role="img" aria-hidden="true" (click)="onCancel();">close
+        </button>
+            </div>
+        </div>
+        <div class="payment-schedule" *ngIf="isPrimary">
+            <form [formGroup]="paymentScheduleForm" (ngSubmit)="paymentScheduleFormSubmit(paymentScheduleForm.value)" (keydown.enter)="$event.preventDefault()" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label>Preferred Payment Method</label>
+                    <!-- bank setup -->
+                    <ng-container *ngIf="primaryAccount.payment_method == 'bank'">
+                        <div class="payment_info">
+                            {{primaryAccount.bank_name}} {{primaryAccount.bank_branch}} account ending in {{primaryAccount .account_number | slice:-4}}
+                        </div>
+
+                        <div class="payment-sublist">
+                            <h6>Remote Nepal Fee</h6>
+                            <p *ngIf="withdraw_option != 'USD'">{{withdraw_fee_bank}} {{withdraw_option}} per withdrawal</p>
+                            <p *ngIf="withdraw_option == 'USD'">${{withdraw_fee_bank}} {{withdraw_option}} per withdrawal</p>
+                            <p>Other bank fees may apply.</p>
+                        </div>
+                    </ng-container>
+                    <!-- paypal setup -->
+                    <ng-container *ngIf="primaryAccount.payment_method == 'paypal'">
+                        <div class="payment_info">Paypal - {{primaryAccount.paypal_email}}</div>
+                        <h6>Remote Nepal Fee</h6>
+                        <p *ngIf="withdraw_option != 'USD'">{{withdraw_fee_paypal}} {{withdraw_option}} per withdrawal</p>
+                        <p *ngIf="withdraw_option == 'USD'">${{withdraw_fee_paypal}} {{withdraw_option}} per withdrawal</p>
+                        <p>Paypal may charge additional fees for sending and withdrawing funds.</p>
+                    </ng-container>
+                </div>
+
+
+                <div class="form-group">
+                    <label>Preferred Payment Schedule</label>
+                    <p>Earnings will be released upon your request</p>
+
+                    <ul class="prefer-payment">
+
+                        <mat-radio-group formControlName="schedule_type" [(ngModel)]="defaultType">
+                            <ng-container class="row" *ngFor="let schItem of scheduleTypes">
+                                <li>
+                                    <mat-radio-button [value]="schItem.schedule_type" [checked]="schItem.schedule_type == defaultType" (change)="onchangeSchedule(schItem)">
+                                        {{schItem.schedule_type}} ( {{schItem.description}} )
+                                    </mat-radio-button>
+                                </li>
+                            </ng-container>
+                        </mat-radio-group>
+                    </ul>
+
+                    <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('schedule_type') || this.errorMsgArr['schedule_type']}}
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    <label>Only When Balance is</label>
+                    <mat-form-field appearance="outline">
+                        <mat-select placeholder="Select" formControlName="require_balance_amount" [(ngModel)]="defaultBalance">
+                            <mat-option *ngFor="let amountItem of scRequiredAmount" [value]="amountItem.key">
+                                {{ amountItem.name }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <p>Minimize withdrawal fees by choosing larger amount.</p>
+                    <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('require_balance_amount') || this.errorMsgArr['require_balance_amount']}}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Next Payment (based on your schedule)</label> {{displayNextPayment}}
+                </div>
+                <div class="bottom-btn">
+                    <button mat-button type="submit" [disabled]="isbuttondisable">Save</button>
+                    <button mat-button (click)="onCancel()" class="cancel-btn">Cancel</button>
+                </div>
+            </form>
+        </div>
+        <div class="" *ngIf="!isPrimary">
+            <p>You have not set up any primary payment methods yet.</p>
+            <p>Tell us how you want to receive your funds.</p>
+        </div>
+    </div>
+</div>

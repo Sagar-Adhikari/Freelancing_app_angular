@@ -1,0 +1,48 @@
+
+<section class="dashboard-wrap">
+    <div class="admin-dashboard admin-cmspage">
+      <div class="cms-container pages-container mat-elevation-z8">
+        <h2>Mail settings</h2>
+
+
+
+      <div class="cms-container mat-elevation-z8 table-box">
+        <div class="cms-table-container">
+
+<form [formGroup]="mailsettingsForm" (ngSubmit)="MailSubmit(mailsettingsForm.value)">
+
+  <div class="form-group">
+    <mat-form-field appearance="outline">
+        <mat-label>Select the key</mat-label>
+        <mat-select  formControlName="mailkey" placeholder="Please select a key" (selectionChange)="onchangeevent($event)">
+          <mat-option *ngFor="let template of mailtemplate" value="{{template.key}}">
+              {{template.key}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+  </div>
+  
+  <div class="form-group">
+    <mat-form-field appearance="outline">
+      <mat-label>Subject</mat-label>
+      <input matInput type="text" formControlName="subject" placeholder="Content">
+    </mat-form-field>
+  </div>
+  
+  <div class="form-group">
+    <label>Message</label>
+    <quill-editor formControlName="Messege"></quill-editor>
+  </div> 
+
+  <div class="account-button">
+    <button mat-button type="submit">Save</button>
+    <button mat-button type="button" class="agent_cancelbtn" routerLink="/admin/dashboard">Cancel</button>
+  </div>
+</form>
+
+</div>
+</div>
+
+</div>
+</div>
+</section>

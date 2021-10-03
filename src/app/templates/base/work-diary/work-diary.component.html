@@ -1,0 +1,243 @@
+<link
+  href="https://fonts.googleapis.com/icon?family=Material+Icons"
+  rel="stylesheet"
+/>
+<div class="outer-div">
+  <div class="breadcrumb_wrap">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <h4>Work Diary</h4>
+        </div>
+        <!--end col-->
+      </div>
+      <!--end row-->
+    </div>
+    <!--end container-->
+  </div>
+
+  <div class="top-main">
+    <div class="main-block">
+      <div class="filter_options">
+        <div class="class_drop-down">
+          <mat-form-field class="mat-field">
+            <mat-select
+              class="select"
+              [(ngModel)]="selectedContractId"
+              (selectionChange)="contractChanged($event.value)"
+            >
+              <mat-option
+                *ngFor="let contract of contracts"
+                [(value)]="contract.contract_id"
+              >
+                {{ contract.contract_name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="class_drop-down">
+          <img class="logo" src="../../../../assets/images/myImage.png" />
+          <span>{{ freelancerName }}</span>
+          <!-- <mat-form-field class = "mat-field-2" style="float: right;" >
+                   <mat-select class="select-2" [(value)]="selectedName" name="name">
+                   <mat-option *ngFor="let freelance of freelancer" [value]="freelance.freelancer_id" >
+                      {{freelance.freelancer_name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>  -->
+        </div>
+      </div>
+
+      <header class="header-row">
+        <mat-icon (click)="previousDate()">keyboard_arrow_left</mat-icon>
+        <mat-form-field class="date-field">
+          <span>{{ tillDate }}</span>
+          <input
+            (keypress)="$event.preventDefault()"
+            matInput
+            #tillDt
+            [matDatepicker]="dateTill"
+            [(ngModel)]="tillDate"
+            (dateChange)="onChange($event.value)"
+            autocomplete="off"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="dateTill"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #dateTill></mat-datepicker>
+        </mat-form-field>
+        <mat-icon (click)="nextDate()">keyboard_arrow_right</mat-icon>
+      </header>
+
+      <div class="time-stamps">
+        <div class="time-stamps-content" >
+          <p>Total Time Tracked :</p>
+          <span> {{totalTimeTracked}} </span>
+          <mat-icon>refresh</mat-icon>
+
+        </div>
+ 
+        <div class="time-stamps-btn" >
+          <button mat-raised-button (click)="deleteDialog(deletePopup)" [disabled]="!disabled">
+            Delete
+          </button>
+          <button class="time-stamps-btn-update" mat-raised-button (click)="updateDialog(updatePopup)" [disabled]="!disabled">
+            Update
+          </button>
+        </div>
+      </div>
+
+      <div class="not-working">
+        <div class="progress-gap"></div>
+        <div class="work">
+          <div
+            *ngFor="let hour_log of time_logs; let hourIndex = index"
+            class="work-time-loop"
+          >
+            <div class="work-1">
+              <div class="work-2">
+                <div class="working-time">
+                  {{
+                    hour_log.hour > 12
+                    ? (hour_log.hour - 12 ) + timeMeridiem
+                    : (hour_log.hour ) + timeMeridiem
+                  }}
+                </div>
+            
+                <div class="work-3">
+                  <div
+                    class="auth-bar-width"
+                    fxLayout="row"
+                    fxLayoutAlign="center center"
+                    *ngFor="let hourlyEntries of hour_log.entities"
+                    [ngStyle]="{
+                      width:
+                        (hourlyEntries.endIndex -
+                          hourlyEntries.startIndex +
+                          1) *
+                          (90 / 6) +
+                        '%'
+                    }"
+                  >
+                    <div
+                      class="auth-bar"
+                      [ngClass]="
+                        hourlyEntries.status == 'n' ? 'white-bar' : 'green-bar'
+                      "
+                    >
+                      {{ hourlyEntries.memo }}
+                    </div>
+                  </div>
+
+                  <div class="box-type" fxLayout="row">
+                    <div
+                      class="rectangular-boxes"
+                      fxLayout="row"
+                      *ngFor="
+                        let item of [].constructor(6);
+                        let boxIndex = index
+                      "
+                    >
+                      <div *ngIf="isWorking(hourIndex, boxIndex)">
+                        <span class="isWorking">
+                          <img
+                            [src]="getScreenshotPath(hourIndex, boxIndex)"
+                            (click)="
+                              imageDialog(
+                                imagePopup,
+                                getScreenshotPath(hourIndex, boxIndex)
+                              )
+                            "
+                          />
+                        </span>
+                        <ng-container>
+                          <div class="mat-checkbox">
+                            <mat-checkbox
+                              class="check-box"
+                             [value]="getMatCheckedValue(hourIndex,boxIndex)"                               
+                              (change)="checkBoxValueChange($event,hourIndex,boxIndex)"
+                              >{{
+                                hour_log.hour > 12
+                                  ? hour_log.hour - 12
+                                  : hour_log.hour
+                              }}:{{ boxIndex }}{{ 0 }}
+                            </mat-checkbox>
+                          </div>
+                        </ng-container>
+                      </div>
+                      <div *ngIf="!isWorking(hourIndex, boxIndex)">
+                        <span class="isNotWorking"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #deletePopup>
+  <div>
+    <span style="font-family: Roboto; font-weight: 600; font-size: 20px"
+      >Are you sure to delete Memo</span
+    >
+    <div style="margin-top: 125px; text-align: center">
+      <button mat-button [mat-dialog-close]="true">
+        <mat-icon class="mat-icon material-icons" aria-hidden="true"></mat-icon
+        >Cancel
+      </button>
+      <button mat-raised-button (click)="deleteScreenshot()">Ok</button>
+
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #updatePopup>
+  <div style="display: inline-block">
+    <span style="font-family: Roboto; font-weight: 600; font-size: 20px"
+      >Are you sure to update Memo</span
+    >
+    <mat-form-field style="width: 100%" appearance="outline">
+      <mat-label>Memo</mat-label>
+      <input
+        matInput
+        type="text"
+        [(ngModel)]="memo"
+        placeholder=" Enter Memo"
+        required
+      />
+    </mat-form-field>
+  </div>
+
+  <div style="margin-top: 125px; text-align: center">
+    <button mat-button [mat-dialog-close]="true">
+      <mat-icon class="mat-icon material-icons" aria-hidden="true"></mat-icon
+      >Cancel
+    </button>
+    <button mat-raised-button (click)="updateScreenshot()" >Update</button>
+
+  </div>
+</ng-template>
+
+<ng-template #imagePopup>
+  <div class="dialog-template">
+    <div style="float: right">
+      <button mat-raised-button [mat-dialog-close]="true">
+        <mat-icon class="mat-icon material-icons" aria-hidden="true"
+          >cancel</mat-icon
+        >
+      </button>
+    </div>
+    <div class="mat-dialog-container">
+      <div>
+        <img style="width: 100%" [src]="popupImagePath" />
+      </div>
+    </div>
+  </div>
+</ng-template>

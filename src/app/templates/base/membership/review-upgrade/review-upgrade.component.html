@@ -1,0 +1,100 @@
+<div class="category_mainwrap freelancer_profile">
+    <div class="breadcrumb_wrap">
+        <!--start breadcrumb_wrap-->
+        <div class="container">
+            <!--start container-->
+            <div class="row">
+                <!--start row-->
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <!--start col-->
+                    <h4>Review upgrade</h4>
+                </div>
+                <!--end col-->
+            </div>
+            <!--end row-->
+        </div>
+        <!--end container-->
+    </div>
+    <!--end breadcrumb_wrap-->
+
+    <div class="freelancer-wrap changeplan-wrap upgradeplan-wrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="bg-box profile_bg-box">
+                        <!-- <div class="freelancer-detail changeplan_detail">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                      <h4>Review upgrade</h4>
+                    </div>
+                  </div>
+              </div> -->
+                        <div class="change_plan_content">
+                            <div class="row plan_title">
+                                <h1>Membership plan</h1>
+                            </div>
+                            <div class="row membership_plans">
+                                <div class="plans_block" *ngIf="isLoadCurrent">
+                                    <h1>Current Plan</h1>
+                                    <h2>Freelancer {{currentPlan.membership_name}}</h2>
+                                    <h2>{{currentPlan.membership_connect}} Connects/{{currentPlan.membership_type}}</h2>
+                                    <h2 *ngIf="currentPlan.default_type == 1">Free</h2>
+                                    <h2 *ngIf="currentPlan.default_type == 2">${{currentPlan.membership_amount}}/{{currentPlan.membership_type}}</h2>
+                                </div>
+                                <div class="plans_block" *ngIf="isLoadNew">
+                                    <h1>New Plan</h1>
+                                    <h2>Freelancer {{newPlan.membership_name}}</h2>
+                                    <h2>{{newPlan.membership_connect}} Connects/{{newPlan.membership_type}}</h2>
+                                    <h2 *ngIf="newPlan.default_type == 1">Free</h2>
+                                    <h2 *ngIf="newPlan.default_type == 2">${{newPlan.membership_amount}}/{{newPlan.membership_type}}</h2>
+                                </div>
+                            </div>
+                            <div class="row billing_details">
+                                <h1>Your Connects balance </h1>
+                                <h2>Your billing cycle will reset today when you upgrade. Because you're already partway through your previous billing cycle, the Connects you receive today will be pro-rated. </h2>
+                            </div>
+                            <div class="row connects_balance_block" *ngIf="isBilling">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 plan_list_items">
+                                    <h1>Connects You'll Receive Today</h1>
+                                    <h2>{{currentBilling.days_connect}}</h2>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 plan_list_items">
+                                    <h1>Current Balance</h1>
+                                    <h2>{{currentBilling.user_connect}}</h2>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 plan_list_items">
+                                    <h1>Balance After Upgrading</h1>
+                                    <h2>{{currentBilling.total_connect}}</h2>
+                                </div>
+                                <h6 class="gray_line"></h6>
+                            </div>
+                            <div class="row upgrade_descriptions">
+                                <h3>If you have sufficient funds, the monthly membership fee will be deducted from your Remote Nepal account balance.</h3>
+                                <h3>If your balance is not sufficient, the full amount of the fee will be charged to your primary billing method.
+                                    <!-- <span class="learn_more"><a>Learn more</a></span> --></h3>
+                                <h4>You're authorizing Remote Nepal to charge $10.00 to your account at the beginning of each billing cycle. </h4>
+                            </div>
+                        </div>
+                        <div class="freelancer-detail changeplan_detail">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <!--start col-->
+                                    <button type="button" mat-button *ngIf="isLoadNew" (click)="billingPopup();">Activate Freelancer {{newPlan.membership_name}}</button>
+                                    <button type="button" mat-button class="cancel_button" routerLink="/membership/changeplan">Cancel</button>
+                                </div>
+                                <!--end col-->
+                            </div>
+                        </div>
+                        <!--end freelancer-detail-->
+                    </div>
+                    <!--end bg-box-->
+                </div>
+                <!--end col-->
+            </div>
+            <!--end row-->
+        </div>
+        <!--end container-->
+    </div>
+    <!--end freelancer-wrap-->
+</div>
+<!--end freelancer_profile-->

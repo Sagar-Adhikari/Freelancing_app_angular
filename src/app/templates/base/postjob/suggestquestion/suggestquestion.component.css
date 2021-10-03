@@ -1,0 +1,3 @@
+.bottom-btn button{font-family: 'HelveticaNeue';font-size: 14px;background: #4A154B;color: #fff;font-weight: normal;margin-right: 5px;}
+.bottom-btn{margin-top: 10px;}
+::ng-deep mat-label{font-weight: bold;margin-bottom: 15px;display: inline-block;}

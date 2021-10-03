@@ -1,0 +1,109 @@
+<div class="admin-view-freelancer freelancer_profile">
+    <div class="pages-container">
+        <div class="category_mainwrap job_detailwrap">
+            <div class="breadcrumb_wrap">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <h4>View Client</h4>
+                        </div>
+                        <!--end col-->
+                    </div>
+                    <!--end row-->
+                </div>
+                <!--end container-->
+            </div>
+        <!--end breadcrumb_wrap-->
+        </div>
+        <div class="freelancer-wrap">
+            <div class="container" *ngIf="isLoadingResults"  >
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 view_client_page">
+                        <div class="bg-box profile_bg-box">
+                            <div class="profile_back_btn"><!--start profile back button-->
+                                <button routerLink="/admin/user-clients"  class="back_button save-btn" mat-button><i class="material-icons">keyboard_backspace</i> Back</button>
+                            </div><!--end profile back button-->
+                            <div class="profile-img"><img src={{profileImage}}></div>
+                            <div class="client_details">
+                                <div class="left_side_block">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <span class="label_text">First Name</span>
+                                            <span>{{ userinfo.first_name }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <span class="label_text">Last Name</span>
+                                            <span>{{ userinfo.last_name }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <span class="label_text">Email</span>
+                                            <span>{{ userinfo.email }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 location_blk">
+                                            <span class="label_text">Location</span>
+                                            <div class="location_rightside">
+                                            <p>{{ userinfo.profile.address }}</p>
+                                            <p>{{ userinfo.profile.country }}</p>
+                                            <p>{{ userinfo.profile.state }}</p>
+                                            <p>{{ userinfo.profile.city }}</p>
+                                            <p>{{ userinfo.profile.zipcode }}</p>
+                                            </div>
+                                            <!-- <p>profile address</p>
+                                            <p>profile country</p>
+                                            <p>profile state</p>
+                                            <p>profile city</p>
+                                            <p>profile zipcode</p> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="right_side_block">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <span class="label_text">Phone</span>
+                                            <span>{{ userinfo.profile.phone }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="row"> 
+                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <span class="label_text">VAT ID</span>
+                                            <span>{{ userinfo.profile.vat }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <span class="label_text">Job Count</span><span>{{ userinfo.profile.job_count }}</span>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <span class="label_text">Job Open</span><span>{{ userinfo.profile.job_open }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="row" *ngIf="isLoadCompany">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 company_blk">
+                                            <h3>Company</h3>
+                                            <div class="row_details"><span class="label_text">Company Name</span><span>{{ company_name }}</span></div>
+                                            <div class="row_details"><span class="label_text">Website</span><span>{{ company_website }}</span></div>
+                                            <div class="row_details"><span class="label_text">Tagline</span><span>{{ company_tagline }}</span></div>
+                                            <div class="row_details"><span class="label_text">Description</span><span>{{ company_description }}</span></div>
+                                        </div>
+                                    </div>
+                                    <ul *ngFor='let docurl of docurls' class="client_view_list">
+                                        <li>
+                                            <img [src]="docurl.image" height="200" />
+                                            <a target="_blank" [href]="docurl.file">Download</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

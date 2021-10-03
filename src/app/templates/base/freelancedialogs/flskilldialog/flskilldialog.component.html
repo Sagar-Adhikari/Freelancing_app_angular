@@ -1,0 +1,40 @@
+<div>
+    <div class="model_main"> 
+      <div class="modal-header">
+        <h4 class="modal-title">My Skills</h4>
+        <button (click)="onclickcancel()"><mat-icon>close</mat-icon></button>
+      </div>
+      <form [formGroup]="jobSkillEditForm">
+      <div class="modal-body">      
+        <div class="profile-leftblock">        
+          <div>
+            <div class="form-group">
+                <label>Enter Skills</label>
+                <div class="skills_block">
+
+                <!-- <ng-select formControlName="skills" [addTag]="true" [items]="skillists" [(ngModel)]="defaultSelectSkill" [multiple]="true" bindLabel="name" bindValue="id" (change)="onChangeSkills($event)">
+                    <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                      {{item.name}}
+                      <span class="ng-value-icon right" (click)="clear(item); $event.stopPropagation()" aria-hidden="true">×</span>
+                    </ng-template>
+                </ng-select> -->
+  
+                <mat-select placeholder="Select a Skill" formControlName="skills" [(ngModel)]="defaultSelectSkill" multiple (ngModelChange)="onChangeSkills($event)">
+                    <mat-option *ngFor="let topping of skillists;let i = index;" [value]="topping">
+                      {{topping.name}} 
+                       <span class="ng-value-icon right" (click)="$event.stopPropagation()" aria-hidden="true"></span>
+                    </mat-option>
+                  </mat-select>
+                </div>
+                <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('skills') || this.errorMsgArr['skills']}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <button class="save-btn" (click)="saveJobSkills()">Save</button>
+        <button class="cancel-btn" (click)="onclickcancel()">Cancel</button>
+      </div>
+    </form>
+    </div>
+</div>

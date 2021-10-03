@@ -1,0 +1,144 @@
+<div class="message-left">
+<div class="sidebar-section">
+	<!-- <div class="container">
+	<div class="row">
+
+	<div class="col-lg-3 col-md-2 col-sm-2"> -->
+
+		<div class="container message-sub">
+	<!-- <div class="messageHeader"> -->
+		<div class="messageIconsOne">
+			<button class="top-iconbtn" [matMenuTriggerFor]="settings" mat-button><span class="fa fa-cog"></span></button>
+		</div>
+		<div class="messageIconsTwo">
+			<button class="top-iconbtn top-righticon" mat-button (click)="addroom();"><span class="fa fa-user"></span></button>
+		</div>
+
+		<mat-menu #settings="matMenu" class="matMenuSettings">
+			<button mat-button class="matSettings" (click)="settingPopup();">
+				<span>Settings</span>
+			</button>
+			<button mat-button class="matSettings" (click)="shortPopup();">
+				<span>Shortcut Keys</span>
+			</button>
+		</mat-menu>
+	<!-- </div> -->
+
+
+	<!-- <div class="col-lg-6 col-md-8 col-sm-8 MessageCenterContent"> -->
+		<mat-tab-group>
+			<mat-tab label="Tab 1">
+				<ng-template mat-tab-label>
+					<span class="fa fa-commenting"></span>
+				</ng-template>
+
+				<div class="message-user" *ngIf="recent_room_list.length>0">
+
+					<ng-container *ngFor="let recent_room of recent_room_list">
+						<div class="inner-box">
+							<div class="row">
+								<ul class="container message_userlist">
+									<!-- <li class="col-md-2 col-sm-2">
+										<div class="user-avatar">
+											<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyf93CzD6zMkpTmIhSDPbqcOnXLaPZEtGHVon_Yee7SErXjkyO_g">
+										</div>
+									</li> -->
+
+									<li class="col-md-9 col-sm-9">
+										<!-- <h3>Profile Name</h3> -->
+										<a routerLink="/chat-room/{{recent_room.id}}">
+											{{recent_room.room_name}}
+										</a><br/>
+										<span class="time">{{recent_room.full_name}}</span>
+										
+									</li>
+
+									<li class="col-md-3 col-sm-3">
+										<!-- <a><i class="material-icons">more_horiz</i></a> -->
+										<span class="time">{{recent_room.new_date_format}}</span>
+									</li>
+								</ul>
+							</div>
+							<!-- <div class="user-detail">
+								<h4><a routerLink="/chat-room/{{recent_room.id}}">{{recent_room.room_name}} <span class="time">{{recent_room.new_date_format}}</span></a></h4>
+							</div> -->
+							<!--end user-detail-->
+							<!--end mess-menu-->
+						</div>
+					</ng-container>
+					<!--end inner-box-->
+				</div><!--end message-user-->
+			</mat-tab>
+
+			<mat-tab label="Tab 2">
+				<ng-template mat-tab-label>
+					<span class="fa fa-user-plus"></span>
+				</ng-template>
+				<div class="message-user" *ngIf="all_recent_room_list.length>0">
+
+					<ng-container *ngFor="let recent_room of all_recent_room_list">
+						<div class="inner-box">
+
+								<div class="row">
+										<ul class="container message_userlist">
+											<!-- <li class="col-md-2 col-sm-2">
+												<div class="user-avatar">
+													<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyf93CzD6zMkpTmIhSDPbqcOnXLaPZEtGHVon_Yee7SErXjkyO_g">
+												</div>
+											</li> -->
+		
+											<li class="col-md-9 col-sm-9">
+												<!-- <h3>Profile Name</h3> -->
+												<a routerLink="/chat-room/{{recent_room.id}}">{{recent_room.room_name}}</a>
+											</li>
+		
+											<li class="col-md-3 col-sm-3">
+												<!-- <a><i class="material-icons">more_horiz</i></a> -->
+												<span class="time">{{recent_room.new_date_format}}</span>
+											</li>
+										</ul>
+									</div>
+
+							<!-- <div class="user-detail">
+								<h4><a routerLink="/chat-room/{{recent_room.id}}">{{recent_room.room_name}}</a></h4>
+							</div> -->
+							<!--end user-detail-->
+							<!--end mess-menu-->
+							<!-- <p class="time">{{recent_room.new_date_format}}</p> -->
+						</div>
+					</ng-container>
+					<!--end inner-box-->
+				</div><!--end message-user-->
+			</mat-tab>
+
+		</mat-tab-group>
+	<!-- </div> -->
+	</div>
+		<!-- </div>
+
+		<div class="col-lg-3 col-md-2 col-sm-2"> -->
+			<!-- <div class="messageIcons">
+				<button class="top-iconbtn top-righticon" mat-button (click)="addroom();"><span class="fa fa-user"></span></button>
+			</div> -->
+		<!-- </div>
+	</div>
+	</div> -->
+
+	<div class="form-topHeader">
+		<form class="leftmessage-form">
+			<mat-form-field class="example-full-width">
+				<span class="form-icon"><i class="fa fa-search"></i></span>
+				<input matInput placeholder="Search" (keyup.enter)="getrecentroombysearch($event);">
+			</mat-form-field>
+		</form>
+	</div>
+
+		<div class="oldermessage-box">
+			<p>Looking for older messages?</p>
+			<a routerLink="/messages">view all rooms & people</a>
+		</div><!--end oldermessage-box-->
+
+
+
+	</div>
+	</div><!--end message-left-->

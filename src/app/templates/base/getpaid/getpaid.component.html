@@ -1,0 +1,93 @@
+<div class="category_mainwrap profileedit-wrap profileedit_list_middle getpaid_wrap">
+  <div class="profileedit_list">
+    <div class="container">
+    <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="account-box contact-box" *ngIf="isLoad">
+        <div class="account-box contact-box">
+          <h5>Balance</h5>
+          <div>Your balance is ${{getPaidData.balance_amount}}</div>
+          <button type="button" mat-button *ngIf="paymentMethods.length > 0 && getPaidData.balance_amount > 0" [disabled]="!paidAllow" (click)="getpaidnow()">Get Paid Now</button>
+        </div>
+
+        <div class="account-box contact-box">
+          <h5>Payment Details</h5>
+
+          <div *ngIf="paymentMethods.length > 0;else nopayments">
+            <!-- Payment schedule starts -->
+            <div class="payment_schedule_block" *ngIf="isPrimary">
+              <h6>Schedule</h6>
+              <ng-container *ngIf="scheduledAdded;else noschedule">
+                <button type="button" mat-button (click)="paymentSchedule();">Edit Schedule</button>
+                <p>{{scheduleType}} (next on {{nextPayment | date: 'mediumDate'}}) to
+                  <!-- bank setup -->
+                  <ng-container *ngIf="primaryAccount.payment_method == 'bank'">
+                    Direct to Local Bank ({{primaryAccount.currency}}) - Account ending in
+                    {{primaryAccount.account_number |
+                    slice:-4}}
+                  </ng-container>
+                  <!-- paypal setup -->
+                  <ng-container *ngIf="primaryAccount.payment_method == 'paypal'">
+                    Paypal - {{primaryAccount.paypal_email}}
+                  </ng-container>
+                </p>
+                <p>Only when balance is {{scDisplayAmount.name}}. <!-- <a>View payment calender</a> --></p>
+              </ng-container>
+              <ng-template #noschedule>
+                <button type="button" mat-button (click)="paymentSchedule();">Add Schedule</button>
+                <p>No schedule added.</p>
+              </ng-template>
+            </div>
+            <!-- Payment schedule ends -->
+            <h6>Payment Methods</h6>
+            <button type="button" mat-button (click)="addPaymentMethod();">Add Method</button>
+            <!-- Payment methods starts -->
+            <div class="payment_method_block">
+              <ul>
+                <li *ngFor="let payItem of paymentMethods">
+
+                  <!-- bank setup -->
+                  <ng-container *ngIf="payItem.payment_method == 'bank'">
+                    <div>Direct to Local Bank ({{payItem.currency}}) - Account ending in {{payItem.account_number |
+                      slice:-4}}
+                        <ng-container *ngIf="payItem.is_primary==true">
+                          <i class="material-icons primary">check_circle_outline</i>
+                        </ng-container></div>
+                  </ng-container>
+                  <!-- paypal setup -->
+                  <ng-container *ngIf="payItem.payment_method == 'paypal'">
+                    <div>Paypal - {{payItem.paypal_email}}
+
+                        <ng-container *ngIf="payItem.is_primary==true">
+                            <i class="material-icons primary">check_circle_outline</i>
+                          </ng-container>
+                    </div>
+                  </ng-container>
+                  <!--menu starts -->
+                  <button mat-button [matMenuTriggerFor]="menu">...</button>
+                  <mat-menu #menu="matMenu">
+                    <button mat-menu-item color="primary" focusable="false" (click)="setPrimaryPaymentSetup(payItem.id)"
+                      *ngIf="payItem.is_primary==false">Set primary</button>
+
+                    <button mat-menu-item color="primary" class="remove-btn" focusable="false" (click)="deletePaymentSetup(payItem.id)">
+                      <i class="material-icons">delete</i><span>Remove</span>
+                    </button>
+                  </mat-menu>
+                  <!-- menu ends -->
+                </li>
+              </ul>
+            </div>
+            <!-- Payment methods ends -->
+          </div>
+          <ng-template #nopayments>
+            <button type="button" mat-button (click)="addPaymentMethod();">Add Method</button>
+            <p>You have not set up any payment methods yet.</p>
+            <p>Tell us how you want to receive your funds.</p>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+  </div>
+</div>

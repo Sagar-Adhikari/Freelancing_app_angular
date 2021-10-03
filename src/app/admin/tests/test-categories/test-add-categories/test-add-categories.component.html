@@ -1,0 +1,26 @@
+<div class="admin-dashboard admin-settingspage admin-custompage admin-cmspage">
+	<div class="general-form-layout custompage-form-layout pages-container">
+		<h2>Add Test Category</h2>
+		<form [formGroup]="categoryForm" (ngSubmit)="categoryFormSubmit(categoryForm.value)">
+			<ng-template [ngIf]="ismessage"><div class="alert alert-danger" role="alert">{{errormessage}}</div></ng-template>
+			<ng-template [ngIf]="is_success"><div class="alert alert-success" role="alert">Category name has been added successfully</div></ng-template>
+			<div class="formfield-box">
+				<mat-form-field appearance="outline">
+					<mat-label>Category Name</mat-label>            
+					<input matInput placeholder="Category Name" formControlName="category_name" required>
+				</mat-form-field>
+			</div>       
+			<div class="formfield-box">
+				<mat-radio-group formControlName="category_status">
+					Status : 
+					<mat-radio-button value="Active" checked="checked">Active</mat-radio-button>
+					<mat-radio-button value="Inactive">In-active</mat-radio-button>
+				</mat-radio-group>
+			</div>
+			<div class="submit-btn">
+				<button mat-raised-button type="submit" [disabled]="isbuttondisable">Save</button>
+				<button mat-raised-button [routerLink]="['/admin/test-categories']">Cancel</button>
+			</div>
+		</form>
+	</div>
+</div>

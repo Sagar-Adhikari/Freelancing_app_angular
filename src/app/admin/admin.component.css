@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700,700i');
+/*sidebar*/
+:host /deep/ body {margin: 0px;padding: 0px;background-color: #edf4f7;font-family: Noto Sans,sans-serif;}
+mat-sidenav { width: 250px; }
+.sidebar { background: #32323a; }
+.sideHeader {padding:6px; text-align: center;}
+.sidebar ul {padding:0; margin:0;}
+.sidebar ul li {list-style: none; }
+.sidebar ul.mainMenu li a {color: #999999; display: block; padding:0px 10px 0px 20px; border-top:1px solid #444444; font:600 14px 'Open Sans', sans-serif; text-decoration: capitailze; line-height: 40px;  }
+.sidebar ul.mainMenu li a:hover {text-decoration: none; background:  #444444; color: #ffffff; }
+.sidebar ul.mainMenu li a .left_icon, .sidebar ul li a .right_icon {display: inline-block; }
+.sidebar ul.mainMenu li a span {margin:0 0 0 10px;}
+.sidebar ul.mainMenu li a .right_icon {float: right; position: relative; top:8px; }
+.sidebar ul.mainMenu li a .left_icon {position: relative; top:6px;}
+.sidebar ul.subMenu li a {padding:0px 20px 0px; }
+/*top menu*/
+.topMenu {background: #fff; height: 120px;box-shadow: 1px 2px 3px #e5f2f6;    margin-bottom: 20px;position: relative;}
+.topleft {position: relative; left: 20px; top: 15px;}
+.topleft mat-icon {width:32px; height: 32px; font-size: 32px; color: #999999;}
+.adminTool { margin-right: 20px; position: absolute; right: 0; top: 0; width: 85%;}
+.top-rightblock{position: absolute;width: 40%;right: 0;top: 0;}
+.adminTool ul {padding:0; margin:0;}
+.adminTool li {float: right; list-style: none; margin-left: 15px; }
+.adminTool li a {color: #999999; display: block;  font:600 14px 'Open Sans', sans-serif; text-decoration: capitailze; line-height: 60px;  }
+.adminTool li a:hover {text-decoration: none; color: #ffffff; }
+.adminTool li a span {margin-left:5px;}
+.adminTool li a mat-icon {position: relative; top:7px;}
+mat-sidenav-content{overflow: hidden;}
+.administration .col-sm-8{float: left; flex: inherit; max-width: none;  position: absolute;left: 0;}  
+.mainMenu{display: table; margin: 26px auto 0; width: 60%;}
+.mainMenu li{list-style: none;float: left;margin-top: -28px; padding-top: 32px; padding-bottom: 32px;width: 16%;background-color: #e2e2e2;height: 122px;    margin-right: 2px;}
+.mainMenu li:hover{background-color: #fff;}
+.mainMenu li .mat-icon { background-repeat: no-repeat; display: inline-block; fill: currentColor; height: 24px; width: 100%; display: inline-block; text-align: center; }
+.mainMenu li a{color: #292f43;font-family: 'Noto Sans', sans-serif;outline:none;font-size: 17px;font-weight: normal;height: 122px; display: inline-block; width: 100%; margin-top: -30px; padding-top: 30px;}
+.mainMenu li span{display: inline-block;width: 100%;text-align: center;}
+.mainMenu li:active{background-color: #e2e2e2;}
+:host /deep/ .mainMenu li ul.subMenu{position: absolute;background-color: #fff;z-index: 9999;margin: 4px 0; padding: 0 20px;border-style: solid;border-width: 0px 1px 1px 1px;border-color: #ddd;width: 18%;    margin-top: 35px;}
+:host /deep/ .mainMenu li ul.subMenu li { float: none; line-height: 45px; width: auto; background: transparent; padding: 0; margin: 0; height: auto;}
+.mainMenu li ul.subMenu li a{color: #292f43;width: 100%; display: inline-block; }
+.administration h4.page-title{font-size: 30px;float: left;color: #232839; margin-left: 60px; margin-top: 40px;font-family: 'Noto Sans', sans-serif;font-weight: 700; margin-right: 95px;}
+.adminTool{}
+.adminTool ul li{width: 40%;background-color: #292f43;text-align: center;border-radius: 15px; margin-top: 35px;}
+.adminTool ul li a{color: #fff;padding: 0 15px; line-height: 45px;font-family: 'Noto Sans', sans-serif;font-size: 18px;font-weight: normal;}
+:host /deep/ .mat-menu-content { background-color: #ff0000!important; }
+:host /deep/ .mat-table{font-family: 'Noto Sans', sans-serif;}
+
+@media (max-width: 767px) 
+{
+.topMenu .col-sm-3, .topMenu .col-sm-9 {float:left;}
+.topMenu .col-sm-3 {width:30%;}
+.topMenu .col-sm-9 {width:70%;}
+.topMenu {background: #fff; height: auto;box-shadow: 1px 2px 3px #e5f2f6;    margin-bottom: 20px;position: relative;}
+.administration h4.page-title {font-size: 30px;float: none;color: #232839;margin-left: auto;margin-top: 10px;font-family: 'Noto Sans', sans-serif;font-weight: 700;margin-right: auto;text-align: center;}
+.administration .col-sm-8{position: relative;}
+.mainMenu {display: table;margin: 26px auto 0;width: 100%;padding: 0;}
+.mainMenu li{width: 19%;list-style: none;float: left;margin-top: -28px;padding-top: 20px;padding-bottom: 20px;background-color: #e2e2e2;height: 65px;margin-right: -3px;margin-left: 5px;}
+.top-rightblock {position: relative;width: 100%;right: 0;top: 0;max-width: none;flex: inherit;}
+.adminTool {margin-right: 20px;position: relative;right: 0;top: -12px;width: 100%;display: inline-block;left: -27px;}
+.adminTool ul li {width: 40%;background-color: #292f43;text-align: center;border-radius: 15px;margin-top: 35px;}
+.mainMenu li ul.subMenu{width: 50%;top: 0;margin-top: 63px;}
+.mainMenu li span{visibility: hidden;}
+.mainMenu li a{height: 76px;}
+}
+
+
+@media (min-width: 767px) and (max-width: 991px) 
+{
+.mainMenu li{line-height: 70px;}
+.mainMenu li span {display: none; width: 100%; text-align: center;}
+.mainMenu li ul.subMenu{margin-top: 20px;width: 26%;}
+.adminTool ul li{width: 43%;}
+.adminTool ul li a{font-size: 14px;}
+}
+
+
+@media (min-width: 992px) and (max-width: 1199px) 
+{
+.mainMenu li a{font-size: 15px!important;}
+}
+
+@media (max-width: 1199px) {  }

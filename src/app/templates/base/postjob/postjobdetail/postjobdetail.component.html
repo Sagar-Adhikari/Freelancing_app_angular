@@ -1,0 +1,333 @@
+<div class="category_mainwrap postjob_wrap">
+    <div class="breadcrumb_wrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <h4>Post a Job</h4>
+                </div>
+                <!--end col-->
+            </div>
+            <!--end row-->
+        </div>
+        <!--end container-->
+    </div>
+    <!--end breadcrumb_wrap-->
+    <form [formGroup]="newjobpostForm" (ngSubmit)="newjobpostFormSubmit(newjobpostForm.value)" (keydown.enter)="$event.preventDefault()" enctype="multipart/form-data">
+        <div class="postjob-fulldesc">
+            <div class="postjob-details">
+                <div class="container">
+                    <div class="row">
+                        <div class="postjob-inner postjob-three">
+                            <div class="left-selected">
+                                <h6 id="newpostjobForm"><span class="fa fa-check"></span>You selected <span>{{maincategory}} > {{subcategory}}</span>
+                                    <!--<button mat-button (click)="onClickEdit()"><i class="fa fa-pencil"></i></button>--></h6>
+                                <!-- <span class="vertical-align-middle"><a routerLink=""><span class="fa fa-bullhorn"></span>Give us feedback on this experience</a></span> -->
+                            </div>
+                            <!--end left-selected-->
+                        </div>
+                        <!--end postjob-inner-->
+
+                        <div class="postjob-inner postjob-three">
+                            <h5>Describe the job</h5>
+                            <section class="content-section stepthree-section">
+
+                                <ng-template [ngIf]="ismessage">
+                                    <div class="alert alert-danger" role="alert">{{errormessage}}</div>
+                                </ng-template>
+                                <ng-template [ngIf]="is_success">
+                                    <div class="alert alert-success" role="alert">Job Post saved</div>
+                                </ng-template>
+                                <div class="form-group">
+                                    <label>Name your job posting</label>
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <input matInput placeholder="EXAMPLE: AngularJS and Kendo UI front end developer" formControlName="name" value="{{project_title}}" required>
+                                    </mat-form-field>
+                                </div>
+                                <!--end form-group-->
+                                <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('name') || this.errorMsgArr['name']}}</div>
+
+                                <div class="form-group">
+                                    <label>Describe the work to be done</label>
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <textarea matInput placeholder="Detailed description" formControlName="description" matTextareaAutosize matAutosizeMinRows="5" matAutosizeMaxRows="10" required></textarea>
+                                    </mat-form-field>
+                                </div>
+                                <!--end form-group-->
+                                <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('description') || this.errorMsgArr['description']}}</div>
+
+                                <div class="form-group">
+                                    <label>Attachments</label>
+                                    <!-- <div class="drop-box eo-image-drop p-lg-top">
+										<span>drag or </span>
+										<label for="PostForm_attachments" class="attachment m-0">upload</label> 
+										<span>project files</span>
+										<input ng2FileDrop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}" class="well my-drop-zone" ng2FileSelect type="file"
+										[uploader]="uploader" (onFileSelected)="fileSelected($event)" multiple >
+									</div> -->
+                                    <div class="drag_attachment">
+                                        <label>drag or <span>upload</span> project files</label>
+                                        <input ng2FileDrop class="well my-drop-zone" ng2FileSelect type="file" [uploader]="uploader" (onFileSelected)="fileSelected($event)" multiple>
+                                    </div>
+                                    <div class="fileupload-box">
+                                        <mat-list-item *ngFor="let rowattachment of attachment;let i = index">
+                                            <div class="fileupload-img">
+                                                <span class="thumbimg" [ngSwitch]="true">
+															<span *ngSwitchCase="rowattachment.filetype === 'csv'"><img src='{{siteBaseUrl}}/assets/images/thumbimg/csvthumb.png'></span>
+                                                <span *ngSwitchCase="rowattachment.filetype === 'img'"><img [src]="rowattachment.tempimage"></span>
+                                                <span *ngSwitchCase="rowattachment.filetype === 'video'"><img src='{{siteBaseUrl}}/assets/images/thumbimg/videothumb.png'></span>
+                                                <span *ngSwitchCase="rowattachment.filetype === 'doc'"><img src='{{siteBaseUrl}}/assets/images/thumbimg/docthumb.png'></span>
+                                                <span *ngSwitchCase="rowattachment.filetype === 'pdf'"><img src='{{siteBaseUrl}}/assets/images/thumbimg/pdfthumb.png'></span>
+                                                <span *ngSwitchCase="rowattachment.filetype === 'zip'"><img src='{{siteBaseUrl}}/assets/images/thumbimg/zipthumb.png'></span>
+                                                <span *ngSwitchCase="rowattachment.filetype === 'php'"><img src='{{siteBaseUrl}}/assets/images/thumbimg/phpthumb.png'></span>
+                                                <span *ngSwitchCase="rowattachment.filetype === 'js'"><img src='{{siteBaseUrl}}/assets/images/thumbimg/jsthumb.png'></span>
+                                                <span *ngSwitchCase="rowattachment.filetype === 'sql'"><img src='{{siteBaseUrl}}/assets/images/thumbimg/sqlthumb.png'></span>
+                                                <span *ngSwitchCase="rowattachment.filetype === 'none'"><img src='{{siteBaseUrl}}/assets/images/thumbimg/nonethumb.png'></span>
+                                                </span>
+                                                <span class="fileupload-txt">{{rowattachment._file.name}}</span>
+                                                <a href="javascript:;" (click)="onDeleteAttachment(i);" class="uploadelete-btn">
+                                                    <mat-icon>delete</mat-icon>
+                                                </a>
+                                            </div>
+                                        </mat-list-item>
+                                    </div>
+                                </div>
+                                <!--end form-group-->
+
+                                <div class="form-group">
+                                    <label>What type of project do you have?</label>
+                                    <mat-radio-group formControlName="type" [(ngModel)]="defaulttype" required>
+                                        <mat-radio-button *ngFor="let typeproject of typeprojects" [value]="typeproject.key" [checked]="typeproject.key == defaulttype">
+                                            {{typeproject.name}}
+                                        </mat-radio-button>
+                                    </mat-radio-group>
+                                </div>
+                                <!--end form-group-->
+                                <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('type') || this.errorMsgArr['type']}}</div>
+
+                                <div class="form-group">
+                                    <label id="NeedtoHireId">How many freelancers do you need to hire for this job?</label>
+                                    <mat-radio-group formControlName="resource" [(ngModel)]="defaultresource" (change)="onchangefreelancer(defaultresource)">
+                                        <mat-radio-button *ngFor="let resource of resources" [value]="resource.key" [checked]="resource.key == defaultresource">
+                                            {{resource.name}}
+                                        </mat-radio-button>
+                                    </mat-radio-group>
+                                    <div *ngIf="resourcevalue">
+                                        <div class="form-group">
+                                            <label>Freelancers</label>
+                                            <mat-form-field appearance="outline">
+                                                <input matInput autocomplete="off" formControlName="resourcevaluevalid" [(ngModel)]="resourcecount" (keypress)="numberOnly($event)" placeholder="Number of Freelancers">
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="text-danger text-left small" *ngIf="errorMsg || frreeerrormessage">{{geterrorMsg('resourcevaluevalid') || this.errorMsgArr['resourcevaluevalid'] || frreeerrormessage}}</div>
+                                    </div>
+                                </div>
+                                <!--end form-group-->
+
+                                <div class="form-group radio-style">
+                                    <label>Where are you in the lifecycle of this project? 
+									<a href="javascript://" mat-raised-button matTooltip="This information will be shown to freelancers, and will help us match you with good candidates." matTooltipPosition="right">
+										<i class="fa fa-question"></i>
+									</a>
+								</label>
+
+                                    <mat-radio-group formControlName="life_cycle">
+                                        <mat-radio-button *ngFor="let lifecycle of lifecycles" [value]="lifecycle.key">
+                                            {{lifecycle.name}}
+                                        </mat-radio-button>
+                                    </mat-radio-group>
+                                    <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('life_cycle') || this.errorMsgArr['life_cycle']}}</div>
+                                </div>
+                                <!--end form-group-->
+
+                                <div class="form-group radio-style">
+                                    <label>Are you experienced hiring for this type of work?<a href="javascript://" mat-raised-button
+	matTooltip="This answer will not be shown to freelancers directly. We will use this information to match you with the right freelancer.">
+<i class="fa fa-question"></i>
+</a></label>
+                                    <mat-radio-group formControlName="experience" [(ngModel)]="defaultexp">
+                                        <mat-radio-button *ngFor="let exp of exps" [value]="exp.key" [checked]="exp.key == defaultexp">
+                                            {{exp.name}}
+                                        </mat-radio-button>
+                                    </mat-radio-group>
+                                    <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('experience') || this.errorMsgArr['experience']}}</div>
+                                </div>
+                                <!--end form-group-->
+
+
+                                <div class="form-group">
+                                    <label>Enter skills needed</label>
+                                    <!-- <mat-form-field class="example-full-width">
+									<mat-select placeholder="Skills" formControlName="skills" multiple>
+										<mat-option *ngFor="let skills of skillists" [value]="skills.id">{{skills.category_name}}</mat-option>
+									</mat-select>
+								</mat-form-field> -->
+
+                                    <div class="skills_block">
+                                        <!--single select skill settings-->
+                                        <!-- <ng-select formControlName="skills" [addTag]="true" [items]="skillists" [multiple]="true" bindLabel="name" bindValue="name" (change)="onChangeSkills($event)">
+									<ng-template ng-label-tmp let-item="item" let-clear="clear">
+										{{item.name}}
+										<span class="ng-value-icon right" (click)="clear(item); $event.stopPropagation()" aria-hidden="true">×</span>
+									</ng-template>
+								</ng-select> -->
+                                        <!--single select skill settings-->
+                                        <!--multiple select skill settings-->
+
+                                        <mat-select placeholder="Select a Skill" formControlName="skills" multiple (ngModelChange)="onChangeSkills($event)">
+                                            <mat-option *ngFor="let topping of skillists" [value]="topping">
+                                                {{topping.name}}
+                                                <span class="ng-value-icon right" (click)="$event.stopPropagation()" aria-hidden="true"></span>
+                                            </mat-option>
+                                        </mat-select>
+                                    </div>
+                                </div>
+                                <!--end form-group-->
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="postjob-details">
+                <div class="container">
+                    <div class="row">
+                        <div class="postjob-inner postjob-three">
+                            <h5>Rate and Availability</h5>
+                            <section class="content-section stepthree-section">
+
+                                <div class="form-group">
+                                    <label>How would you like to pay?</label>
+                                    <mat-form-field appearance="outline">
+                                        <mat-select formControlName="payment" [(ngModel)]="defaultpay" (selectionChange)="onChangePayment(defaultpay)">
+                                            <mat-option *ngFor="let pay of paylists" [value]="pay.key">
+                                                {{ pay.name }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+
+                                <div>
+                                    <div class="form-group">
+                                        <label *ngIf="fixedField">Budget (Rs.)</label>
+                                        <label *ngIf="!fixedField">Hourly (Rs.)</label>
+                                        <mat-form-field appearance="outline">
+                                            <input matInput type="number" formControlName="paymentbudget" placeholder="(Rs.)">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('paymentbudget') || this.errorMsgArr['paymentbudget']}}</div>
+                                </div>
+                                <!--end form-group-->
+
+                                <div class="form-group radio-style">
+                                    <label>Desired Experience Level<a href="javascript://" mat-raised-button
+	matTooltip="Budget ranges are based on other jobs posted in the same category and are for reference only. Freelancers determine their own rates, so the actual rate you pay is up to you and the freelancer.">
+<i class="fa fa-question"></i>
+</a></label>
+                                    <mat-radio-group formControlName="experience_level" required>
+                                        <mat-radio-button *ngFor="let exp_level of exp_levels" [value]="exp_level.key">
+                                            {{exp_level.name}}
+                                        </mat-radio-button>
+                                    </mat-radio-group>
+                                    <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('experience_level') || this.errorMsgArr['experience_level']}}</div>
+                                </div>
+                                <!--end form-group-->
+
+                                <div class="form-group radio-style">
+                                    <label>How long do you expect this job to last?</label>
+                                    <mat-radio-group formControlName="expected_to_complete" required>
+                                        <mat-radio-button *ngFor="let exp_comp of exp_comps" [value]="exp_comp.key">
+                                            {{exp_comp.name}}
+                                        </mat-radio-button>
+                                    </mat-radio-group>
+                                    <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('expected_to_complete') || this.errorMsgArr['expected_to_complete']}}</div>
+                                </div>
+                                <!--end form-group-->
+
+                                <div class="form-group radio-style">
+                                    <label>What time commitment is required for this job?</label>
+                                    <mat-radio-group formControlName="commitment" required>
+                                        <mat-radio-button *ngFor="let commit of commits" [value]="commit.key">
+                                            {{commit.name}}
+                                        </mat-radio-button>
+                                    </mat-radio-group>
+                                </div>
+                                <!--end form-group-->
+                                <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('commitment') || this.errorMsgArr['commitment']}}</div>
+
+                            </section>
+                        </div>
+                        <!--end postjob-inner-->
+                    </div>
+                    <!--end row-->
+                </div>
+                <!--end container-->
+            </div>
+            <!--end postjob-details-->
+
+            <div class="postjob-details">
+                <div class="container">
+                    <div class="row">
+                        <div class="postjob-inner postjob-three">
+                            <h5>Freelancer Preferences</h5>
+                            <section class="content-section stepthree-section">
+                                <!--end form-group-->
+
+                                <div class="form-group">
+                                    <label>Screening Questions</label>
+                                    <p>Add a few questions you'd like your candidates to answer when applying to your job.</p>
+                                    <mat-select formControlName="question_id" [(ngModel)]="defaultquestion">
+                                        <mat-option *ngFor="let question of questionoptions" [value]="question.key" (click)="onChangeQuestion(defaultquestion)">
+                                            {{ question.name }}
+                                        </mat-option>
+                                    </mat-select>
+                                    <div>
+                                        <mat-list-item *ngFor="let question of questions;let i = index">
+                                            <div class="edit-outerwrap">
+                                                <span>{{question.question}}</span> <span>({{question.type}})</span>
+                                                <a href="javascript:;" (click)="editquestion(question.question_id);" class="screen-icon">
+                                                    <mat-icon>edit</mat-icon>
+                                                </a>
+                                                <a href="javascript:;" (click)="deletequestion(question.question_id);" class="screen-icon">
+                                                    <mat-icon>delete</mat-icon>
+                                                </a>
+                                            </div>
+                                        </mat-list-item>
+                                    </div>
+                                </div>
+                                <!--end form-group-->
+
+                                <div class="form-group">
+                                    <label>Cover Letter</label>
+                                    <mat-checkbox formControlName="cover_letter">If you don't add any screening questions, we'll require a cover letter to allow freelancers to introduce themselves.</mat-checkbox>
+                                </div>
+                                <!--end form-group-->
+
+                                <div class="form-group">
+                                    <label>Boost your job's visibility</label>
+                                    <mat-checkbox formControlName="boost">Tell me how I can reach more freelancers and hire in less time.</mat-checkbox>
+                                </div>
+                                <!--end form-group-->
+                                <!--end form-group-->
+
+                                <div class="bottom-btn">
+                                    <button mat-raised-button [disabled]="disableButton" type="submit" (click)="onStatusCall('Open')">Post Job</button>
+                                    <button mat-raised-button [disabled]="disableButton" type="submit" (click)="onStatusCall('Draft')">Draft</button>
+                                    <button mat-raised-button [disabled]="disableButton" type="button" (click)="onClickCancel()">Cancel</button>
+                                </div>
+                                <!--end bottom-btn-->
+
+
+                            </section>
+                        </div>
+                        <!--end postjob-inner-->
+                    </div>
+                    <!--end row-->
+                </div>
+                <!--end container-->
+
+            </div>
+            <!--end postjob-details-->
+        </div>
+        <!--end postjob-fulldesc-->
+    </form>
+</div>

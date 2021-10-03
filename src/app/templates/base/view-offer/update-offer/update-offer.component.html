@@ -1,0 +1,40 @@
+
+<div *ngIf="type==1">
+<div class="offer-popup">
+<h1>Withdraw Your Offer</h1>
+<p>Click "Continue" to withdraw the offer... else click "Cancel" to close the request.</p>
+<button mat-button (click)="goTocontract(1);">Continue</button>
+<button mat-button class="cancel_button" (click)="goCanel();">Cancel</button>
+</div>
+</div>
+
+<div *ngIf="type==2">
+<div class="offer-popup">
+<h1>Modify Your Offer</h1>
+<p>You can send the freelancer a new offer with different terms. We will automatically withdraw your previous offer.</p>
+<button mat-button (click)="goTocontract(2);">Continue</button>
+<button mat-button class="cancel_button" (click)="goCanel();">Cancel</button>
+</div>
+</div>
+
+<div *ngIf="type==3">
+<div class="offer-popup">
+<h1>Accept your offer</h1>
+<p>Are u sure to Accept this offer ?  </p>
+<div class="btn-container">
+<button mat-button (click)="goTocontract(3);">Accept</button>
+<button mat-button class="cancel_button" (click)="goCanel();">Cancel</button>
+</div>
+</div>
+</div>
+
+<div *ngIf="type==4">
+<div class="offer-popup">
+<h1>Reject Your Offer</h1>
+<p>Are u sure to Reject this offer ?  </p>
+<div class="btn-container">
+<button mat-button (click)="goTocontract(4);">Reject</button>
+<button mat-button class="cancel_button" (click)="goCanel();">Cancel</button>
+</div>
+</div>
+</div>

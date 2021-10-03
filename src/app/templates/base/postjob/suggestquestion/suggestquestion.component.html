@@ -1,0 +1,26 @@
+<h4>Screening Question</h4>
+<p>Add a question you'd like your candidates to answer when applying to your job.</p>
+<form [formGroup]="suggestquestionForm" (ngSubmit)="onSuggestSave()">
+    <div class="model-container">
+        <mat-label>Choose questions?</mat-label>
+
+        <ng-container formArrayName="suggestedquestions">
+            <div *ngFor="let sqa of suggestedquestions; let i = index">
+               <span *ngIf="sqa.checked;else nochecked">
+                     <mat-checkbox class="example-margin" disabled="true" [formControlName]="i" [ngModel]="makechecked" >
+                           {{sqa.question}}
+                        </mat-checkbox>
+               </span><ng-template #nochecked>
+                     <mat-checkbox class="example-margin" [formControlName]="i">
+                           {{sqa.question}}
+                        </mat-checkbox>
+               </ng-template>
+                     
+            </div>
+         </ng-container>
+      <div class="button-row bottom-btn">
+        <button mat-raised-button type="submit" >Save</button>
+        <button mat-raised-button type="button" (click)="onCancelClick()">Cancel</button>
+      </div>
+    </div>
+  </form>

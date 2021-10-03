@@ -1,0 +1,71 @@
+<div class="category_mainwrap postjob_wrap">
+    <div class="breadcrumb_wrap">
+    <div class="container">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <h4>Post a Job</h4>
+        </div><!--end col-->
+      </div><!--end row-->
+    </div><!--end container-->
+  </div><!--end breadcrumb_wrap-->
+    <div class="postjob-details">
+        <div class="container">
+          <div class="row">
+            <div class="postjob-inner">
+              <h5>What exactly are you looking for?</h5>
+              <section class="content-section steptwo-section newjob">
+    
+  <form [formGroup]="subcategoryForm">
+    <ng-template [ngIf]="ismessage">
+      <div class="alert alert-danger" role="alert">{{errormessage}}</div>
+    </ng-template>
+<span *ngIf="subcategoryshow">*Please select Sub Category to Proceed</span>
+    <mat-radio-group formControlName="subcategory" [(ngModel)]="selectedSubcategory" (change)="onchangesubcategory(selectedSubcategory)" class="newjob_radiogroup">
+      <mat-radio-button *ngFor="let subcategory of subcategorylist" [value]="subcategory.id">
+        {{subcategory.sub_cat_name}}
+      </mat-radio-button>
+    </mat-radio-group>
+
+    <div class="m-sm-bottom tellus_accord"> 
+        <div>
+        <div *ngIf="!subcategoryshow">
+        <b class="d-block d-md-inline m-sm-bottom">Now what you're looking for?</b>
+        <!-- <button class="btn btn-link btn-sm m-0 p-0 vertical-align-top" (click)="categoryformshowfunc()"> <b>Tell us your specific category</b> </button>  -->
+        </div>
+
+        <div class="expansion-body" *ngIf="panelOpenState">
+        <div>
+          <mat-form-field appearance="outline">
+          <mat-select formControlName="sec_category" placeholder="Select Category" [(value)]="selectedSecCategory" (selectionChange)="onchangeallcategory(selectedSecCategory)">
+          <mat-option *ngFor="let category of allCategory" [value]="category.id">
+          {{ category.name }}
+          </mat-option>
+          </mat-select>
+          </mat-form-field>
+          <div class="text-danger text-left small" *ngIf="errorMsg">{{this.errorMsgArr['sec_category']}}</div>
+        </div>
+        <div>
+          <mat-form-field appearance="outline">
+          <mat-select formControlName="sec_subcategory" placeholder="Select SubCategory" [(value)]="selectedAsSubCategory" (selectionChange)="onchangesecsubcategory(selectedAsSubCategory)">
+          <mat-option *ngFor="let assubcategory of assubcategorylist" [value]="assubcategory.id">
+          {{ assubcategory.sub_cat_name }}
+          </mat-option>
+          </mat-select>
+          </mat-form-field>
+          <div class="text-danger text-left small" *ngIf="errorMsg">{{this.errorMsgArr['sec_subcategory']}}</div>
+        </div>
+        </div><!--end expansion-body-->
+      </div>
+    </div>
+    <div class="bottom-btn">
+      <button  mat-button (click)="gotoback()">Back</button>
+      <button  mat-button type="submit" (click)="subcategoryFormSubmit(subcategoryForm.value)" mat-button [disabled]="isbuttondisable">Next</button>      
+    </div> 
+  </form>  
+
+  </section>
+</div><!--end postjob-inner-->
+</div><!--end row-->
+</div><!--end container-->
+</div><!--end postjob-details-->
+</div>

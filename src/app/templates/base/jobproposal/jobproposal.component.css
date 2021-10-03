@@ -1,0 +1,100 @@
+.category_mainwrap input::-webkit-input-placeholder {color: #b5b8b8!important;}
+.category_mainwrap input:-moz-placeholder { color: #b5b8b8!important; }
+.asterisk { color:#4A154B; }
+ul{margin:0;padding: 0;}
+li{list-style: none;}
+:host /deep/ ngb-rating span { font-size: 34px; color: #4A154B; }
+.form-control { display: block; width: 100%; padding: .5rem .75rem; font-size: 1rem; line-height: 1.25; color: #464a4c; background-color: #fff;  background-image: none;  -webkit-background-clip: padding-box; background-clip: padding-box; border: 1px solid rgba(0,0,0,.15); border-radius: .25rem; transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s; }
+.category_mainwrap .breadcrumb_wrap{background-color: #4A154B;padding: 35px 0;}
+.category_mainwrap .breadcrumb_wrap h4{font-size: 32px;font-family: 'HelveticaNeue-Medium';color: #fff;text-transform: capitalize;margin:0;letter-spacing: 1px;}
+.category_mainwrap .search-category{float: right;}
+.category_mainwrap .search-category span.form-icon{position: absolute;height: 100%;background: transparent; width: 40px; text-align: center;padding-top: 10px;padding-left: 4px;color: #4A154B;cursor: pointer;}    .category_mainwrap .search-category input.form-control{height: 45px;border-radius: 30px;padding-left: 40px;font-family: 'HelveticaNeue';font-size: 16px;color: #3d3d3d;letter-spacing: 1px;line-height: 45px;}
+.job_detailwrap .job_listing{padding: 35px 0;}
+.job_detailwrap .job_listing .bg-box{background-color: #fff;height: 100%;box-shadow: 0px 0px 20px #dcdcdc;border-radius: 10px;padding: 36px 40px;}
+.job_detailwrap .job_listing .bg-box h3{font-family: 'HelveticaNeue-Medium';font-size: 26px;color: #343434;margin-bottom: 10px;}
+.job_detailwrap .job_listing .bg-box .trans-wrap{border: 1px solid #e5e5e5;height: auto;margin-bottom:40px;display:inline-block;width:100%;border-radius: 10px;}
+.job_detailwrap .job_listing .bg-box .trans-wrap .trans-left{width: 50%;display: inline-block;float: left;border-right: 1px solid #ddd;padding: 45px 46px;height: 150px;}
+.job_detailwrap .job_listing .bg-box .trans-wrap .trans-left:last-child{border-right:none;}
+.job_detailwrap .job_listing .bg-box .trans-wrap .trans-left .trans-img{display: inline-block;float: left;    margin-right: 28px;}
+.job_detailwrap .job_listing .bg-box .trans-wrap .trans-left .trans-desc{display: inline-block;width: 65%;}
+.job_detailwrap .job_listing .bg-box .trans-wrap .trans-left .trans-desc h4{font-family: 'HelveticaNeue-Medium';font-size: 16px;color: #4A154B;text-transform: capitalize;margin-bottom: 5px;}
+.job_detailwrap .job_listing .bg-box .trans-wrap .trans-left .trans-desc p{font-family: 'HelveticaNeue';font-size: 14px;color: #777;margin-bottom: 0px;}
+.job_detailwrap .job_listing .bg-box .detail-wrap{position: relative;margin-bottom: 30px;display: inline-block;width: 100%;}
+.job_detailwrap .job_listing .bg-box .detail-wrap h4{font-family: 'HelveticaNeue-Medium';color: #4A154B;font-size: 22px;text-transform: capitalize;margin-bottom: 15px;}
+.job_detailwrap .job_listing .bg-box .detail-wrap p{font-family: 'HelveticaNeue';font-size: 14px;color: #777;margin-bottom: 0px;line-height: 27px;margin-bottom: 30px;}
+.job_detailwrap .job_listing .bg-box .detail-wrap h5{font-family: 'HelveticaNeue';color: #777;font-size: 14px;margin-bottom: 10px;}
+.job_detailwrap .job_listing .bg-box .detail-wrap p.post-date{position: absolute;right: 0;top: 0;font-family: 'HelveticaNeue';font-size: 12px;color: #777;margin-bottom: 0px;}
+.job_detailwrap .job_listing .bg-box .skill-wrap button {background-color: #4A154B; color: #fff;line-height: 32px;font-family: 'HelveticaNeue'; font-size: 14px; width: auto; margin-right: 15px;letter-spacing:0.5px;border-radius: 4px; margin-right: 15px; margin-bottom: 5px; }
+.freelancer_profile[_ngcontent-c8] .freelancer-wrap[_ngcontent-c8] .bg-boxbottom[_ngcontent-c8] .post-head[_ngcontent-c8] { padding: 15px 32px 30px; position: relative; border-bottom: 1px solid #dfe2e5; margin-bottom: 40px; margin-left: -40px; margin-right: -40px; }
+.freelancer_profile .freelancer-wrap .bg-boxbottom .post-head { padding: 8px 32px 13px !important; margin-bottom: 15px !important; margin-left: -30px !important; margin-right: -30px !important;}
+.profile-leftblock h5{font-family: 'HelveticaNeue';font-size: 18px;line-height: 25px;}
+.profile-leftblock p{font-family: 'HelveticaNeue';font-size: 16px;color: #444;}
+.profile-leftblock .form-group label{font-family: 'HelveticaNeue';font-size: 14px;color: #333;}
+.profile-leftblock .form-group input{width: 95%;display: inline-block;margin-right: 10px;font-family: 'HelveticaNeue';}
+.profile-leftblock .form-group textarea{font-family: 'HelveticaNeue';height: 150px;}
+.job_detailwrap .job_listing .bg-box .detail-wrap a{background-color: #4A154B;color: #fff;padding: 5px 20px;display: inline-block;text-decoration: none; font-family: 'HelveticaNeue';}
+.drag_attachment label{display: table; margin: 0 auto;text-align: center;width: 100%;}
+.job_detailwrap .job_listing .bg-boxright{padding:27px 23px;}
+.job_detailwrap .job_listing .bg-boxright .job-btn button{line-height: 52px;background-color: #4A154B;width: 100%;text-align: center;margin-bottom: 25px;font-family: 'HelveticaNeue';font-size: 15px;color: #fff;box-shadow:0px 0px 20px #dedede;border-radius: 4px;}
+:host /deep/ .bg-boxright .mat-list .mat-list-item .mat-list-item-content{display: inline-block;width: 100%;padding: 0;}
+:host /deep/ .bg-boxright .mat-list .mat-list-item{height: auto;border-bottom: 1px solid #ddd; margin-bottom: 20px;margin-left: -25px;margin-right: -25px;padding: 20px 25px;}
+:host /deep/ .bg-boxright .mat-list h4{font-family: 'HelveticaNeue-Medium';font-size: 16px;color: #343434;}
+:host /deep/ .bg-boxright .mat-list p{font-family: 'HelveticaNeue';font-size: 14px;color: #777;}
+.candid-rating span{color: #e0dada;}
+.job_detailwrap .job_listing .bg-boxright p.member-date{font-family: 'HelveticaNeue-Medium';margin-top: 30px;font-size: 14px;color: #4A154B;text-align: center;}
+.job_detailwrap .job_listing .bg-boxbottom{margin-top: 50px;}
+:host /deep/ .bg-boxbottom .mat-list .mat-list-item .mat-list-item-content{display: inline-block;width: 100%;padding: 0;}
+:host /deep/ .bg-boxbottom .mat-list .mat-list-item{height: auto;border-top: 1px solid #ddd;margin-bottom: 0px;margin-left: -40px;margin-right: -40px; padding: 20px 40px;}
+.bg-boxbottom .mat-list .mat-list-item p{margin-bottom: 0;font-family: 'HelveticaNeue';font-size: 14px;color: #777;}
+.bg-boxbottom .mat-list .mat-list-item p span{color: #4A154B;}
+.fileupload-box .mat-list-item .fileupload-img span.thumbimg img{width: 100%;height: 81px;object-fit: cover;background: #eee;}
+.fileupload-box .mat-list-item span.fileupload-txt{white-space: nowrap;overflow: hidden; display: inline-block;width: 100%;text-overflow: ellipsis;}
+.fileupload-box{/*margin-top: 20px;background: #ddd;padding: 5px 5px 0px;*/}
+.fileupload-box .mat-list-item a.uploadelete-btn{position: absolute;right: 0;top: 0;text-align: center;cursor:pointer;background: #4A154B;padding: 0px!important;}
+.fileupload-box .mat-list-item .uploadelete-btn mat-icon.mat-icon.material-icons{color: #fff;font-size: 16px;line-height: 23px;}
+.fileupload-box .mat-list-item span.thumbimg{width: 112px;height: 81px;display: inline-block;vertical-align: top;background: #eee;}
+.fileupload-box .fileupload-img{width: 112px;position: relative;display: inline-block;float: left;margin-right: 10px;margin-top: 10px;}
+.bottom-btn button{background-color: #4A154B;color: #fff;margin-right: 10px;}
+.profile-leftblock .image_preview_block .thumbimg {width: 100%;display: inline-block; vertical-align: middle; border: 1px solid #eee;height:81px;text-align: center; background-color: #eee;}
+.profile-leftblock .image_preview_block .thumbimg span img {width: auto;line-height: 100px; object-fit:cover;max-height: 100%;max-width: 100%;}
+.profile-leftblock .form-group .image_preview_block .file_name_text{vertical-align: middle;display: block;padding: 0; text-overflow: ellipsis; white-space: nowrap;width: 100%; overflow: hidden;}
+.profile-leftblock .form-group .image_preview_block .delete_icon {vertical-align: middle; display: inline-block; position: absolute; right: 0px;top: 0px; background-color: #4A154B; text-align: center;}
+.image_preview_block { display: block; width: 100%; margin-top: 20px; position: relative;}
+.preview_block .mat-list-item {display: inline-block; width: 15%;  margin-right: 20px; position: relative; overflow: hidden;}
+.delete_icon .mat-icon{font-size:16px;color:#fff;line-height: 23px;}
+.image_preview_block a .mat-icon {color: #4A154B;vertical-align: top;margin-top: 2px;font-size: 22px; width: 20px;margin-left: 5px;}
+.preview_block .mat-list-item {width: 100%; margin-right: 0px;}
+.image_preview_block { margin-top: 10px; }
+.preview_block { padding-top: 10px; display: block; width: 100%; color: #4A154B; }
+
+
+@media(max-width: 767px)
+{
+.category_mainwrap .breadcrumb_wrap{text-align: center; margin-bottom: 0px;font-size: 25px;line-height: 45px;}
+.category_mainwrap .breadcrumb_wrap h4{text-align: center;margin-bottom: 20px;}
+.category_mainwrap .search-category {float: none;text-align: center;width: 250px;margin: 0 auto;position: relative;}
+.category_mainwrap .search-category span.form-icon{left: 0;}
+.job_detailwrap .job_listing .bg-box .trans-wrap .trans-left {width: 100%;display: inline-block; float: none;text-align: center;border-right: none;padding: 20px 15px;height: auto;border-bottom: 1px solid #ddd;}
+.job_detailwrap .job_listing .bg-box .trans-wrap .trans-left .trans-img { display: inline-block; float: none; margin-right: 0; }
+.job_detailwrap .job_listing .bg-box .trans-wrap .trans-left .trans-desc { display: inline-block; width: 100%; margin-top: 15px; }
+.job_detailwrap .job_listing .bg-box .skill-wrap button{margin-bottom: 15px;}
+.job_detailwrap .job_listing .bg-boxright { padding: 27px 23px;  margin-top: 20px; }
+.job_detailwrap .job_listing .bg-box .trans-wrap .trans-left:last-child{border-bottom: none;}
+.job_detailwrap .job_listing .bg-box{padding: 36px 20px;}
+:host /deep/ .bg-boxright .mat-list .mat-list-item{margin-left: -20px;margin-right: -20px;}
+:host /deep/ .bg-boxbottom .mat-list .mat-list-item{margin-left: -20px;margin-right: -20px;}
+}
+
+@media(min-width: 768px) and (max-width: 991px)
+{
+.job_detailwrap .job_listing .bg-box .trans-wrap .trans-left{padding: 37px 20px;}
+.job_detailwrap .job_listing .bg-box .trans-wrap .trans-left .trans-desc {display: inline-block;width: 60%;}
+.job_detailwrap .job_listing .bg-boxright {  padding: 27px 23px; margin-top: 20px; }
+}
+
+@media(min-width: 992px) and (max-width: 1199px)
+{
+.job_detailwrap .job_listing .bg-box .trans-wrap .trans-left{padding: 45px 20px;}
+.job_detailwrap .job_listing .bg-box .trans-wrap .trans-left .trans-desc {display: inline-block; width: 60%; }
+:host /deep/ .bg-boxright .mat-list .mat-list-item{padding: 17px 25px;}
+}

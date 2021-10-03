@@ -1,0 +1,23 @@
+.admin-dashboard.admin-cmspage{padding: 15px 15px;background: #eeeeee;height:auto;min-height:100%;}
+.admin-dashboard.admin-cmspage .pages-container{padding: 15px;background-color: #fff;box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);}
+.admin-dashboard.admin-cmspage .pages-container h2{border-bottom: 1px solid #ececed;color: #4A154B;font-size: 18px;padding-bottom: 15px;margin: 0 -15px 20px;padding: 0 15px 15px;}
+.admin-dashboard.admin-cmspage .pages-container .submit-btn button{margin-left: 0px;background: #4A154B;color: #fff;margin-right: 10px;}
+:host /deep/ .mat-radio-button{margin-right: 15px;}
+ul.add-category-upload { padding-left:0; margin-bottom:0; margin:10px 0;  }
+ul.add-category-upload li { display: inline-block; vertical-align: middle; padding:0 5px; }
+ul.add-category-upload li p img { width: 85px; height: auto;border:2px solid #4A154B; }
+ul.add-category-upload li .remove_icon {position: relative;display: inline-block;width: 28px;height: 28px;background-color: #4A154B;border-radius: 50%;color: #fff; }
+ul.add-category-upload li .remove_icon .material-icons {padding: 4px;font-size: 20px;}
+label.browse-file{cursor:pointer;margin-left: 0px;background: #4A154B;color: #fff;margin-right: 10px;padding: 5px 10px;}
+
+.pre_img img { width: 95px; height: auto; margin:10px 0; }
+.admin-dashboard.admin-cmspage .pages-container .submit-btn{margin-top: 20px;width:100%;text-align: center;}
+.formfield-box{display: inline-block; width: 50%; padding: 0 15px;position: relative;}
+:host /deep/ .formfield-box .mat-form-field{width: 100%;}
+a.add-evidence{margin-left: 0px;background: #4A154B;color: #fff;margin-right: 10px;}
+a.evidence-delete{position: absolute;top: 0;right: 0;}
+
+@media(max-width: 767px)
+{
+.formfield-box{display: inline-block;width: 100%;padding: 0 15px;position: relative;}
+}

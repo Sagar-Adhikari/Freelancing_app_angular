@@ -1,0 +1,74 @@
+        <!-- Sidebar  -->
+        <nav id="sidebar" class="{{searchFormOpen}}">
+            <div class="sidebar-header" >
+                <h1><img id="appLogo" width="190" height="60" src="{{logo_url}}"></h1>
+                <!-- <h2 id="app_title">{{application_name}}</h2> -->
+            </div>
+
+            
+            <div id="navigation" class="scroll-window" slimScroll (scrollChanged)="scrollChanged($event)" [options]="options">
+            <ul class="list-unstyled components">
+
+              <li><button mat-button [class.activeLink]="currentUrl == '/admin/dashboard'" routerLink="/admin/dashboard"><span class="icon icon-dashboard"></span> <span class="sidemenu-text">Dashboard</span></button></li>
+              <li>
+              <!-- <button mat-button><span class="icon icon-user"></span> Users</button> -->
+                  <mat-accordion>
+                    <mat-expansion-panel [expanded]="(currentUrl == '/admin/user-clients' || currentUrl == '/admin/user-freelancers' || urlSegment == 'admin/client/view' || urlSegment == 'admin/freelancer/view' || urlData[2] == 'client' || urlData[2] == 'freelancer')?true:false">
+                        <mat-expansion-panel-header>
+                          <mat-panel-title>
+                                  <span class="icon icon-users"></span> <span class="sidemenu-text">Users</span>
+                          </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <button mat-button [class.activeLink]="currentUrl == '/admin/user-clients' || urlSegment == 'admin/client/view' || urlData[2] == 'client'" routerLink="/admin/user-clients"><span class="icon icon-clients"></span> <span class="sidemenu-text">Clients</span></button>
+                        <button mat-button [class.activeLink]="currentUrl == '/admin/user-freelancers' || urlSegment == 'admin/freelancer/view' || urlData[2] == 'freelancer'" routerLink="/admin/user-freelancers"><span class="icon icon-freelancer"></span> <span class="sidemenu-text">Freelancers</span></button>
+                     </mat-expansion-panel>
+                  </mat-accordion>
+              </li>
+              <li><button mat-button [class.activeLink]="currentUrl == '/admin/jobs/categorys' || currentUrl == '/admin/jobs/add-category' || urlSegment == 'admin/jobs/edit-category'" routerLink="/admin/jobs/categorys"><span class="icon icon-category"></span> <span class="sidemenu-text">Category</span></button></li>
+              <li><button mat-button [class.activeLink]="currentUrl == '/admin/jobs/sub-categorys' || currentUrl == '/admin/jobs/add-sub-category' || urlSegment == 'admin/jobs/edit-sub-category'" routerLink="/admin/jobs/sub-categorys"><span class="icon icon-sub-category"></span> <span class="sidemenu-text">Sub Category</span></button></li>
+              <li><button mat-button [class.activeLink]="currentUrl == '/admin/jobs' || urlData[2] == 'proposal-list' || urlSegment == 'admin/jobs/view'" routerLink="/admin/jobs"><span class="icon icon-jobs"></span> <span class="sidemenu-text">Jobs</span></button></li>
+              <li><button mat-button [class.activeLink]="currentUrl == '/admin/proposals' || urlData[2] == 'proposal-detail'" routerLink="/admin/proposals"><span class="icon icon-proposal"></span> <span class="sidemenu-text">Proposals</span></button></li>
+              <li><button mat-button [class.activeLink]="currentUrl == '/admin/jobs/skills' || currentUrl == '/admin/jobs/add-skill' || urlSegment == 'admin/jobs/edit-skill'" routerLink="/admin/jobs/skills"><span class="icon icon-job-skills"></span> <span class="sidemenu-text">Job Skills</span></button></li>
+              <li><button mat-button [class.activeLink]="currentUrl == '/admin/jobs/suggested/question' || currentUrl == '/admin/jobs/add-suggested-question' || urlSegment == 'admin/jobs/edit-suggested-question'" routerLink="/admin/jobs/suggested/question"><span class="icon icon-suggestion-question"></span> <span class="sidemenu-text">Job Suggested Questions</span></button></li>
+              <li><button mat-button [class.activeLink]="currentUrl == '/admin/membership' || currentUrl == '/admin/add-membership' || urlData[2] == 'edit-membership'" routerLink="/admin/membership"><span class="icon icon-membership"></span> <span class="sidemenu-text">Memberships</span></button></li>
+              <li><button mat-button [class.activeLink]="currentUrl == '/admin/user/withdraws'" routerLink="/admin/user/withdraws"><span class="icon icon-withdraw"></span> <span class="sidemenu-text">Withdraw</span></button></li> 
+              <li><button mat-button [class.activeLink]="currentUrl == '/admin/chat/room'" routerLink="/admin/chat/room"><span class="icon icon-chat-room"></span> <span class="sidemenu-text">Chat Room</span></button></li>
+              <li><button mat-button [class.activeLink]="currentUrl == '/admin/test-categories' || urlData[2] == 'add-test-category' || urlData[2] == 'edit-test-category'" routerLink="/admin/test-categories"><span class="icon icon-test-categories"></span> <span class="sidemenu-text">Test Categories</span></button></li>
+              <li><button mat-button [class.activeLink]="currentUrl == '/admin/test-groups' || urlData[2] == 'add-test-group' || urlData[2] == 'edit-test-group'" routerLink="/admin/test-groups"><span class="icon icon-test-group"></span> <span class="sidemenu-text">Test Groups</span></button></li>
+              <li><button mat-button [class.activeLink]="currentUrl == '/admin/test-questions' || currentUrl == '/admin/add-test-question' || urlData[2] == 'edit-test-question'" routerLink="/admin/test-questions"><span class="icon icon-test-questions"></span> <span class="sidemenu-text">Test Questions</span></button></li>
+              <li><button mat-button [class.activeLink]="currentUrl == '/admin/testimonials' || currentUrl == '/admin/add-testimonial' || urlData[2] == 'edit-testimonial'" routerLink="/admin/testimonials"><span class="icon icon-testimonial"></span> <span class="sidemenu-text">Testimonials</span></button></li>
+              <li><button mat-button [class.activeLink]="currentUrl == '/admin/pages' || currentUrl == '/admin/add-page' || urlData[2] == 'edit-page'" routerLink="/admin/pages"><span class="icon icon-cms-pages"></span> <span class="sidemenu-text">CMS Pages</span></button></li>
+              <li><button mat-button [class.activeLink]="currentUrl == '/admin/security-questions' || currentUrl == '/admin/add-security-question' || urlData[2] == 'edit-security-question'" routerLink="/admin/security-questions"><span class="icon icon-security-question"></span> <span class="sidemenu-text">Security Questions</span></button></li>
+              <li><button mat-button [class.activeLink]="currentUrl == '/admin/contracts'" routerLink="/admin/contracts"><span class="icon icon-contracts"></span> <span class="sidemenu-text">Contracts</span></button></li>
+              <li><button mat-button [class.activeLink]="currentUrl == '/admin/languages' || currentUrl == '/admin/add-language' || urlData[2] == 'edit-language'" routerLink="/admin/languages"><span class="icon icon-programming-language"></span> <span class="sidemenu-text">Language</span></button></li>
+              <li><button mat-button [class.activeLink]="currentUrl == '/admin/home-settings' || urlData[2] == 'edit-home-setting'" routerLink="/admin/home-settings"><span class="icon icon-homepage-setting"></span> <span class="sidemenu-text">Home Page Settings</span></button></li>
+              <li><button mat-button [class.activeLink]="currentUrl == '/admin/settings'" routerLink="/admin/settings"><span class="icon icon-settings"></span> <span class="sidemenu-text">Settings</span></button></li>
+              <!-- <li><button mat-button [class.activeLink]="currentUrl == '/admin/corepages'" routerLink="/admin/corepages"><span class="icon icon-settings"></span> <span class="sidemenu-text">Page Meta Settings</span></button></li> -->
+
+                <!-- <li>
+                  <mat-accordion>
+                    <mat-expansion-panel>
+                      <mat-expansion-panel-header>
+                        <mat-panel-title>
+                                <span class="icon icon-jobs"></span> Jobs
+                        </mat-panel-title>
+                      </mat-expansion-panel-header>
+                        <button mat-button routerLink="/managejobs"><span class="icon icon-menu"></span> Job Listing</button>
+                        <button mat-button routerLink="/addjobs"><span class="icon icon-plus"></span> Add Jobs</button>
+                    </mat-expansion-panel>
+                  </mat-accordion>
+                </li> -->
+                  <!-- <li><button mat-button><span class="icon icon-agency"></span> <span class="sidemenu-text">Agencies</span></button></li>
+                  <li><button mat-button><span class="icon icon-test"></span> <span class="sidemenu-text">Test</span></button></li> -->
+                  <li><button mat-button [class.activeLink]="currentUrl == '/admin/transactions'" routerLink="/admin/transactions"><span class="icon icon-transaction"></span> <span class="sidemenu-text">Transaction</span></button></li>
+                  <li><button mat-button [class.activeLink]="currentUrl == '/admin/disputes'" routerLink="/admin/disputes"><span class="icon icon-dispute"></span> <span class="sidemenu-text">Disputes</span></button></li>
+                  <li><button mat-button [class.activeLink]="currentUrl == '/admin/mail_settings'" routerLink="/admin/mail_settings"><span class="icon icon-mail-setting"></span> <span class="sidemenu-text">Mail Settings</span></button></li>
+                  <li><button mat-button [class.activeLink]="currentUrl == '/admin/connects'" routerLink="/admin/connects"><span class="icon icon-connect-history"></span> <span class="sidemenu-text">Connects History</span></button></li>
+                  <li><button mat-button (click)="logout()"><span class="icon icon-logout"></span> <span class="sidemenu-text">Logout</span></button></li>
+
+            </ul>
+          </div>
+    
+
+        </nav>
+

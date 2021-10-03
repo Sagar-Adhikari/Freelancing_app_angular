@@ -1,0 +1,30 @@
+<div class="profileimage-popup">
+  <div class="model_main"> 
+    <div class="modal-header">
+      <h4 class="modal-title">Profile Image</h4>
+      <button (click)="onclickcancel()"><mat-icon>close</mat-icon></button>
+    </div>
+  <div class="modal-body">
+  <div class="profile-leftblock">
+    <img-cropper #cropper [image]="data" [settings]="cropperSettings" (onCrop)="cropped($event)"></img-cropper>
+    <div class="file-upload file_upload_div">
+      
+      <label for="custom-input"><span class="upload_icon"><i class="fa fa-upload"></i></span></label>
+      <input id="custom-input" class="upload_icon" type="file" accept="image/x-png,image/jpeg,image/png,image/jpg,image/gif" (change)="fileChangeListener($event)" style="display: none;">
+
+    </div>
+    </div><!--end profile-leftblock-->
+    <div class="profile-rightblock">
+    <h5>Your Image</h5>
+    <div class="result rounded preview-image" *ngIf="!data.image" >
+        <img [src]='initialImage' [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
+      </div>
+    <div class="result rounded preview-image" *ngIf="data.image" >
+      <img src="{{data.image}}" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
+    </div>
+      <button class="save-btn" (click)="saveprofileimg()">Save</button>
+      <button class="cancel-btn" (click)="onclickcancel()">Cancel</button>
+    </div><!--end profile-rightblock-->
+  </div><!--end modal-body-->
+  </div>
+  </div><!--end profileimage-popup-->  

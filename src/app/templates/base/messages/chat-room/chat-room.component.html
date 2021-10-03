@@ -1,0 +1,489 @@
+<div class="category_mainwrap messages_wrap">
+    <div [ngClass]="{ hidden : hideLayout }" class="breadcrumb_wrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <h4>Messages</h4>
+                </div>
+                <!--end col-->
+            </div>
+            <!--end row-->
+        </div>
+        <!--end container-->
+    </div>
+    <!--end breadcrumb_wrap-->
+    <div class="messages-block">
+        <div class="container-fluid">
+            <div class="row">
+                <div [ngClass]="{ hidden : hideLayout }" class="col d-none d-md-block col-md-3">
+                    <app-sidebar></app-sidebar>
+                </div>
+                <!--end col-->
+                <div class="col col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                    <div class="message-right">
+                        <div class="top-menus">
+                            <ul>
+                                <li>
+                                    <h5>{{ current_room }}</h5>
+                                    <p><span>{{ created_current_room | date : 'medium' }}</span></p>
+                                </li>
+                                <!-- <li><span class="fa fa-star"></span></li> -->
+                                <!-- <li><a href=""><span class="fa fa-phone"></span></a></li>
+									<li><a href=""><span class="fa fa-video-camera"></span></a></li> -->
+                                <li class="button">
+                                    <button class="hire-btn" mat-button routerLink="/search/job" *ngIf="user_type=='Freelancer'">find
+                    work</button>
+                                    <button class="hire-btn" mat-button routerLink="/contract/{{invite_users_id}}/{{job_id}}" *ngIf="user_type=='Client'">hire freelancer</button>
+                                </li>
+                                <li class="button" *ngIf="proposal_id!=''">
+                                    <button class="hire-btn" mat-button routerLink="/proposal-details/{{proposal_id}}">view
+                    proposal</button>
+                                </li>
+                                <!-- <li class="last-icon"><a href="javascript:void(0);" (click)="closeSearch();"><span
+                      class="fa fa-folder"></span></a></li> -->
+                                <li class="last-icon"><a href="javascript:void(0);" (click)="closeFiles();"><span
+                      class="fa fa-file"></span></a></li>
+                                <li class="last-icon"><a href="javascript:void(0);" (click)="showUsers();"><span
+                      class="fa fa-users"></span></a></li>
+                                <li class="last-icon" *ngIf="current_id==room_owner"><a href="javascript:void(0);" (click)="peoplePopup();"><span class="fa fa-user-plus"></span></a></li>
+                            </ul>
+                        </div>
+
+                        <!--end top-menus-->
+                        <div #scrollMe *ngIf="!users_block && !notes_block" class="main-message" data-infinite-scroll debounce [infiniteScrollDistance]="scrollDistance" [infiniteScrollUpDistance]="scrollUpDistance" [infiniteScrollThrottle]="throttle" (scrolledUp)="onScrollUp()"
+                            [scrollWindow]="false">
+                            <div #msgsContainer>
+                                <div *ngIf="push_dates.length > 0">
+                                    <ng-container *ngFor="let row of push_dates">
+                                        <p class="chat-date">{{row | date}}</p>
+                                        <div *ngFor="let msg of displaymg[row];" class="{{hide_class}}" [ngClass]="(msg.user_id==current_id) ? 'owner-user' : 'other-user'" id="msg_container_{{msg.msg_id}}">
+
+                                            <ng-container *ngFor="let qtemsg of msg.message_info">
+                                                <div>
+                                                    <div class="user-img"><img src="{{user_avatar_url}}?id={{qtemsg.user}}">
+                                                        <p class="time-txt">{{ qtemsg.created | date : 'shortTime' }}</p>
+                                                    </div>
+                                                    <p style="background-color:#878787" *ngIf="qtemsg.chat_message" class="msg-txt wrap-text"><span [innerHTML]="qtemsg.chat_message | formatString"></span>
+                                                    </p>
+                                                    <ng-container *ngFor="let qtnfsinfo of qtemsg.file_info">
+                                                        <a href="{{ qtnfsinfo.file_ext | fileFormat:qtnfsinfo.file:'url' }}" target="_blank">
+                                                            <p class="chat_image_block"> <img src="{{ qtnfsinfo.file_ext | fileFormat:qtnfsinfo.file:'img' }}" class="chat_msg_img">
+                                                            </p>
+                                                            <h1>{{ qtnfsinfo.file_name }}<span>{{ qtnfsinfo.file_size|bytes }}</span></h1>
+                                                        </a>
+                                                    </ng-container>
+                                                </div>
+                                            </ng-container>
+
+                                            <div class="quote_message">
+                                                <div class="user-img"><img src="{{user_avatar_url}}?id={{msg.user_id}}">
+                                                    <p class="time-txt">{{ msg.current_date_time | date : 'shortTime' }}</p>
+                                                </div>
+                                                <p *ngIf="msg.message" class="msg-txt wrap-text"><span [ngClass]="(msg.user_id==current_id) ? 'arrow-right' : 'arrow-left'"></span><span style="overflow-wrap: break-word;" [innerHTML]="msg.message | formatString"></span>
+                                                </p>
+                                                <ng-container *ngFor="let fsinfo of msg.file_info">
+                                                    <a href="{{ fsinfo.file_ext | fileFormat:fsinfo.file:'url' }}" target="_blank">
+                                                        <p class="chat_image_block"> <img src="{{ fsinfo.file_ext | fileFormat:fsinfo.file:'img' }}" class="chat_msg_img"></p>
+                                                        <h1>{{ fsinfo.file_name }}<span>{{ fsinfo.file_size|bytes }}</span></h1>
+                                                    </a>
+                                                </ng-container>
+                                            </div>
+                                            <mat-menu #msg_menu="matMenu">
+                                                <ng-container *ngIf="msg.user_id==current_id">
+                                                    <button mat-menu-item (click)="dlmsg(msg.msg_id)"><i class="material-icons">delete</i>
+												  Delete</button>
+                                                </ng-container>
+                                                <button mat-menu-item (click)="qtemsg(msg.msg_id)"><i class="material-icons">format_quote
+												</i>Quote</button>
+                                            </mat-menu>
+                                            <button mat-icon-button [matMenuTriggerFor]="msg_menu">
+											  <mat-icon>more_vert</mat-icon>
+											</button>
+                                        </div>
+
+                                    </ng-container>
+                                </div>
+                            </div>
+                            <div *ngIf="displayTyping.length > 0">
+                                <ng-container *ngFor="let user_name of displayTyping">
+                                    <p *ngIf="typing_status">{{ user_name }} is typing...</p>
+                                </ng-container>
+                            </div>
+                            <!-- <input type='file' (change)="readUrl($event)" multiple="" #msgfs> -->
+
+
+
+                            <ng-container *ngFor="let qtemsg of prevQteMsg let k = index">
+                                <div class="display_quote">
+                                    <a href="javascript:void(0);" (click)="removeqte(k);" class="close_icon"><i
+                      class="material-icons">clear</i></a>
+
+                                    <div class="user-img">
+                                        <img src="{{user_avatar_url}}?id={{qtemsg.user}}">
+                                        <p class="time-txt">{{ qtemsg.created | date : 'medium' }}</p>
+                                    </div>
+                                    <p *ngIf="qtemsg.chat_message" class="msg-txt wrap-text">
+                                        <span></span>
+                                        <span [innerHTML]="qtemsg.chat_message | formatString"></span>
+                                    </p>
+                                    <ng-container *ngFor="let fsinfo of qtemsg.file_info">
+                                        <a href="{{ fsinfo.file_ext | fileFormat:fsinfo.file:'url' }}" target="_blank">
+                                            <p class="chat_image_block"> <img src="{{ fsinfo.file_ext | fileFormat:fsinfo.file:'img' }}" class="chat_msg_img"></p>
+                                            <h1>{{ fsinfo.file_name }}<span>{{ fsinfo.file_size|bytes }}</span></h1>
+                                        </a>
+                                    </ng-container>
+                                </div>
+                            </ng-container>
+
+
+                            <form class="message-composer">
+                                <mat-form-field class="example-full-width" *ngIf="message_type==2">
+                                    <mat-menu #emoji_menu="matMenu" class="emoji_menu_block">
+                                        <ul class="nav nav-tabs nav-emoji">
+                                            <li>
+                                                <a href="javascript:void(0);" (click)="select(':point_up:')" ng-mouseover="hover(':point_up:')" emoji=":point_up:"><img src="assets/images/emoji/261d.png"></a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" (click)="select(':heart:')" ng-mouseover="hover(':heart:')" emoji=":heart:">
+                                                    <img src="assets/images/emoji/2665.png"></a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" (click)="select(':thumbsup:')" ng-mouseover="hover(':thumbsup:')" emoji=":thumbsup:">
+                                                    <img src="assets/images/emoji/1f44d.png"></a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" (click)="select(':thumbsdown:')" ng-mouseover="hover(':thumbsdown:')" emoji=":thumbsdown:"><img src="assets/images/emoji/1f44e.png"></a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" (click)="select(':grin:')" ng-mouseover="hover(':grin:')" emoji=":grin:">
+                                                    <img src="assets/images/emoji/1f601.png"></a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" (click)="select(':smile:')" ng-mouseover="hover(':smile:')" emoji=":smile:">
+                                                    <img src="assets/images/emoji/1f604.png"></a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" (click)="select(':laughing:')" ng-mouseover="hover(':laughing:')" emoji=":laughing:">
+                                                    <img src="assets/images/emoji/1f606.png"></a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" (click)="select(':wink:')" ng-mouseover="hover(':wink:')" emoji=":wink:">
+                                                    <img src="assets/images/emoji/1f609.png"></a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" (click)="select(':unamused:')" ng-mouseover="hover(':unamused:')" emoji=":unamused:">
+                                                    <img src="assets/images/emoji/1f612.png"></a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" (click)="select(':pensive:')" ng-mouseover="hover(':pensive:')" emoji=":pensive:">
+                                                    <img src="assets/images/emoji/1f614.png"></a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" (click)="select(':stuck_out_tongue_winking_eye:')" ng-mouseover="hover(':stuck_out_tongue_winking_eye:')" emoji=":stuck_out_tongue_winking_eye:">
+                                                    <img src="assets/images/emoji/1f61c.png"></a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" (click)="select(':stuck_out_tongue_closed_eyes:')" ng-mouseover="hover(':stuck_out_tongue_closed_eyes:')" emoji=":stuck_out_tongue_closed_eyes:">
+                                                    <img src="assets/images/emoji/1f61d.png"></a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" (click)="select(':disappointed:')" ng-mouseover="hover(':disappointed:')" emoji=":disappointed:">
+                                                    <img src="assets/images/emoji/1f61e.png"></a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" (click)="select(':grinning:')" ng-mouseover="hover(':grinning:')" emoji=":grinning:">
+                                                    <img src="assets/images/emoji/1f600.png"></a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" (click)="select(':neutral_face:')" ng-mouseover="hover(':neutral_face:')" emoji=":neutral_face:">
+                                                    <img src="assets/images/emoji/1f610.png"></a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" (click)="select(':expressionless:')" ng-mouseover="hover(':expressionless:')" emoji=":expressionless:">
+                                                    <img src="assets/images/emoji/1f611.png"></a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" (click)="select(':confused:')" ng-mouseover="hover(':confused:')" emoji=":confused:">
+                                                    <img src="assets/images/emoji/1f615.png"></a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" (click)="select(':stuck_out_tongue:')" ng-mouseover="hover(':stuck_out_tongue:')" emoji=":stuck_out_tongue:">
+                                                    <img src="assets/images/emoji/1f61b.png"></a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" (click)="select(':fearful:')" ng-mouseover="hover(':fearful:')" emoji=":fearful:">
+                                                    <img src="assets/images/emoji/1f628.png"></a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" (click)="select(':no_mouth:')" ng-mouseover="hover(':no_mouth:')" emoji=":no_mouth:">
+                                                    <img src="assets/images/emoji/1f636.png"></a>
+                                            </li>
+                                        </ul>
+                                    </mat-menu>
+
+                                    <label for="file_select" class="file_select">
+                    <i class="material-icons"> attach_file </i>
+                  <input type='file' class="hidden" (change)="readUrl($event)" multiple="" #msgfs>
+                </label>
+
+                                    <div class="message_input">
+                                        <input type="text" cols="1" rows="5" matInput placeholder="Type your message..." #to_send_msg (input)="onTypingChange($event.target.value)" autocomplete="off">
+                                    </div>
+
+
+                                    <button class="comment_btn" (click)="sendMessage();">
+                    <mat-icon class="mat-icon material-icons" role="img" aria-hidden="true">send</mat-icon><span
+                      class="chat-arrow"></span>
+                  </button>
+
+
+                                    <a href="javascript:void(0);" [matMenuTriggerFor]="emoji_menu" class="smiley_icon"><span
+                          class="smiley"><i class="material-icons">sentiment_satisfied</i></span></a>
+
+                                </mat-form-field>
+
+                                <mat-form-field class="example-full-width" *ngIf="message_type==1">
+                                    <mat-menu #emoji_menu="matMenu" class="emoji_menu_block">
+                                        <ul class="nav nav-tabs nav-emoji">
+                                            <li>
+                                                <a href="javascript:void(0);" (click)="select(':point_up:')" ng-mouseover="hover(':point_up:')" emoji=":point_up:"><img src="assets/images/emoji/261d.png"></a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" (click)="select(':heart:')" ng-mouseover="hover(':heart:')" emoji=":heart:">
+                                                    <img src="assets/images/emoji/2665.png"></a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" (click)="select(':thumbsup:')" ng-mouseover="hover(':thumbsup:')" emoji=":thumbsup:">
+                                                    <img src="assets/images/emoji/1f44d.png"></a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" (click)="select(':thumbsdown:')" ng-mouseover="hover(':thumbsdown:')" emoji=":thumbsdown:"><img src="assets/images/emoji/1f44e.png"></a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" (click)="select(':grin:')" ng-mouseover="hover(':grin:')" emoji=":grin:">
+                                                    <img src="assets/images/emoji/1f601.png"></a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" (click)="select(':smile:')" ng-mouseover="hover(':smile:')" emoji=":smile:">
+                                                    <img src="assets/images/emoji/1f604.png"></a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" (click)="select(':laughing:')" ng-mouseover="hover(':laughing:')" emoji=":laughing:">
+                                                    <img src="assets/images/emoji/1f606.png"></a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" (click)="select(':wink:')" ng-mouseover="hover(':wink:')" emoji=":wink:">
+                                                    <img src="assets/images/emoji/1f609.png"></a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" (click)="select(':unamused:')" ng-mouseover="hover(':unamused:')" emoji=":unamused:">
+                                                    <img src="assets/images/emoji/1f612.png"></a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" (click)="select(':pensive:')" ng-mouseover="hover(':pensive:')" emoji=":pensive:">
+                                                    <img src="assets/images/emoji/1f614.png"></a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" (click)="select(':stuck_out_tongue_winking_eye:')" ng-mouseover="hover(':stuck_out_tongue_winking_eye:')" emoji=":stuck_out_tongue_winking_eye:">
+                                                    <img src="assets/images/emoji/1f61c.png"></a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" (click)="select(':stuck_out_tongue_closed_eyes:')" ng-mouseover="hover(':stuck_out_tongue_closed_eyes:')" emoji=":stuck_out_tongue_closed_eyes:">
+                                                    <img src="assets/images/emoji/1f61d.png"></a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" (click)="select(':disappointed:')" ng-mouseover="hover(':disappointed:')" emoji=":disappointed:">
+                                                    <img src="assets/images/emoji/1f61e.png"></a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" (click)="select(':grinning:')" ng-mouseover="hover(':grinning:')" emoji=":grinning:">
+                                                    <img src="assets/images/emoji/1f600.png"></a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" (click)="select(':neutral_face:')" ng-mouseover="hover(':neutral_face:')" emoji=":neutral_face:">
+                                                    <img src="assets/images/emoji/1f610.png"></a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" (click)="select(':expressionless:')" ng-mouseover="hover(':expressionless:')" emoji=":expressionless:">
+                                                    <img src="assets/images/emoji/1f611.png"></a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" (click)="select(':confused:')" ng-mouseover="hover(':confused:')" emoji=":confused:">
+                                                    <img src="assets/images/emoji/1f615.png"></a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" (click)="select(':stuck_out_tongue:')" ng-mouseover="hover(':stuck_out_tongue:')" emoji=":stuck_out_tongue:">
+                                                    <img src="assets/images/emoji/1f61b.png"></a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" (click)="select(':fearful:')" ng-mouseover="hover(':fearful:')" emoji=":fearful:">
+                                                    <img src="assets/images/emoji/1f628.png"></a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" (click)="select(':no_mouth:')" ng-mouseover="hover(':no_mouth:')" emoji=":no_mouth:">
+                                                    <img src="assets/images/emoji/1f636.png"></a>
+                                            </li>
+                                        </ul>
+                                    </mat-menu>
+
+                                    <label for="file_select" class="file_select">
+                      <i class="material-icons"> attach_file </i>
+                    <input type='file' (change)="readUrl($event)" id="file_select" class="hidden" multiple="" #msgfs>
+                  </label>
+
+                                    <div class="message_input">
+                                        <textarea type="text" matInput placeholder="Type your message..." #to_send_msg (input)="onTypingChange($event.target.value)" autocomplete="off"></textarea>
+                                    </div>
+
+                                    <button [ngClass]="{'comment_btn': !pendingSend,
+                  'pending_comment_send': pendingSend}" (click)="sendMessage();">
+                    <mat-icon class="mat-icon material-icons" role="img" aria-hidden="true">send</mat-icon><span
+                      class="chat-arrow"></span>
+                  </button>
+                                    <a href="javascript:void(0);" [matMenuTriggerFor]="emoji_menu" class="smiley_icon"><span
+                      class="smiley"><i class="material-icons">sentiment_satisfied</i></span></a>
+                                </mat-form-field>
+
+                                <div *ngIf="url.length > 0" class="chat_preview_block">
+                                    <ng-container *ngFor="let preview of url; let j = index">
+                                        <div class="upload-image-container">
+                                            <a href="javascript:void(0);" (click)="removefiles(j);" class="close_btn"><i
+                          class="material-icons">clear</i></a>
+                                            <p class="preview_image_left"><img [src]="preview.img" class="preview_image"></p>
+                                            <div class="preview_image_right">
+                                                <h1>{{ preview.file_name }}</h1>
+                                                <h2>{{ preview.size|bytes }}</h2>
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </form>
+                        </div>
+                        <!--end main-message-->
+
+
+
+
+
+
+                        <div class="main-notepad" *ngIf="users_block">
+                            <h3>People</h3>
+
+                            <ul *ngFor="let rs of room_users" class="people-list">
+                                <li>
+                                    <p>{{rs.first_name}} {{rs.last_name}} </p>
+                                    <img src="{{user_avatar_url}}?id={{rs.id}}">
+                                    <!-- <a href="javascript:void(0);"
+                    *ngIf="(current_id==room_owner || current_id==rs.id) && (room_owner!=rs.id)"
+                    (click)="removeuser(rs.email);"><i class="material-icons">clear</i></a> -->
+                                </li>
+                            </ul>
+
+                        </div>
+
+
+                        <div class="main-notepad" (click)="clickedInside($event)" *ngIf="notes_block">
+                            <h3>personal notepad</h3>
+                            <div *ngIf="default_notes">
+                                <a href="javascript:void(0);" (click)="showNotes(1);">
+                                    <p class="note-txt">Use this space to save your thoughts however you’d like: </p>
+                                    <mat-list role="list">
+                                        <mat-list-item role="listitem"><span>1.</span>Prepare talking points for the interview
+                                        </mat-list-item>
+                                        <mat-list-item role="listitem"><span>2.</span>Record questions for later follow-up</mat-list-item>
+                                        <mat-list-item role="listitem"><span>3.</span>Organize project plans and deliverable dates
+                                        </mat-list-item>
+                                        <mat-list-item role="listitem"><span>4.</span>Make note of the freelancer’s strengths and weaknesses
+                                        </mat-list-item>
+                                        <mat-list-item role="listitem"><span>5.</span>Prepare talking points for the interview
+                                        </mat-list-item>
+                                        <mat-list-item role="listitem"><span>6.</span>Record questions for later follow-up</mat-list-item>
+                                        <mat-list-item role="listitem"><span>7.</span>Organize project plans and deliverable dates
+                                        </mat-list-item>
+                                        <mat-list-item role="listitem"><span>8.</span>Make note of the freelancer’s strengths and weaknesses
+                                        </mat-list-item>
+                                        <p>Notes you type are only visible to you, and can always be accessed through your messages with this freelancer.</p>
+                                        <p>Notes are saved automatically as you type.</p>
+                                    </mat-list>
+                                </a>
+                            </div>
+
+                            <div *ngIf="saved_notes">
+                                <a href="javascript:void(0);" (click)="showNotes(2);">
+                                    <p>{{saved_notes_db}} <span><i class="material-icons">edit</i></span></p>
+                                </a>
+
+                            </div>
+
+                            <div *ngIf="textarea_notes" class="personal-field">
+                                <mat-form-field appearance="outline">
+                                    <textarea matInput rows="6" [ngModel]="saved_notes_db" (ngModelChange)="personalNoteaction($event)" (keyup)="onKeyUp($event)"></textarea>
+                                </mat-form-field>
+                            </div>
+
+
+                            <div class="bottom-block">
+                                <div class="bottom-link">
+                                    <div><a href="javascript:;">Notes Beta</a></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="main-notepad" *ngIf="files_block">
+                            <div *ngIf="isFiles" class="files_block">
+                                <h3>Files</h3>
+                                <ng-container *ngFor="let firinfo of filesInfo">
+                                    <div *ngFor="let fs_info of firinfo.file_info">
+                                        <a href="{{ fs_info.file_ext | fileFormat:fs_info.file:'url' }}" target="_blank">
+                                            <p> <img src="{{ fs_info.file_ext | fileFormat:fs_info.file:'img' }}"></p>
+                                            <h1>{{ fs_info.file_name }}<span>{{ fs_info.file_size|bytes }}</span></h1>
+                                        </a>
+                                    </div>
+                                </ng-container>
+                                <div *ngIf="loadMorebtn"><a href="javascript:void(0);" (click)="loadMorefiles(current_room_id);">Load
+                    More</a></div>
+
+                                <div *ngIf="norecords && filesInfo.length==0">No records found</div>
+                            </div>
+                            <div *ngIf="isSearch">
+                                <a href="javascript:void(0);" (click)="closeSearch();"><i class="material-icons">clear</i></a>
+                                <h3>Search</h3>
+                                <input type="text" [(ngModel)]="search_text" [ngModelOptions]="{standalone: true}" (keyup.enter)="search($event)" placeholder="Enter search text" class="form-control" id="search_id">
+                                <button (click)="searchaction()">
+                  <mat-icon>search</mat-icon>
+                </button>
+                                <ng-container *ngIf="displaySearchMsg.length==0">
+                                    <p>No records found</p>
+                                </ng-container>
+                                <ng-container *ngFor="let shmsg of displaySearchMsg">
+                                    <div class="">
+                                        <div class="user-img"><img src="{{user_avatar_url}}?id={{shmsg.user_id}}">
+                                            <p class="time-txt">{{ shmsg.current_date_time | date : 'medium' }}</p>
+                                        </div>
+                                        <p class="msg-txt"><span></span><span [innerHTML]="shmsg.message | formatString"></span>
+                                        </p>
+                                        <ng-container *ngFor="let sfsinfo of shmsg.file_info">
+                                            <a href="{{ sfsinfo.file_ext | fileFormat:sfsinfo.file:'url' }}" target="_blank">
+                                                <p> <img src="{{ sfsinfo.file_ext | fileFormat:sfsinfo.file:'img' }}"></p>
+                                                <h1>{{ sfsinfo.file_name }}<span>{{ sfsinfo.file_size|bytes }}</span></h1>
+                                            </a>
+                                        </ng-container>
+                                    </div>
+                                </ng-container>
+
+                            </div>
+                        </div>
+
+                        <!--end main-message-->
+                    </div>
+                    <!--end message-right-->
+                </div>
+                <!--end col-->
+            </div>
+            <!--end row-->
+        </div>
+        <!--end container-->
+    </div>
+    <!--end messages-block-->
+</div>
+<!--end messages_wrap-->

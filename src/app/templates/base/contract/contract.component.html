@@ -1,0 +1,148 @@
+<div *ngIf="!esewa_pay_in_process" class="category_mainwrap postjob_wrap">
+    <div class="breadcrumb_wrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <h4>Send Job Contract</h4>
+                </div>
+                <!--end col-->
+            </div>
+            <!--end row-->
+        </div>
+        <!--end container-->
+    </div>
+    <!--end breadcrumb_wrap (ngSubmit)="contractSubmit(contractForm.value)"-->
+    <div>
+        <div class="postjob-details">
+            <div class="container">
+                <form [formGroup]="contractForm">
+                    <div class="postjob-inner">
+                        <h5>Hire</h5>
+                        <ng-container *ngIf="!findPropose">
+                            <h3>Already Proposed</h3>
+                        </ng-container>
+                        <section class="content-section">
+                            <ng-template [ngIf]="ismessage">
+                                <div class="alert alert-danger" role="alert">{{errormessage}}</div>
+                            </ng-template>
+
+                            <div class="freelancer-detail">
+                                <div class="profile-img">
+                                    <img src="{{user_avatar_url}}?id={{freelancer_id}}">
+                                </div>
+                                <div class="profile-name">
+                                    <h1>{{freelancer_name}}</h1>
+                                </div>
+                            </div>
+
+                            <div class="margin-top-block">
+                                <label>Contract Title</label>
+                                <mat-form-field class="example-full-width" appearance="outline">
+                                    <input matInput placeholder="Contract Title" formControlName="title">
+                                </mat-form-field>
+                                <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('title') || this.errorMsgArr['title']}}
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                    <div class="postjob-inner">
+                        <h5>Work Description</h5>
+                        <section class="content-section">
+                            <div class="form-group">
+                                <label>Description</label>
+                                <mat-form-field class="example-full-width" appearance="outline">
+                                    <textarea matInput placeholder="Get started on the right foot by setting clear expectations" formControlName="description" matTextareaAutosize matAutosizeMinRows="10" matAutosizeMaxRows="10"></textarea>
+                                </mat-form-field>
+                                <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('description') || this.errorMsgArr['description']}}
+                                </div>
+                            </div>
+                            <div class="form-group"><label>Attachments</label>
+                                <div class="drag_attachment">
+                                    <label>drag or <span>upload</span> project files</label>
+                                    <input type='file' (change)="readUrl($event)" multiple="" #msgfs>
+                                </div>
+
+                                <div *ngIf="url.length > 0" class="row">
+                                    <ng-container *ngFor="let preview of url; let j = index">
+
+                                        <div class="col-lg-3 col-md-4 col-sm-12">
+                                            <ul class="drag_list">
+                                                <li>
+                                                    <a href="javascript:void(0);" mat-mini-fab (click)="removefiles(j,preview.imgindex);">
+                                                        <mat-icon>delete</mat-icon>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <span *ngIf="preview.file_type == 'img';else notimgFile">
+																<img height="50" width="50" [src]="preview.img[j]"><p>{{ preview.file_name }}<br />{{ preview.size|bytes }}</p>
+														</span>
+                                                    <ng-template #notimgFile>
+                                                        <img height="50" width="50" [src]="preview.img[0]">
+                                                        <p>{{ preview.file_name }}<br />{{ preview.size|bytes }}</p>
+                                                    </ng-template>
+
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </ng-container>
+                                </div>
+
+
+                            </div>
+                        </section>
+                    </div>
+                    <div class="postjob-inner">
+                        <h5>Terms</h5>
+                        <section class="content-section">
+                            <div class="postjob-inner">
+                                <section class="content-section">
+                                    <div class="form-group">
+                                        <label *ngIf="fixed_terms">Total Amount (Rs.)</label>
+                                        <label *ngIf="hourly_terms">Hourly Amount (Rs.)</label>
+                                        <mat-form-field class="example-full-width" appearance="outline">
+                                            <input matInput placeholder="Amount ($)" formControlName="fixed_amount" allownumberonly (keyup)="onKeyUp($event)" autocomplete="off">
+                                        </mat-form-field>
+                                        <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('fixed_amount') || this.errorMsgArr['fixed_amount']}}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Due Date UTC</label>
+                                        <mat-form-field class="example-full-width" appearance="outline">
+                                            <input matInput [matDatepicker]="picker" (focus)="picker.open()" (click)="picker.open()" formControlName="due_date" placeholder="Choose a due date" [min]="minDate">
+                                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                            <mat-datepicker #picker></mat-datepicker>
+                                        </mat-form-field>
+                                        <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('due_date') || this.errorMsgArr['due_date']}}
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6" *ngIf="milestone_display_status">
+                                        <div class="form-group border">
+                                            <a mat-button class="btn btn-form-save add-evidence" (click)="addMile()">+ Add More</a>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </section>
+
+                        <section class="content-section">
+                            <div class="form-group anchor-tag">
+                                <mat-checkbox formControlName="terms" value="1">Yes, I understand and agree to the Remote Nepal <a routerLink="/pages/terms">Terms of Service</a></mat-checkbox>
+                                <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('terms') || this.errorMsgArr['terms']}}
+                                </div>
+                            </div>
+                            <!--end form-group-->
+                            <div class="bottom-btn">
+                                <button mat-button type="submit" (click)="contractSubmit(contractForm.value)" [disabled]="isbuttondisable">Hire {{freelancer_name}}</button>
+                                <button mat-button (click)="onCancel()" class="cancel-btn">Cancel</button>
+                            </div>
+                        </section>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!--end postjob_wrap-->

@@ -1,0 +1,60 @@
+.admin-dashboard.admin-cmspage{padding: 15px 15px;background: #eeeeee;height:auto;min-height:100%;}
+.admin-dashboard.admin-cmspage .pages-container{padding: 15px; background-color: #ffffff; }
+.admin-dashboard.admin-cmspage .pages-container h2{border-bottom: 1px solid #ececed;color: #4A154B;font-size: 18px;padding-bottom: 15px;margin: 0 -15px;padding: 0 15px 15px;}
+.admin-dashboard.admin-cmspage .pages-container .filter_layout{display: inline-block;width: 100%;}
+.admin-dashboard.admin-cmspage .pages-container .filter_layout .filter_layout_input{float: left;margin-top:20px;}
+.admin-dashboard.admin-cmspage .pages-container .filter_layout .filter_button_layout{margin-top:0px;}
+.admin-dashboard.admin-cmspage .pages-container .filter_layout .filter_layout_input{float: left;}
+.admin-dashboard.admin-cmspage .pages-container .filter_layout .filter_button_layout button{margin-left: 10px;background: #4A154B;color: #fff;}
+.admin-dashboard.admin-cmspage .pages-container .table-box {padding: 0px;border: 1px solid #dfe2e5;box-shadow: none;}
+.admin-dashboard.admin-cmspage .pages-container .table-box table{width: 100%;}
+.admin-dashboard.admin-cmspage .pages-container .table-box .mat-header-cell { font-size: 14px;font-weight: bold;height: 56px;border-bottom-width: 1px; border-bottom-style: solid;color: #41454b;border-bottom-color: rgba(0,0,0,.12);min-width:90px;}
+.admin-dashboard.admin-cmspage .pages-container .table-box mat-cell:first-child{padding-left: 24px;font-size: 14px;font-weight: bold;height: 56px;border-bottom-width: 1px;border-bottom-style: solid;color: #41454b;border-bottom-color: rgba(0,0,0,.12);}
+.admin-dashboard.admin-cmspage .pages-container .table-box mat-cell:last-child{padding-left: 0px;font-size: 14px;font-weight: bold;height: 56px;border-bottom-width: 1px;border-bottom-style: solid;color: #41454b;border-bottom-color: rgba(0,0,0,.12);}
+.admin-dashboard.admin-cmspage .pages-container .table-box .mat-icon-button i{color: #4A154B;}
+.admin-cmspage th.mat-header-cell, .admin-cmspage td.mat-cell { min-width:125px; }
+.admin-cmspage th.mat-header-cell {color: #000;font-size: 14px;}
+button.mat-button { background-color:#4A154B; color:#fff; margin:10px 0; }
+:host /deep/ .admin-dashboard.admin-cmspage .pages-container .filter_layout .filter_layout_input .mat-form-field-flex {display: inline-flex;align-items: baseline;box-sizing: border-box;width: 100%;border: 1px solid #ddd;border-radius: 30px;padding: 0px 15px;height: 37px;margin-top: 0px;box-shadow: 0 -8px 10px -5px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12); }
+:host /deep/ .filter_layout_input .mat-form-field-appearance-legacy .mat-form-field-underline{display: none;}
+:host /deep/ .filter_layout_input .mat-form-field-appearance-legacy .mat-form-field-infix {padding: 3px 0;margin-top: -11px;}
+:host /deep/ .filter_layout_input input.mat-input-element {margin-top: 4px;}
+:host /deep/ .filter_layout_input { width:100%;}
+:host /deep/ .filter_layout_input .mat-form-field { width:100%;}
+
+
+table { width:100%; }
+.contract_backbtn { width:100%; position: relative; display: inline-block; }
+.contract_block { position: relative; margin:20px 0;}
+.contract_block table { min-width:380px;}
+.contract_block table tr td { width:50%; padding:10px; }
+.contract_block table tr td:first-child, .contract_details_left label { font-weight: 500;}
+
+
+
+
+@media (max-width:1300px)
+{
+:host /deep/ .filter_layout_input .mat-form-field-appearance-legacy .mat-form-field-wrapper {padding-bottom: 1.25em; }
+}
+
+@media(max-width: 767px)
+{
+.admin-dashboard.admin-cmspage .pages-container .table-box{overflow:auto;}
+.admin-dashboard.admin-cmspage .pages-container .table-box table{width: 1000px;}
+.admin-dashboard.admin-cmspage .pages-container .filter_layout .filter_layout_input {float: none;text-align: center;}
+.admin-dashboard.admin-cmspage .pages-container .filter_layout .filter_button_layout {float: none; margin-top: 0px;text-align: center; margin-bottom: 20px;}
+.admin-dashboard.admin-cmspage .pages-container .filter_layout .filter_button_layout button {margin-left: 10px;background: #4A154B;color: #fff;margin-bottom: 10px;}
+}
+
+@media(min-width: 768px) and (max-width: 991px)
+{
+.admin-dashboard.admin-cmspage .pages-container .table-box{overflow:auto;}
+.admin-dashboard.admin-cmspage .pages-container .table-box table{width: 1000px;}
+.admin-dashboard.admin-cmspage .pages-container .filter_layout .filter_button_layout button {margin-left: 10px;background: #4A154B;color: #fff;margin-bottom: 10px;}
+}
+
+@media(min-width: 992px) and (max-width: 1199px)
+{
+.admin-dashboard.admin-cmspage .pages-container .table-box{overflow:auto;}
+}

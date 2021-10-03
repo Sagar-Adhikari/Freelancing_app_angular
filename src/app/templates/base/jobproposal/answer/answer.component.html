@@ -1,0 +1,21 @@
+<div class="model_main"> 
+    <div class="modal-header">
+        <h5 class="modal-title">Answer the Question</h5>
+        <button (click)="onCancelClick()"><mat-icon>close</mat-icon></button>
+    </div>
+    <div class="modal-body">      
+        <div class="model-container" *ngIf="isLoaded" >
+            <div class="popup_matrow">
+            <mat-form-field appearance="outline"  *ngFor="let question of questions; let in=index">
+                <mat-label>{{question.question}}</mat-label>  
+                <input matInput placeholder="Enter the answer"  class="form-control" [(ngModel)]="questions[in].answer" type="text" required>   
+                <div class="text-danger text-left small" *ngIf="questions[in].error">{{questions[in].errormsg}}</div>
+            </mat-form-field>
+            </div>
+            <div class="button-row bottom-btn">
+                <button mat-raised-button type="button" (click)="OnSubmitAnswer()" class="save-btn" >Save</button>
+                <button mat-raised-button type="button" (click)="onCancelClick()" class="cancel-btn" >Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

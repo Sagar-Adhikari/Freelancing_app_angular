@@ -1,0 +1,70 @@
+<div class="category_mainwrap profileedit-wrap profileedit_list_middle">
+    <div class="profileedit_list">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="account-box">
+                <form [formGroup]="setMyProfileForm">
+                    <h3>My Profile</h3>
+                    <div class="account-details">
+                        <div class="form-group">
+                            <label>Visibility</label>
+                            <mat-select placeholder="Select Visibility" formControlName="visibility" [(ngModel)]="updatedVisibility">
+                                <mat-option *ngFor="let visibilityType of visibilityTypes" [value]="visibilityType.key">
+                                    {{ visibilityType.name }}
+                                </mat-option>
+                            </mat-select>
+                            <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('visibility') || this.errorMsgArr['visibility']}}</div>
+                        </div>
+                        <!-- <div class="form-group">
+                      <label>Paypal Email</label>
+                      <input class="form-control" placeholder="Enter your email address" value="{{updatedPaypal}}" type="text" formControlName="paypal_email">
+                      <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('paypal_email') || this.errorMsgArr['paypal_email']}}</div>
+                    </div> -->
+                        <div class="form-group">
+                            <label>Project preference</label>
+                            <mat-select placeholder="Select Project preference" formControlName="project_preference" [(ngModel)]="updatedPreference">
+                                <mat-option *ngFor="let preferenceType of preferenceTypes" [value]="preferenceType.key">
+                                    {{ preferenceType.name }}
+                                </mat-option>
+                            </mat-select>
+                            <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('project_preference') || this.errorMsgArr['project_preference']}}</div>
+                        </div>
+                        <!-- <div class="form-group">
+                          <label>Earnings privacy</label>
+                            <p>Want to keep your earnings private?
+                                Upgrade to a Freelancer Plus membership to enable this setting.</p>
+                        </div> -->
+                    </div>
+                    <div class="account-button account-button_profile">
+                        <button type="button" mat-button (click)="submitSetMyProfileForm(setMyProfileForm.value)">save</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="account-box contact-box">
+                <h3>Experience level</h3>
+                <form [formGroup]="setMyProfileExpForm">
+                    <div class="name-edit experinece_blk_edit">
+                        <div class="form-group radio-style">
+                            <!-- <label class="experinece_blk">Experience Level</label> -->
+                            <mat-radio-group formControlName="experience_level">
+                                <mat-radio-button *ngFor="let exp_level of exp_levels" [value]="exp_level.key">
+                                    {{exp_level.name}}
+                                </mat-radio-button>
+                            </mat-radio-group>
+                            <div class="text-danger text-left small" *ngIf="errorMsgExp">{{geterrorExpMsg('experience_level') || this.errorMsgExpArr['experience_level']}}</div>
+                        </div>
+                        <div class="account-button">
+                            <button type="button" mat-button (click)="submitSetProExpForm(setMyProfileExpForm.value)">save</button>
+                        </div>
+                    </div>
+                </form>
+                <h3>Categories <button mat-button (click)="updateCategory()" class="cursor_pointer">Edit <i class="material-icons">edit</i></button></h3>
+                <div class="name-edit">
+                    <span *ngFor="let row of categoryNameArr;">
+                        <ul>{{ row }}</ul>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

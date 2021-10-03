@@ -1,0 +1,366 @@
+<div class="category_mainwrap job_detailwrap">
+    <div class="breadcrumb_wrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <h4>job search</h4>
+                </div>
+                <!--end col-->
+            </div>
+            <!--end row-->
+        </div>
+        <!--end container-->
+    </div>
+    <!--end breadcrumb_wrap-->
+
+
+    <div class="jobsearch">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+
+                    <div class="tab-buttons">
+                        <span *ngIf="userType !== 'Client'">
+                <a routerLink="/search/job" class="tab-btn active">SEARCH</a>
+            </span>
+
+                        <a *ngIf="userLogged && userType== 'Freelancer'" routerLink="/job/saved" class="tab-btn">SAVED JOBS
+              ({{countSavedJob}})</a>
+                    </div>
+
+                    <div class="jobsearch-block">
+                        <!-- <div class="label-block">
+              <h5>Intresting Job <i class="fa fa-star" aria-hidden="true"></i></h5>
+            </div> -->
+                        <div class="">
+                            <ul class="jobsearch_list">
+
+                                <mat-table #table [dataSource]="dataSource" matSort matSortDisableClear>
+
+                                    <ng-container matColumnDef="jobtitle">
+                                        <mat-header-cell *matHeaderCellDef=""> {{resultsLength}} Jobs Found </mat-header-cell>
+                                        <mat-cell *matCellDef="let element">
+                                            <li>
+                                                <div class="">
+                                                    <div class="row">
+                                                        <div class="col-md-12 col-sm-10 col-xs-10">
+                                                            <div class="row">
+                                                                <div class="col-md-12 col-sm-12">
+                                                                    <div class="row">
+                                                                        <div class="col-md-10 col-sm-10 col-xs-10">
+                                                                            <h4 routerLink="/jobdetail/{{element.id}}/" [queryParams]="{page: pageEvent?pageEvent.pageIndex:0}">{{element.name}}</h4>
+                                                                        </div>
+                                                                        <div class="col-md-2 col-sm-2 col-xs-12 fav_block" *ngIf="userLogged && userType== 'Freelancer'">
+                                                                            <!-- <button mat-mini-fab class="jobsearch_btn" (click)="notInterestSave()"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></button> -->
+                                                                            <button *ngIf="!element.is_saved" mat-mini-fab class="jobsearch_btn" (click)="updateWishlist(element.id)"><i
+                                          class="fa fa-heart-o" aria-hidden="true"></i></button>
+                                                                            <button *ngIf="element.is_saved" mat-mini-fab class="jobsearch_btn heart_full" (click)="updateWishlist(element.id)"><i
+                                          class="fa fa-heart" aria-hidden="true"></i></button>
+                                                                        </div>
+                                                                    </div>
+                                                                    <h5>
+                                                                        <b *ngIf="element.payment == 'Fixed'">Fixed-price</b>
+                                                                        <b *ngIf="element.payment == 'Hourly'">Hourly</b> - {{element.experience_level}} ( {{hiredLevelTxt[element.experience_level]}} )
+                                                                        <ng-container *ngIf="element.payment == 'Fixed'"> - Est.Budget: Rs.{{element.payment_amount}}
+                                                                        </ng-container>
+                                                                        <ng-container *ngFor="let complement of complements">
+                                                                            <span *ngIf="complement.key == element.expected_to_complete"> - Est. Time:
+                                        {{complement.name}}</span>
+                                                                        </ng-container>
+                                                                        <ng-container *ngFor="let commit of commitsDef">
+                                                                            <span *ngIf="commit.key == element.commitment"> - Commitment : {{commit.name}}.</span>
+                                                                        </ng-container>
+                                                                        - Posted {{element.modified | timeAgo}}
+                                                                    </h5>
+                                                                </div>
+
+                                                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                                                    <div *ngIf="element.description.length > textLength;else fullJobDescription;">
+                                                                        <p [attr.id]="'undoBtn'+element.id" *ngIf="showBtn !== element.id" class="jobTruncate">{{element.description | truncatetext : textLength}}
+                                                                            <a (click)="showUndoBtn(element.id,'less')">More</a>
+                                                                        </p>
+                                                                        <p class="jobFull" *ngIf="showBtn === element.id">{{element.description}}
+                                                                            <a (click)="showUndoBtn(element.id,'more')">Less</a>
+                                                                        </p>
+                                                                    </div>
+                                                                    <ng-template #fullJobDescription>
+                                                                        <p>{{element.description}}</p>
+                                                                    </ng-template>
+                                                                </div>
+
+                                                                <div class="col-md-12 col-sm-12 course_button_block" *ngIf="element.skills != '' && element.skills != null">
+                                                                    <ng-container *ngIf="element.skills.split(',').length > 5;else nomoreskill">
+                                                                        <ng-container *ngFor="let skillData of element.skills.split(','); let i=index">
+                                                                            <button *ngIf="i&lt;5" mat-button class="course_btn" (click)="skillBasedSearch(skillData)">{{skillData}}</button>
+                                                                        </ng-container>
+                                                                        <span> {{element.skills.split(',').length - 5}} more</span>
+                                                                    </ng-container>
+                                                                    <ng-template #nomoreskill>
+                                                                        <ng-container *ngFor="let skillData of element.skills.split(',')">
+                                                                            <button mat-button class="course_btn" (click)="skillBasedSearch(skillData)">{{skillData}}</button>
+                                                                        </ng-container>
+                                                                    </ng-template>
+                                                                </div>
+
+                                                                <div class="col-md-12 col-sm-12">
+                                                                    <ul class="job-detail-list">
+                                                                        <div class="row no_margin">
+                                                                            <li><span class="normal_font">Proposals:</span>
+                                                                                <!-- {{ proposalFormat[0] }}</li> -->
+                                                                                <!-- <ng-template #proposalswitch> -->
+                                                                                <ng-container>
+                                                                                    <span *ngIf="element.proposal_count &lt; 5">{{ proposalFormat[0] }}</span>
+                                                                                    <span *ngIf="element.proposal_count >= 5 && element.proposal_count &lt; 10">{{ proposalFormat[1] }}</span>
+                                                                                    <span *ngIf="element.proposal_count >= 10 && element.proposal_count &lt; 15">{{ proposalFormat[2] }}</span>
+                                                                                    <span *ngIf="element.proposal_count >= 15 && element.proposal_count &lt; 20">{{ proposalFormat[3] }}</span>
+                                                                                    <span *ngIf="proposal_count >= 20 && element.proposal_count &lt; 50">{{ proposalFormat[4] }}</span>
+                                                                                    <span *ngIf="element.proposal_count >= 50">{{ proposalFormat[5] }}</span>
+                                                                                </ng-container>
+                                                                                <!-- <ng-container [ngSwitch]="element.proposal_count">
+
+                                          <li *ngSwitchCase="element.proposal_count &lt; 5"><span class="normal_font">Proposals:</span>
+                                            {{ proposalFormat[0]
+                                            }}</li>
+                                          <li *ngSwitchCase="element.proposal_count > 5 && element.proposal_count &lt; 10"><span
+                                              class="normal_font">Proposals:</span>
+                                            {{ proposalFormat[1] }}</li>
+                                          <li *ngSwitchCase="element.proposal_count > 10 && element.proposal_count &lt; 15"><span
+                                              class="normal_font">Proposals:</span>
+                                            {{ proposalFormat[2] }}</li>
+                                          <li *ngSwitchCase="element.proposal_count > 15 && element.proposal_count &lt; 20"><span
+                                              class="normal_font">Proposals:</span>
+                                            {{ proposalFormat[3] }}</li>
+                                          <li *ngSwitchCase="element.proposal_count > 20 && element.proposal_count &lt;50"><span
+                                              class="normal_font">Proposals:</span>
+                                            {{ proposalFormat[4] }}</li>
+                                          <li *ngSwitchCase="element.proposal_count > 50"><span class="normal_font">Proposals:</span>
+                                            {{ proposalFormat[5] }}</li>
+                                          <li *ngSwitchDefault><span class="normal_font">Proposals:</span> {{
+                                            proposalFormat[0] }}</li>
+                                        </ng-container> -->
+                                                                                <!-- </ng-template> -->
+                                                                                <li><span class="normal_font">Number of freelancers needed:</span> {{element.resource}}
+                                                                                </li>
+                                                                        </div>
+                                                                        <div class="row no_margin">
+                                                                            <li *ngIf="element.payment_verify" class="payment_list verified_list">
+                                                                                <span class="verified_icon">
+                                          <i class="material-icons">check_circle</i></span>Payment verified
+                                                                                <ngb-rating [rate]="element.ratings"></ngb-rating>
+                                                                            </li>
+                                                                            <li *ngIf="!element.payment_verify" class="payment_list unverified_list">
+                                                                                <span class="unverified_icon">
+                                          <i class="material-icons">check_circle</i>
+                                          </span>Payment unverified
+                                                                                <ngb-rating [rate]="element.ratings"></ngb-rating>
+                                                                            </li>
+                                                                            <!-- <li>Rs.{{element.client_spent}} <span class="normal_font"> Spent</span></li> -->
+                                                                            <li *ngIf="element.location">
+                                                                                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                                                                <span class="normal_font" *ngFor="let counte of countries"> 
+                                          <span *ngIf="counte.code == element.location">{{counte.name}}
+                                          </span>
+                                                                                </span>
+                                                                            </li>
+                                                                            <!-- <li>100% Job Success</li> -->
+                                                                            <!-- <ng-container *ngFor="let counte of countries">
+                                      <li *ngIf="counte.code == element.location">
+                                        <i class="fa fa-map-marker" aria-hidden="true"></i> <span class="normal_font"> {{counte.name}}</span>
+                                      </li>
+                                    </ng-container> -->
+                                                                        </div>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                </li>
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                                </mat-table>
+                                <div class="no-results" [style.display]="resultsLength == 0 ? '' : 'none'">
+                                    No Record Found.
+                                </div>
+                                <mat-paginator [ngStyle]="{display: Paginatorhidder ? 'block' : 'none'}" #dataPaginator [length]="resultsLength" [pageSize]="10" (page)="pageEvent = $event"></mat-paginator>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <form [formGroup]="searchDisplayForm" class="jobsearch-form">
+                        <div class="jobsearch-sideblock">
+                            <div class="jobsearch-sidedetails">
+
+                                <div class="search-block">
+                                    <span class="search_icons" #filterbutton mat-raised-button (click)="applyFilter(customFilter)"><i
+                      class="fa fa-search"></i></span>
+                                    <input class="form-control" formControlName="jobsearchfilter" matInput #filterdata [(ngModel)]="customFilter" (keydown.enter)="applyFilter(customFilter)" placeholder="Search Job">
+                                    <span *ngIf="userLogged && userType== 'Freelancer'" class="search_arrow_icons" matTooltip="Click to advanced keyword search" (click)=onSearchToggleButton(searchOpenCheck);>
+                    <!-- <i class="material-icons">unfold_more</i> -->
+                    <i class="material-icons">flip_to_front</i></span>
+                                </div>
+                                <div class="search-btns">
+                                    <div *ngIf="userLogged && userType== 'Freelancer'" class="class_reset_button"><button mat-raised-button (click)="saveSearch()"> Save Search</button></div>
+                                    <div class="class_reset_button"><button mat-raised-button (click)="onSearchClear()"> Clear Filter</button></div>
+                                </div>
+                                <!--end search-btns-->
+                            </div>
+                        </div>
+
+                        <div class="{{searchFormOpen}} search_toggle_block">
+                            <div class="jobsearch-sideblock">
+                                <div class="jobsearch-sidedetails">
+                                    <div class="advanced-search-block">
+                                        <h5>ADVANCED KEYWORD SEARCH</h5>
+                                        <input formControlName="allwordsfilter" #allwordsfilter type="text" placeholder="All of these words">
+                                        <input formControlName="exactphrasefilter" #exactphrasefilter type="text" placeholder="The exact pharse">
+                                        <input formControlName="excludewordfilter" #excludewordfilter type="text" placeholder="Exclude these words">
+                                        <input formControlName="nameFilter" #nameFilter type="text" placeholder="Title Search">
+                                        <input formControlName="skillFilter" #skillFilter type="text" placeholder="Skill Search">
+
+                                        <button mat-button class="advanced-search-btn" (click)="advanceSearch()">Search</button>
+                                        <button mat-button class="advanced-search-btn" (click)="onSearchToggleButton(searchOpenCheck)">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="jobsearch-sideblock" *ngIf="userLogged && userType== 'Freelancer'">
+                            <div class="jobsearch-title">
+                                <h4>Saved Search</h4>
+                            </div>
+                            <div class="jobsearch-sidedetails">
+                                <div *ngIf="!(searchHistory?.length > 0)"> Saved Search is empty</div>
+                                <div *ngFor="let search of searchHistory">
+                                    <ul class="jobsearch-right">
+                                        <li>
+                                            <p (click)="onSelectedSearch(search.id, search)">{{search.job_search}}</p>
+                                        </li>
+
+                                        <li>
+                                            <button mat-mini-fab class="jobright_btn" (click)="onEditSearch(search.id, search.job_search)">
+                        <mat-icon>edit</mat-icon>
+                      </button>
+                                            <button mat-mini-fab class="jobright_btn" (click)="onDeleteHistory(search.id)">
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                                        </li>
+                                    </ul>
+                                    <!-- <p (click)="onSelectedSearch(search.id, search)">{{search.job_search}}<span (click)="onEditSearch(search.id, search.job_search)"><mat-icon>edit</mat-icon></span><span (click)="onDeleteHistory(search.id)"><mat-icon>delete</mat-icon></span></p> -->
+                                    <!-- <p (click)="onSelectedSearch(search.id, search)">{{search.job_search}}<span (click)="onEditSearch(search.id, search.job_search)">edit</span><span (click)="onDeleteHistory(search.id)">delete</span></p> -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="jobsearch-sideblock">
+                            <div class="jobsearch-title">
+                                <h4>Job Type</h4>
+                            </div>
+                            <div class="jobsearch-sidedetails">
+                                <div *ngFor="let pay of paylists">
+                                    <mat-checkbox [checked]="(pre_jobtype.indexOf(pay.key) == -1) ? false : true" (change)="onChangeJobType(pay.key, $event.checked)">{{pay.name}}</mat-checkbox>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="jobsearch-sideblock">
+                            <div class="jobsearch-title">
+                                <h4>Experience Level</h4>
+                            </div>
+                            <div class="jobsearch-sidedetails">
+                                <div *ngFor="let exp_level of exp_levels">
+                                    <mat-checkbox [checked]="(pre_expLevel.indexOf(exp_level.key) == -1) ? false : true" (change)="onChangeExpLevel(exp_level.key, $event.checked)">{{exp_level.name}}</mat-checkbox>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- <div class="jobsearch-sideblock">
+                <div class="jobsearch-title">
+                  <h4>Client History</h4>
+                </div>
+                <div class="jobsearch-sidedetails">
+                    <mat-checkbox>Any Client History</mat-checkbox>
+                    <mat-checkbox>No hires (1,684)</mat-checkbox>
+                    <mat-checkbox>1 to 9 hires (1,309)</mat-checkbox>
+                    <mat-checkbox>10+ hires (1,438)</mat-checkbox>
+                </div>
+              </div> -->
+
+                        <div class="jobsearch-sideblock">
+                            <div class="jobsearch-title">
+                                <h4>Budget</h4>
+                            </div>
+                            <div class="jobsearch-sidedetails">
+                                <div *ngFor="let budgetType of budgetTypes">
+                                    <mat-checkbox [checked]="(pre_budget.indexOf(budgetType.key) == -1) ? false : true" (change)="onChangeBudget(budgetType.key, budgetType.option, $event.checked)">{{budgetType.name}}</mat-checkbox>
+                                </div>
+                                <!-- <ul class="budget-list">
+                        <li><mat-checkbox></mat-checkbox></li>
+                        <li><input type="text" placeholder="Min"></li>
+                        <li><input type="text" placeholder="Max"></li>
+                      </ul> -->
+                            </div>
+                        </div>
+
+                        <div class="jobsearch-sideblock">
+                            <div class="jobsearch-title">
+                                <h4>Hours Per Week</h4>
+                            </div>
+                            <div class="jobsearch-sidedetails">
+                                <div *ngFor="let commit of commits">
+                                    <mat-checkbox [checked]="(pre_hours_per_week.indexOf(commit.key) == -1) ? false : true" (change)="onChangeCommits(commit.key, $event.checked)">{{commit.name}}</mat-checkbox>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="jobsearch-sideblock">
+                            <div class="jobsearch-title">
+                                <h4>Project Length</h4>
+                            </div>
+                            <div class="jobsearch-sidedetails">
+                                <div *ngFor="let exp_comp of exp_comps">
+                                    <mat-checkbox [checked]="(pre_project_langth.indexOf(exp_comp.key) == -1) ? false : true" (change)="onChangeExpComp(exp_comp.key, $event.checked)">{{exp_comp.name}}</mat-checkbox>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="jobsearch-sideblock">
+                            <mat-accordion>
+                                <mat-expansion-panel [expanded]="pre_category.length > 0">
+                                    <mat-expansion-panel-header>
+                                        <mat-panel-title>
+                                            Category
+                                        </mat-panel-title>
+                                    </mat-expansion-panel-header>
+                                    <div *ngFor="let category of categorylists">
+                                        <mat-checkbox [checked]="(pre_category.indexOf(category.id) == -1) ? false : true" [value]="category.id" (change)="onChangeCategory(category.id, $event.checked)">{{category.name}}</mat-checkbox>
+                                    </div>
+                                </mat-expansion-panel>
+                            </mat-accordion>
+                        </div>
+
+                        <div class="jobsearch-sideblock">
+                            <mat-accordion>
+                                <mat-expansion-panel [expanded]="pre_location.length > 0">
+                                    <mat-expansion-panel-header>
+                                        <mat-panel-title>
+                                            Location
+                                        </mat-panel-title>
+                                    </mat-expansion-panel-header>
+                                    <div *ngFor="let counte of countries">
+                                        <mat-checkbox [checked]="(pre_location.indexOf(counte.code) == -1) ? false : true" [value]="counte.code" (change)="onChangeLocation(counte.code, $event.checked)">{{counte.name}}</mat-checkbox>
+                                    </div>
+                                </mat-expansion-panel>
+                            </mat-accordion>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

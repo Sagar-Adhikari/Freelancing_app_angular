@@ -1,0 +1,193 @@
+<div class="category_mainwrap freelancer_profile">
+  <div class="breadcrumb_wrap"><!--start breadcrumb_wrap-->
+    <div class="container"><!--start container-->
+      <div class="row"><!--start row-->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><!--start col-->
+          <h4>Transaction History</h4>
+        </div><!--end col-->
+      </div><!--end row-->
+    </div><!--end container-->
+  </div><!--end breadcrumb_wrap-->
+
+  <div class="freelancer-wrap changeplan-wrap">
+    <div class="container">
+      <div class="transaction-header">        
+          <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-12">
+                  <!-- <h5>Balance: $ {{balance}}</h5> -->
+              </div>
+    
+              <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="daterange">
+                  <input type="text" matInput
+                  ngxDaterangepickerMd
+                  [locale]="{applyLabel: 'ok', format: 'MMM DD, YYYY'}"
+                  startKey="start"
+                  endKey="end"
+                  [(ngModel)]="selectedDateRange"
+                  (change)="changeDateRange($event)"
+                  name="daterange"/>
+                </div>
+              </div>
+            </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="bg-box profile_bg-box">
+
+            <div class="freelancer-detail changeplan_detail">
+              <div class="select_block">
+
+              <div class="row">
+              <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="selectbox">
+                  <mat-select [(ngModel)]="transactionFilter" placeholder="All Transactions">
+                    <mat-option class="dropdown_height" [value]="">All Transactions</mat-option>
+                    <mat-option class="dropdown_height" *ngFor="let tItem of transactionTypes" [value]="tItem.key">
+                      {{tItem.name}}
+                    </mat-option>
+                  </mat-select>
+                </div>
+              </div>
+
+              <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="selectbox">
+                  <mat-select [(ngModel)]="clientFilter" placeholder="All Freelancer">
+                    <mat-option class="dropdown_height" [value]="">All Freelancer</mat-option>
+                    <mat-option class="dropdown_height" *ngFor="let rclient of relatedClients" [value]="rclient.id">
+                      {{rclient.username}}
+                    </mat-option>
+                  </mat-select>
+                </div>
+              </div>
+
+              <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="selectbox select_box_button">
+                  <button type="button" (click)="applyFilter(1)" mat-button>Apply</button>
+                  <button type="button" (click)="applyFilter(0)" mat-button>Reset</button>
+                </div>
+              </div>
+            </div>
+
+              </div>
+            </div>
+            <!--end freelancer-detail-->
+            <div class="change_plan_content">
+              <div class="row">
+                <div class="connect_history_table">
+                  
+                  <div class="transaction-details">
+                    <div class="row">Statement Period {{displayfromDate}} to {{displaytoDate}}</div>
+                    <div class="row"> Escrow Balance : ${{escrow}}</div>
+                    <div class="row"> Dispute Escrow Balance : ${{dispute}}</div>
+                    <!-- <div class="row"> Beginning Balance : ${{beginning_balance}}</div>
+                    <div class="row"> Total Credits : ${{total_credits}}</div> -->
+                    <div class="row"> Total Debits :  ${{total_debits}}</div>
+                  </div>
+
+                  <div class="table-responsive">
+                      <table mat-table [dataSource]="dataSource" matSort matSortActive="id" matSortDisableClear
+                        matSortDirection="desc">
+
+                        <!-- Date Column -->
+                        <ng-container matColumnDef="date">
+                          <th mat-header-cell *matHeaderCellDef>Date</th>
+                          <td mat-cell *matCellDef="let element">{{element.created | date: 'MMM dd, yyyy'}}
+                          </td>
+                        </ng-container>
+                        <!-- Type Column -->
+                        <ng-container matColumnDef="type">
+                          <th mat-header-cell *matHeaderCellDef>Type </th>
+                          <td mat-cell *matCellDef="let element">
+                            {{element.type}}
+                          </td>
+                        </ng-container>
+                        <!-- Description Column -->
+                        <ng-container matColumnDef="description">
+                          <th mat-header-cell *matHeaderCellDef>Description </th>
+                          <td mat-cell *matCellDef="let element">
+                            {{element.description}}
+                          </td>
+                        </ng-container>
+
+                        <!-- Client Column -->
+                        <ng-container matColumnDef="freelancer">
+                          <th mat-header-cell *matHeaderCellDef>Freelancer</th>
+                          <td mat-cell *matCellDef="let element"> {{element.freelancer_name}} </td>
+                        </ng-container>
+
+                        <!-- Amount / Balance Column -->
+                        <ng-container matColumnDef="amount">
+                          <!-- <th mat-header-cell *matHeaderCellDef> Amount / Balance </th>
+                          <td mat-cell *matCellDef="let element">
+                            ${{element.amount}} / ${{element.balance}}
+                          </td> -->
+                          <th mat-header-cell *matHeaderCellDef> Amount </th>
+                          <td mat-cell *matCellDef="let element">
+                            ${{element.amount}}
+                          </td>
+                        </ng-container>
+
+                        <!-- Ref Id Column -->
+                        <ng-container matColumnDef="ref_id">
+                            <th mat-header-cell *matHeaderCellDef> Action </th>
+                            <td mat-cell *matCellDef="let element">
+                              {{element.ref_id}}
+                              <a (click)="openTransactionModal(transactionPopup,element)">
+                                <i class="material-icons">
+                                  visibility
+                                </i>
+                              </a>
+                            </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                      </table>
+
+                    <div class="no-results" [style.display]="resultsLength == 0 ? '' : 'none'">
+                      No Record Found.
+                    </div>
+
+
+                    <mat-paginator [ngStyle]="{display: Paginatorhidder ? 'block' : 'none'}" [length]="resultsLength" [pageSize]="perpage" (page)="pageEvent = $event"></mat-paginator>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--end bg-box-->
+          </div>
+          <!--end col-->
+
+        </div>
+        <!--end row-->
+      </div>
+      <!--end container-->
+    </div>
+    <!--end freelancer-wrap-->
+  </div>
+  <!--end freelancer_profile-->
+  <ng-template #transactionPopup>
+      <div class="transaction-detail-popup">
+        <div class="modal-header">
+        <h4 class="popup-title">Transaction Details</h4>
+        </div>
+
+        <button [mat-dialog-close]="true" class="close-btn">
+          <mat-icon class="mat-icon material-icons" role="img" aria-hidden="true">close</mat-icon>
+        </button>
+        <p *ngIf="selectTransactions.transaction_id">Reference ID: {{selectTransactions.transaction_id}}</p>
+        <p>Date: {{selectTransactions.created | date: 'MMM dd, yyyy'}}</p>
+        <p>Type: {{selectTransactions.type}}</p>
+        <p>Description: {{selectTransactions.description}}</p>
+        <p>Freelancer: {{selectTransactions.freelancer_name}}</p>
+        <!-- <p>Client: </p> -->
+        <p>Amount: {{selectTransactions.amount}}</p>
+        <!-- <p>More Info: <a>
+            <i class="material-icons">
+              attach_file
+            </i> View Invoice</a>
+        </p> -->
+      </div>
+  </ng-template>

@@ -1,0 +1,157 @@
+<div class="category_mainwrap job_detailwrap">
+  <div class="breadcrumb_wrap">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <h4>Invitation to Interview</h4>
+        </div>
+        <!--end col-->
+      </div>
+      <!--end row-->
+    </div>
+    <!--end container-->
+  </div>
+  <!--end breadcrumb_wrap-->
+  <div class="job_listing">
+    <div class="container">
+      <div class="row">
+        <!-- Job detail block starts-->
+        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+          <div class="bg-box" *ngIf="isLoad">
+            <h4>Job details</h4>
+            <h3>{{jobTitleName}}</h3>
+            <div class="trans-wrap">
+              <div class="trans-left">
+                <div class="trans-img"><img src="assets/images/trans-img1.png"></div>
+                <div class="trans-desc">
+                    <h4>{{payment}}</h4>
+                    <ng-container *ngFor="let commit of commits">
+                    <p *ngIf="commit.key == jobCommitment">{{commit.name}}</p>
+                  </ng-container>
+                  <ng-container *ngFor="let complement of complements">
+                    <p *ngIf="complement.key == expComp">{{complement.name}}</p>
+                  </ng-container>
+                </div>
+              </div>
+
+              <div class="trans-left">
+                <div class="trans-img"><img src="assets/images/trans-img2.png"></div>
+                <div class="trans-desc">
+                  <h4>{{hiredLevel}} Level</h4>
+                  <p>{{hiredLevelTxt[hiredLevel]}}</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="detail-wrap">
+              <h4>details</h4>
+              <p class="post-date">Posted {{jobCreatedAt | timeAgo}}</p>
+              <p>{{jobDescrption}}</p>
+              <a routerLink="/jobdetail/{{job_id}}"><span>View Job Posting</span></a>
+            </div>
+
+            <div class="detail-wrap skill-wrap" *ngIf="skillsDisplays.length > 0">
+              <h4>Skills and Expertise</h4>
+              <div class="skill-btn">
+                <ng-container *ngFor='let skillsDisplay of skillsDisplays'>
+                  <button mat-button (click)="skillBasedSearch(skillsDisplay)">{{skillsDisplay}}</button>
+                </ng-container>
+              </div>
+            </div>
+
+            <div class="detail-wrap skill-wrap">
+              <h4>Activity on this Job</h4>
+              <h5>
+                Proposals: <span *ngIf="proposal_count == 0;else proposalswitch">{{ proposalFormat[0] }}</span>
+                <ng-template #proposalswitch>
+                  <ng-container [ngSwitch]="proposal_count">
+                    <span *ngSwitchCase="proposal_count &lt; 5">{{ proposalFormat[0] }}</span>
+                    <span *ngSwitchCase="proposal_count >= 5 && proposal_count &lt; 10">{{ proposalFormat[1] }}</span>
+                    <span *ngSwitchCase="proposal_count >= 10 && proposal_count &lt; 15">{{ proposalFormat[2] }}</span>
+                    <span *ngSwitchCase="proposal_count >= 15 && proposal_count &lt; 20">{{ proposalFormat[3] }}</span>
+                    <span *ngSwitchCase="proposal_count >= 20 && proposal_count &lt; 50">{{ proposalFormat[4] }}</span>
+                    <li *ngSwitchCase="proposal_count >= 50">{{ proposalFormat[5] }}</li>
+                    <li *ngSwitchDefault>{{ proposalFormat[0] }}</li>
+                  </ng-container>
+                </ng-template>
+              </h5>
+              <h5>Interviewing: <span>{{interviewingCount}}</span></h5>
+              <h5>Invites Sent: <span>{{invite_sent}}</span></h5>
+              <h5>Unanswered Invites: <span>{{unansweredCount}}</span></h5>
+            </div>
+            <span *ngIf="clientMessge !== null">
+              <div class="detail-wrap skill-wrap">
+                <h4>Original message from client</h4>
+                <p>
+                  {{clientMessge}}
+                </p>
+              </div>
+            </span>
+
+            <!--end skill-wrap-->
+          </div>
+          <!--end bg-box-->
+        </div>
+        <!-- Job detail block ends-->
+        <!-- Right side block starts -->
+        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+          <div class="bg-box bg-boxright">
+            <div *ngIf="statusData == 'Request'" class="btn-group gray-bg-btn">
+              <button mat-button routerLink="/accept-interview/{{interview_id}}" class="save-btn">Accept Interview</button>
+              <button mat-button (click)="declineInvite()">Decline</button>
+            </div>
+
+            <mat-list role="list" *ngIf="showClient">
+              <mat-list-item role="listitem">
+                <h4>About the Client</h4>
+                <ngb-rating [rate]="clientInfo.profile.rating"></ngb-rating>
+                <p>reviews</p>
+              </mat-list-item>
+              <ng-container *ngFor="let counte of countries">
+                <mat-list-item role="listitem" *ngIf="counte.code == selectedCountry">
+                  <h4>Location: {{counte.name}}</h4>
+                </mat-list-item>
+              </ng-container>
+              <mat-list-item role="listitem">
+                <h4>
+                  <span *ngIf="clientInfo.profile.job_count == 0;else JobsPostednotbelow">
+                    Nil
+                  </span>
+                  <ng-template #JobsPostednotbelow>
+                      {{clientInfo.profile.job_count}} 
+                  </ng-template>
+                  Jobs Posted </h4>
+                <p>{{clientInfo.profile.hire_rate}} Hire Rate, {{clientInfo.profile.job_open}} Open Jobs </p>
+              </mat-list-item>
+              <mat-list-item role="listitem">
+                <h4>
+                <!-- <span *ngIf="clientInfo.profile.client_spent == 0;else TotalSpentnotbelow">
+                  Nil
+                </span> -->
+                <!-- <ng-template #TotalSpentnotbelow> -->
+                    ${{clientInfo.profile.client_spent}} 
+                <!-- </ng-template> -->
+                  
+                  Total Spent </h4>
+                <p>{{clientInfo.profile.hires_count}} Hires, {{clientInfo.profile.active_count}} Active </p>
+              </mat-list-item>
+              <mat-list-item role="listitem">
+                <h4>
+                  <!-- <span *ngIf="clientInfo.profile.avg_hourly_rate == 0;else AvgHourlyRatenotbelow">
+                    Nil
+                  </span> -->
+                  <!-- <ng-template #AvgHourlyRatenotbelow> -->
+                      ${{clientInfo.profile.avg_hourly_rate}}  /hr
+                  <!-- </ng-template> -->
+                  Avg Hourly Rate </h4>
+                <!-- <p>Paid {{clientInfo.profile.paid_hours}} Hours </p> -->
+              </mat-list-item>
+            </mat-list>
+            <p class="member-date" *ngIf="showClient">Member Since {{clientInfo.profile.membersince}} </p>
+          </div>
+        </div>
+        <!-- Right side block ends -->
+
+      </div>
+    </div>
+  </div>

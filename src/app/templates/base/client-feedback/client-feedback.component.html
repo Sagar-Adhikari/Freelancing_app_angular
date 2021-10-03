@@ -1,0 +1,120 @@
+<div class="category_mainwrap postjob_wrap">
+    <div class="breadcrumb_wrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <h4 *ngIf="contract_status == 'closed'">End Contract with {{client_name}}</h4>
+                    <h4 *ngIf="contract_status != 'closed'">Leave feedback for {{client_name}}</h4>
+                </div>
+                <!--end col-->
+            </div>
+            <!--end row-->
+        </div>
+        <!--end container-->
+    </div>
+    <!--end breadcrumb_wrap-->
+    <div>
+        <div class="postjob-details">
+            <div class="container">
+                <div class="row">
+                    <form [formGroup]="clientfeedbackForm" (ngSubmit)="savefeedbackSubmit(clientfeedbackForm.value)" class="client-form">
+                        <div class="postjob-inner">
+                            <p class="share-experiance">Share your experience! Your honest feedback provides helpful information to both the client and the Remote Nepal community. </p>
+                            <h5>Private Feedback</h5>
+                            <section class="content-section">
+
+                                <ng-template [ngIf]="ismessage">
+                                    <div class="alert alert-danger" role="alert">{{errormessage}}</div>
+                                </ng-template>
+                                <p>This feedback will be kept anonymous and never shared directly with the client.</p>
+                                <div>
+                                    <label>Reason for ending contract:</label>
+                                    <div class="skills_block">
+                                        <ng-select formControlName="private_reason" [items]="reasons" bindLabel="name" bindValue="key" placeholder="Please Select">
+                                            <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                                {{item.name}}
+                                                <span class="ng-value-icon right" (click)="clear(item); $event.stopPropagation()" aria-hidden="true">×</span>
+                                            </ng-template>
+                                        </ng-select>
+                                        <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('private_reason')}}</div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label>How likely are you to recommend this client to a friend or a colleague? </label>
+
+                                    <p class="big-rating">
+                                        <ngb-rating formControlName="private_rating" [(rate)]="private_star_rating" max="5"></ngb-rating>
+                                    </p>
+
+                                    <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('private_rating')}}</div>
+                                </div>
+                            </section>
+
+                            <h5 class="public-heading">Public Feedback</h5>
+                            <section class="content-section">
+                                <p>This feedback will be shared on your client's profile only after they've left feedback for you.</p>
+                                <div>
+                                    <label>Feedback to Client</label>
+
+                                    <p>
+                                        <ngb-rating formControlName="public_cooperation" [(rate)]="cooperation" max="5" (rateChange)="getRating();"></ngb-rating>Cooperation</p>
+                                    <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('public_cooperation')}}</div>
+
+                                    <p>
+                                        <ngb-rating formControlName="public_skills" [(rate)]="skills" max="5" (rateChange)="getRating();"></ngb-rating>Skills</p>
+                                    <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('public_skills')}}</div>
+
+                                    <p>
+                                        <ngb-rating formControlName="public_availability" [(rate)]="availability" max="5" (rateChange)="getRating();"></ngb-rating>Availability</p>
+                                    <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('public_availability')}}</div>
+
+                                    <p>
+                                        <ngb-rating formControlName="public_quality" [(rate)]="quality" max="5" (rateChange)="getRating();"></ngb-rating>Quality of Requirements</p>
+                                    <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('public_quality')}}</div>
+
+                                    <p>
+                                        <ngb-rating formControlName="public_deadlines" [(rate)]="deadlines" max="5" (rateChange)="getRating();"></ngb-rating>Set Reasonable Deadlines</p>
+                                    <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('public_deadlines')}}</div>
+
+                                    <p>
+                                        <ngb-rating formControlName="public_communication" [(rate)]="communication" max="5" (rateChange)="getRating();"></ngb-rating>Communication</p>
+                                    <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('public_communication')}}</div>
+
+                                    <b>Total Score: {{total_score}}</b>
+                                </div>
+
+                                <div>
+                                    <label>Share your experience with this client to the Remote Nepal community: </label>
+
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <textarea matInput formControlName="public_reason" matTextareaAutosize matAutosizeMinRows="10" matAutosizeMaxRows="10"></textarea>
+                                    </mat-form-field>
+
+                                    <div class="text-danger text-left small" *ngIf="errorMsg">{{geterrorMsg('public_reason')}}</div>
+
+                                </div>
+
+
+                            </section>
+
+
+                            <div class="bottom-btn">
+                                <button mat-button type="submit" [disabled]="isbuttondisable">
+									<ng-container *ngIf="contract_status == 'closed'">
+										End Contract
+									</ng-container>
+									<ng-container *ngIf="contract_status != 'closed'">
+										Submit Feedback
+									</ng-container>
+								</button>
+                                <button mat-button class="cancel-btn" (click)="onCancel()">Cancel</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!--end postjob_wrap-->
